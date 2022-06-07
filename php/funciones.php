@@ -54,8 +54,6 @@
 			</script>
             <?php
         }
-
         return $tipo_de_cuenta;
-        
     }
 ?>
