@@ -18,9 +18,12 @@
 
     $tipo_de_cuenta = iniciar_sesion($usuario, $clave);
 
-    echo " - ".$tipo_de_cuenta;
+    echo " - Nivel de centa ".$tipo_de_cuenta;
     // Notificar todos los errores de PHP
     error_reporting(-1);
+    
+    //funciones
+    crear_sugerido($usuario);
 ?>
 
 <div class="menu">
