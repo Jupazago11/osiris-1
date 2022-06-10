@@ -1,5 +1,6 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {    options.async = true; });</script>
+<script type="text/javascript" src="../js/funciones.js"></script>
 
 <?php
 
@@ -72,8 +73,8 @@
             <fieldset>
             <label for="provedor">Selecciona el proveedor</label>
             <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-            <input list="provedores" name="provedor" id="provedor">
-            <datalist id="provedores">
+            <input list="provedores" name="provedor" id="provedor"  required>
+            <datalist id="provedores"  required>
 
             <?php
                 if(existencia_de_la_conexion()){
@@ -92,20 +93,20 @@
             ?>
             </datalist>
             <br><br>
-            <button type="button" id="enviar" class="w3-btn w3-teal" onclick="document.getElementById('respuesta').style.display='block'">Crear Sugerido</button><br><br>
-            <input type="reset" value="Limpiar" class="w3-btn w3-teal" onclick="document.getElementById('respuesta').style.display='none'">
+            <button type="button" id="enviar1" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1').style.display='block'">Crear Sugerido</button><br><br>
+            <input type="reset" value="Limpiar" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1').style.display='none'">
             </fieldset>
         </form>
                 
-        <div id="respuesta"></div>
+        <div id="respuesta1"></div>
         <script>
-            $('#enviar').click(function(){
+            $('#enviar1').click(function(){
                 $.ajax({
                     url:'../php/consulta1.php',
                     type:'POST',
                     data: $('#form_seleccionar_prove').serialize(),
                     success: function(res){
-                        $('#respuesta').html(res);
+                        $('#respuesta1').html(res);
                     },
                     error: function(res){
                         alert("Problemas al tratar de enviar el formulario");

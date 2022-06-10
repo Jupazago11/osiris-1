@@ -4,8 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
-    <script type="text/javascript" src="../JavaScript/funciones.js"></script>
+    <script type="text/javascript" src="../js/funciones.js"></script>
     <LINK REL=StyleSheet HREF="../CSS/estilos.css">
+
+    <script>
+       obtener_detalles_pedidos(); 
+    </script>
 </head>
 <body>
 <?php
