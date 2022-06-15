@@ -117,4 +117,118 @@
         </div>
     <?php
     }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Funcion que verifica si existeel archivo de conexion de la base de datos
+    function crear_pedido($usuario){
+        ?>
+        <div>
+        <form id="form_crear_pedido" method="POST">
+            <fieldset>
+            <label for="provedor">Selecciona el proveedor</label>
+            <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+            <input list="provedores" name="provedor" id="provedor"  required>
+            <datalist id="provedores"  required>
+
+            <?php
+                if(existencia_de_la_conexion()){
+                    require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+                }
+                $conexion = conectar();                     //Obtenemos la conexion
+                
+                //Consulta a la base de datos en la tabla provvedor
+                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+
+                while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                    // traemos los proveedores existentes en la base de datos
+                    echo "<option value=".$fila['nombre_proveedor']."></option>";
+                }
+                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+            ?>
+            </datalist>
+            <br><br>
+            Ingresa tu nombre
+            <input type="text" name="nombre_empleado_provedor" required></input>
+            <br><br>
+            <button type="button" id="enviar2" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='block'">Crear Sugerido</button><br><br>
+            <input type="reset" value="Limpiar" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='none'">
+            </fieldset>
+        </form>
+                
+        <div id="respuesta2"></div>
+        <script>
+            $('#enviar2').click(function(){
+                $.ajax({
+                    url:'../php/consulta2.php',
+                    type:'POST',
+                    data: $('#form_crear_pedido').serialize(),
+                    success: function(res){
+                        $('#respuesta2').html(res);
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+        </script>
+        </div>
+    <?php
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Funcion que verifica si existeel archivo de conexion de la base de datos
+    function crear_pedido2($usuario){
+        ?>
+        <div>
+        <form id="form_confirmar_pedido" method="POST">
+            <fieldset>
+            <label for="provedor">Selecciona el proveedor</label>
+            <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+            <input list="provedores" name="provedor" id="provedor"  required>
+            <datalist id="provedores"  required>
+
+            <?php
+                if(existencia_de_la_conexion()){
+                    require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+                }
+                $conexion = conectar();                     //Obtenemos la conexion
+                
+                //Consulta a la base de datos en la tabla provvedor
+                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+
+                while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                    // traemos los proveedores existentes en la base de datos
+                    echo "<option value=".$fila['nombre_proveedor']."></option>";
+                }
+                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+            ?>
+            </datalist>
+            <br><br>
+            Ingresa tu nombre
+            <input type="text" name="nombre_empleado_provedor" required></input>
+            <br><br>
+            <button type="button" id="enviar3" class="w3-btn w3-red" onclick="document.getElementById('respuesta3').style.display='block'">Crear Sugerido</button><br><br>
+            <input type="reset" value="Limpiar" class="w3-btn w3-red" onclick="document.getElementById('respuesta3').style.display='none'">
+            </fieldset>
+        </form>
+                
+        <div id="respuesta3"></div>
+        <script>
+            $('#enviar3').click(function(){
+                $.ajax({
+                    url:'../php/consulta3.php',
+                    type:'POST',
+                    data: $('#form_confirmar_pedido').serialize(),
+                    success: function(res){
+                        $('#respuesta3').html(res);
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+        </script>
+        </div>
+    <?php
+    }
 ?>

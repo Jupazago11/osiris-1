@@ -7,14 +7,12 @@
     <script type="text/javascript" src="../js/funciones.js"></script>
     <LINK REL=StyleSheet HREF="../CSS/estilos.css">
 
-    <script>
-       obtener_detalles_pedidos(); 
-    </script>
+    
 </head>
 <body>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
-    require_once("../PHP/funciones.php");
+    require_once("../php/funciones.php");
     //Desactivar Desactivar toda notificación de error
     error_reporting(0);
     $usuario     =      $_POST['u'];
@@ -28,10 +26,24 @@
     
     //funciones
     crear_sugerido($usuario);
+    crear_pedido($usuario);
+    crear_pedido2($usuario);
 ?>
 
 <div class="menu">
 
 </div>
 </body>
+<script>
+ 
+function multi() {
+
+    var valores = document.getElementsByClassName('cantidad');
+
+    document.getElementById("total_sugeridos").innerHTML = valores.length;
+}
+
+setInterval('multi()',500);
+
+</script>
 </html>
