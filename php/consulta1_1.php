@@ -48,24 +48,19 @@
 
 
     foreach ($ides_productos as $valor) {
-        $consulta = mysqli_query($conexion, "SELECT  `nombre_producto`, `precio_producto`, `existencias` FROM `producto` WHERE `estado` = 'activo' AND `id_producto` = $valor") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
+        $consulta = mysqli_query($conexion, "SELECT  `nombre_producto`, `precio_de_compra`, `existencias` FROM `producto` WHERE `estado` = 'activo' AND `id_producto` = $valor") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
 
         while (($fila = mysqli_fetch_array($consulta))!=NULL) {
             array_push($nombre_productos, $fila['nombre_producto']);
-            array_push($precio_productos, $fila['precio_producto']);
+            array_push($precio_productos, $fila['precio_de_compra']);
             array_push($existe_productos, $fila['existencias']);
         }
     }
+
     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-
-    
-
-
-
     $tamanio_ = count($precio_productos); //obtenemos la cantidad exacta de productos
 
 /*
-    
     $id_sugerido
     $ides_productos
     $cantidad_suger
@@ -77,9 +72,14 @@
     $costo_total = 0;
     for($i=0 ; $i < $tamanio_ ; $i++)
     {
+        $cantidad_suger[$i] = abs($cantidad_suger[$i]); //Valor absoluto
+        $cantidad_exist[$i] = abs($cantidad_exist[$i]); //Valor absoluto
+
         $precio_total = $cantidad_suger[$i] * $precio_productos[$i];
         //echo $precio_total."<br>";
         $costo_total += $precio_total;
+
+        
 
         $consulta = mysqli_query($conexion, "INSERT INTO `detalle_sugerido`(`id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`, `pedido_sugerido`, `precio_sugerido`, `precio_total_sugerido`, `estado`) VALUES ('$id_sugerido','$ides_productos[$i]','$cantidad_suger[$i]','$cantidad_exist[$i]',NULL,'$precio_productos[$i]','$precio_total','activo')") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
         

@@ -66,7 +66,7 @@
 
 
                         //traemos los productos y datos asociados a dicho proveedor
-                        $consulta = mysqli_query($conexion, "SELECT detalle_sugerido.id_detalle, detalle_sugerido.id_producto2, producto.nombre_producto, detalle_sugerido.cantidad_sugerido, detalle_sugerido.inventario_sugerido, detalle_sugerido.pedido_sugerido, detalle_sugerido.precio_sugerido, detalle_sugerido.precio_total_sugerido FROM `detalle_sugerido` INNER JOIN producto ON producto.id_producto = detalle_sugerido.`id_producto2` WHERE detalle_sugerido.id_sugerido1 = '$ide_sugerido'") or die ("Error al consultar: datos de productos en sugeridos");
+                        $consulta = mysqli_query($conexion, "SELECT detalle_sugerido.id_detalle, detalle_sugerido.id_producto2, producto.nombre_producto, detalle_sugerido.cantidad_sugerido, detalle_sugerido.inventario_sugerido, detalle_sugerido.pedido_sugerido, detalle_sugerido.precio_sugerido, detalle_sugerido.precio_total_sugerido FROM `detalle_sugerido` INNER JOIN producto ON producto.id_producto = detalle_sugerido.`id_producto2` WHERE detalle_sugerido.id_sugerido1 = '$ide_sugerido' AND producto.`estado` = 'activo'  AND detalle_sugerido.`estado` = 'activo'") or die ("Error al consultar: datos de productos en sugeridos");
 
                         $contador = 0;
 

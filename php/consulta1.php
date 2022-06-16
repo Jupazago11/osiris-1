@@ -17,7 +17,7 @@
     $existe_proveedor = false;
 
     //Consulta a la base de datos en la tabla proveedor
-    $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `nombre_proveedor` = '$nombre_prove'") or die ("Error al consultar: existencia del proveedor");
+    $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `nombre_proveedor` = '$nombre_prove' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
                         
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         $existe_proveedor = true;
@@ -49,7 +49,7 @@
                         
                         
                         //Consulta a la base de datos en la tabla producto
-                        $consulta = mysqli_query($conexion, "SELECT `id_producto`, `nombre_producto`, `precio_producto`, `existencias` FROM `producto` INNER JOIN `proveedor` ON producto.id_proveedor1 = proveedor.id_proveedor WHERE producto.estado = 'activo' AND proveedor.nombre_proveedor = '$nombre_prove' ORDER BY `id_producto` ASC") or die ("Error al consultar: ver datos generar sugerido");
+                        $consulta = mysqli_query($conexion, "SELECT `id_producto`, `nombre_producto`, `precio_de_compra`, `existencias` FROM `producto` INNER JOIN `proveedor` ON producto.id_proveedor1 = proveedor.id_proveedor WHERE producto.estado = 'activo' AND proveedor.nombre_proveedor = '$nombre_prove' ORDER BY `id_producto` ASC") or die ("Error al consultar: ver datos generar sugerido");
                         
                         $contador=0;
                         while (($fila = mysqli_fetch_array($consulta))!=NULL){
@@ -59,7 +59,7 @@
                                 <tbody>
                                 <td><input type="text" name="ides[]" size="5" readonly class="sin_borde"value="<?php echo $fila['id_producto'] ?>"/></td>
                                 <td><?php echo ucwords($fila['nombre_producto']) ?></td>
-                                <td class="precios"><span class="precio"><?php echo $fila['precio_producto'] ?></span></td>
+                                <td class="precios"><span class="precio"><?php echo $fila['precio_de_compra'] ?></span></td>
                                 <td><input type="number" value="0" min="0" name="existencias[]" style="width: 100px"/></td>
                                 <td class="cantidades"><input  name="sugeridos[]" type="number" value="0" min="0" class="cantidad" style="width: 100px"/></td>
                                 <td><td>                  
@@ -119,10 +119,5 @@
             </script>
         <?php
         mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
-    }else{
-
     }
-
-    
-
 ?>

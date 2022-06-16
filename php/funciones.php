@@ -83,7 +83,7 @@
                 $conexion = conectar();                     //Obtenemos la conexion
                 
                 //Consulta a la base de datos en la tabla provvedor
-                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
 
                 while (($fila = mysqli_fetch_array($consulta))!=NULL){
                     // traemos los proveedores existentes en la base de datos
@@ -137,7 +137,7 @@
                 $conexion = conectar();                     //Obtenemos la conexion
                 
                 //Consulta a la base de datos en la tabla provvedor
-                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
 
                 while (($fila = mysqli_fetch_array($consulta))!=NULL){
                     // traemos los proveedores existentes en la base de datos
@@ -150,7 +150,7 @@
             Ingresa tu nombre
             <input type="text" name="nombre_empleado_provedor" required></input>
             <br><br>
-            <button type="button" id="enviar2" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='block'">Crear Sugerido</button><br><br>
+            <button type="button" id="enviar2" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='block'">Crear Pedido</button><br><br>
             <input type="reset" value="Limpiar" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='none'">
             </fieldset>
         </form>
@@ -194,7 +194,7 @@
                 $conexion = conectar();                     //Obtenemos la conexion
                 
                 //Consulta a la base de datos en la tabla provvedor
-                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
 
                 while (($fila = mysqli_fetch_array($consulta))!=NULL){
                     // traemos los proveedores existentes en la base de datos
@@ -207,7 +207,7 @@
             Ingresa tu nombre
             <input type="text" name="nombre_empleado_provedor" required></input>
             <br><br>
-            <button type="button" id="enviar3" class="w3-btn w3-red" onclick="document.getElementById('respuesta3').style.display='block'">Crear Sugerido</button><br><br>
+            <button type="button" id="enviar3" class="w3-btn w3-red" onclick="document.getElementById('respuesta3').style.display='block'">Pedido Final</button><br><br>
             <input type="reset" value="Limpiar" class="w3-btn w3-red" onclick="document.getElementById('respuesta3').style.display='none'">
             </fieldset>
         </form>
