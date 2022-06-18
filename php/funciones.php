@@ -1,4 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script>$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {    options.async = true; });</script>
 <script type="text/javascript" src="../js/funciones.js"></script>
 
@@ -68,9 +69,10 @@
         echo $fecha;
         echo "<br>";
         ?>
-        <div>
+        <div class="">
         <form id="form_seleccionar_prove" method="POST">
             <fieldset>
+            <legend>Crear Sugerido:</legend>
             <label for="provedor">Selecciona el proveedor</label>
             <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
             <input list="provedores" name="provedor" id="provedor"  required>
@@ -231,4 +233,37 @@
         </div>
     <?php
     }
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //Funcion que verifica si existeel archivo de conexion de la base de datos
+    function ver_pedidos($usuario){
+        ?>
+        <div>
+        <form id="ver_pedidos" method="POST">
+            <fieldset>
+            <button type="button" id="enviar4" class="w3-btn w3-red" onclick="document.getElementById('respuesta4').style.display='block'">Ver fechas <i class='far fa-calendar-alt'></i></button>
+            <input type="reset" value="Limpiar" class="w3-btn w3-red" onclick="document.getElementById('respuesta4').style.display='none'">
+            </fieldset>
+        </form>
+                
+        <div id="respuesta4"></div>
+        <script>
+            $('#enviar4').click(function(){
+                $.ajax({
+                    url:'../php/consulta4.php',
+                    type:'POST',
+                    data: $('#ver_pedidos').serialize(),
+                    success: function(res){
+                        $('#respuesta4').html(res);
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+        </script>
+        </div>
+    <?php
+    }
+
 ?>
