@@ -18,7 +18,7 @@
         mysqli_select_db($conexion, $db_nombre_bd) or die("No se encontró la base de datos en el servidor");
         
         //incluya caracteres latinos
-        mysqli_set_charset($conexion,"uft8");   
+        //mysqli_set_charset($conexion,"uft8");   
         
         //Recordar cerrar la conexion al finalizar cada consulta
         //mysqli_close($conexion);

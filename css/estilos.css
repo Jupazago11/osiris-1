@@ -339,8 +339,8 @@ body {
   top: 0px;
   background-color: #fff;
   color: black;
-  border: solid;
-  margin: 3%;
+  /*border: solid;*/
+  margin: 0%;
 }
 
 #administrativo {
@@ -350,6 +350,6 @@ body {
   top: 0px;
   background-color: #fff;
   color: black;
-  border: solid;
-  margin: 3%;
+  /*border: solid;*/
+  margin: 0%;
 }

@@ -9,13 +9,13 @@
 </head>
 <body>
 <div class="header">
-  <h2>Bienvenidos</h2>
+  <h2>Bienvenido</h2>
 </div>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
     require_once("../php/funciones.php");
     //Desactivar Desactivar toda notificación de error
-    error_reporting(0);
+    //error_reporting(0);
     $usuario     =      $_POST['u'];
     $clave       =      $_POST['p'];
 
@@ -30,13 +30,13 @@
     //crear_pedido($usuario);
     //crear_pedido2($usuario);
 ?>
-
 <div class="menu">
     <a class="columna w3-bar-item w3-button w3-hover-green" onclick="ocultarDivs('cont1')">Pedidos</a>
     <a class="columna w3-bar-item w3-button w3-hover-teal" onclick="ocultarDivs('cont2')">Administrativo</a>
     <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs('cont3')">Column</a>
     <a class="columna w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs('cont4')">Column</a>
 </div>
+
     <?php //Desplegaremos los elementos para la sección de Pedidos ?>
     <div id="cont1" style="display:none;">
         <div class="w3-container" id="pedidos"  style="display:none;">
@@ -103,6 +103,7 @@
             </div>
         </div>
     </div>
+    
     <div id="cont3" style="display:none;">
         <div class="w3-container" id="otro"  style="display:none;">
             <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0()">_</a>

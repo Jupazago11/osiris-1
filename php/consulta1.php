@@ -49,7 +49,7 @@
                         
                         
                         //Consulta a la base de datos en la tabla producto
-                        $consulta = mysqli_query($conexion, "SELECT `id_producto`, `nombre_producto`, `precio_de_compra`, `existencias` FROM `producto` INNER JOIN `proveedor` ON producto.id_proveedor1 = proveedor.id_proveedor WHERE producto.estado = 'activo' AND proveedor.nombre_proveedor = '$nombre_prove' ORDER BY `id_producto` ASC") or die ("Error al consultar: ver datos generar sugerido");
+                        $consulta = mysqli_query($conexion, "SELECT `id_producto`, `nombre_producto`, `precio_de_compra` FROM `producto` INNER JOIN `proveedor` ON producto.id_proveedor1 = proveedor.id_proveedor WHERE producto.estado = 'activo' AND proveedor.nombre_proveedor = '$nombre_prove' ORDER BY `id_producto` ASC") or die ("Error al consultar: ver datos generar sugerido");
                         
                         $contador=0;
                         while (($fila = mysqli_fetch_array($consulta))!=NULL){

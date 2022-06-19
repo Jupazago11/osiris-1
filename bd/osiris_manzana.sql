@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-06-2022 a las 23:12:43
--- Versión del servidor: 10.4.22-MariaDB
--- Versión de PHP: 7.4.27
+-- Tiempo de generación: 19-06-2022 a las 05:20:02
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -48,9 +48,12 @@ CREATE TABLE `detalle_sugerido` (
   `id_producto2` int(11) NOT NULL,
   `cantidad_sugerido` int(11) NOT NULL,
   `inventario_sugerido` int(11) NOT NULL,
-  `pedido_sugerido` int(11) NOT NULL,
-  `precio_sugerido` int(11) NOT NULL,
-  `precio_total_sugerido` int(11) NOT NULL,
+  `pedido_sugerido` int(11) DEFAULT NULL,
+  `pedido_recibido` int(11) DEFAULT NULL,
+  `precio_sugerido` int(11) DEFAULT NULL,
+  `precio_total_sugerido` int(11) DEFAULT NULL,
+  `precio_total_pedido` int(11) DEFAULT NULL,
+  `precio_total_llegada` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -109,6 +112,8 @@ CREATE TABLE `producto` (
   `descripcion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `precio_producto` int(11) NOT NULL,
   `precio_producto2` int(11) NOT NULL,
+  `precio_de_compra` int(11) NOT NULL,
+  `existencias` int(11) NOT NULL,
   `id_proveedor1` int(11) NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
@@ -137,10 +142,14 @@ CREATE TABLE `sugerido` (
   `id_sugerido` int(11) NOT NULL,
   `id_pers2` int(11) NOT NULL,
   `fecha_sugerido` date NOT NULL,
-  `pedido_proxima_sugerido` date NOT NULL,
-  `nombre_provedor_sugerido` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `nombre_empleado_provedor_sug` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `total_global_sugerido` int(11) NOT NULL,
+  `pedido_proxima_sugerido` date DEFAULT NULL,
+  `pedido_llegada` date DEFAULT NULL,
+  `nombre_provedor_sugerido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre_empleado_provedor_sug` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre_empleado_provedor_sug2` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `total_global_sugerido` int(11) DEFAULT NULL,
+  `total_global_pedido` int(11) DEFAULT NULL,
+  `total_global_confirmado` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
