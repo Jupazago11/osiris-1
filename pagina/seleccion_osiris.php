@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio de Sesión</title>
+    <title class="w3-center w3-animate-top">Inicio de Sesión</title>
     <script type="text/javascript" src="../JavaScript/funciones.js"></script>
     <LINK REL=StyleSheet HREF="../CSS/estilos.css">
 </head>

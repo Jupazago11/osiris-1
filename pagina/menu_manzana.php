@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="header">
-  <h2>Bienvenido</h2>
+  <h2 class="w3-animate-top">Bienvenido</h2>
 </div>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
@@ -30,18 +30,18 @@
     //crear_pedido($usuario);
     //crear_pedido2($usuario);
 ?>
-<div class="menu">
+<div class="menu w3-animate-zoom">
     <a class="columna w3-bar-item w3-button w3-hover-green" onclick="ocultarDivs('cont1')">Pedidos</a>
     <a class="columna w3-bar-item w3-button w3-hover-teal" onclick="ocultarDivs('cont2')">Administrativo</a>
-    <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs('cont3')">Column</a>
+    <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs('cont3')">Control de Domicilios</a>
     <a class="columna w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs('cont4')">Column</a>
 </div>
 
-    <?php //Desplegaremos los elementos para la sección de Pedidos ?>
+<?php //Desplegaremos los elementos para la sección de Pedidos ?>
     <div id="cont1" style="display:none;">
         <div class="w3-container" id="pedidos"  style="display:none;">
             <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0()">_</a>
-            <div class="menu">
+            <div class="menu"  style="background:rgb(196, 196, 196)">
                 <a class="columna w3-bar-item w3-button w3-hover-green" onclick="ocultarDivs1('cont1_1')">Crea Sugerido</a>
                 <a class="columna w3-bar-item w3-button w3-hover-teal" onclick="ocultarDivs1('cont1_2')">Crear Pedido</a>
                 <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs1('cont1_3')">Confirmar Pedido</a>
@@ -82,7 +82,6 @@
 
             <div id="cont2_1" style="display:none;">
                 <div class="w3-container">
-                    Hola
                     <?php   //crear_sugerido($usuario);   ?>
                 </div>
             </div>
@@ -105,34 +104,10 @@
     </div>
     
     <div id="cont3" style="display:none;">
-        <div class="w3-container" id="otro"  style="display:none;">
+        <div class="w3-container" id="control_domiciliario"  style="display:none;">
             <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0()">_</a>
             <div class="menu">
-                <a class="columna w3-bar-item w3-button w3-hover-green" onclick="ocultarDivs3('cont3_1')">Crea Proveedor</a>
-                <a class="columna w3-bar-item w3-button w3-hover-teal" onclick="ocultarDivs3('cont3_2')">Crear Pedido</a>
-                <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs3('cont3_3')">Confirmar Pedido</a>
-                <a class="columna w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs3('cont3_4')">Ver próximos pedidos</a>
-            </div>
-
-            <div id="cont3_1" style="display:none;">
-                <div class="w3-container">
-                    <?php   //crear_sugerido($usuario);   ?>
-                </div>
-            </div>
-            <div id="cont3_2" style="display:none;">
-                <div class="w3-container">
-                    <?php   //crear_pedido($usuario);     ?>
-                </div>
-            </div>
-            <div id="cont3_3" style="display:none;">
-                <div class="w3-container">
-                    <?php   //crear_pedido2($usuario);    ?>
-                </div>
-            </div>
-            <div id="cont3_4" style="display:none;">
-                <div class="w3-container">
-                    <?php   //ver_pedidos($usuario);      ?>
-                </div>
+                <?php control_domiciliario($usuario, $tipo_de_cuenta); ?>
             </div>
         </div>
     </div>
@@ -209,6 +184,11 @@ function ocultarDivs(no_oculta){
             break;
         case "cont3":
             document.getElementById("cont3").style.display='block';
+            document.getElementById("control_domiciliario").style.display='block';
+            document.getElementById("cont3_1").style.display='none';
+            document.getElementById("cont3_2").style.display='none';
+            document.getElementById("cont3_3").style.display='none';
+            document.getElementById("cont3_4").style.display='none';
             break;
         case "cont4":
             document.getElementById("cont4").style.display='block';
@@ -221,6 +201,7 @@ function ocultarDivs(no_oculta){
 function ocultarDivs0(){
     document.getElementById("pedidos").style.display='none';
     document.getElementById("administrativo").style.display='none';
+    document.getElementById("control_domiciliario").style.display='none';
 
 }
 function ocultarDivs1(no_oculta){
@@ -265,6 +246,30 @@ function ocultarDivs2(no_oculta){
             break;
         case "cont2_4":
             document.getElementById("cont2_4").style.display='block';
+            break;
+        default:
+          // code block
+            break;
+    }
+}
+function ocultarDivs3(no_oculta){
+    document.getElementById("cont3_1").style.display='none';
+    document.getElementById("cont3_2").style.display='none';
+    document.getElementById("cont3_3").style.display='none';
+    document.getElementById("cont3_4").style.display='none';
+    switch(no_oculta) {
+        //Pedidos
+        case "cont3_1":
+            document.getElementById("cont3_1").style.display='block';
+            break;
+        case "cont3_2":
+            document.getElementById("cont3_2").style.display='block';
+            break;
+        case "cont3_3":
+            document.getElementById("cont3_3").style.display='block';
+            break;
+        case "cont3_4":
+            document.getElementById("cont3_4").style.display='block';
             break;
         default:
           // code block

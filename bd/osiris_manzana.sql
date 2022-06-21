@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-06-2022 a las 05:20:02
+-- Tiempo de generación: 21-06-2022 a las 19:50:44
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `osiris_manzana`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cliente`
+--
+
+CREATE TABLE `cliente` (
+  `id_cliente` int(11) NOT NULL,
+  `nombre_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `identificacion_cliente` int(11) DEFAULT NULL,
+  `direccion_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cliente`
+--
+
+INSERT INTO `cliente` (`id_cliente`, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente`, `telefono_cliente`, `estado`) VALUES
+(1, 'Juanito V.', 123456, 'carrera 1 #12-12', '123456789', 'activo'),
+(2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
+(3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo');
 
 -- --------------------------------------------------------
 
@@ -54,6 +78,24 @@ CREATE TABLE `detalle_sugerido` (
   `precio_total_sugerido` int(11) DEFAULT NULL,
   `precio_total_pedido` int(11) DEFAULT NULL,
   `precio_total_llegada` int(11) DEFAULT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `domicilio`
+--
+
+CREATE TABLE `domicilio` (
+  `id_domi` int(11) NOT NULL,
+  `id_pers3` int(11) NOT NULL,
+  `id_cliente2` int(11) NOT NULL,
+  `id_vehiculo2` int(11) NOT NULL,
+  `observacion` text COLLATE utf8_spanish_ci NOT NULL,
+  `nivel_urgencia` int(11) NOT NULL,
+  `tiempo_inicio` date NOT NULL,
+  `tiempo_llegada` date NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -153,9 +195,38 @@ CREATE TABLE `sugerido` (
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `vehiculo`
+--
+
+CREATE TABLE `vehiculo` (
+  `id_vehiculo` int(11) NOT NULL,
+  `tipo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `placa` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_soat` date NOT NULL,
+  `fecha_tecn` date NOT NULL,
+  `kilometraje` int(11) NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `vehiculo`
+--
+
+INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tecn`, `kilometraje`, `estado`) VALUES
+(1, 'moto', 'ABC-12A', '2022-06-01', '2022-06-01', 1000, 'activo');
+
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD PRIMARY KEY (`id_cliente`);
 
 --
 -- Indices de la tabla `detalle_factura`
@@ -172,6 +243,15 @@ ALTER TABLE `detalle_sugerido`
   ADD PRIMARY KEY (`id_detalle`),
   ADD KEY `id_sugerido1` (`id_sugerido1`),
   ADD KEY `id_producto2` (`id_producto2`);
+
+--
+-- Indices de la tabla `domicilio`
+--
+ALTER TABLE `domicilio`
+  ADD PRIMARY KEY (`id_domi`),
+  ADD KEY `id_pers` (`id_pers3`),
+  ADD KEY `id_vehiculo` (`id_vehiculo2`),
+  ADD KEY `id_cliente` (`id_cliente2`);
 
 --
 -- Indices de la tabla `factura`
@@ -207,8 +287,20 @@ ALTER TABLE `sugerido`
   ADD KEY `id_pers2` (`id_pers2`);
 
 --
+-- Indices de la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  ADD PRIMARY KEY (`id_vehiculo`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_factura`
@@ -221,6 +313,12 @@ ALTER TABLE `detalle_factura`
 --
 ALTER TABLE `detalle_sugerido`
   MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `domicilio`
+--
+ALTER TABLE `domicilio`
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -253,6 +351,12 @@ ALTER TABLE `sugerido`
   MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `vehiculo`
+--
+ALTER TABLE `vehiculo`
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- Restricciones para tablas volcadas
 --
 
@@ -269,6 +373,14 @@ ALTER TABLE `detalle_factura`
 ALTER TABLE `detalle_sugerido`
   ADD CONSTRAINT `detalle_sugerido_ibfk_1` FOREIGN KEY (`id_producto2`) REFERENCES `producto` (`id_producto`),
   ADD CONSTRAINT `detalle_sugerido_ibfk_2` FOREIGN KEY (`id_sugerido1`) REFERENCES `sugerido` (`id_sugerido`);
+
+--
+-- Filtros para la tabla `domicilio`
+--
+ALTER TABLE `domicilio`
+  ADD CONSTRAINT `domicilio_ibfk_1` FOREIGN KEY (`id_pers3`) REFERENCES `personal` (`id_pers`),
+  ADD CONSTRAINT `domicilio_ibfk_2` FOREIGN KEY (`id_vehiculo2`) REFERENCES `vehiculo` (`id_vehiculo`),
+  ADD CONSTRAINT `domicilio_ibfk_3` FOREIGN KEY (`id_cliente2`) REFERENCES `cliente` (`id_cliente`);
 
 --
 -- Filtros para la tabla `factura`

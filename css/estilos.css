@@ -308,7 +308,8 @@ body {
   margin: 10px;
   width: 25.00%;
   padding: 10px;
-  height: 200px; /* Should be removed. Only for demonstration */
+  height: 120px; /* Should be removed. Only for demonstration */
+  border-radius: 50%;
 }
 
 /* Clear floats after the columns */
@@ -344,6 +345,17 @@ body {
 }
 
 #administrativo {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0px;
+  background-color: #fff;
+  color: black;
+  /*border: solid;*/
+  margin: 0%;
+}
+
+#control_domiciliario {
   position: absolute;
   width: 100%;
   height: 100%;

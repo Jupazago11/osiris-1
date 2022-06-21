@@ -9,9 +9,9 @@
     <LINK REL=StyleSheet HREF="../CSS/estilos.css">
 </head>
 <body>
-<div class="input">
+<div class="input w3-center">
     <form name="formulario_iniciar_sesion" action="menu_manzana.php" method='post'>
-        <h1>Ingresar datos</h1>
+        <h1 class="w3-animate-top">Ingresar datos</h1>
         <input type="text" name="u" required placeholder="Usuario"/>
         <input type="password" name="p" required placeholder="Contraseña"/>
         <br><br>
