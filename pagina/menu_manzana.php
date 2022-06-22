@@ -108,6 +108,7 @@
             <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0()">_</a>
             <div class="menu">
                 <?php control_domiciliario($usuario, $tipo_de_cuenta); ?>
+                <?php control_domiciliario($usuario, $tipo_de_cuenta); ?>
             </div>
         </div>
     </div>

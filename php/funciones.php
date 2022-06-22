@@ -269,19 +269,64 @@ function ver_pedidos($usuario){
 
 function control_domiciliario($usuario, $tipo_de_cuenta){
 
-    if($tipo_de_cuenta == 1 && $tipo_de_cuenta == 1){
-        ?>
-        <form id="kilometraje" method="POST">
-            <fieldset><legend>Ingresa el kilometraje del vehículo:</legend>
-            <input type="number" name="kilometraje" value="<?php echo $usuario; ?>">
+    if(existencia_de_la_conexion()){
+        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+    }
+    $conexion = conectar();                     //Obtenemos la conexion
 
-            <button type="button" id="enviar4" class="w3-btn w3-red" onclick="document.getElementById('respuesta4').style.display='block'">Ver fechas <i class='far fa-calendar-alt'></i></button>
-            <input type="reset" value="Limpiar" class="w3-btn w3-red" onclick="document.getElementById('respuesta4').style.display='none'">
+    if($tipo_de_cuenta == 1 && $tipo_de_cuenta == 2){
+        ?>
+        <form id="seleccion_vehiculo" method="POST">
+            <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+            <input type="hidden" name="tipo_de_cuenta" value="<?php echo $tipo_de_cuenta; ?>">
+            <fieldset><legend>Selecciona el vehículo:</legend>
+            <input list="vehiculos" name="vehiculo" id="vehiculo"  required>
+            <datalist id="vehiculos"  required>
+
+            <?php
+                //Consulta a la base de datos en la tabla provvedor
+                $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
+
+                while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                    // traemos los proveedores existentes en la base de datos
+                    echo "<option value=".$fila['placa']."></option>";
+                }
+                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+            ?>
+            </datalist>
+
+            <button type="button" id="enviar5" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5').style.display='block'">Continuar</button>
             </fieldset>
         </form>
-        <?php
-    }elseif($tipo_de_cuenta == 3){
 
+        <div id="respuesta5"></div>
+        <script>
+            $('#enviar5').click(function(){
+                $.ajax({
+                    url:'../php/consulta5.php',
+                    type:'POST',
+                    data: $('#seleccion_vehiculo').serialize(),
+                    success: function(res){
+                        $('#respuesta5').html(res);
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+        </script>
+        </div>
+        <?php
+
+    }elseif($tipo_de_cuenta == 4){
+
+        //Consulta a la base de datos en la tabla domicilios
+        $consulta = mysqli_query("SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado FROM `domicilio` INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente") or die ("Error al consultar: proveedores");
+
+        while (($fila = mysqli_fetch_array($consulta))!=NULL){
+            // traemos los proveedores existentes en la base de datos
+            echo "<option value=".$fila['personal.user_pers']."></option>";
+        }
     }
 }
 

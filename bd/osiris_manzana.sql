@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 21-06-2022 a las 19:50:44
+-- Tiempo de generación: 22-06-2022 a las 20:40:29
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -29,6 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
+  `id_ubi1` int(11) NOT NULL,
   `nombre_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `identificacion_cliente` int(11) DEFAULT NULL,
   `direccion_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
@@ -40,10 +41,10 @@ CREATE TABLE `cliente` (
 -- Volcado de datos para la tabla `cliente`
 --
 
-INSERT INTO `cliente` (`id_cliente`, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente`, `telefono_cliente`, `estado`) VALUES
-(1, 'Juanito V.', 123456, 'carrera 1 #12-12', '123456789', 'activo'),
-(2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
-(3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo');
+INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente`, `telefono_cliente`, `estado`) VALUES
+(1, 1, 'Juanito V.', 123456, 'carrera 1 #12-12', '123456789', 'activo'),
+(2, 2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
+(3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo');
 
 -- --------------------------------------------------------
 
@@ -92,12 +93,23 @@ CREATE TABLE `domicilio` (
   `id_pers3` int(11) NOT NULL,
   `id_cliente2` int(11) NOT NULL,
   `id_vehiculo2` int(11) NOT NULL,
-  `observacion` text COLLATE utf8_spanish_ci NOT NULL,
-  `nivel_urgencia` int(11) NOT NULL,
-  `tiempo_inicio` date NOT NULL,
-  `tiempo_llegada` date NOT NULL,
+  `fecha` date NOT NULL,
+  `observacion` text COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nivel_urgencia` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `ubicacion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `destino` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tiempo_llegada` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `domicilio`
+--
+
+INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `tiempo_llegada`, `estado`) VALUES
+(1, 1, 1, 1, '2022-06-22', 'ninguna', 'normal', 'urbano', 'parque', NULL, 'activo'),
+(2, 1, 2, 1, '2022-06-22', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', NULL, 'activo'),
+(3, 1, 3, 1, '2022-06-22', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -139,7 +151,8 @@ CREATE TABLE `personal` (
 --
 
 INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `salario_pers`, `estado`) VALUES
-(1, 'juan pablo zapata gómez', '1037977046', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', 'Desarrollador', '1000000', 'activo');
+(1, 'juan pablo zapata gómez', '1037977046', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', 'Desarrollador', '1000000', 'activo'),
+(2, 'Domiciliario', '1', 'domi', 'domi', 4, '2022-06-01', '2022-06-01', 'verbal', '0', 'activo');
 
 -- --------------------------------------------------------
 
@@ -198,6 +211,27 @@ CREATE TABLE `sugerido` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `ubicacion`
+--
+
+CREATE TABLE `ubicacion` (
+  `id_ubi` int(11) NOT NULL,
+  `ubicacion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `ubicacion`
+--
+
+INSERT INTO `ubicacion` (`id_ubi`, `ubicacion`, `estado`) VALUES
+(1, 'urbano', 'activo'),
+(2, 'Sopetran', 'activo'),
+(3, 'san francisco', 'activo');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `vehiculo`
 --
 
@@ -216,7 +250,8 @@ CREATE TABLE `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tecn`, `kilometraje`, `estado`) VALUES
-(1, 'moto', 'ABC-12A', '2022-06-01', '2022-06-01', 1000, 'activo');
+(1, 'moto', 'ABC-12A', '2022-06-01', '2022-06-01', 1000, 'activo'),
+(2, 'moto', 'XYZ-12A', '2022-06-02', '2022-06-02', 0, 'activo');
 
 --
 -- Índices para tablas volcadas
@@ -226,7 +261,8 @@ INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tec
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  ADD PRIMARY KEY (`id_cliente`);
+  ADD PRIMARY KEY (`id_cliente`),
+  ADD KEY `id_ubi` (`id_ubi1`);
 
 --
 -- Indices de la tabla `detalle_factura`
@@ -287,6 +323,12 @@ ALTER TABLE `sugerido`
   ADD KEY `id_pers2` (`id_pers2`);
 
 --
+-- Indices de la tabla `ubicacion`
+--
+ALTER TABLE `ubicacion`
+  ADD PRIMARY KEY (`id_ubi`);
+
+--
 -- Indices de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
@@ -318,7 +360,7 @@ ALTER TABLE `detalle_sugerido`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -330,7 +372,7 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -351,14 +393,26 @@ ALTER TABLE `sugerido`
   MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `ubicacion`
+--
+ALTER TABLE `ubicacion`
+  MODIFY `id_ubi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `cliente`
+--
+ALTER TABLE `cliente`
+  ADD CONSTRAINT `cliente_ibfk_1` FOREIGN KEY (`id_ubi1`) REFERENCES `ubicacion` (`id_ubi`);
 
 --
 -- Filtros para la tabla `detalle_factura`
