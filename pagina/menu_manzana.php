@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal</title>
-    <script type="text/javascript" src="../js/funciones.js"></script>
     <LINK REL=StyleSheet HREF="../css/estilos.css">
 </head>
 <body>
@@ -34,7 +33,7 @@
     <a class="columna w3-bar-item w3-button w3-hover-green" onclick="ocultarDivs('cont1')">Pedidos</a>
     <a class="columna w3-bar-item w3-button w3-hover-teal" onclick="ocultarDivs('cont2')">Administrativo</a>
     <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs('cont3')">Control de Domicilios</a>
-    <a class="columna w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs('cont4')">Column</a>
+    <a class="columna w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs('cont4')">Ventas</a>
 </div>
 
 <?php //Desplegaremos los elementos para la sección de Pedidos ?>
@@ -108,7 +107,6 @@
             <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0()">_</a>
             <div class="menu">
                 <?php control_domiciliario($usuario, $tipo_de_cuenta); ?>
-                <?php control_domiciliario($usuario, $tipo_de_cuenta); ?>
             </div>
         </div>
     </div>
@@ -148,6 +146,8 @@
     <p>Powered by <u>Jupazago</u></p>
 </div>
 </body>
+
+<script type="text/javascript" src="../js/funciones.js"></script>
 <script>
  
 function multi() {

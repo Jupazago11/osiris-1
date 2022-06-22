@@ -1,5 +1,6 @@
 src="http://code.jquery.com/jquery-2.1.4.min.js";
 
+
 var close = document.getElementsByClassName("closebtn");
 var i;
 

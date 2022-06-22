@@ -320,13 +320,53 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
 
     }elseif($tipo_de_cuenta == 4){
 
-        //Consulta a la base de datos en la tabla domicilios
-        $consulta = mysqli_query("SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado FROM `domicilio` INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente") or die ("Error al consultar: proveedores");
+        $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado FROM `domicilio` INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
+        ?>
+        <table id="tabla_sugerido">
+        <tr>
+            <th>Personal</th>
+            <th colspan="3">Cliente</th>
+            <th>Destino</th>
+            <th>Salida</th>
+            <th>LLegada</th>
+            <th>Estado</th>
+        </tr>
+        <?php
+        
+        while (($fila = mysqli_fetch_array($consulta)) != NULL){
+            ?>
+            <tr>
+                <td><?php echo $fila['user_pers']; ?></td>
+                <td><?php echo $fila['nombre_cliente']; ?></td>
+                <td><div class="tooltip"><i class='fas fa-search-location' style='font-size:36px'></i>
+                <span class="tooltiptext"><?php echo $fila['observacion']; ?></span></div></td>
+                <?php
+                if($fila['nivel_urgencia'] == "Prioritario"){
+                    ?>
+                    <td><i class='fas fa-exclamation-triangle' style='font-size:36px;color:red'></i></td>
+                    <?php
+                }else{
+                    ?>
+                    <td></td>
+                    <?php
+                }
+                ?>
 
-        while (($fila = mysqli_fetch_array($consulta))!=NULL){
-            // traemos los proveedores existentes en la base de datos
-            echo "<option value=".$fila['personal.user_pers']."></option>";
+                <td><?php echo $fila['destino']; ?></td>
+                <td></td>
+                <td></td>
+                <td><?php echo $fila['estado']; ?></td>
+            </tr>
+            
+            <?php
         }
+        
+        mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+        ?>
+        </table>
+        <?php
+
+        
     }
 }
 
