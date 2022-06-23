@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2022 a las 00:11:46
+-- Tiempo de generación: 23-06-2022 a las 19:54:20
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -98,7 +98,8 @@ CREATE TABLE `domicilio` (
   `nivel_urgencia` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ubicacion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `destino` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `tiempo_llegada` int(11) DEFAULT NULL,
+  `tiempo_salida` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tiempo_llegada` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -106,10 +107,10 @@ CREATE TABLE `domicilio` (
 -- Volcado de datos para la tabla `domicilio`
 --
 
-INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `tiempo_llegada`, `estado`) VALUES
-(1, 1, 1, 1, '2022-06-22', 'ninguna', 'normal', 'urbano', 'parque', NULL, 'activo'),
-(2, 1, 2, 1, '2022-06-22', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', NULL, 'activo'),
-(3, 1, 3, 1, '2022-06-22', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', NULL, 'activo');
+INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `tiempo_salida`, `tiempo_llegada`, `estado`) VALUES
+(1, 1, 1, 1, '2022-06-23', 'ninguna', 'normal', 'urbano', 'parque', NULL, NULL, 'activo'),
+(2, 1, 2, 1, '2022-06-23', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', NULL, NULL, 'activo'),
+(3, 1, 3, 1, '2022-06-23', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
