@@ -319,54 +319,45 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
         <?php
 
     }elseif($tipo_de_cuenta == 4){
-
-        $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado FROM `domicilio` INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
         ?>
-        <table id="tabla_sugerido">
-        <tr>
-            <th>Personal</th>
-            <th colspan="3">Cliente</th>
-            <th>Destino</th>
-            <th>Salida</th>
-            <th>LLegada</th>
-            <th>Estado</th>
-        </tr>
-        <?php
-        
-        while (($fila = mysqli_fetch_array($consulta)) != NULL){
-            ?>
-            <tr>
-                <td><?php echo $fila['user_pers']; ?></td>
-                <td><?php echo $fila['nombre_cliente']; ?></td>
-                <td><div class="tooltip"><i class='fas fa-search-location' style='font-size:36px'></i>
-                <span class="tooltiptext"><?php echo $fila['observacion']; ?></span></div></td>
-                <?php
-                if($fila['nivel_urgencia'] == "Prioritario"){
-                    ?>
-                    <td><i class='fas fa-exclamation-triangle' style='font-size:36px;color:red'></i></td>
-                    <?php
-                }else{
-                    ?>
-                    <td></td>
-                    <?php
-                }
-                ?>
-
-                <td><?php echo $fila['destino']; ?></td>
-                <td></td>
-                <td></td>
-                <td><?php echo $fila['estado']; ?></td>
-            </tr>
-            
+        <form id="seleccion_vehiculo" method="POST">
+            <fieldset><legend>Selecciona el vehículo:</legend>
+            <input list="vehiculos" name="vehiculo" id="vehiculo"  required>
+            <datalist id="vehiculos"  required>
             <?php
-        }
-        
-        mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-        ?>
-        </table>
-        <?php
+                //Consulta a la base de datos en la tabla provvedor
+                $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
 
-        
+                while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                    // traemos los proveedores existentes en la base de datos
+                    echo "<option value=".$fila['placa']."></option>";
+                }
+                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+            ?>
+            </datalist>
+
+            <button type="button" id="enviar5_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5_2').style.display='block'">Continuar</button>
+            </fieldset>
+        </form>
+
+        <div id="respuesta5_2"></div>
+        <script>
+            $('#enviar5_2').click(function(){
+                $.ajax({
+                    url:'../php/consulta5_2.php',
+                    type:'POST',
+                    data: $('#seleccion_vehiculo').serialize(),
+                    success: function(res){
+                        $('#respuesta5_2').html(res);
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+        </script>
+        </div>
+        <?php
     }
 }
 
