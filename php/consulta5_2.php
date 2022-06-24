@@ -10,6 +10,7 @@
 
     date_default_timezone_set('America/Bogota');
     $fecha = date('Y-m-d', time());
+    $hoy = date("H:i");
 
     //date('h:i'); //Fecha justo ahora
 
@@ -30,7 +31,7 @@
 
 
     if($cantidad > 0){
-        $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado 
+        $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado, domicilio.tiempo_salida, domicilio.tiempo_llegada, domicilio.id_domi
         FROM `domicilio` 
         INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers 
         INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente  
@@ -39,8 +40,11 @@
         AND `fecha` = '$fecha'
         ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
         ?>
+        <p id="reloj"></p>
+        <form id="configuracion" method="POST">
         <table id="tabla_sugerido">
         <tr>
+            <th>#</th>
             <th>Personal</th>
             <th colspan="3">Cliente</th>
             <th>Destino</th>
@@ -48,47 +52,130 @@
             <th>LLegada</th>
             <th></th>
         </tr>
-        <?php
-        while (($fila = mysqli_fetch_array($consulta)) != NULL){
-            ?>
-            <tr>
-                <td><?php echo $fila['user_pers']; ?></td>
-                <td><?php echo $fila['nombre_cliente']; ?></td>
-                <td><div class="tooltip"><i class='fas fa-search-location' style='font-size:36px'></i>
-                <span class="tooltiptext"><?php echo $fila['observacion']; ?></span></div></td>
-                <?php
-                if($fila['nivel_urgencia'] == "Prioritario"){
-                    ?>
-                    <td><i class='fas fa-exclamation' style='font-size:36px;color:red'></i></td>
-                    <?php
-                }else{
-                    ?>
-                    <td></td>
-                    <?php
-                }
-                ?>
-                <td><?php echo $fila['ubicacion'].": ".$fila['destino']; ?></td>
-                <td><input type="text" name="salidas[]"></input><button style="font-size:24px;border-radius:50%;" onclick="rellenar_formulario()"><i class="far fa-clock"></i></button></td>
-                <td><input type="text" name="llegadas[]"></input><button style="font-size:24px;border-radius:50%;"><i class="far fa-clock"></i></button></td>
-                <?php
-                if($fila['estado'] == "activo"){
-                    ?>
-                    <td><i class='fas fa-hourglass-half' style='font-size:36px;color:red'></i></td>
-                    <?php
-                }else{
-                    ?>
-                    <td><i class='far fa-calendar-check' style='font-size:36px;color:green'></td>
-                    <?php
-                }
-                ?>
-            </tr>
-            
-            <?php
-        }
+        <tbody id="tbodyform">
         
+            <?php
+            $contador = 1;
+            
+            //<span class="numeral"><?php echo $contador ? ></span>
+            //<input type="number" class="numeral" value="<?php echo $contador ? >"></input>
+            while (($fila = mysqli_fetch_array($consulta)) != NULL){
+                ?>
+                <tr>
+                
+                    <td><span class="numeral"><?php echo $contador ?></span></td> 
+                    <td><?php echo $fila['user_pers']; ?></td>
+                    <td><?php echo $fila['nombre_cliente']; ?></td>
+                    <td><div class="tooltip"><i class='fas fa-search-location' style='font-size:36px'></i>
+                    <span class="tooltiptext"><?php echo $fila['observacion']; ?></span></div></td>
+                    <?php
+                    if($fila['nivel_urgencia'] == "Prioritario"){
+                        ?>
+                        <td><i class='fas fa-exclamation' style='font-size:36px;color:red'></i></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td></td>
+                        <?php
+                    }
+                    ?>
+                    <td><?php echo $fila['ubicacion'].": ".$fila['destino']; ?></td>
+                    <?php
+                    if($fila['tiempo_salida'] == NULL){
+                        ?>
+                        <td>
+                        <label class="switch">
+                        <input type="checkbox" name="salidass[]" onclick="enviar_update()" value="<?php echo $fila['id_domi'] ?>">
+                        <span class="slider"></span>
+                        </label></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td></td>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    if($fila['tiempo_llegada'] == NULL){
+                        ?>
+                        <td>
+                        <label class="switch">
+                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $contador ?>">
+                        <span class="slider"></span>
+                        </label></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td></td>
+                        <?php
+                    }
+                    ?>
+
+                    <?php
+                    if($fila['estado'] == "activo"){
+                        ?>
+                        <td><i class='fas fa-hourglass-half' style='font-size:36px;color:red'></i></td>
+                        <?php
+                    }elseif($fila['estado'] == "inactivo"){
+                        ?>
+                        <td><i class='fa fa-check' style='font-size:36px;color:green'></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td><i class='fa fa-motorcycle' style='font-size:36px;color:blue'></td>
+                        <?php
+                    }
+                    ?>
+
+                </tr>
+                
+            <?php
+            $contador++;
+        }
+        ?>
+        
+        </tbody>
+        <?php
         mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
         ?>
         </table>
+        <button type="button" id="enviar5_3" class="w3-btn w3-teal" style="visibility:hidden;"></button>
+        <button type="button" id="enviar5_4" class="w3-btn w3-teal" style="visibility:hidden;"></button>
+        </form>
+        <div id="respuesta5_4"></div>
+        <script>
+            $('#enviar5_3').click(function(){
+                $.ajax({
+                    url:'../php/consulta5_3.php',
+                    type:'POST',
+                    data: $('#configuracion').serialize(),
+                    success: function(res){
+                        $('#enviar5_2').trigger('click');
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+
+            $('#enviar5_4').click(function(){
+                $.ajax({
+                    url:'../php/consulta5_4.php',
+                    type:'POST',
+                    data: $('#configuracion').serialize(),
+                    success: function(res){
+                        $('#respuesta5_4').html(res);
+                        setTimeout(function(){ 
+                            $('#enviar5_2').trigger('click');;
+                        }, 5000);
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+        </script>
+
         <?php
     }else{
         ?>

@@ -274,7 +274,7 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
     }
     $conexion = conectar();                     //Obtenemos la conexion
 
-    if($tipo_de_cuenta == 1 && $tipo_de_cuenta == 2){
+    if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
         ?>
         <form id="seleccion_vehiculo" method="POST">
             <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
@@ -336,7 +336,7 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
             ?>
             </datalist>
 
-            <button type="button" id="enviar5_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5_2').style.display='block'">Continuar</button>
+            <button type="button" id="enviar5_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5_2').style.display='block'; var intervalo_time = setInterval(myTimer2, 60000); setInterval(myTimer2, 60000)">Continuar</button>
             </fieldset>
         </form>
 
@@ -349,6 +349,7 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
                     data: $('#seleccion_vehiculo').serialize(),
                     success: function(res){
                         $('#respuesta5_2').html(res);
+                        
                     },
                     error: function(res){
                         alert("Problemas al tratar de enviar el formulario");

@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal</title>
     <LINK REL=StyleSheet HREF="../css/estilos.css">
+    <script type="text/javascript" src="../js/funciones.js"></script>
 </head>
 <body>
 <div class="header">
@@ -104,7 +105,7 @@
     
     <div id="cont3" style="display:none;">
         <div class="w3-container" id="control_domiciliario"  style="display:none;">
-            <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0()">_</a>
+            <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0(); var intervalo_time = setInterval(myTimer2, 60000); setInterval(myTimer2, 60000);clearInterval(intervalo_time);">_</a>
             <div class="menu">
                 <?php control_domiciliario($usuario, $tipo_de_cuenta); ?>
             </div>
@@ -186,10 +187,10 @@ function ocultarDivs(no_oculta){
         case "cont3":
             document.getElementById("cont3").style.display='block';
             document.getElementById("control_domiciliario").style.display='block';
-            document.getElementById("cont3_1").style.display='none';
-            document.getElementById("cont3_2").style.display='none';
-            document.getElementById("cont3_3").style.display='none';
-            document.getElementById("cont3_4").style.display='none';
+            //document.getElementById("cont3_1").style.display='none';
+            //document.getElementById("cont3_2").style.display='none';
+            //document.getElementById("cont3_3").style.display='none';
+            //document.getElementById("cont3_4").style.display='none';
             break;
         case "cont4":
             document.getElementById("cont4").style.display='block';
@@ -261,16 +262,16 @@ function ocultarDivs3(no_oculta){
     switch(no_oculta) {
         //Pedidos
         case "cont3_1":
-            document.getElementById("cont3_1").style.display='block';
+            //document.getElementById("cont3_1").style.display='block';
             break;
         case "cont3_2":
-            document.getElementById("cont3_2").style.display='block';
+            //document.getElementById("cont3_2").style.display='block';
             break;
         case "cont3_3":
-            document.getElementById("cont3_3").style.display='block';
+            //document.getElementById("cont3_3").style.display='block';
             break;
         case "cont3_4":
-            document.getElementById("cont3_4").style.display='block';
+            //document.getElementById("cont3_4").style.display='block';
             break;
         default:
           // code block

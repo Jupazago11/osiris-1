@@ -12,3 +12,25 @@ for (i = 0; i < close.length; i++) {
   }
 }
 
+
+
+//setInterval(myTimer, 1000);
+
+
+function myTimer() {
+  const date = new Date();
+  document.getElementById("reloj").innerHTML = date.toLocaleTimeString();
+}
+
+function myTimer2() {
+  const date = new Date();
+  //$('#enviar5_2').trigger('click');
+}
+
+function enviar_update() {
+  $('#enviar5_3').trigger('click');
+}
+
+function enviar_update2() {
+  $('#enviar5_4').trigger('click');
+}

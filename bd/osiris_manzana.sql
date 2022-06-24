@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-06-2022 a las 19:54:20
+-- Tiempo de generación: 25-06-2022 a las 01:08:54
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -108,9 +108,11 @@ CREATE TABLE `domicilio` (
 --
 
 INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `tiempo_salida`, `tiempo_llegada`, `estado`) VALUES
-(1, 1, 1, 1, '2022-06-23', 'ninguna', 'normal', 'urbano', 'parque', NULL, NULL, 'activo'),
-(2, 1, 2, 1, '2022-06-23', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', NULL, NULL, 'activo'),
-(3, 1, 3, 1, '2022-06-23', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', NULL, NULL, 'activo');
+(1, 1, 1, 1, '2022-06-24', 'ninguna', 'normal', 'urbano', 'parque', '18:08', '18:08', 'inactivo'),
+(2, 1, 2, 1, '2022-06-24', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', '17:51', '17:56', 'inactivo'),
+(3, 1, 3, 1, '2022-06-24', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', '14:38', '14:50', 'inactivo'),
+(4, 1, 2, 1, '2022-06-24', 'despues de la escuela de manizales', 'Prioritario', 'san francisco', 'por la fabrica de agua', '15:20', '17:56', 'inactivo'),
+(5, 1, 1, 1, '2022-06-24', 'nada', 'normal', 'urbano', 'la casa', NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -361,7 +363,7 @@ ALTER TABLE `detalle_sugerido`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
