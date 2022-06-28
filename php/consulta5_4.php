@@ -18,8 +18,7 @@
     //date('h:i'); //Fecha justo ahora
     $llegadass        = $_POST['llegadass'];
 
-    // Notificar todos los errores de PHP
-    error_reporting(-1);
+    
 
     foreach ($llegadass as $value) {
         if(count($llegadass) > 0){
@@ -48,5 +47,7 @@
             }
         }
     }
+    // Notificar todos los errores de PHP
+    error_reporting(-1);
 
 ?>

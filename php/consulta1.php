@@ -7,7 +7,7 @@
         require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
     }
     $conexion = conectar();                     //Obtenemos la conexion
-    mysqli_set_charset($conexion,"uft8");
+
 
     $nombre_usuario = strval($_POST['usuario']);//obtenemos el nombre del proveedor seleccionado
     $nombre_prove = strval($_POST['provedor']); //obtenemos el nombre del proveedor seleccionado

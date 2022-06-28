@@ -245,7 +245,6 @@ function ver_pedidos($usuario){
         <input type="reset" value="Limpiar" class="w3-btn w3-red" onclick="document.getElementById('respuesta4').style.display='none'">
         </fieldset>
     </form>
-            
     <div id="respuesta4"></div>
     <script>
         $('#enviar4').click(function(){
@@ -274,7 +273,7 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
     }
     $conexion = conectar();                     //Obtenemos la conexion
 
-    if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
+    if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
         ?>
         <form id="seleccion_vehiculo" method="POST">
             <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
@@ -361,5 +360,80 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
         <?php
     }
 }
+/////////////////////////////////////////////////////////////////////////////////////////
+function cuentas_por_pagar($usuario){
+    ?>
+    <div>
+    <br>
+    <table border="1" id="tabla_sugerido" width="100%">
+    <tr>
+        <th>Nombre del Proveedor</th>
+        <th>Fecha Límite</th>
+        <th colspan="2">Selección</th>
+    </tr>
+    <tr>
+    <form id="cuentas_por_pagar" method="POST">
+        <td><input list="provedores" name="provedor" id="provedor"></td>
+        <datalist id="provedores"  required>
 
+        <?php
+            if(existencia_de_la_conexion()){
+                require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+            }
+            $conexion = conectar();                     //Obtenemos la conexion
+            
+            //Consulta a la base de datos en la tabla provvedor
+            $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+
+            while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                // traemos los proveedores existentes en la base de datos
+                echo "<option value=".$fila['nombre_proveedor']."></option>";
+            }
+            mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+        ?>
+        </datalist>
+        <td><input type="date" name="fecha"/></td>
+        <td><button type="button" id="enviar6" class="w3-btn w3-red" onclick="document.getElementById('respuesta6').style.display='block'">Inscribir Cuenta</button></td>
+        <td><button type="button" class="w3-btn w3-green" onclick="$('#enviar6_1').trigger('click')">Ver cuentas activas</button></td>
+    </form>
+    </tr>
+    </table>
+    <div id="respuesta6"></div>
+
+    
+    <button type="button" id="enviar6_1" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta6_1').style.display='block'">Inscribir Cuenta</button>
+    
+    <div id="respuesta6_1"></div>
+
+    <script>
+        $('#enviar6').click(function(){
+            $.ajax({
+                url:'../php/consulta6.php',
+                type:'POST',
+                data: $('#cuentas_por_pagar').serialize(),
+                success: function(res){
+                    $('#respuesta6').html(res);
+                    $('#enviar6_1').trigger('click');
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+        $('#enviar6_1').click(function(){
+            $.ajax({
+                url:'../php/consulta6_1.php',
+                type:'POST',
+                success: function(res){
+                    $('#respuesta6_1').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+    </div>
+<?php
+}
 ?>

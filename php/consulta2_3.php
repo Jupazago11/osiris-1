@@ -7,8 +7,6 @@
     }
     $conexion = conectar();
 
-    mysqli_set_charset($conexion,"uft8");
-
     $nombre_usuario = strval($_POST['usuario']);
     $nombre_provedo = strval($_POST['proveedor']);
     $nombre_emplead = strval($_POST['empleado']);

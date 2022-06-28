@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 25-06-2022 a las 01:08:54
+-- Tiempo de generación: 29-06-2022 a las 01:15:10
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -45,6 +45,30 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (1, 1, 'Juanito V.', 123456, 'carrera 1 #12-12', '123456789', 'activo'),
 (2, 2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
 (3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuenta_cobro`
+--
+
+CREATE TABLE `cuenta_cobro` (
+  `id_cuenta` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha` date NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cuenta_cobro`
+--
+
+INSERT INTO `cuenta_cobro` (`id_cuenta`, `nombre`, `fecha`, `estado`) VALUES
+(1, 'prove', '2022-06-29', 'inactivo'),
+(2, 'prove', '2022-06-30', 'inactivo'),
+(3, 'prove', '2022-06-01', 'activo'),
+(4, 'prove', '2022-07-08', 'activo'),
+(5, 'prove', '2022-07-01', 'activo');
 
 -- --------------------------------------------------------
 
@@ -108,11 +132,13 @@ CREATE TABLE `domicilio` (
 --
 
 INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `tiempo_salida`, `tiempo_llegada`, `estado`) VALUES
-(1, 1, 1, 1, '2022-06-24', 'ninguna', 'normal', 'urbano', 'parque', '18:08', '18:08', 'inactivo'),
-(2, 1, 2, 1, '2022-06-24', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', '17:51', '17:56', 'inactivo'),
-(3, 1, 3, 1, '2022-06-24', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', '14:38', '14:50', 'inactivo'),
-(4, 1, 2, 1, '2022-06-24', 'despues de la escuela de manizales', 'Prioritario', 'san francisco', 'por la fabrica de agua', '15:20', '17:56', 'inactivo'),
-(5, 1, 1, 1, '2022-06-24', 'nada', 'normal', 'urbano', 'la casa', NULL, NULL, 'activo');
+(1, 1, 1, 1, '2022-06-28', 'ninguna', 'normal', 'urbano', 'parque', '12:08', '12:08', 'inactivo'),
+(2, 1, 2, 1, '2022-06-28', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', '12:08', '12:08', 'inactivo'),
+(3, 1, 3, 1, '2022-06-28', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', '12:08', '12:09', 'inactivo'),
+(4, 1, 2, 1, '2022-06-28', 'despues de la escuela de manizales', 'Prioritario', 'san francisco', 'por la fabrica de agua', '12:09', '12:09', 'inactivo'),
+(5, 1, 1, 1, '2022-06-28', 'nada', 'normal', 'urbano', 'la casa', '12:09', '12:09', 'inactivo'),
+(6, 1, 2, 1, '2022-06-28', 'nada', 'Prioritario', 'urbano', 'mi casa', '12:09', '12:09', 'inactivo'),
+(8, 1, 1, 1, '2022-06-28', 'werqwerqwerqwer', 'normal', 'urbano', 'fasdfasd', '18:09', NULL, 'proceso');
 
 -- --------------------------------------------------------
 
@@ -190,6 +216,13 @@ CREATE TABLE `proveedor` (
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
+--
+-- Volcado de datos para la tabla `proveedor`
+--
+
+INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `direccion_proveedor`, `telefono_proveedor`, `estado`) VALUES
+(1, 'prove', 'san luis', '123', 'activo');
+
 -- --------------------------------------------------------
 
 --
@@ -202,6 +235,7 @@ CREATE TABLE `sugerido` (
   `fecha_sugerido` date NOT NULL,
   `pedido_proxima_sugerido` date DEFAULT NULL,
   `pedido_llegada` date DEFAULT NULL,
+  `pedido_fecha_factura` date DEFAULT NULL,
   `nombre_provedor_sugerido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre_empleado_provedor_sug` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre_empleado_provedor_sug2` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -266,6 +300,12 @@ INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tec
 ALTER TABLE `cliente`
   ADD PRIMARY KEY (`id_cliente`),
   ADD KEY `id_ubi` (`id_ubi1`);
+
+--
+-- Indices de la tabla `cuenta_cobro`
+--
+ALTER TABLE `cuenta_cobro`
+  ADD PRIMARY KEY (`id_cuenta`);
 
 --
 -- Indices de la tabla `detalle_factura`
@@ -348,6 +388,12 @@ ALTER TABLE `cliente`
   MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de la tabla `cuenta_cobro`
+--
+ALTER TABLE `cuenta_cobro`
+  MODIFY `id_cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
@@ -363,7 +409,7 @@ ALTER TABLE `detalle_sugerido`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -387,7 +433,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `sugerido`

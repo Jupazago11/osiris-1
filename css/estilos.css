@@ -307,8 +307,10 @@ body {
   width: 25.00%;
   padding: 10px;
   height: 120px; /* Should be removed. Only for demonstration */
-  border-radius: 50%;
+  justify-content: center;
 }
+
+
 
 /* Clear floats after the columns */
 .menu:after {
@@ -336,18 +338,18 @@ body {
   width: 100%;
   height: 100%;
   top: 0px;
-  background-color: #fff;
+  background-color: rgb(241, 241, 241);
   color: black;
   /*border: solid;*/
   margin: 0%;
 }
 
-#administrativo {
+#empresa {
   position: absolute;
   width: 100%;
   height: 100%;
   top: 0px;
-  background-color: #fff;
+  background-color: rgb(241, 241, 241);
   color: black;
   /*border: solid;*/
   margin: 0%;
@@ -358,7 +360,7 @@ body {
   width: 100%;
   height: 100%;
   top: 0px;
-  background-color: #fff;
+  background-color: rgb(241, 241, 241);
   color: black;
   /*border: solid;*/
   margin: 0%;
@@ -491,4 +493,75 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+/*/////////////////////////////////////////////////////////////////////////////////////////////*/
+
+.form-inline {  
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.form-inline label {
+  margin: 5px 10px 5px 0;
+}
+
+.form-inline input {
+  vertical-align: middle;
+  margin: 5px 10px 5px 0;
+  padding: 10px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.form-inline button {
+  padding: 10px 20px;
+  background-color: dodgerblue;
+  border: 1px solid #ddd;
+  color: white;
+  cursor: pointer;
+}
+
+.form-inline button:hover {
+  background-color: royalblue;
+}
+
+@media (max-width: 800px) {
+  .form-inline input {
+    margin: 10px 0;
+  }
+  
+  .form-inline {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+/*///////////////////////////////////////////////////////////////////////////////////*/
+
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background-color: #04AA6D;
+}
+
+li {
+  float: left;
+}
+
+li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+li a:hover {
+  background-color: #111;
+}
+
+.active {
+  background-color: red;
 }

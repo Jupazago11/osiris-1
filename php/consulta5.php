@@ -1,4 +1,69 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+input[type=text], select, textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input[type=submit] {
+  background-color: #04AA6D;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  float: right;
+}
+
+input[type=submit]:hover {
+  background-color: #45a049;
+}
+
+.container {
+  border-radius: 5px;
+  background-color: #f2f2f2;
+  padding: 20px;
+}
+
+.col-25 {
+  float: left;
+  width: 25%;
+  margin-top: 6px;
+}
+
+.col-75 {
+  float: left;
+  width: 75%;
+  margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .col-25, .col-75, input[type=submit] {
+    width: 100%;
+    margin-top: 0;
+  }
+}
+</style>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
     require_once("../PHP/funciones.php");
@@ -30,21 +95,16 @@
     
         ?>
         <br>
+        <div class="container">
         <form id="creacion_domicilio" method="POST">
         <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
         <input type="hidden" name="vehiculo" value="<?php echo $vehiculo; ?>">
-
-        <table width="100%" border="1">
-            <tr>
-                <th>Cliente</th>
-                <th>Ubicacion</th>
-                <th>Destino</th>
-                <th>Categoría</th>
-                <th>Observación</th>
-                <th>Opción</th>
-            </tr>
-            <tr>
-                <td><input list="clientes" name="cliente" id="cliente"  required>
+            <div class="row">
+            <div class="col-25">
+                <label for="fname">Cliente</label>
+            </div>
+            <div class="col-75">
+                <input list="clientes" name="cliente" id="cliente"  required>
                 <datalist id="clientes" onchange="traer_ubicacion()" required>
                 <?php
                     //Consulta a la base de datos en la tabla para desplegar los clientes
@@ -60,8 +120,15 @@
                     }
                     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
                 ?>
-                </datalist></td>
-                <td><input list="ubicaciones" name="ubicacion" id="ubicacion"  required>
+                </datalist>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-25">
+                <label for="lname">Ubicación</label>
+            </div>
+            <div class="col-75">
+                <input list="ubicaciones" name="ubicacion" id="ubicacion"  required>
                 <datalist id="ubicaciones" onchange="traer_ubicacion()" required>
                 <?php
                     
@@ -78,20 +145,45 @@
                     }
                     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
                 ?>
-                </datalist></td>
-
-
-                <td><input type="text" name="destino" id="destino"  required>
-                <td><input list="categorias" name="categoria" id="categoria"  required>
+                </datalist>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-25">
+                <label for="country">Destino</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="destino" id="destino"  required>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-25">
+                <label for="country">Categoría</label>
+            </div>
+            <div class="col-75">
+                <input list="categorias" name="categoria" id="categoria"  required>
                 <datalist id="categorias"  required>
                     <option value="normal">
                     <option value="Prioritario">
-                </datalist></td>
-                <td><input type="text" name="observacion"   required></td></td>
-                <td><button type="button" id="enviar5_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta5_1').style.display='block'">Agregar</button></td>
-            </tr>
-        </table>
+                </datalist>
+            </div>
+            </div>
+            <div class="row">
+            <div class="col-25">
+                <label for="country">Observación</label>
+            </div>
+            <div class="col-75">
+                <input type="text" name="observacion"   required>
+            </div>
+            </div>
+            <br>
+            <br>
+            <div class="row">
+            <button type="button" id="enviar5_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta5_1').style.display='block'">Agregar</button>
+            </div>
+            <br>
         </form>
+        </div>
         
         <div id="respuesta5_1"></div>
             <script>
@@ -109,7 +201,7 @@
                     });
                 });
             </script>
-            </div>
+        </div>
     <?PHP
 
 

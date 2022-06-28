@@ -7,7 +7,7 @@
         require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
     }
     $conexion = conectar();
-    mysqli_set_charset($conexion,"uft8");
+
 
     $consulta = mysqli_query($conexion, "SELECT * FROM `sugerido`WHERE `pedido_proxima_sugerido` >= CURDATE() AND `estado`='activo' ORDER BY `pedido_proxima_sugerido` ASC") or die ("Error al consultar: existencia del proveedor");
     

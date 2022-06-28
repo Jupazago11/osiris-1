@@ -66,12 +66,12 @@
                     <td><span class="numeral"><?php echo $contador ?></span></td> 
                     <td><?php echo $fila['user_pers']; ?></td>
                     <td><?php echo $fila['nombre_cliente']; ?></td>
-                    <td><div class="tooltip"><i class='fas fa-search-location' style='font-size:36px'></i>
+                    <td><div class="tooltip"><i class='fa fa-search' style='font-size:36px'></i>
                     <span class="tooltiptext"><?php echo $fila['observacion']; ?></span></div></td>
                     <?php
                     if($fila['nivel_urgencia'] == "Prioritario"){
                         ?>
-                        <td><i class='fas fa-exclamation' style='font-size:36px;color:red'></i></td>
+                        <td><i class='fa fa-exclamation' style='font-size:36px;color:red'></i></td>
                         <?php
                     }else{
                         ?>
@@ -114,7 +114,7 @@
                     <?php
                     if($fila['estado'] == "activo"){
                         ?>
-                        <td><i class='fas fa-hourglass-half' style='font-size:36px;color:red'></i></td>
+                        <td><i class='fa fa-hourglass-half' style='font-size:36px;color:red'></i></td>
                         <?php
                     }elseif($fila['estado'] == "inactivo"){
                         ?>
@@ -167,7 +167,7 @@
                         $('#respuesta5_4').html(res);
                         setTimeout(function(){ 
                             $('#enviar5_2').trigger('click');;
-                        }, 5000);
+                        }, 2000);
                     },
                     error: function(res){
                         alert("Problemas al tratar de enviar el formulario");
