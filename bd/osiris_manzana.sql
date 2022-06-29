@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 29-06-2022 a las 01:15:10
+-- Tiempo de generación: 30-06-2022 a las 00:34:27
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -29,11 +29,11 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cliente` (
   `id_cliente` int(11) NOT NULL,
-  `id_ubi1` int(11) NOT NULL,
+  `id_ubi1` int(11) DEFAULT NULL,
   `nombre_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `identificacion_cliente` int(11) DEFAULT NULL,
-  `direccion_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono_cliente` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `direccion_cliente` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `telefono_cliente` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -44,7 +44,13 @@ CREATE TABLE `cliente` (
 INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente`, `telefono_cliente`, `estado`) VALUES
 (1, 1, 'Juanito V.', 123456, 'carrera 1 #12-12', '123456789', 'activo'),
 (2, 2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
-(3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo');
+(3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo'),
+(5, 3, 'anónimo', NULL, 'anonima', 'anonima', 'activo'),
+(6, NULL, 'jacinto', NULL, NULL, NULL, 'activo'),
+(7, NULL, 'juana', NULL, NULL, NULL, 'activo'),
+(8, NULL, 'carmen', NULL, NULL, NULL, 'activo'),
+(9, NULL, 'pacho', NULL, NULL, NULL, 'activo'),
+(10, NULL, 'jairo', NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -132,13 +138,17 @@ CREATE TABLE `domicilio` (
 --
 
 INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `tiempo_salida`, `tiempo_llegada`, `estado`) VALUES
-(1, 1, 1, 1, '2022-06-28', 'ninguna', 'normal', 'urbano', 'parque', '12:08', '12:08', 'inactivo'),
-(2, 1, 2, 1, '2022-06-28', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', '12:08', '12:08', 'inactivo'),
-(3, 1, 3, 1, '2022-06-28', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', '12:08', '12:09', 'inactivo'),
-(4, 1, 2, 1, '2022-06-28', 'despues de la escuela de manizales', 'Prioritario', 'san francisco', 'por la fabrica de agua', '12:09', '12:09', 'inactivo'),
-(5, 1, 1, 1, '2022-06-28', 'nada', 'normal', 'urbano', 'la casa', '12:09', '12:09', 'inactivo'),
-(6, 1, 2, 1, '2022-06-28', 'nada', 'Prioritario', 'urbano', 'mi casa', '12:09', '12:09', 'inactivo'),
-(8, 1, 1, 1, '2022-06-28', 'werqwerqwerqwer', 'normal', 'urbano', 'fasdfasd', '18:09', NULL, 'proceso');
+(1, 1, 1, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'parque', '12:05', '12:05', 'inactivo'),
+(2, 1, 2, 1, '2022-06-28', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', NULL, NULL, 'activo'),
+(3, 1, 3, 1, '2022-06-29', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', '15:57', NULL, 'proceso'),
+(4, 1, 2, 1, '2022-06-29', 'despues de la escuela de manizales', 'Prioritario', 'san francisco', 'por la fabrica de agua', '12:07', '12:07', 'inactivo'),
+(5, 1, 1, 1, '2022-06-28', 'nada', 'normal', 'urbano', 'la casa', NULL, NULL, 'activo'),
+(6, 1, 2, 1, '2022-06-29', 'nada', 'Prioritario', 'urbano', 'mi casa', NULL, NULL, 'activo'),
+(8, 1, 1, 1, '2022-06-29', 'werqwerqwerqwer', 'normal', 'urbano', 'fasdfasd', '12:06', '12:06', 'inactivo'),
+(9, 3, 1, 1, '2022-06-29', 'nada', 'normal', 'san francisco', 'vereda', NULL, NULL, 'activo'),
+(10, 3, 5, 1, '2022-06-29', 'villa jardin', 'normal', 'villa jardin', 'jardin', '12:19', '12:24', 'inactivo'),
+(11, 3, 7, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'hogar', '15:52', '15:52', 'inactivo'),
+(12, 3, 10, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'su casa', NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -163,15 +173,15 @@ CREATE TABLE `factura` (
 
 CREATE TABLE `personal` (
   `id_pers` int(11) NOT NULL,
-  `nombre_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `identificacion_pers` varchar(20) COLLATE utf8_spanish_ci NOT NULL,
+  `nombre_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `identificacion_pers` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `user_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `pass_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `tipo_usuario_pers` int(11) NOT NULL,
-  `fecha_nacimiento_pers` date NOT NULL,
-  `fecha_inicio_contrato_pers` date NOT NULL,
-  `tipo_contrato_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `salario_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `fecha_nacimiento_pers` date DEFAULT NULL,
+  `fecha_inicio_contrato_pers` date DEFAULT NULL,
+  `tipo_contrato_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `salario_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -181,7 +191,8 @@ CREATE TABLE `personal` (
 
 INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `salario_pers`, `estado`) VALUES
 (1, 'juan pablo zapata gómez', '1037977046', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', 'Desarrollador', '1000000', 'activo'),
-(2, 'Domiciliario', '1', 'domi', 'domi', 4, '2022-06-01', '2022-06-01', 'verbal', '0', 'activo');
+(2, 'Domiciliario', '1', 'domi', 'domi', 4, '2022-06-01', '2022-06-01', 'verbal', '0', 'activo'),
+(3, 'empleado prueba', NULL, 'empleado', '1234', 2, NULL, NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -385,7 +396,7 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `cuenta_cobro`
@@ -409,7 +420,7 @@ ALTER TABLE `detalle_sugerido`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -421,7 +432,7 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
