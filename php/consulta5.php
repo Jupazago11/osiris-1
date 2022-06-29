@@ -194,6 +194,7 @@ input[type=submit]:hover {
                         data: $('#creacion_domicilio').serialize(),
                         success: function(res){
                             $('#respuesta5_1').html(res);
+                            //$('#enviar5').trigger('click');
                         },
                         error: function(res){
                             alert("Problemas al tratar de enviar el formulario");

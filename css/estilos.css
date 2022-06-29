@@ -306,7 +306,7 @@ body {
   margin: 10px;
   width: 25.00%;
   padding: 10px;
-  height: 120px; /* Should be removed. Only for demonstration */
+  height: 100px; /* Should be removed. Only for demonstration */
   justify-content: center;
 }
 

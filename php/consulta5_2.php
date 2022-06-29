@@ -100,7 +100,7 @@
                         ?>
                         <td>
                         <label class="switch">
-                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $contador ?>">
+                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $fila['id_domi'] ?>">
                         <span class="slider"></span>
                         </label></td>
                         <?php
@@ -167,7 +167,7 @@
                         $('#respuesta5_4').html(res);
                         setTimeout(function(){ 
                             $('#enviar5_2').trigger('click');;
-                        }, 2000);
+                        }, 4000);
                     },
                     error: function(res){
                         alert("Problemas al tratar de enviar el formulario");

@@ -33,10 +33,26 @@
     //crear_pedido2($usuario);
 ?>
 <div class="menu w3-animate-zoom">
-    <a class="columna w3-bar-item w3-button w3-hover-green" onclick="ocultarDivs('cont1')">Pedidos</a>
-    <a class="columna w3-bar-item w3-button w3-hover-teal" onclick="ocultarDivs('cont2')">Empresa</a>
-    <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs('cont3')">Control de Domicilios</a>
-    <a class="columna w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs('cont4')">Ventas</a>
+    <?php
+    if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
+        ?>
+        <a class='columna w3-bar-item w3-button w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
+        <a class='columna w3-bar-item w3-button w3-teal' onclick="ocultarDivs('cont2')">Empresa</a>
+        <a class='columna w3-bar-item w3-button w3-blue' onclick="ocultarDivs('cont3')">Control de Domicilios <br><i class='fas fa-tasks' style='font-size:48px;color:white'></i></a>
+        <a class='columna w3-bar-item w3-button w3-red' onclick="ocultarDivs('cont4')">Ventas</a>
+        <?php
+    }elseif($tipo_de_cuenta == 3){
+        ?>
+        <a class='columna w3-bar-item w3-button w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
+        <a class='columna w3-bar-item w3-button w3-blue' onclick="ocultarDivs('cont3')">Control de Domicilios</a>
+        <a class='columna w3-bar-item w3-button w3-red' onclick="ocultarDivs('cont4')">Ventas</a>
+        <?php
+    }elseif($tipo_de_cuenta == 4){
+        ?>
+        <a class='columna w3-bar-item w3-button w3-blue' onclick="ocultarDivs('cont3')">Control de Domicilios <br><i class='fas fa-tasks' style='font-size:48px;color:white'></i></a>
+        <?php
+    }
+    ?>
 </div>
 
 <?php //Desplegaremos los elementos para la sección de Pedidos ?>
@@ -103,7 +119,7 @@
             
             <div class="menu">
             <ul>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1')">Crea Proveedor</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1')">Proveedor</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')">Actualizar Proveedor</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3')">Crear Nueva Cuenta</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')">Modificar datos de Cuentas</a></li>
@@ -113,7 +129,7 @@
 
             <div id="cont2_1" style="display:none;">
                 <div class="w3-container">
-                    <?php   //crear_sugerido($usuario);   ?>
+                    <?php   menu_proveedor($usuario);   ?>
                 </div>
             </div>
             <div id="cont2_2" style="display:none;">
@@ -249,10 +265,10 @@ function ocultarDivs(no_oculta){
         case "cont3":
             document.getElementById("cont3").style.display='block';
             document.getElementById("control_domiciliario").style.display='block';
-            //document.getElementById("cont3_1").style.display='none';
-            //document.getElementById("cont3_2").style.display='none';
-            //document.getElementById("cont3_3").style.display='none';
-            //document.getElementById("cont3_4").style.display='none';
+            document.getElementById("cont3_1").style.display='none';
+            document.getElementById("cont3_2").style.display='none';
+            document.getElementById("cont3_3").style.display='none';
+            document.getElementById("cont3_4").style.display='none';
             break;
         case "cont4":
             document.getElementById("cont4").style.display='block';

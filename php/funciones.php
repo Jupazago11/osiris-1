@@ -436,4 +436,58 @@ function cuentas_por_pagar($usuario){
     </div>
 <?php
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function menu_proveedor($usuario){
+    ?>
+    <div>
+    <br>
+    <form id="menu_proveedores" method="POST"> 
+    <table>
+    <tr>
+        <th>Nombre</th>
+        <th><input list="provedores" name="provedor" id="provedor">  <button type="button" id="enviar7" class="w3-red" onclick="document.getElementById('respuesta7').style.display='block'"><i class='fas fa-edit' style='font-size:24px;color:white'></i></button></th>
+        <datalist id="provedores"  required>
+
+        <?php
+            if(existencia_de_la_conexion()){
+                require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+            }
+            $conexion = conectar();                     //Obtenemos la conexion
+            
+            //Consulta a la base de datos en la tabla provvedor
+            $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+
+            while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                // traemos los proveedores existentes en la base de datos
+                echo "<option value=".$fila['nombre_proveedor']."></option>";
+            }
+            mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+        ?>
+        </datalist>
+    </tr>
+    </form>
+    
+
+    <div id="respuesta7"></div>
+    </table>
+
+    <script>
+        $('#enviar7').click(function(){
+            $.ajax({
+                url:'../php/consulta7.php',
+                type:'POST',
+                data: $('#menu_proveedores').serialize(),
+                success: function(res){
+                    $('#respuesta7').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+    </div>
+<?php
+}
 ?>

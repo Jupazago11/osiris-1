@@ -20,9 +20,9 @@
 
     
 
+    
     foreach ($llegadass as $value) {
         if(count($llegadass) > 0){
-        
             $consulta = mysqli_query($conexion, "SELECT `estado` FROM `domicilio` WHERE `id_domi` = '$value'") or die ("Error al consultar: domicilios");
             
 

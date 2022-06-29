@@ -19,6 +19,7 @@
     $categor         = strval($_POST['categoria']);
     $observa         = strval($_POST['observacion']);
 
+
     $banderas = array(false, false, false);
     
     //id del usuario
@@ -30,16 +31,35 @@
     }
     mysqli_free_result($consulta);
 
+
     //id del cliente
     $consulta = mysqli_query($conexion, "SELECT * FROM `cliente` WHERE `nombre_cliente` = '$cliente'") or die ("Error al consultar: cliente");
 
-    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+
+    while(($fila = mysqli_fetch_array($consulta)) != NULL){
         if($cliente == $fila['nombre_cliente']){
             $id_cliente = $fila['id_cliente'];
             $banderas[1] = true;
         }
+        
     }
+    
+
+    if($banderas[1] == false){
+        $consulta = mysqli_query($conexion, "INSERT INTO `cliente`(`nombre_cliente`, `estado`) VALUES ('$cliente','activo')") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
+
+        $consulta = mysqli_query($conexion, "SELECT * FROM `cliente` WHERE `nombre_cliente` = '$cliente'") or die ("Error al consultar: cliente");
+
+        while (($fila = mysqli_fetch_array($consulta)) != NULL){
+            if($cliente == $fila['nombre_cliente']){
+                $id_cliente = $fila['id_cliente'];
+                $banderas[1] = true;
+            } 
+        }
+    }
+   
     mysqli_free_result($consulta);
+    
 
     //id del vehiculo
     $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `placa` = '$vehiculo'") or die ("Error al consultar: proveedores");
