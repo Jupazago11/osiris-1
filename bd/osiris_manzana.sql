@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-06-2022 a las 00:34:27
+-- Tiempo de generación: 01-07-2022 a las 01:39:28
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `osiris_manzana`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categoria`
+--
+
+CREATE TABLE `categoria` (
+  `id_cat` int(11) NOT NULL,
+  `categorias` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `categoria`
+--
+
+INSERT INTO `categoria` (`id_cat`, `categorias`, `estado`) VALUES
+(1, 'carnes', 'activo');
 
 -- --------------------------------------------------------
 
@@ -203,6 +222,7 @@ INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `user_p
 CREATE TABLE `producto` (
   `id_producto` int(11) NOT NULL,
   `cod_producto` int(11) NOT NULL,
+  `id_cat1` int(11) NOT NULL,
   `nombre_producto` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `descripcion` varchar(100) COLLATE utf8_spanish_ci NOT NULL,
   `precio_producto` int(11) NOT NULL,
@@ -222,8 +242,10 @@ CREATE TABLE `producto` (
 CREATE TABLE `proveedor` (
   `id_proveedor` int(11) NOT NULL,
   `nombre_proveedor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `direccion_proveedor` varchar(65) COLLATE utf8_spanish_ci NOT NULL,
-  `telefono_proveedor` varchar(65) COLLATE utf8_spanish_ci NOT NULL,
+  `direccion_proveedor` varchar(65) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `contacto_proveedor` varchar(65) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nom_vendedor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `telefono_vendedor` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -231,8 +253,16 @@ CREATE TABLE `proveedor` (
 -- Volcado de datos para la tabla `proveedor`
 --
 
-INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `direccion_proveedor`, `telefono_proveedor`, `estado`) VALUES
-(1, 'prove', 'san luis', '123', 'activo');
+INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `direccion_proveedor`, `contacto_proveedor`, `nom_vendedor`, `telefono_vendedor`, `estado`) VALUES
+(1, 'prove', 'san luis ant', '123456', '', '', 'activo'),
+(2, 'provee', 'Dirección', 'Teléfono', '', '', 'inactivo'),
+(3, 'provee2', 'rionegro', '123465', '', '', 'activo'),
+(4, 'nuevoprove', 'Dirección', 'Teléfono', '', '', 'inactivo'),
+(5, 'nuevoprovee', 'Dirección', 'Teléfono', '', '', 'inactivo'),
+(6, 'nuevoproveer', 'Dirección', 'Teléfono', '', '', 'inactivo'),
+(7, 'nuevoproveerr', 'Dirección', 'Teléfono', '', '', 'inactivo'),
+(8, 'crear prove', 'direccion 5', '123456', '', '', 'activo'),
+(9, 'colanta', 'rionegro', '654321', '', '', 'activo');
 
 -- --------------------------------------------------------
 
@@ -306,6 +336,12 @@ INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tec
 --
 
 --
+-- Indices de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  ADD PRIMARY KEY (`id_cat`);
+
+--
 -- Indices de la tabla `cliente`
 --
 ALTER TABLE `cliente`
@@ -361,7 +397,8 @@ ALTER TABLE `personal`
 --
 ALTER TABLE `producto`
   ADD PRIMARY KEY (`id_producto`),
-  ADD KEY `id_proveedor1` (`id_proveedor1`) USING BTREE;
+  ADD KEY `id_proveedor1` (`id_proveedor1`) USING BTREE,
+  ADD KEY `id_cat` (`id_cat1`);
 
 --
 -- Indices de la tabla `proveedor`
@@ -391,6 +428,12 @@ ALTER TABLE `vehiculo`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `categoria`
+--
+ALTER TABLE `categoria`
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -444,7 +487,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `sugerido`
@@ -506,7 +549,8 @@ ALTER TABLE `factura`
 -- Filtros para la tabla `producto`
 --
 ALTER TABLE `producto`
-  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_proveedor1`) REFERENCES `proveedor` (`id_proveedor`);
+  ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_proveedor1`) REFERENCES `proveedor` (`id_proveedor`),
+  ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`id_cat1`) REFERENCES `categoria` (`id_cat`);
 
 --
 -- Filtros para la tabla `sugerido`

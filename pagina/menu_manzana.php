@@ -120,8 +120,8 @@
             <div class="menu">
             <ul>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1')">Proveedor</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')">Actualizar Proveedor</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3')">Crear Nueva Cuenta</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')">Producto</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3')">Personal</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')">Modificar datos de Cuentas</a></li>
                 <li style="float:right"><a class="w3-bar-item w3-button w3-hover-red active" onclick="ocultarDivs0()">X</a></li>
             </ul>
@@ -134,7 +134,7 @@
             </div>
             <div id="cont2_2" style="display:none;">
                 <div class="w3-container">
-                    <?php   //crear_pedido($usuario);     ?>
+                    <?php   menu_producto($usuario);     ?>
                 </div>
             </div>
             <div id="cont2_3" style="display:none;">

@@ -441,13 +441,91 @@ function cuentas_por_pagar($usuario){
 function menu_proveedor($usuario){
     ?>
     <div>
+    
+    <form id="menu_proveedores" method="POST">
+        <table id="tabla_sugerido">
+            <tr>
+                <th>Proveedor</th>
+                <th>Dirección</th>
+                <th>Contacto</th>
+
+            </tr>
+            <tr>
+                <td><input type="text" name="nombre"/></td>
+                <td><input type="text" name="direccion"/></td>
+                <td><input type="text" name="contacto"/></td>
+            </tr>
+            <tr>
+                <th>Nombre vendedor</th>
+                <th>Teléfono</th>
+                <th>Estado</th>
+            </tr>
+            <tr>
+                <td><input type="text" name="nombrevendedor"/></td>
+                <td><input type="text" name="telefono"/></td>
+                <td><input type="radio" id="r1" name="estado" value="activo" checked>
+                    <label for="r1">Activo</label><br>
+                <input type="radio" id="r2" name="estado" value="inactivo">
+                    <label for="r2">Inactivo</label><br></td>
+            </tr>
+        </table>
+    </form>
+    
+
+    <button type="button" id="enviar7" class="w3-red" onclick="document.getElementById('respuesta7').style.display='block'">Desplegar<i class='fas fa-edit' style='font-size:24px;color:white'></i></button>
+
+    <div id="respuesta7"></div>
+    <br>
+    <button type="button" id="enviar7_1" class="w3-green" onclick="document.getElementById('respuesta7_1').style.display='block'">Ver Proveedores<i class='fas fa-edit' style='font-size:24px;color:white'></i></button>
+
+    <div id="respuesta7_1"></div>
+
+    <script>
+        $('#enviar7').click(function(){
+            $.ajax({
+                url:'../php/consulta7.php',
+                type:'POST',
+                data: $('#menu_proveedores').serialize(),
+                success: function(res){
+                    $('#respuesta7').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+        $('#enviar7_1').click(function(){
+            $.ajax({
+                url:'../php/consulta7_1.php',
+                success: function(res){
+                    $('#respuesta7_1').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+    </div>
+<?php
+}
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+function menu_producto($usuario){
+    ?>
+    <div>
     <br>
     <form id="menu_proveedores" method="POST"> 
-    <table>
+    <table id="tabla_sugerido">
     <tr>
-        <th>Nombre</th>
-        <th><input list="provedores" name="provedor" id="provedor">  <button type="button" id="enviar7" class="w3-red" onclick="document.getElementById('respuesta7').style.display='block'"><i class='fas fa-edit' style='font-size:24px;color:white'></i></button></th>
-        <datalist id="provedores"  required>
+        <th colspan="2">Datos Básicos</th>
+        <th colspan="3">Información Tributaria</th>
+    </tr>
+    <tr>
+
+        <td>Categoría</td>
+        <td><input list="categorias" name="categoria" id="categoria"></th>
+        <datalist id="categorias"  required>
 
         <?php
             if(existencia_de_la_conexion()){
@@ -456,21 +534,85 @@ function menu_proveedor($usuario){
             $conexion = conectar();                     //Obtenemos la conexion
             
             //Consulta a la base de datos en la tabla provvedor
-            $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+            $consulta = mysqli_query($conexion, "SELECT `categorias` FROM `categoria` WHERE `estado` = 'activo' ORDER BY `categorias` ASC") or die ("Error al consultar: proveedores");
 
             while (($fila = mysqli_fetch_array($consulta))!=NULL){
                 // traemos los proveedores existentes en la base de datos
-                echo "<option value=".$fila['nombre_proveedor']."></option>";
+                echo "<option value=".$fila['categorias']."></option>";
             }
             mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
         ?>
-        </datalist>
+        </datalist></td>
+        <td>Tarifas de IVA</td>
+        <td><input type="text" id="t_iva"/></td>
     </tr>
+    <tr>
+        <td>Código</td>
+        <td><input type="text" name="codigo"/></td>
+        <td>Clasificación de IVA</td>
+        <td><input type="text" id="t_iva"/></td>
+    </tr>
+    <tr>
+        <td>Descripción</td>
+        <td><input type="text" name="descripcion"/></td>
+        <td>Costo del producto</td>
+        <td><input type="text" id="t_iva"/></td>
+    </tr>
+    <tr>
+        <td>Referencia</td>
+        <td><input type="text" name="referencia"/></td>
+        <td>Costo + Impuesto</td>
+        <td><input type="text" id="t_iva"/></td>
+    </tr>
+    <tr>
+        <td>Código de barra</td>
+        <td><input type="text" name="codigo_barras"/></td>
+        <td>Flete</td>
+        <td><input type="text" id="t_iva"/></td>
+    </tr>
+    <tr>
+        <td>Control Inventario</td>
+        <td><input type="radio" id="c1" name="control_inventario" value="si" checked>
+                <label for="c1">Si</label><br>
+            <input type="radio" id="c2" name="control_inventario" value="no">
+                <label for="c2">No</label><br></td>
+        <td>Utilidad estimada</td>
+        <td><input type="text" id="t_iva"/></td>
+    </tr>
+    <tr>
+        <td>Decimales en cantidad</td>
+        <td><input type="radio" id="d1" name="decimales_en_cantidad" value="si" checked>
+                <label for="d1">Si</label><br>
+            <input type="radio" id="d2" name="decimales_en_cantidad" value="no">
+                <label for="d2">No</label><br></td>
+
+
+
+        <td>Precio Sugerido<br><input type="text" id="t_iva"/></td>
+        <td>Venta 2<br><input type="text" id="t_iva"/></td>
+        <td>Venta 3<br><input type="text" id="t_iva"/></td>
+    </tr>
+    <tr>
+        <td>Días rotación</td>
+        <td><input type="number" name="codigo_barras" min="0" value="0"/></td>
+    </tr>
+    <tr>
+        <td>Activo</td>
+        <td><input type="radio" id="r1" name="estado" value="activo" checked>
+                <label for="r1">Activo</label><br>
+            <input type="radio" id="r2" name="estado" value="inactivo">
+                <label for="r2">Inactivo</label><br></td>
+        <td>Utilidad<br><input type="text" id="t_iva"/></td>
+        <td>Utilidad 2<br><input type="text" id="t_iva"/></td>
+        <td>Utilidad 3<br><input type="text" id="t_iva"/></td>
+    </tr>
+
     </form>
-    
+    </table>
+    <button type="button" id="enviar7" class="w3-red" onclick="document.getElementById('respuesta7').style.display='block'"><i class='fas fa-edit' style='font-size:24px;color:white'></i></button>
 
     <div id="respuesta7"></div>
-    </table>
+    
 
     <script>
         $('#enviar7').click(function(){

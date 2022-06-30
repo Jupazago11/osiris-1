@@ -8,86 +8,35 @@
     }
     $conexion = conectar();                     //Obtenemos la conexion
 
+    $nombre   = strval($_POST['nombre']);
+    $direccion = strval($_POST['direccion']);
+    $contacto  = strval($_POST['contacto']);
+    $nombrevendedor  = strval($_POST['nombrevendedor']);
+    $telefono  = strval($_POST['telefono']);
+    $estado    = strval($_POST['estado']);  
 
-    $nombre_prove = strval($_POST['provedor']); //obtenemos el nombre del proveedor seleccionado
+    //strlen($ubicacion)
+    if(strlen($nombre) >= 3 && strlen($direccion) >= 6 && strlen($contacto) >= 6 && strlen($nombrevendedor) >= 6 && strlen($telefono) >= 6){
 
-
-    //Verificamos si el proveedor existe
-    $existe_proveedor = false;
-
-    //Consulta a la base de datos en la tabla proveedor
-    $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` WHERE `nombre_proveedor` = '$nombre_prove'") or die ("Error al consultar: existencia del proveedor");
-                        
-    while (($fila = mysqli_fetch_array($consulta))!=NULL){
-        $existe_proveedor = true;
-        $direccion = $fila['direccion_proveedor'];
-        $telefono = $fila['telefono_proveedor'];
-        $estado = $fila['estado'];
-    }
-
-    if($existe_proveedor != true){
-        //$consulta = mysqli_query($conexion, "INSERT INTO `proveedor`(`nombre_proveedor`, `direccion_proveedor`, `telefono_proveedor`, `estado`) VALUES ('','','','activo')") or die ("Error al consultar: existencia del proveedor");
-
-    }else{
-        mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-
-        ?>
-        <table id="tabla_sugerido">
-        <tr>
-            <th>Dirección<th>
-            <th>Teléfono<th>
-            <th>Estado</th>
-            <th></th>
-        </tr>
-        <tr>
-            <td><input type="text" name = "direccion" value="<?php echo $direccion ?>" /><td>
-            <td><input type="text" name = "telefono" value="<?php echo $telefono ?>" /><td>
-            <?php
-            if($estado == "activo"){
-                ?>
-                <td><input type="radio" id="r1" name="estado" value="activo" checked>
-                    <label for="r1">Activo</label><br>
-                <input type="radio" id="r2" name="estado" value="inactivo">
-                    <label for="r2">Inactivo</label><br></td>
-                <?php
-            }else{
-                ?>
-                <td><input type="radio" id="r1" name="estado" value="activo">
-                    <label for="r1">Activo</label><br>
-                <input type="radio" id="r2" name="estado" value="inactivo" checked>
-                    <label for="r2">Inactivo</label><br></td>
-                <?php
-            }
-            ?>
-            <td>Ok<td>
-        </tr>
-        </table>
-        <?php
-
-
-
-    }
-    /*
-
-    if($existe_proveedor == true){
-        
-
+        $consulta = mysqli_query($conexion, "INSERT INTO `proveedor`(`nombre_proveedor`, `direccion_proveedor`, `contacto_proveedor`, `nom_vendedor`, `telefono_vendedor`, `estado`) 
+        VALUES ('$nombre','$direccion','$contacto','$nombrevendedor','$telefono','$estado')") or die ("Error al consultar: proveedor");
         ?>
         <br>
         <div class="alert info">
             <span class="closebtn">&times;</span>  
-            <strong>Información!</strong> Agregado con éxito
+            <strong>Información!</strong> Creado con éxito
         </div>
         <?php
-
-    }elseif($existe_proveedor == true){
+    }else{
         ?>
         <br>
         <div class="alert warning">
             <span class="closebtn">&times;</span>  
-            <strong>Información!</strong> Debes ingresar una fecha válida
+            <strong>Información!</strong> Los campos deben contener 6 caracteres como mínimo.
         </div>
         <?php
-    }*/
+    }
+
+
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>
