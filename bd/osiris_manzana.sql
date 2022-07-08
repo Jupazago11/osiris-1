@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-07-2022 a las 01:39:28
+-- Tiempo de generación: 08-07-2022 a las 06:45:05
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -69,7 +69,8 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (7, NULL, 'juana', NULL, NULL, NULL, 'activo'),
 (8, NULL, 'carmen', NULL, NULL, NULL, 'activo'),
 (9, NULL, 'pacho', NULL, NULL, NULL, 'activo'),
-(10, NULL, 'jairo', NULL, NULL, NULL, 'activo');
+(10, NULL, 'jairo', NULL, NULL, NULL, 'activo'),
+(11, NULL, 'Jaime R.h', NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -80,7 +81,11 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 CREATE TABLE `cuenta_cobro` (
   `id_cuenta` int(11) NOT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `costo` int(11) NOT NULL,
+  `factura` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fecha` date NOT NULL,
+  `fecha_pago` datetime DEFAULT NULL,
+  `dias` int(11) NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -88,12 +93,16 @@ CREATE TABLE `cuenta_cobro` (
 -- Volcado de datos para la tabla `cuenta_cobro`
 --
 
-INSERT INTO `cuenta_cobro` (`id_cuenta`, `nombre`, `fecha`, `estado`) VALUES
-(1, 'prove', '2022-06-29', 'inactivo'),
-(2, 'prove', '2022-06-30', 'inactivo'),
-(3, 'prove', '2022-06-01', 'activo'),
-(4, 'prove', '2022-07-08', 'activo'),
-(5, 'prove', '2022-07-01', 'activo');
+INSERT INTO `cuenta_cobro` (`id_cuenta`, `nombre`, `costo`, `factura`, `fecha`, `fecha_pago`, `dias`, `estado`) VALUES
+(1, 'prove', 10000, NULL, '2022-07-03', '2022-07-06 12:26:52', 5, 'activo'),
+(2, 'prove', 200000, '5A45SDAS4D5AS', '2022-07-04', '2022-07-05 16:13:29', 10, 'inactivo'),
+(3, 'prove', 300000, NULL, '2022-07-05', '2022-07-06 12:25:02', 15, 'inactivo'),
+(4, 'prove', 4000000, 'ABC123', '2022-07-03', '2022-07-06 00:00:00', 20, 'inactivo'),
+(5, 'prove', 450000, NULL, '2022-07-05', '2022-07-06 12:25:02', 25, 'inactivo'),
+(6, 'cocacola', 50000, NULL, '2022-07-05', '2022-07-05 16:13:25', 30, 'inactivo'),
+(7, 'cocacola', 2000, 'jp11', '2022-07-05', '2022-07-06 12:26:52', 10, 'inactivo'),
+(8, 'nuevo', 200000, NULL, '2022-07-05', '2022-07-06 12:26:52', 5, 'activo'),
+(9, 'cocacola', 50000, 'kl521', '2022-07-06', NULL, 16, 'activo');
 
 -- --------------------------------------------------------
 
@@ -167,7 +176,8 @@ INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `
 (9, 3, 1, 1, '2022-06-29', 'nada', 'normal', 'san francisco', 'vereda', NULL, NULL, 'activo'),
 (10, 3, 5, 1, '2022-06-29', 'villa jardin', 'normal', 'villa jardin', 'jardin', '12:19', '12:24', 'inactivo'),
 (11, 3, 7, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'hogar', '15:52', '15:52', 'inactivo'),
-(12, 3, 10, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'su casa', NULL, NULL, 'activo');
+(12, 3, 10, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'su casa', NULL, NULL, 'activo'),
+(13, 3, 11, 1, '2022-07-01', 'hfghfg', 'carnes', 'hfghfgh', 'gfhfgh', '16:12', '16:12', 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -200,7 +210,12 @@ CREATE TABLE `personal` (
   `fecha_nacimiento_pers` date DEFAULT NULL,
   `fecha_inicio_contrato_pers` date DEFAULT NULL,
   `tipo_contrato_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `cargo` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `salario_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `eps` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `arl` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `caja_compensacion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pension` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -208,10 +223,14 @@ CREATE TABLE `personal` (
 -- Volcado de datos para la tabla `personal`
 --
 
-INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `salario_pers`, `estado`) VALUES
-(1, 'juan pablo zapata gómez', '1037977046', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', 'Desarrollador', '1000000', 'activo'),
-(2, 'Domiciliario', '1', 'domi', 'domi', 4, '2022-06-01', '2022-06-01', 'verbal', '0', 'activo'),
-(3, 'empleado prueba', NULL, 'empleado', '1234', 2, NULL, NULL, NULL, NULL, 'activo');
+INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `cargo`, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, `estado`) VALUES
+(1, 'juan pablo zapata gómez', '1037977046', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', '12', 'Administrador', '1000000', '', '', '', '', 'activo'),
+(2, 'Domiciliario', '1', 'domi', 'domi', 4, '2022-06-01', '2022-06-01', '12', 'Domiciliario', '500000', 'sura', 'sura', '', '', 'activo'),
+(3, 'empleado prueba', '', 'empleado', '1234', 2, '0000-00-00', '0000-00-00', '12', '', '', '', '', '', '', 'activo'),
+(4, NULL, NULL, 'probando', 'probando', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(5, NULL, NULL, 'prueba 50', 'prueba 50', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(6, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(7, 'jaime r', '123456', 'jaime123', 'jaime123', 2, '2000-01-01', '2022-01-01', '6', 'carguero', '1000000', 'sura', 'sura', 'comfenalco', 'porvenir', 'activo');
 
 -- --------------------------------------------------------
 
@@ -254,15 +273,44 @@ CREATE TABLE `proveedor` (
 --
 
 INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `direccion_proveedor`, `contacto_proveedor`, `nom_vendedor`, `telefono_vendedor`, `estado`) VALUES
-(1, 'prove', 'san luis ant', '123456', '', '', 'activo'),
-(2, 'provee', 'Dirección', 'Teléfono', '', '', 'inactivo'),
-(3, 'provee2', 'rionegro', '123465', '', '', 'activo'),
-(4, 'nuevoprove', 'Dirección', 'Teléfono', '', '', 'inactivo'),
-(5, 'nuevoprovee', 'Dirección', 'Teléfono', '', '', 'inactivo'),
-(6, 'nuevoproveer', 'Dirección', 'Teléfono', '', '', 'inactivo'),
-(7, 'nuevoproveerr', 'Dirección', 'Teléfono', '', '', 'inactivo'),
-(8, 'crear prove', 'direccion 5', '123456', '', '', 'activo'),
-(9, 'colanta', 'rionegro', '654321', '', '', 'activo');
+(1, 'prove', 'san luis ant', '123456', '', '', ''),
+(2, 'provee', 'Dirección', 'Teléfono', '', '', ''),
+(3, 'provee2', 'rionegro', '123465', '', '', ''),
+(4, 'nuevoprove', 'Dirección', 'Teléfono', '', '', ''),
+(5, 'nuevoprovee', 'Dirección', 'Teléfono', '', '', ''),
+(6, 'nuevoproveer', 'Dirección', 'Teléfono', '', '', ''),
+(7, 'nuevoproveerr', 'Dirección', 'Teléfono', '', '', ''),
+(8, 'crear prove', 'direccion 5', '123456', '', '', ''),
+(9, 'colanta', 'rionegro', '654321', '', '', ''),
+(10, 'aura', 'medellin', '123456', 'jaime', '32123121', ''),
+(11, 'aura', 'medellin', '123456', 'jaime', '32123121', ''),
+(12, 'milo', 'medellin', '123456', 'jaime', '32123121', ''),
+(13, 'milo', 'medellin', '123456', 'jaime', '32123121', ''),
+(14, 'nutresa', 'medellin', '123456', 'jaime salazar', '32123121', ''),
+(15, 'nutresa', 'medellin', '123456', 'jaime salazar', '32123121', ''),
+(16, 'prueba', 'san luis', '123456', 'carlos', '132456', ''),
+(17, 'prueba', 'san luis', '123456', 'carlos', '132456', ''),
+(18, 'prueba2', 'san luis', '123456', 'carlos', '132456', ''),
+(19, 'prueba2', 'san luis', '123456', 'carlos', '132456', ''),
+(20, 'empa', 'rionegro', '123456', 'provedor', '123456', ''),
+(21, 'empa', 'rionegro', '123456', 'provedor', '123456', ''),
+(22, 'nuevo', 'san luiss', '12455454', 'vendedor', '5421545', ''),
+(23, 'nuevo', 'san luiss', '12455454', 'vendedor', '5421545', ''),
+(24, 'ahora', 'medellin', '123456', 'vendedor', '123456', ''),
+(25, 'ahora', 'medellin', '123456', 'vendedor', '123456', ''),
+(26, 'ahora2', 'medellin', '123456', 'vendedor', '123456', ''),
+(27, 'ahora2', 'medellin', '123456', 'vendedor', '123456', ''),
+(28, 'ahora3', 'afasdgafdgadfgf', '212fd1g2df1g', 'gd1f5gdf51gdf', 'gd6f4g5df5g1df5g', ''),
+(29, 'ahora4', 'afasdgafdgadfgf', '212fd1g2df1g', 'gd1f5gdf51gdf', 'gd6f4g5df5g1df5g', ''),
+(30, 'ahora5', 'afasdgafdgadfgf', '212fd1g2df1g', 'gd1f5gdf51gdf', 'gd6f4g5df5g1df5g', ''),
+(31, 'ahora6', 'afasdgafdgadfgf', '212fd1g2df1g', 'gd1f5gdf51gdf', 'gd6f4g5df5g1df5g', ''),
+(32, 'provedor 1', 'san luis', '123456', 'jaime', '123456', 'inactivo'),
+(33, 'nuevo', 'fgdfgadfgadfg', '654321', 'ikyukukyu', '456565645456', 'activo'),
+(34, 'otro prove', 'rionegro', '123456123', 'vendedor', '12345678', 'activo'),
+(35, 'prueba', '123456', '123456', '123456', '123456', 'inactivo'),
+(36, 'cocacola', 'medellin', '11111111', 'jaime', '22222222', 'activo'),
+(37, 'probando', 'ggggggggggggg', 'gggggggggggggg', 'ggggggggggggg', 'ggggggg', 'activo'),
+(38, 'probando 40', 'fffffff', 'fffffffffffffffffffff', 'ffffffffffffffffffff', 'ffffffffffffffffffffff', 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -439,13 +487,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `cuenta_cobro`
 --
 ALTER TABLE `cuenta_cobro`
-  MODIFY `id_cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_cuenta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_factura`
@@ -463,7 +511,7 @@ ALTER TABLE `detalle_sugerido`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -475,7 +523,7 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -487,7 +535,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT de la tabla `sugerido`

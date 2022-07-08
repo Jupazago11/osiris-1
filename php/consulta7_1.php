@@ -9,11 +9,11 @@
     $conexion = conectar();                     //Obtenemos la conexion
 
     //Consulta a la base de datos en la tabla proveedor
-    $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` WHERE `estado` = 'activo' OR `estado` = 'inactivo'") or die ("Error al consultar: existencia del proveedor");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` WHERE `estado` != ''") or die ("Error al consultar: existencia del proveedor");
 
 ?>
     <form id="actualizar_proveedores" method="POST">
-    <table border="1" id="tabla_sugerido" width="100%">
+    <table id="tabla_sugerido" width="100%" style="display: block;overflow: auto;width: 100%;">
     <tr>
         <th>#</th>
         <th>Proveedor</th>
@@ -30,23 +30,15 @@
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         $contador++;
-
-        $fila['nombre_proveedor'];
-        $fila['direccion_proveedor'];
-        $fila['contacto_proveedor'];
-        $fila['nom_vendedor'];
-        $fila['telefono_vendedor'];
-        $fila['estado'];
-
         ?>
         <tr>
             <tbody>
             <td><?php echo $contador ?></td>
-            <td><input type="text" name="ides[]" readonly value="<?php echo $fila['nombre_proveedor'] ?>"/></td>
-            <td><input type="text" name="ides[]" value="<?php echo $fila['direccion_proveedor'] ?>"/></td>   
-            <td><input type="text" name="ides[]" value="<?php echo $fila['contacto_proveedor'] ?>"/></td>    
-            <td><input type="text" name="ides[]" value="<?php echo $fila['nom_vendedor'] ?>"/></td>    
-            <td><input type="text" name="ides[]" value="<?php echo $fila['telefono_vendedor'] ?>"/></td>    
+            <td><input type="text" name="nombres[]" readonly value="<?php echo $fila['nombre_proveedor'] ?>"/></td>
+            <td><input type="text" name="direcciones[]" value="<?php echo $fila['direccion_proveedor'] ?>"/></td>   
+            <td><input type="text" name="contactos[]" value="<?php echo $fila['contacto_proveedor'] ?>"/></td>    
+            <td><input type="text" name="vendedores[]" value="<?php echo $fila['nom_vendedor'] ?>"/></td>    
+            <td><input type="text" name="telefonos[]" value="<?php echo $fila['telefono_vendedor'] ?>"/></td>    
             <td>
             <?php
             if($fila['estado'] == "activo"){
@@ -67,7 +59,34 @@
             
     }
     ?> 
+    <tr>
+        <td colspan="3"></td>
+        <td><button type="button" id="enviar7_2" class="w3-btn w3-green" onclick="document.getElementById('respuesta7_2').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></td>
+        <td colspan="3"></td>
+    </tr>
+    </table>
     </form>
+    <br>
+
+    <div id="respuesta7_2"></div>
+
+    <script>
+    $('#enviar7_2').click(function(){
+        $.ajax({
+            url:'../php/consulta7_2.php',
+            type:'POST',
+            data: $('#actualizar_proveedores').serialize(),
+            success: function(res){
+                $('#respuesta7_2').html(res);
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+
+    </script>
+
     <?php
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>

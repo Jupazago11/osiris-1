@@ -58,28 +58,27 @@
 <?php //Desplegaremos los elementos para la sección de Pedidos ?>
     <div id="cont1" style="display:none;">
         <div class="w3-container" id="pedidos"  style="display:none;">
-            
             <div class="menu">
             <ul>
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_1')">Crea Sugerido</a></li>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_4')">Ver próximos pedidos</a></li>
+                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_1')"><i class='fas fa-marker' style='font-size:16px;color:#9fa2a7'></i> Crea Sugerido</a></li>
+                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_4')"><i class='fas fa-tasks' style='font-size:16px;color:#9fa2a7'></i> Ver próximos pedidos</a></li>
                     <?php
                     if($tipo_de_cuenta == 1){
                         ?>
-                        <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_5')">Inscribir / Ver cuentas por pagar</a></li>
+                        <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_5')"><i class='fas fa-comment-dollar' style='font-size:16px;color:#9fa2a7'></i> Inscribir / Ver cuentas por pagar</a></li>
                         <?php
                     }
                 }elseif($tipo_de_cuenta == 5){
                     ?>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_2')">Crear Pedido</a></li>
+                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_2')"><i class='fas fa-marker' style='font-size:16px;color:#9fa2a7'></i> Crear Pedido</a></li>
                     <?php
                 }
                 elseif($tipo_de_cuenta == 6){
                     ?>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_3')">Confirmar Pedido</a></li>
+                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_3')"><i class='fas fa-marker' style='font-size:16px;color:#9fa2a7'></i> Confirmar Pedido</a></li>
                     <?php
                 }
                 ?>
@@ -119,10 +118,10 @@
             
             <div class="menu">
             <ul>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1')">Proveedor</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')">Producto</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3')">Personal</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')">Modificar datos de Cuentas</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1')"><i class='far fa-address-card' style='font-size:16px;color:#9fa2a7'></i> Proveedor</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')"><i class='fas fa-box-open' style='font-size:16px;color:#9fa2a7'></i> Producto</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3')"><i class='fas fa-user-cog' style='font-size:16px;color:#9fa2a7'></i> Personal</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')"><i class='fas fa-car-side' style='font-size:16px;color:#9fa2a7'></i> Vehículos</a></li>
                 <li style="float:right"><a class="w3-bar-item w3-button w3-hover-red active" onclick="ocultarDivs0()">X</a></li>
             </ul>
             </div>
@@ -139,7 +138,7 @@
             </div>
             <div id="cont2_3" style="display:none;">
                 <div class="w3-container">
-                    <?php   //crear_pedido2($usuario);    ?>
+                    <?php   menu_personal($usuario);    ?>
                 </div>
             </div>
             <div id="cont2_4" style="display:none;">
