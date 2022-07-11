@@ -364,68 +364,11 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
 /////////////////////////////////////////////////////////////////////////////////////////
 function cuentas_por_pagar($usuario){
     ?>
-    <div>
-    <table border="1" id="tabla_sugerido" width="100%">
-    <tr>
-        <th>Nombre del Proveedor</th>
-        <th>Factura</th>
-        <th>Días</th>
-        <th>Costo</th>
-        <th colspan="3">Selección</th>
-    </tr>
-    <tr>
-    <form id="cuentas_por_pagar" method="POST">
-        <td><input list="provedores" name="provedor" id="provedor"></td>
-        <datalist id="provedores"  required>
-
-        <?php
-            if(existencia_de_la_conexion()){
-                require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-            }
-            $conexion = conectar();                     //Obtenemos la conexion
-            
-            //Consulta a la base de datos en la tabla provvedor
-            $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
-
-            while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                // traemos los proveedores existentes en la base de datos
-                echo "<option value=".$fila['nombre_proveedor']."></option>";
-            }
-            mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-        ?>
-        </datalist>
-        <td><input type="text" name="factura"/></td>
-        <td><input type="text" name="dias" size="5"/></td>
-        <td><input type="number" name="costo"/></td>
-        <td><button type="button" id="enviar6" class="w3-btn w3-red" onclick="document.getElementById('respuesta6').style.display='block'">Inscribir Cuenta</button></td>
-        <td><button type="button" class="w3-btn w3-green" onclick="$('#enviar6_1').trigger('click')"><i class="fa fa-eye" style="font-size:24px;color:white"></button></td>
-        <td><button type="button" class="w3-btn w3-green" onclick="document.getElementById('respuesta6_1').style.display='none'"><i class="fas fa-eye-slash" style="font-size:24px;color:white"></button></td>
-        
-        <input type="reset" id="limpiar6" value="Limpiar" class="w3-btn w3-teal"  style="visibility:hidden;"/>
-    </form>
-    </tr>
-    </table>
-    <div id="respuesta6"></div>
     <button type="button" id="enviar6_1" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta6_1').style.display='block'">Inscribir Cuenta</button>
     
     <div id="respuesta6_1"></div>
 
     <script>
-        $('#enviar6').click(function(){
-            $.ajax({
-                url:'../php/consulta6.php',
-                type:'POST',
-                data: $('#cuentas_por_pagar').serialize(),
-                success: function(res){
-                    $('#respuesta6').html(res);
-                    $('#limpiar6').trigger('click');
-                    $('#enviar6_1').trigger('click');
-                },
-                error: function(res){
-                    alert("Problemas al tratar de enviar el formulario");
-                }
-            });
-        });
         $('#enviar6_1').click(function(){
             $.ajax({
                 url:'../php/consulta6_1.php',
@@ -446,80 +389,15 @@ function cuentas_por_pagar($usuario){
 /////////////////////////////////////////////////////////////////////////////////////////
 function menu_proveedor($usuario){
     ?>
-    <div>
+    <button type="button" id="enviar7_1" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta7_1').style.display='block'">Ver Proveedores</button>
     
-    <form id="menu_proveedores" method="POST">
-        <table id="tabla_sugerido">
-            <tr>
-                <th colspan="4">Crear un nuevo proveedor</th>
-            </tr>
-            <tr>
-                <td>Nombre</td>
-                <td><input type="text" name="nombre"/></td>
-                <td>Dirección</td>
-                <td><input type="text" name="direccion"/></td>
-            </tr>
-            <tr>
-                <td>Contacto</td>
-                <td><input type="text" name="contacto"/></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>Nombre del vendedor</td>
-                <td><input type="text" name="nombrevendedor"/></td>
-                <td>Teléfono</td>
-                <td><input type="text" name="telefono"/></td>
-            </tr>
-            <tr>
-                <td colspan="4"><div class="alert warning">
-                    <span class="closebtn">&times;</span>  
-                    <strong>Información!</strong> El Usuario y Contraseña es el nombre del proveedor
-                </div></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td colspan="2"><button type="button" id="enviar7" class="w3-btn w3-green" onclick="document.getElementById('respuesta7').style.display='block'">Guardar<i class='fas fa-edit' style='font-size:24px;color:white'></i></button></td>
-                <td><input type="reset" id="limpiar7" value="Limpiar" class="w3-btn w3-teal"  style="visibility:hidden;"/></td>
-            </tr>
-        </table>
-    </form>
-    
-    <table id="tabla_sugerido">
-        <tr>
-            <td width="33%"><button type="button" id="enviar7_1" class="w3-btn w3-blue" onclick="document.getElementById('respuesta7_1').style.display='block'">Ver Proveedores<i class='fa fa-eye' style='font-size:24px;color:white'></i></button></td>
-            <td width="33%"></td>
-            <td width="33%"><button type="button" class="w3-btn w3-blue" onclick="document.getElementById('respuesta7_1').style.display='none'">Ocultar<i class='fa fa-eye-slash' style='font-size:24px;color:white'></i></button></td>
-        </tr>
-    </table>
-    
-
-    <div id="respuesta7"></div>
-    <br>
-    
-    
-
     <div id="respuesta7_1"></div>
 
     <script>
-        $('#enviar7').click(function(){
-            $.ajax({
-                url:'../php/consulta7.php',
-                type:'POST',
-                data: $('#menu_proveedores').serialize(),
-                success: function(res){
-                    $('#respuesta7').html(res);
-                    $('#limpiar7').trigger('click');
-                    $('#enviar7_1').trigger('click');
-                },
-                error: function(res){
-                    alert("Problemas al tratar de enviar el formulario");
-                }
-            });
-        });
         $('#enviar7_1').click(function(){
             $.ajax({
                 url:'../php/consulta7_1.php',
+                type:'POST',
                 success: function(res){
                     $('#respuesta7_1').html(res);
                 },
@@ -529,6 +407,7 @@ function menu_proveedor($usuario){
             });
         });
     </script>
+    </div>
     </div>
 <?php
 }
@@ -585,7 +464,7 @@ function menu_producto($usuario){
                 // traemos los proveedores existentes en la base de datos
 
                 ?>
-                <option value="<?php echo $fila['nombre_proveedor'] ?>"></option>";
+                <option value="<?php echo $fila['nombre_proveedor'] ?>">1</option>";
                 <?php
             }
             mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
@@ -681,7 +560,7 @@ function menu_producto($usuario){
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-function menu_personal($usuario){
+/*function menu_personal($usuario){
     ?>
 
     <form id="menu_personals" method="POST"> 
@@ -698,7 +577,7 @@ function menu_personal($usuario){
             </tr>
             <tr>
                 <td>Identificación</td>
-                <td><input type="text" name="identificacion"/></td>
+                <td><input type="text" name="identificacion" class="w3-inputs"/></td>
                 <td>Duración del contrato</td>
                 <td><input type="radio" id="r1" name="contrato" value="6" checked/>
                         <label for="r1">6 Meses</label><br>
@@ -707,38 +586,38 @@ function menu_personal($usuario){
             </tr>
             <tr>
                 <td>Fecha de nacimiento</td>
-                <td><input type="date" name="fecha_nacimiento"/></td>
+                <td><input type="date" name="fecha_nacimiento" class="w3-inputs"/></td>
                 <td>Salario</td>
-                <td><input type="text" name="salario"/></td>
+                <td><input type="text" name="salario" class="w3-inputs"/></td>
             </tr>
             <tr>
                 <th colspan="2">Datos de cuenta</th>
                 <td>EPS</td>
-                <td><input type="text" name="eps"/></td>
+                <td><input type="text" name="eps" class="w3-inputs"/></td>
             </tr>
             <tr>
                 <td>Usuario</td>
                 <td><input type="text" name="user" class="w3-inputs"/></td>
                 <td>ARL</td>
-                <td><input type="text" name="arl"/></td>
+                <td><input type="text" name="arl" class="w3-inputs"/></td>
             </tr>
             <tr>
                 <td>Contraseña</td>
-                <td><input type="text" name="pass"/></td>
+                <td><input type="text" name="pass" class="w3-inputs"/></td>
                 <td>Caja de compensasión</td>
-                <td><input type="text" name="caja"/></td>
+                <td><input type="text" name="caja" class="w3-inputs"/></td>
             </tr>
             <tr>
                 <td>Nivel de acceso</td>
-                <td><input type="number" name="lvl_acc" value="2" min="1" max="6"/></td>
+                <td><input type="number" name="lvl_acc" value="2" min="1" max="6" class="w3-inputs"/></td>
                 <td>Pensión</td>
-                <td><input type="text" name="pension"/></td>
+                <td><input type="text" name="pension" class="w3-inputs"/></td>
             </tr>
             <tr>
                 <td></td>
                 <td></td>
                 <td>Cargo</td>
-                <td><input type="text" name="cargo"/></td>
+                <td><input type="text" name="cargo" class="w3-inputs"/></td>
             </tr>
             
             <tr>
@@ -780,6 +659,59 @@ function menu_personal($usuario){
                 url:'../php/consulta9_1.php',
                 success: function(res){
                     $('#respuesta9_1').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+    </div>
+<?php
+}*/
+
+function menu_personal($usuario){
+    ?>
+    <button type="button" id="enviar9" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta9').style.display='block'"></button>
+    
+    <div id="respuesta9"></div>
+
+    <script>
+        $('#enviar9').click(function(){
+            $.ajax({
+                url:'../php/consulta9.php',
+                success: function(res){
+                    $('#respuesta9').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+    </div>
+    </div>
+<?php
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function ver_personal($usuario){
+    ?>
+    <table id="tabla_sugerido">
+        <tr>
+            <td width="50%"><button type="button" id="enviar10" class="w3-btn" style="background-color: #305490;color:white" onclick="document.getElementById('respuesta10').style.display='block'">Ver información</button></td>
+            <td width="50%"><button type="button" class="w3-btn" style="background-color: #478248;color:white" onclick="document.getElementById('respuesta10').style.display='none'">Ocultar</button></td>
+        </tr>
+    </table>
+
+    <div id="respuesta10"></div>
+
+    <script>
+        $('#enviar10').click(function(){
+            $.ajax({
+                url:'../php/consulta10.php',
+                success: function(res){
+                    $('#respuesta10').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

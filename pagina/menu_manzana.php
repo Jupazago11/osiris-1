@@ -7,7 +7,8 @@
     <LINK REL=StyleSheet HREF="../css/estilos.css">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script type="text/javascript" src="../js/funciones.js"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="sweetalert2.min.css">
 </head>
 <body>
 <div class="header">
@@ -68,7 +69,7 @@
                     <?php
                     if($tipo_de_cuenta == 1){
                         ?>
-                        <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_5')"><i class='fas fa-comment-dollar' style='font-size:16px;color:#9fa2a7'></i> Inscribir / Ver cuentas por pagar</a></li>
+                        <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')"><i class='fas fa-comment-dollar' style='font-size:16px;color:#9fa2a7'></i> Inscribir / Ver cuentas por pagar</a></li>
                         <?php
                     }
                 }elseif($tipo_de_cuenta == 5){
@@ -118,14 +119,14 @@
             
             <div class="menu">
             <ul>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1')"><i class='far fa-address-card' style='font-size:16px;color:#9fa2a7'></i> Proveedor</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1');document.getElementById('respuesta7_1').style.display='block'; $('#enviar7_1').trigger('click')"><i class='far fa-address-card' style='font-size:16px;color:#9fa2a7'></i> Proveedor</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')"><i class='fas fa-box-open' style='font-size:16px;color:#9fa2a7'></i> Producto</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3')"><i class='fas fa-user-cog' style='font-size:16px;color:#9fa2a7'></i> Personal</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')"><i class='fas fa-car-side' style='font-size:16px;color:#9fa2a7'></i> Vehículos</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3'); $('#enviar9').trigger('click')"><i class='fas fa-user-cog' style='font-size:16px;color:#9fa2a7'></i> Personal</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')"><i class='far fa-id-card' style='font-size:16px;color:#9fa2a7'></i> Ver Personal</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_5')"><i class='fas fa-car-side' style='font-size:16px;color:#9fa2a7'></i> Vehículos</a></li>
                 <li style="float:right"><a class="w3-bar-item w3-button w3-hover-red active" onclick="ocultarDivs0()">X</a></li>
             </ul>
             </div>
-
             <div id="cont2_1" style="display:none;">
                 <div class="w3-container">
                     <?php   menu_proveedor($usuario);   ?>
@@ -143,7 +144,12 @@
             </div>
             <div id="cont2_4" style="display:none;">
                 <div class="w3-container">
-                    <?php   //ver_pedidos($usuario);      ?>
+                    <?php   ver_personal($usuario);    ?>
+                </div>
+            </div>
+            <div id="cont2_5" style="display:none;">
+                <div class="w3-container">
+                    <?php   //ver_personal($usuario);      ?>
                 </div>
             </div>
         </div>
@@ -260,6 +266,7 @@ function ocultarDivs(no_oculta){
             document.getElementById("cont2_2").style.display='none';
             document.getElementById("cont2_3").style.display='none';
             document.getElementById("cont2_4").style.display='none';
+            document.getElementById("cont2_5").style.display='none';
             break;
         case "cont3":
             document.getElementById("cont3").style.display='block';
@@ -316,8 +323,9 @@ function ocultarDivs2(no_oculta){
     document.getElementById("cont2_2").style.display='none';
     document.getElementById("cont2_3").style.display='none';
     document.getElementById("cont2_4").style.display='none';
+    document.getElementById("cont2_5").style.display='none';
     switch(no_oculta) {
-        //Pedidos
+        //empresa
         case "cont2_1":
             document.getElementById("cont2_1").style.display='block';
             break;
@@ -329,6 +337,9 @@ function ocultarDivs2(no_oculta){
             break;
         case "cont2_4":
             document.getElementById("cont2_4").style.display='block';
+            break;
+        case "cont2_5":
+            document.getElementById("cont2_5").style.display='block';
             break;
         default:
           // code block

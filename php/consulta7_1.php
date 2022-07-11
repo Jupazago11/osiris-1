@@ -22,6 +22,7 @@
         <th>Nombre del Vendedor</th>
         <th>Teléfono</th>
         <th>Estado</th>
+        <th>Eliminar</th>
     </tr>
     <?php
 
@@ -34,7 +35,8 @@
         <tr>
             <tbody>
             <td><?php echo $contador ?></td>
-            <td><input type="text" name="nombres[]" readonly value="<?php echo $fila['nombre_proveedor'] ?>"/></td>
+            <input type="hidden" name="id_proveedor[]" value="<?php echo $fila['id_proveedor'] ?>"/>
+            <td><input type="text" name="nombres[]" value="<?php echo $fila['nombre_proveedor'] ?>"/></td>
             <td><input type="text" name="direcciones[]" value="<?php echo $fila['direccion_proveedor'] ?>"/></td>   
             <td><input type="text" name="contactos[]" value="<?php echo $fila['contacto_proveedor'] ?>"/></td>    
             <td><input type="text" name="vendedores[]" value="<?php echo $fila['nom_vendedor'] ?>"/></td>    
@@ -56,15 +58,32 @@
                     Inactivo<br></td> 
                 <?php
             }
+            if($fila['nombre_proveedor'] == ''){
+                ?>
+                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar7_4').trigger('click');">
+                <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                <?php
+            }else{
+                ?>
+                <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar7_4').trigger('click');"></td> 
+                <?php
+            }
+            
+            
             
     }
     ?> 
     <tr>
-        <td colspan="3"></td>
+        <td></td>
+        <td><button type="button" id="enviar7_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+        <td></td>
         <td><button type="button" id="enviar7_2" class="w3-btn w3-green" onclick="document.getElementById('respuesta7_2').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></td>
-        <td colspan="3"></td>
+        <td colspan="4"></td>
     </tr>
     </table>
+    <button type="button" id="enviar7_4" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta7_2').style.display='block'">Ver Proveedores</button>
     </form>
     <br>
 
@@ -77,7 +96,37 @@
             type:'POST',
             data: $('#actualizar_proveedores').serialize(),
             success: function(res){
-                $('#respuesta7_2').html(res);
+                Swal.fire(
+                '¡Muy bien!',
+                'Guardado Exitoso',
+                'success'
+                )
+                $('#enviar7_1').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    $('#enviar7_3').click(function(){
+        $.ajax({
+            url:'../php/consulta7_3.php',
+            success: function(res){
+                $('#respuesta7_3').html(res);
+                $('#enviar7_1').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    $('#enviar7_4').click(function(){
+        $.ajax({
+            url:'../php/consulta7_2.php',
+            type:'POST',
+            data: $('#actualizar_proveedores').serialize(),
+            success: function(res){
+                $('#enviar7_1').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
