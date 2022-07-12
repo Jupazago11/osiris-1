@@ -119,7 +119,7 @@
             
             <div class="menu">
             <ul>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1');document.getElementById('respuesta7_1').style.display='block'; $('#enviar7_1').trigger('click')"><i class='far fa-address-card' style='font-size:16px;color:#9fa2a7'></i> Proveedor</a></li>
+                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><i class='far fa-address-card' style='font-size:16px;color:#9fa2a7'></i> Proveedor</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')"><i class='fas fa-box-open' style='font-size:16px;color:#9fa2a7'></i> Producto</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3'); $('#enviar9').trigger('click')"><i class='fas fa-user-cog' style='font-size:16px;color:#9fa2a7'></i> Personal</a></li>
                 <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')"><i class='far fa-id-card' style='font-size:16px;color:#9fa2a7'></i> Ver Personal</a></li>

@@ -407,8 +407,8 @@ function menu_proveedor($usuario){
             });
         });
     </script>
-    </div>
-    </div>
+
+
 <?php
 }
 
@@ -673,7 +673,7 @@ function menu_producto($usuario){
 function menu_personal($usuario){
     ?>
     <button type="button" id="enviar9" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta9').style.display='block'"></button>
-    
+
     <div id="respuesta9"></div>
 
     <script>
@@ -689,8 +689,7 @@ function menu_personal($usuario){
             });
         });
     </script>
-    </div>
-    </div>
+
 <?php
 }
 

@@ -74,6 +74,7 @@
             
             
     }
+    mysqli_free_result($consulta);
     ?> 
     <tr>
         <td></td>

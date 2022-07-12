@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-07-2022 a las 01:52:43
+-- Tiempo de generación: 12-07-2022 a las 20:28:41
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `osiris_manzana`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cargo`
+--
+
+CREATE TABLE `cargo` (
+  `id_cargo` int(11) NOT NULL,
+  `cargo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cargo`
+--
+
+INSERT INTO `cargo` (`id_cargo`, `cargo`, `estado`) VALUES
+(1, 'Administrador', 'activo'),
+(2, 'Empleado Entendido', 'activo'),
+(3, 'Empleado', 'activo'),
+(4, 'Domiciliario', 'activo'),
+(5, 'Proveedor oficina', ''),
+(6, 'Proveedor', '');
 
 -- --------------------------------------------------------
 
@@ -230,14 +254,17 @@ CREATE TABLE `personal` (
   `id_pers` int(11) NOT NULL,
   `nombre_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `identificacion_pers` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `celular_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `correo_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `user_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `pass_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `tipo_usuario_pers` int(11) NOT NULL,
   `fecha_nacimiento_pers` date DEFAULT NULL,
   `fecha_inicio_contrato_pers` date DEFAULT NULL,
-  `tipo_contrato_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `cargo` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `salario_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo_contrato_pers` int(11) DEFAULT NULL,
+  `fecha_ingreso` date DEFAULT NULL,
+  `cargo` int(11) DEFAULT NULL,
+  `salario_pers` int(11) DEFAULT NULL,
   `eps` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `arl` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `caja_compensacion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
@@ -249,16 +276,16 @@ CREATE TABLE `personal` (
 -- Volcado de datos para la tabla `personal`
 --
 
-INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `cargo`, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, `estado`) VALUES
-(1, 'juan pablo zapata gómez', '1037977046', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', '12', 'Administrador', '1000000', '', '', '', '', 'activo'),
-(2, 'Domiciliario', '1', 'domi', 'domi', 4, '2004-06-01', '2022-06-01', '12', 'Domiciliario', '500000', 'sura', 'sura', '', '', 'activo'),
-(3, 'empleado prueba', '', 'empleado', '1234', 2, '1990-01-01', '2022-01-01', '12', '', '', '', '', '', '', 'activo'),
-(4, NULL, NULL, 'probando', 'probando', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
-(5, NULL, NULL, 'prueba 50', 'prueba 50', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
-(6, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
-(7, 'jaime r', '123456', 'jaime123', 'jaime123', 2, '2000-01-01', '2022-01-01', '6', 'carguero', '1000000', 'sura', 'sura', 'comfenalco', 'porvenir', 'activo'),
-(8, NULL, NULL, 'Bimbo', 'Bimbo', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
-(9, NULL, NULL, 'auralac', 'auralac', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo');
+INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celular_pers`, `correo_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `fecha_ingreso`, `cargo`, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, `estado`) VALUES
+(1, 'juan pablo zapata gómez', '1037977046', '3135721225', 'juan@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', 6, NULL, 1, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
+(2, 'Domiciliario', '1', NULL, 'domi@gmail.com', 'domi', 'domi', 4, '2004-06-01', '2022-06-01', 2, NULL, 4, 500000, 'sura', 'sura', '', 'proteccion', 'activo'),
+(3, 'empleado prueba', '', NULL, 'emp_1@gmail.com', 'empleado', '1234', 2, '1990-01-01', '2022-01-01', 12, NULL, 2, 0, '', '', '', '', 'activo'),
+(4, NULL, NULL, NULL, NULL, 'probando', 'probando', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(5, NULL, NULL, NULL, NULL, 'prueba 50', 'prueba 50', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(6, NULL, NULL, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(7, 'jaime r', '123456', NULL, NULL, 'jaime123', 'jaime123', 2, '2000-01-01', '2022-01-01', 6, NULL, NULL, 1000000, 'sura', 'sura', 'comfenalco', 'porvenir', 'activo'),
+(8, NULL, NULL, NULL, NULL, 'Bimbo', 'Bimbo', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(9, NULL, NULL, NULL, NULL, 'auralac', 'auralac', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -427,6 +454,12 @@ INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tec
 --
 
 --
+-- Indices de la tabla `cargo`
+--
+ALTER TABLE `cargo`
+  ADD PRIMARY KEY (`id_cargo`);
+
+--
 -- Indices de la tabla `categoria`
 --
 ALTER TABLE `categoria`
@@ -481,7 +514,8 @@ ALTER TABLE `factura`
 -- Indices de la tabla `personal`
 --
 ALTER TABLE `personal`
-  ADD PRIMARY KEY (`id_pers`);
+  ADD PRIMARY KEY (`id_pers`),
+  ADD KEY `cargo` (`cargo`);
 
 --
 -- Indices de la tabla `producto`
@@ -519,6 +553,12 @@ ALTER TABLE `vehiculo`
 --
 -- AUTO_INCREMENT de las tablas volcadas
 --
+
+--
+-- AUTO_INCREMENT de la tabla `cargo`
+--
+ALTER TABLE `cargo`
+  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -635,6 +675,12 @@ ALTER TABLE `domicilio`
 --
 ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_pers1`) REFERENCES `personal` (`id_pers`);
+
+--
+-- Filtros para la tabla `personal`
+--
+ALTER TABLE `personal`
+  ADD CONSTRAINT `personal_ibfk_1` FOREIGN KEY (`cargo`) REFERENCES `cargo` (`id_cargo`);
 
 --
 -- Filtros para la tabla `producto`
