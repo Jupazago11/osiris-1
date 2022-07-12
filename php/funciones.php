@@ -672,16 +672,51 @@ function menu_producto($usuario){
 
 function menu_personal($usuario){
     ?>
-    <button type="button" id="enviar9" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta9').style.display='block'"></button>
+    <br>
+    <button type="button" id="enviar9_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Laboral</button>
+    <button type="button" id="enviar9_2" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_2').style.display='block'"> Información Personal</button>
+    <button type="button" id="enviar9_3" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_3').style.display='block'"> Datos</button>
 
-    <div id="respuesta9"></div>
+    <br>
+    <br>
+    <div id="respuesta9_1" style="display:none;"></div>
+    <div id="respuesta9_2" style="display:none;"></div>
+    <div id="respuesta9_3" style="display:none;"></div>
 
     <script>
-        $('#enviar9').click(function(){
+        $('#enviar9_1').click(function(){
             $.ajax({
-                url:'../php/consulta9.php',
+                url:'../php/consulta9_1.php',
                 success: function(res){
-                    $('#respuesta9').html(res);
+                    document.getElementById('respuesta9_2').style.display='none';
+                    document.getElementById('respuesta9_3').style.display='none';
+                    $('#respuesta9_1').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+        $('#enviar9_2').click(function(){
+            $.ajax({
+                url:'../php/consulta9_2.php',
+                success: function(res){
+                    document.getElementById('respuesta9_1').style.display='none';
+                    document.getElementById('respuesta9_3').style.display='none';
+                    $('#respuesta9_2').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+        $('#enviar9_3').click(function(){
+            $.ajax({
+                url:'../php/consulta9_3.php',
+                success: function(res){
+                    document.getElementById('respuesta9_1').style.display='none';
+                    document.getElementById('respuesta9_2').style.display='none';
+                    $('#respuesta9_3').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

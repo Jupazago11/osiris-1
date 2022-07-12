@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-07-2022 a las 20:28:41
+-- Tiempo de generación: 13-07-2022 a las 01:14:16
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -256,9 +256,9 @@ CREATE TABLE `personal` (
   `identificacion_pers` varchar(20) COLLATE utf8_spanish_ci DEFAULT NULL,
   `celular_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `correo_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `user_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `pass_pers` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `tipo_usuario_pers` int(11) NOT NULL,
+  `user_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `pass_pers` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo_usuario_pers` int(11) DEFAULT NULL,
   `fecha_nacimiento_pers` date DEFAULT NULL,
   `fecha_inicio_contrato_pers` date DEFAULT NULL,
   `tipo_contrato_pers` int(11) DEFAULT NULL,
@@ -285,7 +285,13 @@ INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celula
 (6, NULL, NULL, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (7, 'jaime r', '123456', NULL, NULL, 'jaime123', 'jaime123', 2, '2000-01-01', '2022-01-01', 6, NULL, NULL, 1000000, 'sura', 'sura', 'comfenalco', 'porvenir', 'activo'),
 (8, NULL, NULL, NULL, NULL, 'Bimbo', 'Bimbo', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
-(9, NULL, NULL, NULL, NULL, 'auralac', 'auralac', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo');
+(9, NULL, NULL, NULL, NULL, 'auralac', 'auralac', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(10, '', NULL, NULL, NULL, NULL, NULL, 3, '2020-01-01', '2022-01-01', 0, NULL, 3, 0, NULL, NULL, NULL, NULL, ''),
+(11, '', NULL, NULL, NULL, NULL, NULL, 3, '2010-01-01', '2022-01-01', 0, '2022-01-01', 3, 0, NULL, NULL, NULL, NULL, ''),
+(12, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, ''),
+(13, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, ''),
+(14, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, ''),
+(15, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -606,7 +612,7 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`

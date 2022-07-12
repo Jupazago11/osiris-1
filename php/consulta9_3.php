@@ -14,20 +14,16 @@
     ?>
     <table id="tabla_sugerido">
         <tr>
-            <th colspan="11" style="text-align: center;"><h3>Información Personal</h3></th>
+            <th colspan="9" style="text-align: center;"><h3>Datos</h3></th>
         <tr>
         <tr>
             <th>#</th>
-            <th>Identificación</th>
             <th>Nombre</th>
-            <th>F. Nacimiento</th>
-            <th>Edad</th>
-            <th>F. Ingreso</th>
-            <th>Cumpl</th>
-            <th>EPS</th>
-            <th>ARL</th>
-            <th>Pensión</th>
-            <th>C. Compensasión</th>
+            <th>Celular</th>
+            <th>E-mail</th>
+            <th>Nivel de acceso</th>
+            <th>Usuario</th>
+            <th>Contraseña</th>
         </tr>
         <tr>
             <?php
@@ -42,25 +38,27 @@
                 ?>
                 <tr>
                     <td><?php echo $contador ?></td>
-                    <td><input type="text" name="identificacion_pers[]" size="15" value="<?php echo $fila['identificacion_pers'] ?>"/></td>
                     <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
-                    <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>"/></td>
-
+                    <td><input type="text" name="celular_pers[]" value="<?php echo $fila['celular_pers'] ?>"/></td>
+                    <td><input type="text" name="correo_pers[]" value="<?php echo $fila['correo_pers'] ?>"/></td>
+                    <td>
                     <?php
-                    $fecha1  = new DateTime($fecha);
-                    $fecha2  = new DateTime($fila['fecha_nacimiento_pers']);
+                    if($fila['tipo_usuario_pers'] != '' ){
+                        echo "<input list='lvl_accs' name='lvl_acc[]' id='lvl_acc' value='".$fila['tipo_usuario_pers']."'>";
+                    }else{
+                        echo "<input list='lvl_accs' name='lvl_acc[]' id='lvl_acc'>";
+                    }
 
-                    $intvl   = $fecha1->diff($fecha2);
-                    echo "<td style='background-color:green;border: 2px solid white;text-align: center;color:white;'>".$intvl->y."</td>";
                     ?>
-
-
-                    <td><input type="date" name="fecha_ingreso[]" value="<?php echo $fila['fecha_ingreso'] ?>"/></td>
-                    <td></td>
-                    <td><input type="text" name="[eps]" size="8" value="<?php echo $fila['eps'] ?>"/></td>
-                    <td><input type="text" name="[arl]" size="8" value="<?php echo $fila['arl'] ?>"/></td>
-                    <td><input type="text" name="[pension]" size="8" value="<?php echo $fila['pension'] ?>"/></td>
-                    <td><input type="text" name="[caja_compensacion]" size="8" value="<?php echo $fila['caja_compensacion'] ?>"/></td>
+                        <datalist id="lvl_accs">
+                            <option value="1">Administrador</option>
+                            <option value="2">Empleado entendido</option>
+                            <option value="3">Empleado</option>
+                            <option value="4">Domiciliario</option>
+                        </datalist>
+                    </td>
+                    <td><input type="text" name="user_pers[]" size="8" value="<?php echo $fila['user_pers'] ?>"/></td>
+                    <td><input type="text" name="pass_pers[]" size="8" value="<?php echo $fila['pass_pers'] ?>"/></td>
 
                     
             <?php
@@ -75,6 +73,5 @@
         </tr>
     </table>
 <?php
-
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>

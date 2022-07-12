@@ -212,10 +212,6 @@
         ?>
     </tr>
     </table>
-
-    <?php
-
-    ?>
     </form>
     <div id="respuesta6_2"></div>
     <div id="respuesta6_4" style="position:absolute; top:0;left:0;background:white;width:100%;height: 100%;display:none;"></div>
