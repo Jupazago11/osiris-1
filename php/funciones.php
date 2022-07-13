@@ -679,9 +679,9 @@ function menu_personal($usuario){
 
     <br>
     <br>
-    <div id="respuesta9_1" style="display:none;"></div>
-    <div id="respuesta9_2" style="display:none;"></div>
-    <div id="respuesta9_3" style="display:none;"></div>
+    <div id="respuesta9_1" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta9_2" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta9_3" style="display:none; backgroung-color:white;"></div>
 
     <script>
         $('#enviar9_1').click(function(){

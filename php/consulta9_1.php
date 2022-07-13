@@ -29,7 +29,7 @@
         <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Cargo <button>   <i class="fa fa-plus"></i></button></th>
+            <th>Cargo <i class="fa fa-plus" onclick="document.getElementById('form_cargos').style.display='block'"></i></th>
             <th>Duración</th>
             <th>F. Inicio</th>
             <th>F. Terminación</th>
@@ -122,7 +122,7 @@
         </tr>
         <tr>
             <td></td>
-            <td><button type="button" id="enviar9_4" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td><button type="button" id="enviar9_4_1" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
             <td colspan="5"></td>
             <td><button type="button" id="enviar9" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta9').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
             <td></td>
@@ -130,6 +130,30 @@
     </table>
     </form>
     <div id="respuesta9" style="display:none;"></div>
+
+    <div id="form_cargos" style="display:none;">
+    <table id="tabla_sugerido">
+        <tr>
+            <th>Nombre</th>
+        </tr>
+    <?php
+    $consulta = mysqli_query($conexion, "SELECT * FROM `cargo` WHERE `estado` != ''") or die ("Error al consultar: existencia del cargo");
+    
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+    ?>
+    
+        <tr>
+            <td><input type="text" name="nuevo_cargo" value="<?php echo $fila['cargo'] ?>"/></td>
+        </tr>
+    <?php
+    }
+    ?>
+        <tr>
+            <td><button type="button" id="enviar9_7" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+        </tr>
+
+    </table>
+    </div>
     <?php
     
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
@@ -155,7 +179,7 @@
             }
         });
     });
-    $('#enviar9_4').click(function(){
+    $('#enviar9_4_1').click(function(){
         $.ajax({
             url:'../php/consulta9_4.php',
             success: function(res){
@@ -166,4 +190,18 @@
             }
         });
     });
+    $('#enviar9_7').click(function(){
+        $.ajax({
+            url:'../php/consulta9_7.php',
+            type:'POST',
+            data: $('#actualizar_personal').serialize(),
+            success: function(res){
+                $('#enviar9').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+
 </script>

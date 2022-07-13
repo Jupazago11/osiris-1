@@ -10,7 +10,7 @@
 
     date_default_timezone_set('America/Bogota');
 
-    $consulta = mysqli_query($conexion, "SELECT * FROM `personal` WHERE `tipo_usuario_pers` != '5' AND `tipo_usuario_pers` != '6'") or die ("Error al consultar: existencia del proveedor");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `personal` WHERE `tipo_usuario_pers` != '5' AND `tipo_usuario_pers` != '6' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
 
     ?>
         <table id="tabla_sugerido">

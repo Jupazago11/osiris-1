@@ -12,9 +12,10 @@
     $fecha        = date('Y-m-d', time());
 
     ?>
+    <form id="actualizar_personal2" method="POST">
     <table id="tabla_sugerido">
         <tr>
-            <th colspan="11" style="text-align: center;"><h3>Información Personal</h3></th>
+            <th colspan="12" style="text-align: center;"><h3>Información Personal</h3></th>
         <tr>
         <tr>
             <th>#</th>
@@ -28,6 +29,7 @@
             <th>ARL</th>
             <th>Pensión</th>
             <th>C. Compensasión</th>
+            <th></th>
         </tr>
         <tr>
             <?php
@@ -41,8 +43,9 @@
                 $contador++;
                 ?>
                 <tr>
+                    <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
-                    <td><input type="text" name="identificacion_pers[]" size="15" value="<?php echo $fila['identificacion_pers'] ?>"/></td>
+                    <td><input type="text" name="identificacion_pers[]" size="10" value="<?php echo $fila['identificacion_pers'] ?>"/></td>
                     <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
                     <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>"/></td>
 
@@ -57,11 +60,24 @@
 
                     <td><input type="date" name="fecha_ingreso[]" value="<?php echo $fila['fecha_ingreso'] ?>"/></td>
                     <td></td>
-                    <td><input type="text" name="[eps]" size="8" value="<?php echo $fila['eps'] ?>"/></td>
-                    <td><input type="text" name="[arl]" size="8" value="<?php echo $fila['arl'] ?>"/></td>
-                    <td><input type="text" name="[pension]" size="8" value="<?php echo $fila['pension'] ?>"/></td>
-                    <td><input type="text" name="[caja_compensacion]" size="8" value="<?php echo $fila['caja_compensacion'] ?>"/></td>
-
+                    <td><input type="text" name="eps[]" size="8" value="<?php echo $fila['eps'] ?>"/></td>
+                    <td><input type="text" name="arl[]" size="8" value="<?php echo $fila['arl'] ?>"/></td>
+                    <td><input type="text" name="pension[]" size="8" value="<?php echo $fila['pension'] ?>"/></td>
+                    <td><input type="text" name="caja_compensacion[]" size="8" value="<?php echo $fila['caja_compensacion'] ?>"/></td>
+                    <?php
+                    if($fila['nombre_pers'] == '' || $fila['nombre_pers'] == NULL){
+                        ?>
+                        <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_5').trigger('click');">
+                        <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <?php
+                    }else{
+                        ?>
+                        <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar9_5').trigger('click');"></td> 
+                        <?php
+                    }
+                    ?>
                     
             <?php
             }
@@ -69,11 +85,49 @@
             ?>
         </tr>
         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+            <td></td>
+            <td><button type="button" id="enviar9_4_2" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td colspan="8"></td>
+            <td><button type="button" id="enviar9_5" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta9_5').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            <td></td>
+            <td></td>
         </tr>
     </table>
+    </form>
+    <div id="respuesta9_5" style="display:none;"></div>
+
+<script>
+$('#enviar9_5').click(function(){
+    $.ajax({
+        url:'../php/consulta9_5.php',
+        type:'POST',
+        data: $('#actualizar_personal2').serialize(),
+        success: function(res){
+            Swal.fire(
+            '¡Muy bien!',
+            'Guardado Exitoso',
+            'success'
+            )
+            $('#respuesta9_5').html(res);
+            $('#enviar9_2').trigger('click');
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+});
+$('#enviar9_4_2').click(function(){
+    $.ajax({
+        url:'../php/consulta9_4.php',
+        success: function(res){
+            $('#enviar9_2').trigger('click');
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+});
+</script>
 <?php
 
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------

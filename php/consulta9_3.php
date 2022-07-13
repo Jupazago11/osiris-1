@@ -12,6 +12,7 @@
     $fecha        = date('Y-m-d', time());
 
     ?>
+    <form id="actualizar_personal3" method="POST">
     <table id="tabla_sugerido">
         <tr>
             <th colspan="9" style="text-align: center;"><h3>Datos</h3></th>
@@ -24,6 +25,7 @@
             <th>Nivel de acceso</th>
             <th>Usuario</th>
             <th>Contraseña</th>
+            <th></th>
         </tr>
         <tr>
             <?php
@@ -37,6 +39,7 @@
                 $contador++;
                 ?>
                 <tr>
+                    <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
                     <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
                     <td><input type="text" name="celular_pers[]" value="<?php echo $fila['celular_pers'] ?>"/></td>
@@ -59,7 +62,20 @@
                     </td>
                     <td><input type="text" name="user_pers[]" size="8" value="<?php echo $fila['user_pers'] ?>"/></td>
                     <td><input type="text" name="pass_pers[]" size="8" value="<?php echo $fila['pass_pers'] ?>"/></td>
-
+                    <?php
+                    if($fila['nombre_pers'] == '' || $fila['nombre_pers'] == NULL){
+                        ?>
+                        <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_6').trigger('click');">
+                        <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <?php
+                    }else{
+                        ?>
+                        <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar9_6').trigger('click');"></td> 
+                        <?php
+                    }
+                    ?>
                     
             <?php
             }
@@ -67,11 +83,48 @@
             ?>
         </tr>
         <tr>
-            <th></th>
-            <th></th>
-            <th></th>
+            <td></td>
+            <td><button type="button" id="enviar9_4_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td colspan="4"></td>
+            <td><button type="button" id="enviar9_6" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta9_6').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            <td></td>
         </tr>
     </table>
+    </form>
+    <div id="respuesta9_6" style="display:none;"></div>
+
+<script>
+$('#enviar9_6').click(function(){
+    $.ajax({
+        url:'../php/consulta9_6.php',
+        type:'POST',
+        data: $('#actualizar_personal3').serialize(),
+        success: function(res){
+            Swal.fire(
+            '¡Muy bien!',
+            'Guardado Exitoso',
+            'success'
+            )
+            $('#respuesta9_6').html(res);
+            $('#enviar9_3').trigger('click');
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+});
+$('#enviar9_4_3').click(function(){
+    $.ajax({
+        url:'../php/consulta9_4.php',
+        success: function(res){
+            $('#enviar9_3').trigger('click');
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+});
+</script>
 <?php
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>
