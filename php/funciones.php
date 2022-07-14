@@ -560,115 +560,6 @@ function menu_producto($usuario){
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-/*function menu_personal($usuario){
-    ?>
-
-    <form id="menu_personals" method="POST"> 
-        <table id="tabla_sugerido">
-            <tr>
-                <th colspan="2">Datos Personales</th>
-                <th colspan="2">Información Laboral</th>
-            </tr>
-            <tr>
-                <td>Nombre</td>
-                <td><input type="text" name="nombre" class="w3-inputs"/></td>
-                <td>Fecha de Inicio de contrato</td>
-                <td><input type="date" name="fecha_contrato" class="w3-inputs"/></td>
-            </tr>
-            <tr>
-                <td>Identificación</td>
-                <td><input type="text" name="identificacion" class="w3-inputs"/></td>
-                <td>Duración del contrato</td>
-                <td><input type="radio" id="r1" name="contrato" value="6" checked/>
-                        <label for="r1">6 Meses</label><br>
-                    <input type="radio" id="r2" name="contrato" value="12"/>
-                        <label for="r2">1 Año</label><br></td>
-            </tr>
-            <tr>
-                <td>Fecha de nacimiento</td>
-                <td><input type="date" name="fecha_nacimiento" class="w3-inputs"/></td>
-                <td>Salario</td>
-                <td><input type="text" name="salario" class="w3-inputs"/></td>
-            </tr>
-            <tr>
-                <th colspan="2">Datos de cuenta</th>
-                <td>EPS</td>
-                <td><input type="text" name="eps" class="w3-inputs"/></td>
-            </tr>
-            <tr>
-                <td>Usuario</td>
-                <td><input type="text" name="user" class="w3-inputs"/></td>
-                <td>ARL</td>
-                <td><input type="text" name="arl" class="w3-inputs"/></td>
-            </tr>
-            <tr>
-                <td>Contraseña</td>
-                <td><input type="text" name="pass" class="w3-inputs"/></td>
-                <td>Caja de compensasión</td>
-                <td><input type="text" name="caja" class="w3-inputs"/></td>
-            </tr>
-            <tr>
-                <td>Nivel de acceso</td>
-                <td><input type="number" name="lvl_acc" value="2" min="1" max="6" class="w3-inputs"/></td>
-                <td>Pensión</td>
-                <td><input type="text" name="pension" class="w3-inputs"/></td>
-            </tr>
-            <tr>
-                <td></td>
-                <td></td>
-                <td>Cargo</td>
-                <td><input type="text" name="cargo" class="w3-inputs"/></td>
-            </tr>
-            
-            <tr>
-                <td></td>
-                <td colspan="2"></td>
-                <td><input type="reset" id="limpiar9" value="Limpiar" style="visibility:hidden;"/></td>
-            </tr>
-    
-        </table>
-    </form>
-    <div id="respuesta9"></div>
-    <br>
-    <table id="tabla_sugerido">
-        <tr>
-            <td width="33%"><button type="button" id="enviar9_1" class="w3-btn" style="background-color: #305490;color:white" onclick="document.getElementById('respuesta9_1').style.display='block'">Modificar información</button></td>
-            <td width="33%"><button type="button" id="enviar9" class="w3-btn" style="background-color: #478248;color:white" onclick="document.getElementById('respuesta9').style.display='block'">Registrar</button></td>
-            <td width="33%"><button type="button" class="w3-btn" style="background-color: #305490;color:white" onclick="document.getElementById('respuesta9_1').style.display='none'">Ocultar</button></td>
-        </tr>
-    </table>
-
-    <div id="respuesta9_1"></div>
-
-    <script>
-        $('#enviar9').click(function(){
-            $.ajax({
-                url:'../php/consulta9.php',
-                type:'POST',
-                data: $('#menu_personals').serialize(),
-                success: function(res){
-                    $('#respuesta9').html(res);
-                },
-                error: function(res){
-                    alert("Problemas al tratar de enviar el formulario");
-                }
-            });
-        });
-        $('#enviar9_1').click(function(){
-            $.ajax({
-                url:'../php/consulta9_1.php',
-                success: function(res){
-                    $('#respuesta9_1').html(res);
-                },
-                error: function(res){
-                    alert("Problemas al tratar de enviar el formulario");
-                }
-            });
-        });
-    </script>
-    </div>
-<?php
-}*/
 
 function menu_personal($usuario){
     ?>
@@ -729,23 +620,53 @@ function menu_personal($usuario){
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
-function ver_personal($usuario){
+function ver_presupuestos($usuario){
     ?>
-    <table id="tabla_sugerido">
+    <br>
+    <form id="menu_presupuestos" method="POST" class="form-inline">
+    <table id="tabla_sugerido" style="width:25%">
         <tr>
-            <td width="50%"><button type="button" id="enviar10" class="w3-btn" style="background-color: #305490;color:white" onclick="document.getElementById('respuesta10').style.display='block'">Ver información</button></td>
-            <td width="50%"><button type="button" class="w3-btn" style="background-color: #478248;color:white" onclick="document.getElementById('respuesta10').style.display='none'">Ocultar</button></td>
+            <th colspan="2">Selección</th>
+        </tr>
+        <tr>
+            <td>Mes</td>
+            <td>
+                <select name="mes" id="mes">
+                    <option value="1">Enero</option>
+                    <option value="2">Febrero</option>
+                    <option value="3">Marzo</option>
+                    <option value="4">Abril</option>
+                    <option value="5">Mayo</option>
+                    <option value="6">Junio</option>
+                    <option value="7">Julio</option>
+                    <option value="8">Agosto</option>
+                    <option value="9">Septiembre</option>
+                    <option value="10">Octubre</option>
+                    <option value="11">Noviembre</option>
+                    <option value="12">Diciembre</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <td>Año</td>
+            <td><input type="text" name="year" value="2022"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="button" id="enviar11" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
         </tr>
     </table>
-
-    <div id="respuesta10"></div>
-
+    </form>
+    </div>
+    <div id="respuesta11">
     <script>
-        $('#enviar10').click(function(){
+        $('#enviar11').click(function(){
             $.ajax({
-                url:'../php/consulta10.php',
+                url:'../php/consulta11.php',
+                type:'POST',
+                data: $('#menu_presupuestos').serialize(),
                 success: function(res){
-                    $('#respuesta10').html(res);
+                    $('#respuesta11').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");
@@ -753,7 +674,49 @@ function ver_personal($usuario){
             });
         });
     </script>
-    </div>
+<?php
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function menu_vehiculos($usuario){
+    ?>
+    <br>
+    <button type="button" id="enviar10_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta10_1').style.display='block'"> Vehículos</button>
+    <button type="button" id="enviar10_2" class="w3-btn w3-red" onclick="document.getElementById('respuesta10_2').style.display='block'"> Generar reporte</button>
+
+    <br>
+    <br>
+    <div id="respuesta10_1" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta10_2" style="display:none; backgroung-color:white;"></div>
+
+    <script>
+        $('#enviar10_1').click(function(){
+            $.ajax({
+                url:'../php/consulta10_1.php',
+                success: function(res){
+                    document.getElementById('respuesta10_2').style.display='none';
+                    $('#respuesta10_1').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+        $('#enviar10_2').click(function(){
+            $.ajax({
+                url:'../php/consulta10_2.php',
+                success: function(res){
+                    document.getElementById('respuesta10_1').style.display='none';
+                    $('#respuesta10_2').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+
+    </script>
+
 <?php
 }
 ?>

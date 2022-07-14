@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-07-2022 a las 01:14:16
+-- Tiempo de generación: 15-07-2022 a las 01:51:23
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `cargo` (
   `id_cargo` int(11) NOT NULL,
-  `cargo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `cargo` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -43,7 +43,10 @@ INSERT INTO `cargo` (`id_cargo`, `cargo`, `estado`) VALUES
 (3, 'Empleado', 'activo'),
 (4, 'Domiciliario', 'activo'),
 (5, 'Proveedor oficina', ''),
-(6, 'Proveedor', '');
+(6, 'Proveedor', ''),
+(7, 'Bodeguera', 'inactivo'),
+(8, '', ''),
+(9, 'camionero', 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -227,7 +230,8 @@ INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `
 (11, 3, 7, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'hogar', '15:52', '15:52', 'inactivo'),
 (12, 3, 10, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'su casa', NULL, NULL, 'activo'),
 (13, 3, 11, 1, '2022-07-01', 'hfghfg', 'carnes', 'hfghfgh', 'gfhfgh', '16:12', '16:12', 'inactivo'),
-(14, 1, 2, 1, '2022-07-11', '123', '', 'urbano', 'su casa', '16:08', '16:08', 'inactivo');
+(14, 1, 2, 1, '2022-07-11', '123', '', 'urbano', 'su casa', '16:08', '16:08', 'inactivo'),
+(15, 1, 1, 1, '2022-07-14', 'kjkhjkhjk', 'carnes', 'urbano', 'khkhjkj', '12:02', '12:02', 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -243,6 +247,68 @@ CREATE TABLE `factura` (
   `precio_total` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gasto`
+--
+
+CREATE TABLE `gasto` (
+  `id_gasto` int(11) NOT NULL,
+  `mes` int(11) NOT NULL,
+  `year` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `gasto`
+--
+
+INSERT INTO `gasto` (`id_gasto`, `mes`, `year`) VALUES
+(1, 7, 2022);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `gas_detalle`
+--
+
+CREATE TABLE `gas_detalle` (
+  `id_gasto_de` int(11) NOT NULL,
+  `id_gasto1` int(11) NOT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `costo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `gas_detalle`
+--
+
+INSERT INTO `gas_detalle` (`id_gasto_de`, `id_gasto1`, `nombre`, `costo`) VALUES
+(1, 1, 'arriendo', 1000000),
+(2, 1, 'servicios', 500000);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `observacion`
+--
+
+CREATE TABLE `observacion` (
+  `id_obs` int(11) NOT NULL,
+  `id_vehiculo1` int(11) DEFAULT NULL,
+  `observacion` varchar(200) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `costo` int(11) DEFAULT NULL,
+  `fecha` date DEFAULT NULL,
+  `estado` varchar(50) CHARACTER SET utf32 COLLATE utf32_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `observacion`
+--
+
+INSERT INTO `observacion` (`id_obs`, `id_vehiculo1`, `observacion`, `costo`, `fecha`, `estado`) VALUES
+(1, 1, 'combustible', 10000, '2022-07-14', 'activo');
 
 -- --------------------------------------------------------
 
@@ -277,9 +343,9 @@ CREATE TABLE `personal` (
 --
 
 INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celular_pers`, `correo_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `fecha_ingreso`, `cargo`, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, `estado`) VALUES
-(1, 'juan pablo zapata gómez', '1037977046', '3135721225', 'juan@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-05-31', 6, NULL, 1, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
-(2, 'Domiciliario', '1', NULL, 'domi@gmail.com', 'domi', 'domi', 4, '2004-06-01', '2022-06-01', 2, NULL, 4, 500000, 'sura', 'sura', '', 'proteccion', 'activo'),
-(3, 'empleado prueba', '', NULL, 'emp_1@gmail.com', 'empleado', '1234', 2, '1990-01-01', '2022-01-01', 12, NULL, 2, 0, '', '', '', '', 'activo'),
+(1, 'juan pablo zapata gómez', '1037977046', '3135721225', 'juan@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-01-01', 12, '2022-07-13', 1, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
+(2, 'Domiciliario', '1', '123', 'domi@gmail.com', 'domi', 'domi', 4, '2004-06-01', '2022-06-02', 12, '2022-07-13', 4, 500000, 'sura', 'sura', '', 'proteccion', 'activo'),
+(3, 'empleado prueba', '', '456', 'emp_1@hotmail.com', 'empleado', '1234', 0, '1990-07-14', '2022-01-01', 12, '2022-07-13', 2, 0, '', '', '', '', 'activo'),
 (4, NULL, NULL, NULL, NULL, 'probando', 'probando', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (5, NULL, NULL, NULL, NULL, 'prueba 50', 'prueba 50', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (6, NULL, NULL, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
@@ -291,7 +357,57 @@ INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celula
 (12, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, ''),
 (13, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, ''),
 (14, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, ''),
-(15, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, '');
+(15, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-12', '2022-07-12', 0, '2022-07-12', 3, 0, NULL, NULL, NULL, NULL, ''),
+(16, '', '', NULL, NULL, NULL, NULL, 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, '', '', '', '', ''),
+(17, '', '', NULL, NULL, NULL, NULL, 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, '', '', '', '', ''),
+(18, '', '', NULL, NULL, NULL, NULL, 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, '', '', '', '', ''),
+(19, '', NULL, '', '', '', '', 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, NULL, NULL, NULL, NULL, ''),
+(20, '', NULL, '', '', '', '', 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, NULL, NULL, NULL, NULL, ''),
+(21, '', NULL, '', '', '', '', 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, NULL, NULL, NULL, NULL, ''),
+(22, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-13', '2022-07-13', 0, '2022-07-13', 3, 0, NULL, NULL, NULL, NULL, ''),
+(23, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-13', '2022-07-13', 0, '2022-07-13', 3, 0, NULL, NULL, NULL, NULL, ''),
+(24, '', NULL, '', '', '', '', 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, NULL, NULL, NULL, NULL, ''),
+(25, '', '', '', '', '', '', 0, '1992-07-14', '2022-07-14', NULL, '2022-07-14', 3, NULL, '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `presupuesto`
+--
+
+CREATE TABLE `presupuesto` (
+  `id_presu` int(11) NOT NULL,
+  `mes` int(11) NOT NULL,
+  `year` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `presupuesto`
+--
+
+INSERT INTO `presupuesto` (`id_presu`, `mes`, `year`) VALUES
+(1, 7, 2022);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_detalle`
+--
+
+CREATE TABLE `pre_detalle` (
+  `id_presu_de` int(11) NOT NULL,
+  `id_presu1` int(11) DEFAULT NULL,
+  `nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `costo` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pre_detalle`
+--
+
+INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`) VALUES
+(1, 1, 'arriendo', 1200000),
+(2, 1, 'servicios', 400000);
 
 -- --------------------------------------------------------
 
@@ -386,7 +502,9 @@ INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `direccion_proveedo
 (50, '', '', '', '', '', ''),
 (51, '', '', '', '', '', ''),
 (52, '', '', '', '', '', ''),
-(53, '', '', '', '', '', '');
+(53, '', '', '', '', '', ''),
+(54, '', '', '', '', '', ''),
+(55, '', '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -439,11 +557,11 @@ INSERT INTO `ubicacion` (`id_ubi`, `ubicacion`, `estado`) VALUES
 
 CREATE TABLE `vehiculo` (
   `id_vehiculo` int(11) NOT NULL,
-  `tipo` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `placa` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
-  `fecha_soat` date NOT NULL,
-  `fecha_tecn` date NOT NULL,
-  `kilometraje` int(11) NOT NULL,
+  `tipo` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `placa` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `fecha_soat` date DEFAULT NULL,
+  `fecha_tecn` date DEFAULT NULL,
+  `kilometraje` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -452,8 +570,15 @@ CREATE TABLE `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tecn`, `kilometraje`, `estado`) VALUES
-(1, 'moto', 'ABC-12A', '2022-06-01', '2022-06-01', 1000, 'activo'),
-(2, 'moto', 'XYZ-12A', '2022-06-02', '2022-06-02', 0, 'activo');
+(1, 'moto', 'ABC-12A', '2022-07-13', '2021-09-30', 1000, 'activo'),
+(2, 'moto', 'XYZ-12A', '2022-06-02', '2022-06-02', 0, 'activo'),
+(3, '', '', '2022-07-14', '2022-07-14', 0, ''),
+(4, '', '', '2022-07-14', '2022-07-14', 0, ''),
+(5, '', '', '2022-07-14', '2022-07-14', 0, ''),
+(6, '', '', '2022-07-14', '2022-07-14', 0, ''),
+(7, '', '', '2022-07-14', '2022-07-14', 0, ''),
+(8, '', '', '2022-07-14', '2022-07-14', 0, ''),
+(9, '', '', '2022-07-14', '2022-07-14', 25000, '');
 
 --
 -- Índices para tablas volcadas
@@ -517,11 +642,44 @@ ALTER TABLE `factura`
   ADD UNIQUE KEY `id_pers1` (`id_pers1`);
 
 --
+-- Indices de la tabla `gasto`
+--
+ALTER TABLE `gasto`
+  ADD PRIMARY KEY (`id_gasto`);
+
+--
+-- Indices de la tabla `gas_detalle`
+--
+ALTER TABLE `gas_detalle`
+  ADD PRIMARY KEY (`id_gasto_de`),
+  ADD KEY `id_gasto1` (`id_gasto1`);
+
+--
+-- Indices de la tabla `observacion`
+--
+ALTER TABLE `observacion`
+  ADD PRIMARY KEY (`id_obs`),
+  ADD KEY `id_vehiculo1` (`id_vehiculo1`);
+
+--
 -- Indices de la tabla `personal`
 --
 ALTER TABLE `personal`
   ADD PRIMARY KEY (`id_pers`),
   ADD KEY `cargo` (`cargo`);
+
+--
+-- Indices de la tabla `presupuesto`
+--
+ALTER TABLE `presupuesto`
+  ADD PRIMARY KEY (`id_presu`);
+
+--
+-- Indices de la tabla `pre_detalle`
+--
+ALTER TABLE `pre_detalle`
+  ADD PRIMARY KEY (`id_presu_de`),
+  ADD KEY `id_presu1` (`id_presu1`);
 
 --
 -- Indices de la tabla `producto`
@@ -564,7 +722,7 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -600,7 +758,7 @@ ALTER TABLE `detalle_sugerido`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -609,10 +767,40 @@ ALTER TABLE `factura`
   MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `gasto`
+--
+ALTER TABLE `gasto`
+  MODIFY `id_gasto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `gas_detalle`
+--
+ALTER TABLE `gas_detalle`
+  MODIFY `id_gasto_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `observacion`
+--
+ALTER TABLE `observacion`
+  MODIFY `id_obs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+
+--
+-- AUTO_INCREMENT de la tabla `presupuesto`
+--
+ALTER TABLE `presupuesto`
+  MODIFY `id_presu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `pre_detalle`
+--
+ALTER TABLE `pre_detalle`
+  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -624,7 +812,7 @@ ALTER TABLE `producto`
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
 
 --
 -- AUTO_INCREMENT de la tabla `sugerido`
@@ -642,7 +830,7 @@ ALTER TABLE `ubicacion`
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Restricciones para tablas volcadas
@@ -683,10 +871,28 @@ ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_pers1`) REFERENCES `personal` (`id_pers`);
 
 --
+-- Filtros para la tabla `gas_detalle`
+--
+ALTER TABLE `gas_detalle`
+  ADD CONSTRAINT `gas_detalle_ibfk_1` FOREIGN KEY (`id_gasto1`) REFERENCES `gasto` (`id_gasto`);
+
+--
+-- Filtros para la tabla `observacion`
+--
+ALTER TABLE `observacion`
+  ADD CONSTRAINT `observacion_ibfk_1` FOREIGN KEY (`id_vehiculo1`) REFERENCES `vehiculo` (`id_vehiculo`);
+
+--
 -- Filtros para la tabla `personal`
 --
 ALTER TABLE `personal`
   ADD CONSTRAINT `personal_ibfk_1` FOREIGN KEY (`cargo`) REFERENCES `cargo` (`id_cargo`);
+
+--
+-- Filtros para la tabla `pre_detalle`
+--
+ALTER TABLE `pre_detalle`
+  ADD CONSTRAINT `pre_detalle_ibfk_1` FOREIGN KEY (`id_presu1`) REFERENCES `presupuesto` (`id_presu`);
 
 --
 -- Filtros para la tabla `producto`

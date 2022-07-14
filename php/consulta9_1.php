@@ -14,7 +14,7 @@
     $id_cargo = array();
     $cargo = array();
 
-    $consulta = mysqli_query($conexion, "SELECT * FROM `cargo` WHERE `estado` != ''") or die ("Error al consultar: existencia del cargo");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `cargo` WHERE `estado` != '' AND `estado` != 'inactivo'") or die ("Error al consultar: existencia del cargo");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         array_push($id_cargo, $fila['id_cargo']);
@@ -55,7 +55,7 @@
                     <td>
                     <?php
                     if($fila['cargo'] != '' ){
-                        echo "<input list='cargos' name='cargo[]' id='cargo' value='".$fila['id_cargo']."'>";
+                        echo "<input list='cargos' name='cargo[]' id='cargo' value='".$fila['cargo']."'>";
                     }else{
                         echo "<input list='cargos' name='cargo[]' id='cargo'>";
                     }
@@ -64,7 +64,7 @@
                         <?php
                         for ($i = 0; $i < count($id_cargo); $i++) { 
                             ?>
-                            <option value="<?php echo $id_cargo[$i] ?>"><?php echo $cargo[$i] ?></option>
+                            <option value="<?php echo $cargo[$i] ?>"></option>
 
                         <?php
                         }
@@ -75,8 +75,11 @@
                     <td><input type="date" name="fecha_inicio_contrato_pers[]" value="<?php echo $fila['fecha_inicio_contrato_pers'] ?>"/></td>
                     <?php
 
-                    echo "<td>".date("d-m-Y",strtotime($fila['fecha_inicio_contrato_pers']." +".intval($fila['tipo_contrato_pers'])." month"))."</td>";
+                    echo "<td>".date("d-m-Y",strtotime(date("d-m-Y",strtotime($fila['fecha_inicio_contrato_pers']." +".intval($fila['tipo_contrato_pers'])." month"))."- 1 days"))."</td>";
+                    
+
                     $fecha_final = date("d-m-Y",strtotime($fila['fecha_inicio_contrato_pers']." +".intval($fila['tipo_contrato_pers'])." month"));
+                    $fecha_final = date("d-m-Y",strtotime($fecha_final."- 1 days"));
                     ?>
                     <td><input type="text" name="salario_pers[]" size="8" value="<?php echo $fila['salario_pers'] ?>"/></td>
                     
@@ -87,7 +90,7 @@
 
                     $intvl   = $fecha1->diff($fecha2);
                     if($fecha1 > $fecha2){
-                        echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'> - ".$intvl->days."</td>";
+                        echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'> - ".$intvl->days." Días</td>";
 
                     }elseif($intvl->days < 30 && $intvl->days > 0){
                         
@@ -131,28 +134,71 @@
     </form>
     <div id="respuesta9" style="display:none;"></div>
 
-    <div id="form_cargos" style="display:none;">
-    <table id="tabla_sugerido">
+
+    
+    <form id="actualizar_cargos" method="POST">
+    <div id="form_cargos" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
+    
+    <table id="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white" >
         <tr>
             <th>Nombre</th>
+            <th>Estado</th>
+            <th><a class="w3-bar-item w3-button w3-hover-red active" onclick="document.getElementById('form_cargos').style.display='none'">X</a></th>
         </tr>
     <?php
     $consulta = mysqli_query($conexion, "SELECT * FROM `cargo` WHERE `estado` != ''") or die ("Error al consultar: existencia del cargo");
-    
+    $contador=0;
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $contador++;
     ?>
     
         <tr>
-            <td><input type="text" name="nuevo_cargo" value="<?php echo $fila['cargo'] ?>"/></td>
+            <input type="hidden" name="id_cargo[]" value="<?php echo $fila['id_cargo'] ?>"/>
+            <td><input type="text" name="cargo[]" value="<?php echo $fila['cargo'] ?>"/></td>
+            <td>
+                <?php
+            if($fila['estado'] == "activo"){
+                ?>
+                <input type="radio" name="estado[<?php echo $contador ?>]" value="activo" checked>
+                    Activo<br>
+                <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo">
+                    Inactivo<br></td> 
+                <?php
+            }elseif($fila['estado'] == "inactivo"){
+                ?>
+                <input type="radio" name="estado[<?php echo $contador ?>]" value="activo">
+                    Activo<br>
+                <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo" checked>
+                    Inactivo<br></td> 
+                <?php
+            }
+            ?></td>
+            <?php
+            if($fila['cargo'] == ''){
+                ?>
+                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_8').trigger('click');">
+                <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                <?php
+            }else{
+                ?>
+                <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar9_8').trigger('click');"></td> 
+                <?php
+            }
+            ?>
         </tr>
     <?php
     }
     ?>
         <tr>
             <td><button type="button" id="enviar9_7" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td><button type="button" id="enviar9_8" class="w3-btn" style="background-color: #478248;color:white;">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            <td></td>
         </tr>
 
     </table>
+    </form>
     </div>
     <?php
     
@@ -194,14 +240,37 @@
         $.ajax({
             url:'../php/consulta9_7.php',
             type:'POST',
-            data: $('#actualizar_personal').serialize(),
+            data: $('#actualizar_cargos').serialize(),
             success: function(res){
-                $('#enviar9').trigger('click');
+                $('#respuesta9').html(res);
+                $('#enviar9_1').trigger('click');
+                document.getElementById('form_cargos').style.display='block';
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
             }
         });
     });
+    $('#enviar9_8').click(function(){
+        $.ajax({
+            url:'../php/consulta9_8.php',
+            type:'POST',
+            data: $('#actualizar_cargos').serialize(),
+            success: function(res){
+                Swal.fire(
+                '¡Muy bien!',
+                'Guardado Exitoso',
+                'success'
+                )
+                $('#respuesta9').html(res);
+                $('#enviar9_1').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    
+
 
 </script>

@@ -24,7 +24,7 @@
             <th>F. Nacimiento</th>
             <th>Edad</th>
             <th>F. Ingreso</th>
-            <th>Cumpl</th>
+            <th>Cumpleaños</th>
             <th>EPS</th>
             <th>ARL</th>
             <th>Pensión</th>
@@ -56,10 +56,25 @@
                     $intvl   = $fecha1->diff($fecha2);
                     echo "<td style='background-color:green;border: 2px solid white;text-align: center;color:white;'>".$intvl->y."</td>";
                     ?>
-
+                    
 
                     <td><input type="date" name="fecha_ingreso[]" value="<?php echo $fila['fecha_ingreso'] ?>"/></td>
-                    <td></td>
+                    <?php
+                    $fecha3 = new DateTime(date("d-m-Y",strtotime($fila['fecha_nacimiento_pers']." +".intval(($intvl->y)+1)." year")));
+
+                    $intvl2   = $fecha1->diff($fecha3);
+                    if($intvl2->d == 0 && $intvl2->m == 0){
+                        echo "<td style='background-color:pink;border: 2px solid white;text-align: center;color:white;'><i class='fa fa-birthday-cake' style='font-size:36px;color:red'></i></td>";
+                    }else{
+                        if($intvl2->m == 0){
+                            echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'>".$intvl2->d." Días</td>";
+                        }else{
+                            echo "<td style='background-color:green;border: 2px solid white;text-align: center;color:white;'>".$intvl2->m." Meses con ".$intvl2->d." Días</td>";
+                        }
+                        
+                        
+                    }
+                    ?>
                     <td><input type="text" name="eps[]" size="8" value="<?php echo $fila['eps'] ?>"/></td>
                     <td><input type="text" name="arl[]" size="8" value="<?php echo $fila['arl'] ?>"/></td>
                     <td><input type="text" name="pension[]" size="8" value="<?php echo $fila['pension'] ?>"/></td>
