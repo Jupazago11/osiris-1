@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2022 a las 01:51:23
+-- Tiempo de generación: 16-07-2022 a las 00:42:31
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -386,7 +386,9 @@ CREATE TABLE `presupuesto` (
 --
 
 INSERT INTO `presupuesto` (`id_presu`, `mes`, `year`) VALUES
-(1, 7, 2022);
+(1, 7, 2022),
+(2, 6, 2022),
+(3, 1, 2022);
 
 -- --------------------------------------------------------
 
@@ -398,16 +400,33 @@ CREATE TABLE `pre_detalle` (
   `id_presu_de` int(11) NOT NULL,
   `id_presu1` int(11) DEFAULT NULL,
   `nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `costo` int(11) DEFAULT NULL
+  `costo` int(11) DEFAULT NULL,
+  `costo_gasto` int(11) DEFAULT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
 --
 -- Volcado de datos para la tabla `pre_detalle`
 --
 
-INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`) VALUES
-(1, 1, 'arriendo', 1200000),
-(2, 1, 'servicios', 400000);
+INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`, `costo_gasto`, `estado`) VALUES
+(1, 1, 'Arriendo', 12000000, 15000000, 'activo'),
+(2, 1, 'servicios', 400000, 5000000, 'activo'),
+(3, 1, '', 0, 0, ''),
+(7, 1, '', 0, 0, ''),
+(11, 1, '', 0, 0, ''),
+(12, 1, '', 0, 0, ''),
+(13, 1, '', 0, 0, ''),
+(14, 1, '', 0, 0, ''),
+(15, 1, '', 0, 0, ''),
+(17, 2, '', 0, 0, ''),
+(18, 2, '', 0, 0, ''),
+(27, 2, '', 0, 0, ''),
+(28, 2, '', 0, 0, 'activo'),
+(29, 2, '', 0, 0, ''),
+(30, 3, 'Arriendo', 1000000, 950000, 'activo'),
+(31, 3, '', 0, 0, ''),
+(32, 3, 'servicios', 950000, 1200000, 'activo');
 
 -- --------------------------------------------------------
 
@@ -505,6 +524,89 @@ INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `direccion_proveedo
 (53, '', '', '', '', '', ''),
 (54, '', '', '', '', '', ''),
 (55, '', '', '', '', '', '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `ro_detalles`
+--
+
+CREATE TABLE `ro_detalles` (
+  `id_ro_de` int(11) NOT NULL,
+  `id_ro1` int(11) DEFAULT NULL,
+  `mes` int(11) DEFAULT NULL,
+  `inventario` int(11) DEFAULT NULL,
+  `ventas` int(11) DEFAULT NULL,
+  `g_operacion` int(11) DEFAULT NULL,
+  `margen` decimal(11,2) DEFAULT NULL,
+  `dividendo` int(11) DEFAULT NULL,
+  `cxpagar` int(11) DEFAULT NULL,
+  `credito` int(11) DEFAULT NULL,
+  `efectivo` int(11) DEFAULT NULL,
+  `tarjeta` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `ro_detalles`
+--
+
+INSERT INTO `ro_detalles` (`id_ro_de`, `id_ro1`, `mes`, `inventario`, `ventas`, `g_operacion`, `margen`, `dividendo`, `cxpagar`, `credito`, `efectivo`, `tarjeta`) VALUES
+(1, 1, 1, 100000000, 750000000, 35000000, '9.80', 30000000, 120000000, 80000000, 100000000, 85000000),
+(4, 1, 2, 110000000, 800000000, 37000000, '10.20', 45000000, 130000000, 75000000, 80000000, 75000000),
+(5, 1, 3, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(6, 1, 4, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(7, 1, 5, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(8, 1, 6, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(9, 1, 7, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(10, 1, 8, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(11, 1, 9, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(12, 1, 10, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(13, 1, 11, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(14, 1, 12, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(15, 2, 1, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(16, 2, 2, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(17, 2, 3, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(18, 2, 4, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(19, 2, 5, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(20, 2, 6, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(21, 2, 7, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(22, 2, 8, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(23, 2, 9, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(24, 2, 10, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(25, 2, 11, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(26, 2, 12, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(27, 3, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(28, 3, 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(29, 3, 3, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(30, 3, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 3, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(32, 3, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(33, 3, 7, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(34, 3, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(35, 3, 9, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(36, 3, 10, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(37, 3, 11, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(38, 3, 12, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `r_operativos`
+--
+
+CREATE TABLE `r_operativos` (
+  `id_ro` int(11) NOT NULL,
+  `year` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `r_operativos`
+--
+
+INSERT INTO `r_operativos` (`id_ro`, `year`) VALUES
+(1, 2022),
+(2, 2021),
+(3, 2023);
 
 -- --------------------------------------------------------
 
@@ -696,6 +798,19 @@ ALTER TABLE `proveedor`
   ADD PRIMARY KEY (`id_proveedor`);
 
 --
+-- Indices de la tabla `ro_detalles`
+--
+ALTER TABLE `ro_detalles`
+  ADD PRIMARY KEY (`id_ro_de`),
+  ADD KEY `id_ro1` (`id_ro1`) USING BTREE;
+
+--
+-- Indices de la tabla `r_operativos`
+--
+ALTER TABLE `r_operativos`
+  ADD PRIMARY KEY (`id_ro`);
+
+--
 -- Indices de la tabla `sugerido`
 --
 ALTER TABLE `sugerido`
@@ -794,13 +909,13 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `presupuesto`
 --
 ALTER TABLE `presupuesto`
-  MODIFY `id_presu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_presu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `pre_detalle`
 --
 ALTER TABLE `pre_detalle`
-  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
@@ -813,6 +928,18 @@ ALTER TABLE `producto`
 --
 ALTER TABLE `proveedor`
   MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+
+--
+-- AUTO_INCREMENT de la tabla `ro_detalles`
+--
+ALTER TABLE `ro_detalles`
+  MODIFY `id_ro_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
+
+--
+-- AUTO_INCREMENT de la tabla `r_operativos`
+--
+ALTER TABLE `r_operativos`
+  MODIFY `id_ro` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `sugerido`
@@ -900,6 +1027,12 @@ ALTER TABLE `pre_detalle`
 ALTER TABLE `producto`
   ADD CONSTRAINT `producto_ibfk_1` FOREIGN KEY (`id_proveedor1`) REFERENCES `proveedor` (`id_proveedor`),
   ADD CONSTRAINT `producto_ibfk_2` FOREIGN KEY (`id_cat1`) REFERENCES `categoria` (`id_cat`);
+
+--
+-- Filtros para la tabla `ro_detalles`
+--
+ALTER TABLE `ro_detalles`
+  ADD CONSTRAINT `ro_detalles_ibfk_1` FOREIGN KEY (`id_ro1`) REFERENCES `r_operativos` (`id_ro`);
 
 --
 -- Filtros para la tabla `sugerido`

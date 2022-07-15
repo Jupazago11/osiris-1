@@ -624,9 +624,9 @@ function ver_presupuestos($usuario){
     ?>
     <br>
     <form id="menu_presupuestos" method="POST" class="form-inline">
-    <table id="tabla_sugerido" style="width:25%">
+    <table id="tabla_sugerido" style="width:50%">
         <tr>
-            <th colspan="2">Selección</th>
+            <th colspan="6">Selección</th>
         </tr>
         <tr>
             <td>Mes</td>
@@ -646,17 +646,14 @@ function ver_presupuestos($usuario){
                     <option value="12">Diciembre</option>
                 </select>
             </td>
-        </tr>
-        <tr>
             <td>Año</td>
             <td><input type="text" name="year" value="2022"></td>
-        </tr>
-        <tr>
             <td></td>
             <td><button type="button" id="enviar11" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
         </tr>
     </table>
     </form>
+    <br>
     </div>
     <div id="respuesta11">
     <script>
@@ -667,6 +664,7 @@ function ver_presupuestos($usuario){
                 data: $('#menu_presupuestos').serialize(),
                 success: function(res){
                     $('#respuesta11').html(res);
+                    document.getElementById('form_presupuestos').style.display='block';
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");
@@ -717,6 +715,44 @@ function menu_vehiculos($usuario){
 
     </script>
 
+<?php
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function resultados_operativos($usuario){
+    ?>
+    <form id="menu_roo" method="POST" class="form-inline">
+    <table id="tabla_sugerido" style="width:50%">
+        <tr>
+            <th colspan="6">Selección</th>
+        </tr>
+        <tr>
+            <td>Año</td>
+            <td><input type="text" name="year" value="2022"></td>
+            <td></td>
+            <td><button type="button" id="enviar12" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+        </tr>
+    </table>
+    </form>
+    <br>
+    </div>
+    <div id="respuesta12">
+    <script>
+        $('#enviar12').click(function(){
+            $.ajax({
+                url:'../php/consulta12.php',
+                type:'POST',
+                data: $('#menu_roo').serialize(),
+                success: function(res){
+                    $('#respuesta12').html(res);
+                    document.getElementById('form_ro').style.display='block';
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
 <?php
 }
 ?>
