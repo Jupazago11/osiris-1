@@ -10,8 +10,8 @@
 
     $id_presu_de    = $_POST['id_presu_de'];
     $nombre         = $_POST['nombre'];
-    $costo          = $_POST['costo1'];
-    $costo_gasto    = $_POST['costo2'];
+    $costo          = str_replace(".","",$_POST['costo1']);
+    $costo_gasto    = str_replace(".","",$_POST['costo2']);
     $eliminar       = $_POST['eliminar'];
 
     for ($i = 0; $i < count($id_presu_de); $i++) { 

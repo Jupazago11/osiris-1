@@ -76,7 +76,7 @@
                 <th>U. Neta</th>
                 <th>Dividendo</th>
                 <th>Cxpagar</th>
-                <th>Crédito</th>
+                <th>Cartera</th>
                 <th>Efectivo</th>
                 <th>Tarjeta</th>
                 
@@ -85,8 +85,8 @@
             <?php
             $total = array(0,0,0,0,0,0,0,0,0,0,0);
             $nmeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
-            $cant = 0;
-            $canti= 0;
+            $cant =  array(0,0,0,0,0,0,0,0,0,0,0);
+            $canti=  array(0,0,0,0,0,0,0,0,0,0,0);
             for ($i = 0; $i < count($mes); $i++) { 
                 $contador = $i + 1;
 
@@ -95,35 +95,60 @@
                 <input type="hidden" name="id_ro1" value="<?php echo $id_ro1 ?>"/>
                 <input type="hidden" name="id_ro_de[]" value="<?php echo $id_ro_de[$i] ?>"/>
                 <td><?php echo $nmeses[$i] ?></td>
-                <td><input type="text" name="inventario[]" size="10" value="<?php echo $inventario[$i] ?>"/></td>
-                <td><input type="text" name="ventas[]" size="10" value="<?php echo $ventas[$i] ?>"/></td>
-                <td><input type="text" name="g_operacion[]" size="10" value="<?php echo $g_operacion[$i] ?>"/></td>
+                <td><input type="text" name="inventario[]" size="10" value="<?php echo number_format($inventario[$i], 0, ',', '.') ?>" class="puntos"/></td>
+                <td><input type="text" name="ventas[]" size="10" value="<?php echo number_format($ventas[$i], 0, ',', '.') ?>" class="puntos"/></td>
+                <td><input type="text" name="g_operacion[]" size="10" value="<?php echo number_format($g_operacion[$i], 0, ',', '.') ?>" class="puntos"/></td>
                 <td><input type="text" name="margen[]" size="2" value="<?php echo $margen[$i] ?>"/></td>
                 <td><?php echo number_format($ventas[$i]*$margen[$i]/100, 0, ',', '.') ?></td>
                 <td><?php echo number_format(($ventas[$i]*$margen[$i]/100)-$g_operacion[$i], 0, ',', '.') ?></td>
-                <td><input type="text" name="dividendo[]" size="10" value="<?php echo $dividendo[$i] ?>"/></td>
-                <td><input type="text" name="cxpagar[]" size="10" value="<?php echo $cxpagar[$i] ?>"/></td>
-                <td><input type="text" name="credito[]" size="10" value="<?php echo $credito[$i] ?>"/></td>
-                <td><input type="text" name="efectivo[]" size="10" value="<?php echo $efectivo[$i] ?>"/></td>
-                <td><input type="text" name="tarjeta[]" size="10" value="<?php echo $tarjeta[$i] ?>"/></td>
+                <td><input type="text" name="dividendo[]" size="10" value="<?php echo number_format($dividendo[$i], 0, ',', '.') ?>" class="puntos"/></td>
+                <td><input type="text" name="cxpagar[]" size="10" value="<?php echo number_format($cxpagar[$i], 0, ',', '.') ?>" class="puntos"/></td>
+                <td><input type="text" name="credito[]" size="10" value="<?php echo number_format($credito[$i], 0, ',', '.') ?>" class="puntos"/></td>
+                <td><input type="text" name="efectivo[]" size="10" value="<?php echo number_format($efectivo[$i], 0, ',', '.') ?>" class="puntos"/></td>
+                <td><input type="text" name="tarjeta[]" size="10" value="<?php echo number_format($tarjeta[$i], 0, ',', '.') ?>" class="puntos"/></td>
                 <?php
 
-                //cantidad de margen
+
+                //prom de inv
+                if($inventario[$i] != 0){
+                    $cant[0]++;
+                    $canti[0] += $inventario[$i];
+                }
+
+                //prom de g operacion
+                if($g_operacion[$i] != 0){
+                    $cant[2]++;
+                    $canti[2] += $g_operacion[$i];
+                }
+
+                //prom de margen
                 if($margen[$i] != 0){
-                    $cant++;
-                    $canti += $margen[$i];
+                    $cant[3]++;
+                    $canti[3] += $margen[$i];
+                }
+                //prom de cxpagar
+                if($cxpagar[$i] != 0){
+                    $cant[7]++;
+                    $canti[7] += $cxpagar[$i];
+                }
+                //prom de cartera/credito
+                if($credito[$i] != 0){
+                    $cant[8]++;
+                    $canti[8] += $credito[$i];
                 }
 
                 //totales
-                $total[0] = $total[0] + $inventario[$i];
+                //$total[0] = $total[0] + $inventario[$i];
                 $total[1] = $total[1] + $ventas[$i];
-                $total[2] = $total[2] + $g_operacion[$i];
+                //$total[2] = $total[2] + $g_operacion[$i];
                 //$total[3] = $total[3] + $margen[$i];
+
                 $total[4] = $total[4] + $ventas[$i]*$margen[$i]/100;                    //Bruta
                 $total[5] = $total[5] + ($ventas[$i]*$margen[$i]/100)-$g_operacion[$i]; //Neta
+
                 $total[6] = $total[6] + $dividendo[$i];
-                $total[7] = $total[7] + $cxpagar[$i];
-                $total[8] = $total[8] + $credito[$i];
+                //$total[7] = $total[7] + $cxpagar[$i];
+                //$total[8] = $total[8] + $credito[$i];
                 $total[9] = $total[9] + $efectivo[$i];
                 $total[10] = $total[10] + $tarjeta[$i];
 
@@ -132,11 +157,11 @@
             </tr>
                 <?php
             }
-            if($cant != 0){
-                $total[3] = $canti / $cant;
-            }else{
-                $total[3] = 0;
-            }
+            if($cant[0] != 0){$total[0] = $canti[0] / $cant[0];}else{$total[0] = 0;}
+            if($cant[2] != 0){$total[2] = $canti[2] / $cant[2];}else{$total[2] = 0;}
+            if($cant[3] != 0){$total[3] = $canti[3] / $cant[3];}else{$total[3] = 0;}
+            if($cant[7] != 0){$total[7] = $canti[7] / $cant[7];}else{$total[7] = 0;}
+            if($cant[8] != 0){$total[8] = $canti[8] / $cant[8];}else{$total[8] = 0;}
             
             ?>
             <tr style="background-color:#87CEEB;">

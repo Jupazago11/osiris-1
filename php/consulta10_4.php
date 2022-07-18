@@ -25,7 +25,7 @@
         $consulta = mysqli_query($conexion, "UPDATE `vehiculo` SET `tipo`='$tipo[$i]', `placa`='$placa[$i]', `fecha_soat`='$fecha_soat[$i]', `fecha_tecn`='$fecha_tecn[$i]', `kilometraje`='$kilometraje[$i]', `estado` ='$estado[$j]'
         WHERE `id_vehiculo` = '$id_vehiculo[$i]'") or die ("Error al update: proveedores");
     
-        if($eliminar[$j] == 'eliminar'){
+        if($eliminar[$j] == 'eliminar' && count($eliminar) > 1){
             $consulta = mysqli_query($conexion, "UPDATE `vehiculo` SET 
             `estado` = '' 
             WHERE `id_vehiculo` = '$id_vehiculo[$i]'") or die ("Error al update: proveedores");

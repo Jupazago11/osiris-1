@@ -27,7 +27,7 @@
         SET `nombre_pers`='$nombre_pers[$i]', `celular_pers`='$celular_pers[$i]', `correo_pers`='$correo_pers[$i]', `tipo_usuario_pers`='$tipo_usuario_pers[$i]', `user_pers`='$user_pers[$i]', `pass_pers`='$pass_pers[$i]'
         WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: proveedores");
         
-        if($eliminar[$j] == 'eliminar'){
+        if($eliminar[$j] == 'eliminar' && count($eliminar) > 1){
             $consulta = mysqli_query($conexion, "UPDATE `personal` SET 
             `estado` = '' 
             WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: proveedores");

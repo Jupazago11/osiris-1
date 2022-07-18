@@ -10,15 +10,15 @@
 
     $id_ro1         = $_POST['id_ro1'];
     $id_ro_de       = $_POST['id_ro_de'];
-    $inventario     = $_POST['inventario'];
-    $ventas         = $_POST['ventas'];
-    $g_operacion    = $_POST['g_operacion'];
+    $inventario     = str_replace(".","",$_POST['inventario']);
+    $ventas         = str_replace(".","",$_POST['ventas']);
+    $g_operacion    = str_replace(".","",$_POST['g_operacion']);
     $margen         = $_POST['margen'];
-    $dividendo      = $_POST['dividendo'];
-    $cxpagar        = $_POST['cxpagar'];
-    $credito        = $_POST['credito'];
-    $efectivo       = $_POST['efectivo'];
-    $tarjeta        = $_POST['tarjeta'];
+    $dividendo      = str_replace(".","",$_POST['dividendo']);
+    $cxpagar        = str_replace(".","",$_POST['cxpagar']);
+    $credito        = str_replace(".","",$_POST['credito']);
+    $efectivo       = str_replace(".","",$_POST['efectivo']);
+    $tarjeta        = str_replace(".","",$_POST['tarjeta']);
 
     for ($i = 0; $i < count($id_ro_de); $i++) { 
 

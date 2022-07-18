@@ -34,3 +34,19 @@ function enviar_update() {
 function enviar_update2() {
   $('#enviar5_4').trigger('click');
 }
+
+$('input.puntos').keyup(function(event) {
+
+  // skip for arrow keys
+  if(event.which >= 37 && event.which <= 40){
+    event.preventDefault();
+  }
+
+  $(this).val(function(index, value) {
+    return value
+      .replace(/\D/g, "")
+      .replace(/([0-9])([0-9]{0})$/, '$1$2')  
+      .replace(/\B(?=(\d{3})+(?!\d)\.?)/g, ".")
+    ;
+  });
+});

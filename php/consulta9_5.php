@@ -29,7 +29,7 @@
         SET `nombre_pers`='$nombre_pers[$i]', `identificacion_pers`='$identificacion_pers[$i]', `fecha_nacimiento_pers`='$fecha_nacimiento_pers[$i]', `fecha_ingreso`='$fecha_ingreso[$i]', `eps`='$eps[$i]', `arl`='$arl[$i]', `pension`='$pension[$i]', `caja_compensacion`='$caja_compensacion[$i]'
         WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: proveedores");
         
-        if($eliminar[$j] == 'eliminar'){
+        if($eliminar[$j] == 'eliminar' && count($eliminar) > 1){
             $consulta = mysqli_query($conexion, "UPDATE `personal` SET 
             `estado` = '' 
             WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: proveedores");

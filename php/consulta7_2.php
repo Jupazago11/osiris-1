@@ -26,7 +26,7 @@
         `nombre_proveedor`='$nombres[$i]', `direccion_proveedor`='$direcciones[$i]', `contacto_proveedor`='$contactos[$i]', `nom_vendedor`='$vendedores[$i]', `telefono_vendedor`='$telefonos[$i]',`estado`='$estado[$j]' 
         WHERE `estado` != '' AND `id_proveedor` = '$id_proveedor[$i]'") or die ("Error al update: proveedores");
 
-        if($eliminar[$j] == 'eliminar'){
+        if($eliminar[$j] == 'eliminar' && count($eliminar) > 1){
             $consulta = mysqli_query($conexion, "UPDATE `proveedor` SET 
             `estado`='' 
             WHERE `id_proveedor` = '$id_proveedor[$i]'") or die ("Error al update: proveedores");

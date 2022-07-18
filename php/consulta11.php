@@ -74,10 +74,10 @@
                 <input type="hidden" name="id_presu1" value="<?php echo $id_presu1 ?>"/>
                 <input type="hidden" name="id_presu_de[]" value="<?php echo $id_presu_de[$i] ?>"/>
                 <td><input type="text" name="nombre[]" size="10" value="<?php echo $nombre[$i] ?>"/></td>
-                <td><input type="text" name="costo1[]" size="10" value="<?php echo $costo1[$i] ?>"/></td>
+                <td><input type="text" name="costo1[]" size="10" value="<?php echo number_format($costo1[$i], 0, ',', '.') ?>" class="puntos"/></td>
                 <td></td>
                 <td><?php echo $nombre[$i] ?></td>
-                <td><input type="text" name="costo2[]" size="10" value="<?php echo $costo2[$i] ?>"/></td>
+                <td><input type="text" name="costo2[]" size="10" value="<?php echo number_format($costo2[$i], 0, ',', '.') ?>" class="puntos"/></td>
                 <?php
                 if($nombre[$i] == ''){
                     ?>

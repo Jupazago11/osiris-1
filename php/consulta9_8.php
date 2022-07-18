@@ -22,7 +22,7 @@
         $consulta = mysqli_query($conexion, "UPDATE `cargo` SET`cargo`='$cargo[$i]', `estado`='$estado[$j]' 
         WHERE `id_cargo` = '$id_cargo[$i]'") or die ("Error al update: proveedores");
         
-        if($eliminar[$j] == 'eliminar'){
+        if($eliminar[$j] == 'eliminar' && count($eliminar) > 1){
             $consulta = mysqli_query($conexion, "UPDATE `cargo` SET 
             `estado` = '' 
             WHERE `id_cargo` = '$id_cargo[$i]'") or die ("Error al update: proveedores");
