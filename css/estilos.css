@@ -289,47 +289,60 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #dddddd;
+  text-align: center;
+  font-size: 1.3em;
 }
-active
 
 .center {
   margin-left: auto;
   margin-right: auto;
 }
 
+.usuario {
+  font-size: 1em;
+  position: absolute;
+  background-color: gray;
+  color: black;
+  border-radius: 15px 15px 15px 15px;
+  display: inline-block;
+  padding: 10px;
+  top: 5px;
+  left: 5px;
+}
 
 
 /* Style the header */
 .header {
-  background-color: #f1f1f1;
-  padding: 30px;
+  background-color: #dddddd;
+  padding: 15px;
   text-align: center;
-  font-size: 35px;
+  font-size: 100px;
 }
 
 /* Create three equal columns that floats next to each other */
 .columna {
+  border-radius: 15px 15px 15px 15px;
   float: left;
   margin: 10px;
-  width: 25.00%;
-  padding: 10px;
-  height: 100px; /* Should be removed. Only for demonstration */
+  width: 20.00%;
+  padding: 0px;
+  height: 100%; /* altura */
   justify-content: center;
+  padding: 10px;
+  text-align: center;
 }
 
+.columna:hover {
+  opacity: 0.7;
 
+}
 
 /* Clear floats after the columns */
 .menu:after {
   content: "";
   display: table;
   clear: both;
-}
-
-/* Style the footer */
-.footer {
-  background-color: #f1f1f1;
-  padding: 10px;
   text-align: center;
 }
 
@@ -575,3 +588,20 @@ li a:hover {
 }*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////*/
 
+.osiris {
+  background-color: #000;
+  color: white;
+  font-size: 1.2em;
+  position: absolute;
+  display: inline-block;
+  padding: 10px;
+  left:50%;
+  margin-left:-5%;
+  bottom: 5%;
+  border-radius: 10px 10px 10px 10px;
+  align-items: center;
+  justify-content: center;
+}
+.osiris:hover {
+  opacity: 0.3;
+}

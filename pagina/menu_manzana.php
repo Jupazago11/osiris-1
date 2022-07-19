@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="header">
-  <h2 class="w3-animate-top">Bienvenido</h2>
+  <h1 class="w3-animate-top">Bienvenido</h1>
 </div>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
@@ -23,7 +23,7 @@
 
     $tipo_de_cuenta = iniciar_sesion($usuario, $clave);
 
-    echo " - Nivel de centa ".$tipo_de_cuenta;
+    echo "- Nivel de centa ".$tipo_de_cuenta."</div>";
     // Notificar todos los errores de PHP
     error_reporting(-1);
     
@@ -36,20 +36,22 @@
     <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
         ?>
-        <a class='columna w3-bar-item w3-button w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
-        <a class='columna w3-bar-item w3-button w3-teal' onclick="ocultarDivs('cont2')">Empresa</a>
-        <a class='columna w3-bar-item w3-button w3-blue' onclick="ocultarDivs('cont3')">Control de Domicilios <br><i class='fas fa-tasks' style='font-size:48px;color:white'></i></a>
-        <a class='columna w3-bar-item w3-button w3-red' onclick="ocultarDivs('cont4')">Ventas</a>
+        <a class='columna w3-yellow' onclick="ocultarDivs('cont4')">Caja<br><img src="../iconos/ventas.png" alt="ventas" width="40%" height="40%"></a>
+        <a class='columna w3-red' onclick="ocultarDivs('cont1')">Pedidos <br> <img src="../iconos/pedidos.png" alt="" width="40%" height="40%"></a>
+        <a class='columna w3-blue' onclick="ocultarDivs('cont2')">Empresa<br><img src="../iconos/empresa.png" alt="empresa" width="40%" height="40%"></a>
+        <a class='columna w3-green' onclick="ocultarDivs('cont3')">Domicilios <br><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"></a>
+        <a class='columna w3-teal'>Control <br><img src="../iconos/control.png" alt="control" width="40%" height="40%"></a>
+        
         <?php
     }elseif($tipo_de_cuenta == 3){
         ?>
-        <a class='columna w3-bar-item w3-button w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
-        <a class='columna w3-bar-item w3-button w3-blue' onclick="ocultarDivs('cont3')">Control de Domicilios</a>
-        <a class='columna w3-bar-item w3-button w3-red' onclick="ocultarDivs('cont4')">Ventas</a>
+        <a class='columna w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
+        <a class='columna w3-blue' onclick="ocultarDivs('cont3')">Domicilios <br><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"></a>
+        <a class='columna w3-red' onclick="ocultarDivs('cont4')">Caja</a>
         <?php
     }elseif($tipo_de_cuenta == 4){
         ?>
-        <a class='columna w3-bar-item w3-button w3-blue' onclick="ocultarDivs('cont3')">Control de Domicilios <br><i class='fas fa-tasks' style='font-size:48px;color:white'></i></a>
+        <a class='columna w3-blue' onclick="ocultarDivs('cont3')">Domicilios <br><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"></a>
         <?php
     }
     ?>
@@ -210,7 +212,7 @@
 
             <div id="cont4_1" style="display:none;">
                 <div class="w3-container">
-                    <?php   //crear_sugerido($usuario);   ?>
+                    <?php   crear_sugerido($usuario);   ?>
                 </div>
             </div>
             <div id="cont4_2" style="display:none;">
@@ -230,9 +232,6 @@
             </div>
         </div>
     </div>
-<div class="footer w3-container w3-padding-16 w3-light-grey">
-    <p>Powered by <u>Jupazago</u></p>
-</div>
 </body>
 
 <script type="text/javascript" src="../js/funciones.js"></script>

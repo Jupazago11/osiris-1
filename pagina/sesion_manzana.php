@@ -10,27 +10,35 @@
 </head>
 <body>
 <div class="wrapper fadeInDown">
-    <div id="formContent">
-        <h2 class="active"> Mercados la Manzana </h2>
-        <form name="formulario_iniciar_sesion" action="menu_manzana.php" method='post'>
-            <input type="text" name="u" class="fadeIn second" required placeholder="Usuario"/>
-            <input type="text" name="p" class="fadeIn third" required placeholder="Contraseña"/>
-            <div class="fadeIn fourth"><input type="submit" value="Iniciar Sesión" id="enviar"></div>
-        </form>
-    </div>
+  <h2 class="active" style="background-color:transparent;font-size:3em;color:black;"> Bienvenido </h2>
+  <div class="formContent2"><h2 class="active"> Mercados la Manzana </h2></div>
+  <div id="formContent">
+    <form name="formulario_iniciar_sesion" action="menu_manzana.php" method='post'>
+        <br>
+        <img src="../iconos/usuario.png" alt="user" width="10%" height="10%">
+        <input type="text" name="u" class="fadeIn second" required placeholder="Usuario"/><br>
+        <img src="../iconos/bloquear.png" alt="user" width="10%" height="10%">
+        <input type="password" name="p" class="fadeIn third" required placeholder="Contraseña"/>
+        <br><br>
+  </div>
+  <div class="formContent2 formContent3"><div class="fadeIn fourth"><input type="submit" value="Iniciar Sesión" id="enviar"></div></div>
+  </form>
 </div>
+<div class="osiris">OSIRIS</div>
 </body>
 </html>
 <style>
     /* BASIC */
 
 html {
-  background-color: gray;
+  background-color: #dddddd;
 }
 
+
 body {
-  font-family: "Poppins", sans-serif;
-  height: 100vh;
+  font-family: "Helvetica", sans-serif;
+  height: 10%;
+  background-color: #dddddd;
 }
 
 a {
@@ -61,21 +69,37 @@ h2 {
   justify-content: center;
   width: 100%;
   min-height: 100%;
-  padding: 20px;
+  padding: 5px;
 }
 
 #formContent {
-  -webkit-border-radius: 10px 10px 10px 10px;
-  border-radius: 10px 10px 10px 10px;
+  /*-webkit-border-radius: 0px 0px 10px 10px;*/
   background: #fff;
-  padding: 30px;
-  width: 90%;
+  width: 100%;
   max-width: 450px;
   position: relative;
   padding: 0px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
+}
+
+.formContent2 {
+  -webkit-border-radius: 10px 10px 0px 0px;
+  background-color: #4d4c4c;
+  color: white;
+  padding: 0px;
+  width: 100%;
+  max-width: 450px;
+  position: relative;
+  padding: 0px;
+  -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
+  text-align: center;
+}
+
+.formContent3 {
+  -webkit-border-radius: 0px 0px 10px 10px;
 }
 
 #formFooter {
@@ -96,8 +120,7 @@ h2.inactive {
 }
 
 h2.active {
-  color: #0d0d0d;
-  border-bottom: 2px solid #5fbae9;
+  color: white;
   font-size: 1.8em;
 }
 
@@ -106,20 +129,20 @@ h2.active {
 /* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
-  background-color: #6d92a3;
+  background-color: #4d4c4c;
   border: none;
+  width: 100%;
   color: white;
-  padding: 15px 80px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   text-transform: uppercase;
-  font-size: 13px;
-  -webkit-box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  box-shadow: 0 10px 30px 0 rgba(95,186,233,0.4);
-  -webkit-border-radius: 5px 5px 5px 5px;
-  border-radius: 5px 5px 5px 5px;
-  margin: 5px 20px 40px 20px;
+  font-size: 1.8em;
+  -webkit-box-shadow: 0 10px 30px 0 rgba(0,0,0,0.4);
+  box-shadow: 0 10px 30px 0 rgba(0,0,0,0.4);
+  -webkit-border-radius: 0px 0px 10px 10px;
+  border-radius: 0px 0px 10px 10px;
+  padding: 10px 0px 20px 0px;
   -webkit-transition: all 0.3s ease-in-out;
   -moz-transition: all 0.3s ease-in-out;
   -ms-transition: all 0.3s ease-in-out;
@@ -128,7 +151,7 @@ input[type=button], input[type=submit], input[type=reset]  {
 }
 
 input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
-  background-color: #576a73;
+  background-color: #7d7c7c;
 }
 
 input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
@@ -139,7 +162,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active  
   transform: scale(0.95);
 }
 
-input[type=text] {
+input[type=text], input[type=password] {
   background-color: #dfe0e6;
   border: none;
   color: #0d0d0d;
@@ -147,9 +170,9 @@ input[type=text] {
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 1.2em;
   margin: 5px;
-  width: 85%;
+  width: 70%;
   border: 2px solid #dfe0e6;
   -webkit-transition: all 0.5s ease-in-out;
   -moz-transition: all 0.5s ease-in-out;
@@ -160,12 +183,12 @@ input[type=text] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus {
+input[type=text]:focus, input[type=password]:focus {
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder {
+input[type=text]:placeholder, input[type=password]:placeholder {
   color: #cccccc;
 }
 
