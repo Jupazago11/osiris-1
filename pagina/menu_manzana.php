@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="header">
-  <h1 class="w3-animate-top">Bienvenido</h1>
+  <h1 class="w3-animate-top" style="font-size:0.8em;">Bienvenido</h1>
 </div>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
@@ -23,14 +23,9 @@
 
     $tipo_de_cuenta = iniciar_sesion($usuario, $clave);
 
-    echo "- Nivel de centa ".$tipo_de_cuenta."</div>";
+    echo " - Nivel de centa ".$tipo_de_cuenta."</div>";
     // Notificar todos los errores de PHP
     error_reporting(-1);
-    
-    //funciones
-    //crear_sugerido($usuario);
-    //crear_pedido($usuario);
-    //crear_pedido2($usuario);
 ?>
 <div class="menu w3-animate-zoom">
     <?php
@@ -56,107 +51,122 @@
     }
     ?>
 </div>
+<div class="osiris"><div class="contenido">OSIRIS</div></div>
 
 <?php //Desplegaremos los elementos para la sección de Pedidos ?>
     <div id="cont1" style="display:none;">
         <div class="w3-container" id="pedidos"  style="display:none;">
-            <div class="menu">
-            <ul>
+        <div class="osiris"><div class="contenido">Pedidos</div></div>
+            <div class="menu" style="margin-top: 3%;">
+            
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_1')"><i class='fas fa-marker' style='font-size:16px;color:#9fa2a7'></i> Crea Sugerido</a></li>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_4')"><i class='fas fa-tasks' style='font-size:16px;color:#9fa2a7'></i> Ver próximos pedidos</a></li>
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_1')">Crea Sugerido<br><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"></a>
+                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4')">Ver próximos pedidos<br><img src="../iconos/proximo.png" alt="proximo" width="40%" height="40%"></a>
                     <?php
                     if($tipo_de_cuenta == 1){
                         ?>
-                        <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')"><i class='fas fa-comment-dollar' style='font-size:16px;color:#9fa2a7'></i> Inscribir / Ver cuentas por pagar</a></li>
+                        <a class="columna w3-blue" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')">cuentas por pagar<br><img src="../iconos/pago.png" alt="pago" width="40%" height="40%"></a>
                         <?php
                     }
                 }elseif($tipo_de_cuenta == 5){
                     ?>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_2')"><i class='fas fa-marker' style='font-size:16px;color:#9fa2a7'></i> Crear Pedido</a></li>
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_2')">Crear Pedido<br><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"></a>
                     <?php
                 }
                 elseif($tipo_de_cuenta == 6){
                     ?>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs1('cont1_3')"><i class='fas fa-marker' style='font-size:16px;color:#9fa2a7'></i> Confirmar Pedido</a></li>
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_3')">Confirmar Pedido<br><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"></a>
                     <?php
                 }
                 ?>
-                <li style="float:right"><a class="w3-bar-item w3-button w3-hover-red active" onclick="ocultarDivs0()">X</a></li>
-            </ul>
+                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0()">X</a>
+            
             </div>
 
             <div id="cont1_1" style="display:none;">
                 <div class="w3-container">
                     <?php   crear_sugerido($usuario);   ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont1_2" style="display:none;">
                 <div class="w3-container">
                     <?php   crear_pedido($usuario);     ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_2').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont1_3" style="display:none;">
                 <div class="w3-container">
                     <?php   crear_pedido2($usuario);    ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_3').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont1_4" style="display:none;">
                 <div class="w3-container">
                     <?php   ver_pedidos($usuario);      ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_4').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont1_5" style="display:none;">
                 <div class="w3-container">
                     <?php   cuentas_por_pagar($usuario);?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_5').style.display='none'">X</a>
                 </div>
             </div>
         </div>
     </div>
     <div id="cont2" style="display:none;">
+    
         <div class="w3-container" id="empresa"  style="display:none;">
+        <div class="osiris"><div class="contenido">Empresa</div></div>
+            <div class="menu" style="margin-top: 3%;">
             
-            <div class="menu">
-            <ul>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><i class='far fa-address-card' style='font-size:16px;color:#9fa2a7'></i> Proveedor</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_2')"><i class='fas fa-box-open' style='font-size:16px;color:#9fa2a7'></i> Producto</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_3')"><i class='fas fa-user-cog' style='font-size:16px;color:#9fa2a7'></i> Personal</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_4')"><i class='fa fa-dollar' style='font-size:16px;color:#9fa2a7'></i> Presupuestos</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_5')"><i class='fas fa-car-side' style='font-size:16px;color:#9fa2a7'></i> Vehículos</a></li>
-                <li><a class="w3-bar-item w3-button" onclick="ocultarDivs2('cont2_6')"><i class='fa fa-dollar' style='font-size:16px;color:#9fa2a7'></i> Resultados Operativos</a></li>
-                <li style="float:right"><a class="w3-bar-item w3-button w3-hover-red active" onclick="ocultarDivs0()">X</a></li>
-            </ul>
+            <a class="columna w3-red" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')">Proveedor<br><img src="../iconos/proveedor.png" width="40%" height="40%"></a></li>
+            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2')">Producto<br><img src="../iconos/producto.png" width="40%" height="40%"></a>
+            <a class="columna w3-green" onclick="ocultarDivs2('cont2_3')">Personal<br><img src="../iconos/personal.png" width="40%" height="40%"></a>
+            <a class="columna w3-teal" onclick="ocultarDivs2('cont2_4')">Presupuestos<br><img src="../iconos/presupuesto.png" width="40%" height="40%"></a>
+            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5')">Vehículos<br><img src="../iconos/vehiculos.png" width="40%" height="40%"></a>
+            <a class="columna w3-green" onclick="ocultarDivs2('cont2_6')">Resultados Operativos<br><img src="../iconos/indicador.png" width="40%" height="40%"></a>
+            <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0()">X</a>
+
             </div>
             <div id="cont2_1" style="display:none;">
                 <div class="w3-container">
                     <?php   menu_proveedor($usuario);   ?>
+
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_1').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont2_2" style="display:none;">
                 <div class="w3-container">
                     <?php   menu_producto($usuario);     ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_2').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont2_3" style="display:none;">
                 <div class="w3-container">
                     <?php   menu_personal($usuario);    ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_3').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont2_4" style="display:none;">
                 <div class="w3-container">
                     <?php   ver_presupuestos($usuario);    ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_4').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont2_5" style="display:none;">
                 <div class="w3-container">
                     <?php   menu_vehiculos($usuario);      ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_5').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont2_6" style="display:none;">
                 <div class="w3-container">
                     <?php   resultados_operativos($usuario);      ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_6').style.display='none'">X</a>
                 </div>
             </div>
         </div>
@@ -164,18 +174,19 @@
     
     <div id="cont3" style="display:none;">
         <div class="w3-container" id="control_domiciliario"  style="display:none;">
+        <div class="osiris"><div class="contenido">Domicilios</div></div>
+
             <div class="menu">
-            <ul>
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3 || $tipo_de_cuenta == 4){
                     ?>
-                    <li><a class="w3-bar-item w3-button" onclick="ocultarDivs3('cont3_1')">Domicilio</a></li>
+                    <a class="columna w3-blue" onclick="ocultarDivs3('cont3_1')">Domicilio<br><img src="../iconos/entrega.png" width="40%" height="40%"></a>
                     <?php
                 }
                 ?>
 
-                <li style="float:right"><a class="w3-bar-item w3-button w3-hover-red active" onclick="ocultarDivs0(); var intervalo_time = setInterval(myTimer2, 60000); setInterval(myTimer2, 60000);clearInterval(intervalo_time);">X</a></li>
-            </ul>
+                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0(); var intervalo_time = setInterval(myTimer2, 60000); setInterval(myTimer2, 60000);clearInterval(intervalo_time);">X</a>
+
             </div>
             <div id="cont3_1" style="display:none;">
                 <div class="w3-container">

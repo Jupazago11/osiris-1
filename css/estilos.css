@@ -288,7 +288,7 @@ tr:nth-child(even) {background-color: #f2f2f2;}
 }
 
 body {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:Helvetica;
   background-color: #dddddd;
   text-align: center;
   font-size: 1.3em;
@@ -302,12 +302,12 @@ body {
 .usuario {
   font-size: 1em;
   position: absolute;
-  background-color: gray;
+  background-color: rgb(247, 105, 105);
   color: black;
-  border-radius: 15px 15px 15px 15px;
+  border-radius: 0px 0px 15px 15px;
   display: inline-block;
   padding: 10px;
-  top: 5px;
+  top: 0px;
   left: 5px;
 }
 
@@ -324,8 +324,8 @@ body {
 .columna {
   border-radius: 15px 15px 15px 15px;
   float: left;
-  margin: 10px;
-  width: 20.00%;
+  margin: 1%;
+  width: 22.00%;
   padding: 0px;
   height: 100%; /* altura */
   justify-content: center;
@@ -346,6 +346,13 @@ body {
   text-align: center;
 }
 
+.menu {
+  margin-top: 0%;
+  margin-left: 8%;
+  margin-right: 8%;
+  margin-bottom: 0%;
+}
+
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media (max-width: 600px) {
   .columna {
@@ -358,7 +365,7 @@ body {
   width: 100%;
   height: 100%;
   top: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: #dddddd;
   color: black;
   /*border: solid;*/
   margin: 0%;
@@ -369,7 +376,7 @@ body {
   width: 100%;
   height: 100%;
   top: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: #dddddd;
   color: black;
   /*border: solid;*/
   margin: 0%;
@@ -380,7 +387,7 @@ body {
   width: 100%;
   height: 100%;
   top: 0px;
-  background-color: rgb(255, 255, 255);
+  background-color: #dddddd;
   color: black;
   /*border: solid;*/
   margin: 0%;
@@ -587,21 +594,40 @@ li a:hover {
   background-color: red;
 }*/
 /*////////////////////////////////////////////////////////////////////////////////////////////////////*/
-
 .osiris {
+  
+  position: fixed;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  bottom: 0;
+  width: 100%;
+}
+
+.contenido{
+  padding: 5px;
   background-color: #000;
   color: white;
   font-size: 1.2em;
-  position: absolute;
-  display: inline-block;
-  padding: 10px;
-  left:50%;
-  margin-left:-5%;
-  bottom: 5%;
   border-radius: 10px 10px 10px 10px;
-  align-items: center;
-  justify-content: center;
+  margin-bottom: 1%;
 }
-.osiris:hover {
+
+.contenido:hover {
   opacity: 0.3;
+}
+
+
+.salir {
+  position: absolute;
+  right: 0%;
+  top: 0%;
+}
+.w3-container{
+  background-color: #dddddd;
+  position: fixed;
+  right: 0%;
+  top: 0%;
+  width:100%;
+  height: 100%
 }
