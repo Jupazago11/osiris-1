@@ -621,10 +621,12 @@ function menu_personal($usuario){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 function ver_presupuestos($usuario){
+    date_default_timezone_set('America/Bogota');
+    $fecha        = date('m', time());
     ?>
-    <br>
     <form id="menu_presupuestos" method="POST" class="form-inline">
-    <table id="tabla_sugerido" style="width:50%">
+    <input type="hidden" name="user" value="<?php echo $usuario ?>">
+    <table id="tabla_sugerido">
         <tr>
             <th colspan="6">Selección</th>
         </tr>
@@ -632,18 +634,19 @@ function ver_presupuestos($usuario){
             <td>Mes</td>
             <td>
                 <select name="mes" id="mes">
-                    <option value="1">Enero</option>
-                    <option value="2">Febrero</option>
-                    <option value="3">Marzo</option>
-                    <option value="4">Abril</option>
-                    <option value="5">Mayo</option>
-                    <option value="6">Junio</option>
-                    <option value="7">Julio</option>
-                    <option value="8">Agosto</option>
-                    <option value="9">Septiembre</option>
-                    <option value="10">Octubre</option>
-                    <option value="11">Noviembre</option>
-                    <option value="12">Diciembre</option>
+
+                    <option value="1" <?php if($fecha=='01'){?>selected <?php } ?> >Enero</option>
+                    <option value="2" <?php if($fecha=='02'){?>selected <?php } ?> >Febrero</option>
+                    <option value="3" <?php if($fecha=='03'){?>selected <?php } ?> >Marzo</option>
+                    <option value="4" <?php if($fecha=='04'){?>selected <?php } ?> >Abril</option>
+                    <option value="5" <?php if($fecha=='05'){?>selected <?php } ?> >Mayo</option>
+                    <option value="6" <?php if($fecha=='06'){?>selected <?php } ?> >Junio</option>
+                    <option value="7" <?php if($fecha=='07'){?>selected <?php } ?> >Julio</option>
+                    <option value="8" <?php if($fecha=='08'){?>selected <?php } ?> >Agosto</option>
+                    <option value="9" <?php if($fecha=='09'){?>selected <?php } ?> >Septiembre</option>
+                    <option value="10" <?php if($fecha=='10'){?>selected <?php } ?> >Octubre</option>
+                    <option value="11" <?php if($fecha=='11'){?>selected <?php } ?> >Noviembre</option>
+                    <option value="12" <?php if($fecha=='12'){?>selected <?php } ?> >Diciembre</option>
                 </select>
             </td>
             <td>Año</td>
@@ -653,6 +656,7 @@ function ver_presupuestos($usuario){
         </tr>
     </table>
     </form>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_4').style.display='none'">X</a>
     <br>
     </div>
     <div id="respuesta11">

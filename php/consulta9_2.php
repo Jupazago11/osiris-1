@@ -28,7 +28,7 @@
             <th>EPS</th>
             <th>ARL</th>
             <th>Pensión</th>
-            <th>C. Compensasión</th>
+            <th>Caja Comp.</th>
             <th></th>
         </tr>
         <tr>
@@ -45,9 +45,9 @@
                 <tr>
                     <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
-                    <td><input type="text" name="identificacion_pers[]" size="10" value="<?php echo $fila['identificacion_pers'] ?>"/></td>
+                    <td><input type="text" name="identificacion_pers[]" size="7" value="<?php echo $fila['identificacion_pers'] ?>"/></td>
                     <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
-                    <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>"/></td>
+                    <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>" style="width:120px"/></td>
 
                     <?php
                     $fecha1  = new DateTime($fecha);
@@ -58,13 +58,13 @@
                     ?>
                     
 
-                    <td><input type="date" name="fecha_ingreso[]" value="<?php echo $fila['fecha_ingreso'] ?>"/></td>
+                    <td><input type="date" name="fecha_ingreso[]" value="<?php echo $fila['fecha_ingreso'] ?>" style="width:120px"/></td>
                     <?php
                     $fecha3 = new DateTime(date("d-m-Y",strtotime($fila['fecha_nacimiento_pers']." +".intval(($intvl->y)+1)." year")));
 
                     $intvl2   = $fecha1->diff($fecha3);
                     if($intvl2->d == 0 && $intvl2->m == 0){
-                        echo "<td style='background-color:pink;border: 2px solid white;text-align: center;color:white;'><i class='fa fa-birthday-cake' style='font-size:36px;color:red'></i></td>";
+                        echo "<td style='background-color:transparent;border: 2px solid white;text-align: center;color:white;'><img src='../iconos/pastel.png' width='40%' height='40%'></td>";
                     }else{
                         if($intvl2->m == 0){
                             echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'>".$intvl2->d." Días</td>";
@@ -75,10 +75,10 @@
                         
                     }
                     ?>
-                    <td><input type="text" name="eps[]" size="8" value="<?php echo $fila['eps'] ?>"/></td>
-                    <td><input type="text" name="arl[]" size="8" value="<?php echo $fila['arl'] ?>"/></td>
-                    <td><input type="text" name="pension[]" size="8" value="<?php echo $fila['pension'] ?>"/></td>
-                    <td><input type="text" name="caja_compensacion[]" size="8" value="<?php echo $fila['caja_compensacion'] ?>"/></td>
+                    <td><input type="text" name="eps[]" size="5" value="<?php echo $fila['eps'] ?>"/></td>
+                    <td><input type="text" name="arl[]" size="5" value="<?php echo $fila['arl'] ?>"/></td>
+                    <td><input type="text" name="pension[]" size="5" value="<?php echo $fila['pension'] ?>"/></td>
+                    <td><input type="text" name="caja_compensacion[]" size="5" value="<?php echo $fila['caja_compensacion'] ?>"/></td>
                     <?php
                     if($fila['nombre_pers'] == '' || $fila['nombre_pers'] == NULL){
                         ?>

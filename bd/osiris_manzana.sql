@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 20-07-2022 a las 01:37:08
+-- Tiempo de generación: 22-07-2022 a las 01:07:56
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -129,7 +129,7 @@ INSERT INTO `cuenta_cobro` (`id_cuenta`, `nombre`, `costo`, `factura`, `fecha`, 
 (6, 'cocacola', 50000, NULL, '2022-07-05', '2022-07-05 16:13:25', 30, 'inactivo'),
 (7, 'cocacola', 2000, 'jp11', '2022-07-05', '2022-07-06 12:26:52', 10, 'inactivo'),
 (8, 'nuevo', 200000, 'kk', '2022-07-05', '2022-07-09 11:56:52', 10, ''),
-(9, 'cocacola', 50000, 'kl521', '2022-07-06', NULL, 19, 'activo'),
+(9, 'cocacola', 50000, 'kl521', '2022-07-06', '2022-07-19 19:09:54', 19, 'inactivo'),
 (10, 'Bimbo', 100000, 'ABC132', '2022-07-08', NULL, 20, 'activo'),
 (11, '', 0, '', '2022-07-08', '2022-07-08 17:56:32', 0, ''),
 (12, NULL, 0, NULL, '2022-07-08', NULL, 0, ''),
@@ -345,7 +345,7 @@ CREATE TABLE `personal` (
 INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celular_pers`, `correo_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `fecha_ingreso`, `cargo`, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, `estado`) VALUES
 (1, 'juan pablo zapata gómez', '1037977046', '3135721225', 'juan@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-01-01', 12, '2022-07-13', 1, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
 (2, 'Domiciliario', '1', '123', 'domi@gmail.com', 'domi', 'domi', 4, '2004-06-01', '2022-06-02', 12, '2022-07-13', 4, 500000, 'sura', 'sura', '', 'proteccion', 'activo'),
-(3, 'empleado prueba', '', '456', 'emp_1@hotmail.com', 'empleado', '1234', 0, '1990-07-14', '2022-01-01', 12, '2022-07-13', 2, 0, '', '', '', '', 'activo'),
+(3, 'empleado prueba', '', '456', 'emp_1@hotmail.com', 'empleado', '1234', 2, '1990-07-21', '2022-01-01', 12, '2022-07-14', 2, 0, '', '', '', '', 'activo'),
 (4, NULL, NULL, NULL, NULL, 'probando', 'probando', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (5, NULL, NULL, NULL, NULL, 'prueba 50', 'prueba 50', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (6, NULL, NULL, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
@@ -390,7 +390,8 @@ INSERT INTO `presupuesto` (`id_presu`, `mes`, `year`) VALUES
 (2, 6, 2022),
 (3, 1, 2022),
 (4, 5, 2022),
-(5, 11, 2021);
+(5, 11, 2021),
+(6, 1, 2023);
 
 -- --------------------------------------------------------
 
@@ -404,6 +405,8 @@ CREATE TABLE `pre_detalle` (
   `nombre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `costo` int(11) DEFAULT NULL,
   `costo_gasto` int(11) DEFAULT NULL,
+  `descripcion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `id_pers4` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -411,31 +414,65 @@ CREATE TABLE `pre_detalle` (
 -- Volcado de datos para la tabla `pre_detalle`
 --
 
-INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`, `costo_gasto`, `estado`) VALUES
-(1, 1, 'Arriendo', 12000000, 15000000, 'activo'),
-(2, 1, 'servicios', 400000, 5000000, 'activo'),
-(3, 1, '', 0, 0, ''),
-(7, 1, '', 0, 0, ''),
-(11, 1, '', 0, 0, ''),
-(12, 1, '', 0, 0, ''),
-(13, 1, '', 0, 0, ''),
-(14, 1, '', 0, 0, ''),
-(15, 1, '', 0, 0, ''),
-(17, 2, '', 0, 0, ''),
-(18, 2, '', 0, 0, ''),
-(27, 2, '', 0, 0, ''),
-(28, 2, '', 0, 0, 'activo'),
-(29, 2, '', 0, 0, ''),
-(30, 3, 'Arriendo', 1000000, 1500000, 'activo'),
-(31, 3, '', 0, 0, ''),
-(32, 3, 'servicios', 9500000, 10000000, 'activo'),
-(33, 3, 'Trnasporte', 2000000, 1850000, 'activo'),
-(34, 3, '', 0, 0, ''),
-(35, 3, '', 0, 0, ''),
-(36, 3, '', 0, 0, ''),
-(37, 3, '', 0, 0, ''),
-(38, 4, NULL, NULL, NULL, 'activo'),
-(39, 5, NULL, NULL, NULL, 'activo');
+INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`, `costo_gasto`, `descripcion`, `id_pers4`, `estado`) VALUES
+(1, 1, 'Arriendo', 5000000, NULL, 'xd', 1, 'activo'),
+(2, 1, 'Servicios', 5000000, NULL, '', 3, 'activo'),
+(3, 1, '', 0, 0, NULL, NULL, ''),
+(7, 1, '', 0, 0, NULL, NULL, ''),
+(11, 1, '', 0, 0, NULL, NULL, ''),
+(12, 1, '', 0, 0, NULL, NULL, ''),
+(13, 1, '', 0, 0, NULL, NULL, ''),
+(14, 1, '', 0, 0, NULL, NULL, ''),
+(15, 1, '', 0, 0, NULL, NULL, ''),
+(17, 2, '', 0, 0, NULL, NULL, ''),
+(18, 2, '', 0, 0, NULL, NULL, ''),
+(27, 2, '', 0, 0, NULL, NULL, ''),
+(28, 2, '', 0, 0, NULL, NULL, 'activo'),
+(29, 2, '', 0, 0, NULL, NULL, ''),
+(30, 3, 'Arriendo', 1000000, 1500000, NULL, NULL, 'activo'),
+(31, 3, '', 0, 0, NULL, NULL, ''),
+(32, 3, 'servicios', 5000000, 10000000, NULL, NULL, 'activo'),
+(33, 3, 'Trnasporte', 2000000, 1850000, NULL, NULL, 'activo'),
+(34, 3, '', 0, 0, NULL, NULL, ''),
+(35, 3, '', 0, 0, NULL, NULL, ''),
+(36, 3, '', 0, 0, NULL, NULL, ''),
+(37, 3, '', 0, 0, NULL, NULL, ''),
+(38, 4, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(39, 5, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(40, 3, '', 0, 0, NULL, NULL, ''),
+(41, 3, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(42, 6, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(43, 1, NULL, NULL, NULL, NULL, NULL, ''),
+(44, 1, NULL, NULL, NULL, NULL, NULL, ''),
+(52, 1, 'Ferreteria', 1000000, 5, ':v', 1, 'activo'),
+(64, 1, '', 5000000, NULL, '', 1, ''),
+(65, 1, '', 0, NULL, '', 3, ''),
+(95, 1, '', 0, NULL, '', 1, ''),
+(98, 1, '', 0, NULL, '', 1, '');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `pre_detalle_cat`
+--
+
+CREATE TABLE `pre_detalle_cat` (
+  `id_pre_detalle_cat` int(11) NOT NULL,
+  `cate_pre` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pre_detalle_cat`
+--
+
+INSERT INTO `pre_detalle_cat` (`id_pre_detalle_cat`, `cate_pre`, `estado`) VALUES
+(1, 'Arriendo', 'activo'),
+(2, 'Servicios', 'activo'),
+(3, 'Ferreteria', 'activo'),
+(4, '', ''),
+(5, '', ''),
+(6, '', '');
 
 -- --------------------------------------------------------
 
@@ -456,6 +493,13 @@ CREATE TABLE `producto` (
   `id_proveedor1` int(11) NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `producto`
+--
+
+INSERT INTO `producto` (`id_producto`, `cod_producto`, `id_cat1`, `nombre_producto`, `descripcion`, `precio_producto`, `precio_producto2`, `precio_de_compra`, `existencias`, `id_proveedor1`, `estado`) VALUES
+(1, 123456, 1, 'botella 300ml', 'botella personal', 500, 400, 500, 10, 36, 'activo');
 
 -- --------------------------------------------------------
 
@@ -532,7 +576,8 @@ INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `direccion_proveedo
 (52, '', '', '', '', '', ''),
 (53, '', '', '', '', '', ''),
 (54, '', '', '', '', '', ''),
-(55, '', '', '', '', '', '');
+(55, '', '', '', '', '', ''),
+(56, NULL, NULL, NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -560,12 +605,12 @@ CREATE TABLE `ro_detalles` (
 --
 
 INSERT INTO `ro_detalles` (`id_ro_de`, `id_ro1`, `mes`, `inventario`, `ventas`, `g_operacion`, `margen`, `dividendo`, `cxpagar`, `credito`, `efectivo`, `tarjeta`) VALUES
-(1, 1, 1, 100000000, 750000000, 35000000, '9.80', 30000000, 120000000, 80000000, 100000000, 85000000),
-(4, 1, 2, 110000000, 800000000, 37000000, '10.20', 45000000, 130000000, 75000000, 80000000, 75000000),
+(1, 1, 1, 100000000, 750000000, 35000000, '9.80', 10000000, 120000000, 80000000, 100000000, 85000000),
+(4, 1, 2, 500000000, 800000000, 37000000, '10.20', 45000000, 130000000, 75000000, 80000000, 75000000),
 (5, 1, 3, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
 (6, 1, 4, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
-(7, 1, 5, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
-(8, 1, 6, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(7, 1, 5, 360000000, 0, 0, '0.00', 0, 0, 0, 0, 0),
+(8, 1, 6, 0, 0, 0, '5.10', 0, 0, 0, 0, 0),
 (9, 1, 7, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
 (10, 1, 8, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
 (11, 1, 9, 0, 0, 0, '0.00', 0, 0, 0, 0, 0),
@@ -829,7 +874,14 @@ ALTER TABLE `presupuesto`
 --
 ALTER TABLE `pre_detalle`
   ADD PRIMARY KEY (`id_presu_de`),
-  ADD KEY `id_presu1` (`id_presu1`);
+  ADD KEY `id_presu1` (`id_presu1`),
+  ADD KEY `id_pers4` (`id_pers4`);
+
+--
+-- Indices de la tabla `pre_detalle_cat`
+--
+ALTER TABLE `pre_detalle_cat`
+  ADD PRIMARY KEY (`id_pre_detalle_cat`);
 
 --
 -- Indices de la tabla `producto`
@@ -957,25 +1009,31 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `presupuesto`
 --
 ALTER TABLE `presupuesto`
-  MODIFY `id_presu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_presu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `pre_detalle`
 --
 ALTER TABLE `pre_detalle`
-  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+
+--
+-- AUTO_INCREMENT de la tabla `pre_detalle_cat`
+--
+ALTER TABLE `pre_detalle_cat`
+  MODIFY `id_pre_detalle_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `ro_detalles`
@@ -1067,7 +1125,8 @@ ALTER TABLE `personal`
 -- Filtros para la tabla `pre_detalle`
 --
 ALTER TABLE `pre_detalle`
-  ADD CONSTRAINT `pre_detalle_ibfk_1` FOREIGN KEY (`id_presu1`) REFERENCES `presupuesto` (`id_presu`);
+  ADD CONSTRAINT `pre_detalle_ibfk_1` FOREIGN KEY (`id_presu1`) REFERENCES `presupuesto` (`id_presu`),
+  ADD CONSTRAINT `pre_detalle_ibfk_2` FOREIGN KEY (`id_pers4`) REFERENCES `personal` (`id_pers`);
 
 --
 -- Filtros para la tabla `producto`

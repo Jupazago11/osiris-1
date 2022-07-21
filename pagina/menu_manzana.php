@@ -31,17 +31,17 @@
     <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
         ?>
-        <a class='columna w3-yellow' onclick="ocultarDivs('cont4')">Caja<br><img src="../iconos/ventas.png" alt="ventas" width="40%" height="40%"></a>
-        <a class='columna w3-red' onclick="ocultarDivs('cont1')">Pedidos <br> <img src="../iconos/pedidos.png" alt="" width="40%" height="40%"></a>
-        <a class='columna w3-blue' onclick="ocultarDivs('cont2')">Empresa<br><img src="../iconos/empresa.png" alt="empresa" width="40%" height="40%"></a>
-        <a class='columna w3-green' onclick="ocultarDivs('cont3')">Domicilios <br><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"></a>
-        <a class='columna w3-teal'>Control <br><img src="../iconos/control.png" alt="control" width="40%" height="40%"></a>
+        <a class='columna w3-yellow' onclick="ocultarDivs('cont4')"><img src="../iconos/ventas.png" alt="ventas" width="40%" height="40%"><br>Caja</a>
+        <a class='columna w3-red' onclick="ocultarDivs('cont1')"><img src="../iconos/pedidos.png" alt="" width="40%" height="40%"><br>Pedidos</a>
+        <a class='columna w3-blue' onclick="ocultarDivs('cont2')"><img src="../iconos/empresa.png" alt="empresa" width="40%" height="40%"><br>Empresa</a>
+        <a class='columna w3-green' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
+        <a class='columna w3-teal'><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
         
         <?php
     }elseif($tipo_de_cuenta == 3){
         ?>
         <a class='columna w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
-        <a class='columna w3-blue' onclick="ocultarDivs('cont3')">Domicilios <br><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"></a>
+        <a class='columna w3-blue' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
         <a class='columna w3-red' onclick="ocultarDivs('cont4')">Caja</a>
         <?php
     }elseif($tipo_de_cuenta == 4){
@@ -125,7 +125,7 @@
             
             <a class="columna w3-red" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')">Proveedor<br><img src="../iconos/proveedor.png" width="40%" height="40%"></a></li>
             <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2')">Producto<br><img src="../iconos/producto.png" width="40%" height="40%"></a>
-            <a class="columna w3-green" onclick="ocultarDivs2('cont2_3')">Personal<br><img src="../iconos/personal.png" width="40%" height="40%"></a>
+            <a class="columna w3-green" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')">Personal<br><img src="../iconos/personal.png" width="40%" height="40%"></a>
             <a class="columna w3-teal" onclick="ocultarDivs2('cont2_4')">Presupuestos<br><img src="../iconos/presupuesto.png" width="40%" height="40%"></a>
             <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5')">Vehículos<br><img src="../iconos/vehiculos.png" width="40%" height="40%"></a>
             <a class="columna w3-green" onclick="ocultarDivs2('cont2_6')">Resultados Operativos<br><img src="../iconos/indicador.png" width="40%" height="40%"></a>
@@ -154,7 +154,7 @@
             <div id="cont2_4" style="display:none;">
                 <div class="w3-container">
                     <?php   ver_presupuestos($usuario);    ?>
-                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_4').style.display='none'">X</a>
+                    
                 </div>
             </div>
             <div id="cont2_5" style="display:none;">
