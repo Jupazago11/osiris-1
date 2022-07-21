@@ -563,17 +563,16 @@ function menu_producto($usuario){
 
 function menu_personal($usuario){
     ?>
+    
+
+
+    <div id="respuesta9_1" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta9_2" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta9_3" style="display:none; backgroung-color:white;"></div>
     <br>
     <button type="button" id="enviar9_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Laboral</button>
     <button type="button" id="enviar9_2" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_2').style.display='block'"> Información Personal</button>
     <button type="button" id="enviar9_3" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_3').style.display='block'"> Datos</button>
-
-    <br>
-    <br>
-    <div id="respuesta9_1" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta9_2" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta9_3" style="display:none; backgroung-color:white;"></div>
-
     <script>
         $('#enviar9_1').click(function(){
             $.ajax({
@@ -726,7 +725,7 @@ function menu_vehiculos($usuario){
 function resultados_operativos($usuario){
     ?>
     <form id="menu_roo" method="POST" class="form-inline">
-    <table id="tabla_sugerido" style="width:50%">
+    <table id="tabla_sugerido">
         <tr>
             <th colspan="6">Selección</th>
         </tr>
@@ -737,6 +736,7 @@ function resultados_operativos($usuario){
             <td><button type="button" id="enviar12" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
         </tr>
     </table>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_6').style.display='none'">X</a>
     </form>
     <br>
     </div>
