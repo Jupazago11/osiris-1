@@ -80,5 +80,6 @@ function show1() {
 
   var inputNombre = document.getElementById("prove_sugerido");
   inputNombre.value = name;
+  document.getElementById('respuesta1').style.display='none';
   $('#enviar1').trigger('click');
 }

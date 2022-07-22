@@ -88,7 +88,7 @@
             <div id="cont1_1" style="display:none;">
                 <div class="w3-container">
                     <?php   crear_sugerido($usuario);   ?>
-                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
+                    
                 </div>
             </div>
             <div id="cont1_2" style="display:none;">

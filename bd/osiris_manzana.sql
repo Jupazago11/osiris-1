@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-07-2022 a las 21:39:25
+-- Tiempo de generación: 23-07-2022 a las 01:25:11
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -191,6 +191,13 @@ CREATE TABLE `detalle_sugerido` (
   `precio_total_llegada` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `detalle_sugerido`
+--
+
+INSERT INTO `detalle_sugerido` (`id_detalle`, `id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`, `pedido_sugerido`, `pedido_recibido`, `precio_sugerido`, `precio_total_sugerido`, `precio_total_pedido`, `precio_total_llegada`, `estado`) VALUES
+(1, 2, 1, 10, 5, NULL, NULL, 500, 5000, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -499,7 +506,7 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `cod_producto`, `id_cat1`, `nombre_producto`, `descripcion`, `precio_producto`, `precio_producto2`, `precio_de_compra`, `existencias`, `id_proveedor1`, `estado`) VALUES
-(1, 123456, 1, 'botella 300ml', 'botella personal', 500, 400, 500, 10, 36, 'activo');
+(1, 123456, 1, 'botella 300ml', 'botella personal', 500, 400, 1500, 10, 36, 'activo');
 
 -- --------------------------------------------------------
 
@@ -731,6 +738,14 @@ CREATE TABLE `sugerido` (
   `total_global_confirmado` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `sugerido`
+--
+
+INSERT INTO `sugerido` (`id_sugerido`, `id_pers2`, `fecha_sugerido`, `pedido_proxima_sugerido`, `pedido_llegada`, `pedido_fecha_factura`, `nombre_provedor_sugerido`, `nombre_empleado_provedor_sug`, `nombre_empleado_provedor_sug2`, `total_global_sugerido`, `total_global_pedido`, `total_global_confirmado`, `estado`) VALUES
+(1, 1, '2022-07-10', NULL, NULL, NULL, 'cocacola', NULL, NULL, NULL, NULL, NULL, 'activo'),
+(2, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -976,7 +991,7 @@ ALTER TABLE `detalle_factura`
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
 --
 ALTER TABLE `detalle_sugerido`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `domicilio`
@@ -1060,7 +1075,7 @@ ALTER TABLE `r_operativos`
 -- AUTO_INCREMENT de la tabla `sugerido`
 --
 ALTER TABLE `sugerido`
-  MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicacion`

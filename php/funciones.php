@@ -103,9 +103,14 @@
             ?>
         <form>
         </table>
+        <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
         <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>
                 
-        <div id="respuesta1"></div>
+        <div id="respuesta1" style="position:absolute; top:0;left:0;background:white;width:100%;height: 100%;display:none;">
+
+            
+
+        </div>
         <script>
             $('#enviar1').click(function(){
                 $.ajax({

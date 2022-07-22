@@ -59,7 +59,7 @@
         }
         mysqli_free_result($consulta);
         ?>
-        <div id="form_ro" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
+        <div id="form_ro" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);width:100%;height: 100%;display:none;">
         <form id="menu_ro" method="POST">
         <table id="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;overflow:auto;margin-left: auto;  margin-right: auto;background-color:white; font-size:14px">
             <tr>
