@@ -64,41 +64,46 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Funcion que verifica si existeel archivo de conexion de la base de datos
     function crear_sugerido($usuario){
-        $fecha = date('Y-m-d', time());
-        echo "<br>";
-        echo $fecha;
-        echo "<br>";
+        if(existencia_de_la_conexion()){
+            require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+        }
+        $conexion = conectar();                     //Obtenemos la conexion
         ?>
-        <div class="">
-        <form id="form_seleccionar_prove" method="POST">
-            <fieldset>
-            <legend>Crear Sugerido:</legend>
-            <label for="provedor">Selecciona el proveedor</label>
-            <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-            <input list="provedores" name="provedor" id="provedor"  required>
-            <datalist id="provedores"  required>
+        <input type="text" id="myInput" onkeyup="myFunctionTabla()" placeholder="Nombrel del proveedor.." title="Type in a name">
+
+        <form name="form_seleccionar_prove" id="form_seleccionar_prove" method='post'>
+
+            <input type="hidden" name="nombre" id="prove_sugerido"/>
+            <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
+            <table id="myTable">
+            <tr>
+                <th>#</th>
+                <th>Nombre</th>
+                <th></th>
+            </tr>
 
             <?php
-                if(existencia_de_la_conexion()){
-                    require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-                }
-                $conexion = conectar();                     //Obtenemos la conexion
-                
-                //Consulta a la base de datos en la tabla provvedor
-                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+            $consulta = mysqli_query($conexion, "SELECT `id_proveedor`,`nombre_proveedor` 
+            FROM `proveedor` 
+            WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
 
-                while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                    // traemos los proveedores existentes en la base de datos
-                    echo "<option value=".$fila['nombre_proveedor']."></option>";
-                }
-                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+            $contador = 0;
+            while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                $contador++;
+                ?>
+                <tr id="<?php echo $contador ?>">
+                    <td><?php echo $contador ?></td>
+                    <td class="row-data"><?php echo $fila['nombre_proveedor'] ?></td>
+                    <td><input type="button"  value="submit" onclick="show1()" /></td>
+                </tr>
+                <?php
+            }
+            mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+
             ?>
-            </datalist>
-            <br><br>
-            <button type="button" id="enviar1" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1').style.display='block'">Crear Sugerido</button><br><br>
-            <input type="reset" value="Limpiar" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1').style.display='none'">
-            </fieldset>
-        </form>
+        <form>
+        </table>
+        <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>
                 
         <div id="respuesta1"></div>
         <script>
@@ -116,6 +121,39 @@
                 });
             });
         </script>
+        <style>
+
+        #myInput {
+        background-image: url('/css/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        }
+
+        #myTable {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+        }
+
+        #myTable th, #myTable td {
+        text-align: left;
+        padding: 12px;
+        }
+
+        #myTable tr {
+        border-bottom: 1px solid #ddd;
+        }
+
+        #myTable tr.header, #myTable tr:hover {
+        background-color: #f1f1f1;
+        }
+        </style>
         </div>
     <?php
     }
@@ -387,18 +425,40 @@ function cuentas_por_pagar($usuario){
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
+
 function menu_proveedor($usuario){
     ?>
-    <button type="button" id="enviar7_1" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta7_1').style.display='block'">Ver Proveedores</button>
     
-    <div id="respuesta7_1"></div>
 
+
+    <div id="respuesta7_0" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta7_1" style="display:none; backgroung-color:white;"></div>
+
+    <br>
+    <button type="button" id="enviar7_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta7_1').style.display='block'"> Información</button>
+    <button type="button" id="enviar7_0" class="w3-btn w3-red" onclick="document.getElementById('respuesta7_0').style.display='block'"> Acceso</button>
+    
+
+    
     <script>
+        $('#enviar7_0').click(function(){
+            $.ajax({
+                url:'../php/consulta7_0.php',
+                success: function(res){
+                    document.getElementById('respuesta7_1').style.display='none';
+
+                    $('#respuesta7_0').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
         $('#enviar7_1').click(function(){
             $.ajax({
                 url:'../php/consulta7_1.php',
-                type:'POST',
                 success: function(res){
+                    document.getElementById('respuesta7_0').style.display='none';
                     $('#respuesta7_1').html(res);
                 },
                 error: function(res){

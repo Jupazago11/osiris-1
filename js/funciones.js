@@ -50,3 +50,35 @@ $('input.puntos').keyup(function(event) {
     ;
   });
 });
+
+function myFunctionTabla() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function show1() {
+  var rowId = event.target.parentNode.parentNode.id;
+  //this gives id of tr whose button was clicked
+  var data = document.getElementById(rowId).querySelectorAll(".row-data"); 
+  /*returns array of all elements with 
+  "row-data" class within the row with given id*/
+
+  var name = data[0].innerHTML;
+
+  var inputNombre = document.getElementById("prove_sugerido");
+  inputNombre.value = name;
+  $('#enviar1').trigger('click');
+}

@@ -13,7 +13,7 @@
 
 ?>
     <form id="actualizar_proveedores" method="POST">
-    <table id="tabla_sugerido" width="100%" style="display: block;overflow: auto;width: 100%;">
+    <table id="tabla_sugerido" width="100%">
     <tr>
         <th>#</th>
         <th>Proveedor</th>
@@ -22,7 +22,7 @@
         <th>Nombre del Vendedor</th>
         <th>Teléfono</th>
         <th>Estado</th>
-        <th>Eliminar</th>
+        <th></th>
     </tr>
     <?php
 
@@ -35,25 +35,27 @@
         <tr>
             <tbody>
             <td><?php echo $contador ?></td>
-            <input type="hidden" name="id_proveedor[]" value="<?php echo $fila['id_proveedor'] ?>"/>
-            <td><input type="text" name="nombres[]" value="<?php echo $fila['nombre_proveedor'] ?>"/></td>
-            <td><input type="text" name="direcciones[]" value="<?php echo $fila['direccion_proveedor'] ?>"/></td>   
-            <td><input type="text" name="contactos[]" value="<?php echo $fila['contacto_proveedor'] ?>"/></td>    
-            <td><input type="text" name="vendedores[]" value="<?php echo $fila['nom_vendedor'] ?>"/></td>    
-            <td><input type="text" name="telefonos[]" value="<?php echo $fila['telefono_vendedor'] ?>"/></td>    
+                <input type="hidden" name="id_proveedor[]" value="<?php echo $fila['id_proveedor'] ?>"/>
+            <td><input type="text" name="nombres[]" size="10" value="<?php echo $fila['nombre_proveedor'] ?>"/></td>
+            <td><input type="text" name="direcciones[]" size="15" value="<?php echo $fila['direccion_proveedor'] ?>"/></td>   
+            
+            <td><input type="text" name="contactos[]" size="15" value="<?php echo $fila['contacto_proveedor'] ?>"/></td>    
+            <td><input type="text" name="vendedores[]" size="15" value="<?php echo $fila['nom_vendedor'] ?>"/></td>    
+            <td><input type="text" name="telefonos[]" size="15" value="<?php echo $fila['telefono_vendedor'] ?>"/></td>  
+             
             <td>
             <?php
             if($fila['estado'] == "activo"){
                 ?>
                 <input type="radio" name="estado[<?php echo $contador ?>]" value="activo" checked>
-                    Activo<br>
+                    Activo
                 <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo">
                     Inactivo<br></td> 
                 <?php
             }elseif($fila['estado'] == "inactivo"){
                 ?>
                 <input type="radio" name="estado[<?php echo $contador ?>]" value="activo">
-                    Activo<br>
+                    Activo
                 <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo" checked>
                     Inactivo<br></td> 
                 <?php
@@ -61,13 +63,13 @@
             if($fila['nombre_proveedor'] == ''){
                 ?>
                 <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar7_4').trigger('click');">
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar7_5').trigger('click');">
                 <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
                 <?php
             }else{
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar7_4').trigger('click');"></td> 
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar7_5').trigger('click');"></td> 
                 <?php
             }
             
@@ -81,10 +83,10 @@
         <td><button type="button" id="enviar7_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
         <td></td>
         <td><button type="button" id="enviar7_2" class="w3-btn w3-green" onclick="document.getElementById('respuesta7_2').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></td>
-        <td colspan="4"></td>
+        <td colspan="5"></td>
     </tr>
     </table>
-    <button type="button" id="enviar7_4" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta7_2').style.display='block'">Ver Proveedores</button>
+    <button type="button" id="enviar7_5" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta7_2').style.display='block'">Ver Proveedores</button>
     </form>
     <br>
 
@@ -109,11 +111,12 @@
             }
         });
     });
-    $('#enviar7_3').click(function(){
+    $('#enviar7_5').click(function(){
         $.ajax({
-            url:'../php/consulta7_3.php',
+            url:'../php/consulta7_2.php',
+            type:'POST',
+            data: $('#actualizar_proveedores').serialize(),
             success: function(res){
-                $('#respuesta7_3').html(res);
                 $('#enviar7_1').trigger('click');
             },
             error: function(res){
@@ -121,12 +124,11 @@
             }
         });
     });
-    $('#enviar7_4').click(function(){
+    $('#enviar7_3').click(function(){
         $.ajax({
-            url:'../php/consulta7_2.php',
-            type:'POST',
-            data: $('#actualizar_proveedores').serialize(),
+            url:'../php/consulta7_3.php',
             success: function(res){
+                $('#respuesta7_3').html(res);
                 $('#enviar7_1').trigger('click');
             },
             error: function(res){

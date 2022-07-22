@@ -10,7 +10,7 @@
 
 
     $nombre_usuario = strval($_POST['usuario']);//obtenemos el nombre del proveedor seleccionado
-    $nombre_prove = strval($_POST['provedor']); //obtenemos el nombre del proveedor seleccionado
+    $nombre_prove = strval($_POST['nombre']); //obtenemos el nombre del proveedor seleccionado
     $fecha = date('Y-m-d', time());
 
     //Verificamos si el proveedor existe

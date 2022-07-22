@@ -62,22 +62,22 @@
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
-                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_1')">Crea Sugerido<br><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"></a>
-                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4')">Ver próximos pedidos<br><img src="../iconos/proximo.png" alt="proximo" width="40%" height="40%"></a>
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_1')"><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"><br>Crea Sugerido</a>
+                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4')"><img src="../iconos/proximo.png" alt="proximo" width="40%" height="40%"><br>Ver próximos pedidos</a>
                     <?php
                     if($tipo_de_cuenta == 1){
                         ?>
-                        <a class="columna w3-blue" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')">cuentas por pagar<br><img src="../iconos/pago.png" alt="pago" width="40%" height="40%"></a>
+                        <a class="columna w3-blue" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')"><img src="../iconos/pago.png" alt="pago" width="40%" height="40%"><br>cuentas por pagar</a>
                         <?php
                     }
                 }elseif($tipo_de_cuenta == 5){
                     ?>
-                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_2')">Crear Pedido<br><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"></a>
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_2')"><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"><br>Crear Pedido</a>
                     <?php
                 }
                 elseif($tipo_de_cuenta == 6){
                     ?>
-                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_3')">Confirmar Pedido<br><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"></a>
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_3')"><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"><br> Pedido</a>
                     <?php
                 }
                 ?>
@@ -123,12 +123,12 @@
         <div class="osiris"><div class="contenido">Empresa</div></div>
             <div class="menu" style="margin-top: 3%;">
             
-            <a class="columna w3-red" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')">Proveedor<br><img src="../iconos/proveedor.png" width="40%" height="40%"></a></li>
-            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2')">Producto<br><img src="../iconos/producto.png" width="40%" height="40%"></a>
-            <a class="columna w3-green" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')">Personal<br><img src="../iconos/personal.png" width="40%" height="40%"></a>
-            <a class="columna w3-teal" onclick="ocultarDivs2('cont2_4')">Presupuestos<br><img src="../iconos/presupuesto.png" width="40%" height="40%"></a>
-            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5')">Vehículos<br><img src="../iconos/vehiculos.png" width="40%" height="40%"></a>
-            <a class="columna w3-green" onclick="ocultarDivs2('cont2_6')">Resultados Operativos<br><img src="../iconos/indicador.png" width="40%" height="40%"></a>
+            <a class="columna w3-red" onclick="ocultarDivs2('cont2_1');; $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="40%" height="40%"><br>Proveedor</a>
+            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2')"><img src="../iconos/producto.png" width="40%" height="40%"><br>Producto</a>
+            <a class="columna w3-green" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="40%" height="40%"><br>Personal</a>
+            <a class="columna w3-teal" onclick="ocultarDivs2('cont2_4')"><img src="../iconos/presupuesto.png" width="40%" height="40%"><br>Presupuestos</a>
+            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5')"><img src="../iconos/vehiculos.png" width="40%" height="40%"><br>Vehículos</a>
+            <a class="columna w3-green" onclick="ocultarDivs2('cont2_6')"><img src="../iconos/indicador.png" width="40%" height="40%"><br>Resultados Operativos</a>
             <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0()">X</a>
 
             </div>
@@ -180,7 +180,7 @@
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3 || $tipo_de_cuenta == 4){
                     ?>
-                    <a class="columna w3-blue" onclick="ocultarDivs3('cont3_1')">Domicilio<br><img src="../iconos/entrega.png" width="40%" height="40%"></a>
+                    <a class="columna w3-blue" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="40%" height="40%"><br>Domicilio</a>
                     <?php
                 }
                 ?>
@@ -390,6 +390,5 @@ function ocultarDivs3(no_oculta){
             break;
     }
 }
-
 </script>
 </html>

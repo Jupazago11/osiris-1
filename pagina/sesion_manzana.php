@@ -24,7 +24,7 @@
   <div class="formContent2 formContent3"><div class="fadeIn fourth"><input type="submit" value="Iniciar Sesión" id="enviar"></div></div>
   </form>
 </div>
-<div class="osiris">OSIRIS</div>
+<div class="osiris"><div class="contenido">OSIRIS</div></div>
 </body>
 </html>
 <style>
