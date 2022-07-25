@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 23-07-2022 a las 01:25:11
+-- Tiempo de generación: 26-07-2022 a las 01:37:56
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -186,9 +186,6 @@ CREATE TABLE `detalle_sugerido` (
   `pedido_sugerido` int(11) DEFAULT NULL,
   `pedido_recibido` int(11) DEFAULT NULL,
   `precio_sugerido` int(11) DEFAULT NULL,
-  `precio_total_sugerido` int(11) DEFAULT NULL,
-  `precio_total_pedido` int(11) DEFAULT NULL,
-  `precio_total_llegada` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -196,8 +193,79 @@ CREATE TABLE `detalle_sugerido` (
 -- Volcado de datos para la tabla `detalle_sugerido`
 --
 
-INSERT INTO `detalle_sugerido` (`id_detalle`, `id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`, `pedido_sugerido`, `pedido_recibido`, `precio_sugerido`, `precio_total_sugerido`, `precio_total_pedido`, `precio_total_llegada`, `estado`) VALUES
-(1, 2, 1, 10, 5, NULL, NULL, 500, 5000, NULL, NULL, 'activo');
+INSERT INTO `detalle_sugerido` (`id_detalle`, `id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`, `pedido_sugerido`, `pedido_recibido`, `precio_sugerido`, `estado`) VALUES
+(1, 2, 1, 10, 5, NULL, NULL, 500, 'activo'),
+(2, 3, 1, 10, 10, NULL, NULL, 1500, 'activo'),
+(5, 7, 1, 10, 15, NULL, NULL, 1500, 'activo'),
+(6, 7, 2, 10, 15, NULL, NULL, 4000, 'activo'),
+(7, 1, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(8, 1, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(9, 9, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(10, 9, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(11, 9, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(12, 11, 1, 10, 5, NULL, NULL, 1500, 'activo'),
+(13, 9, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(14, 11, 2, 10, 5, NULL, NULL, 4000, 'activo'),
+(15, 14, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(16, 13, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(17, 13, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(18, 14, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(19, 19, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(20, 19, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(21, 21, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(22, 22, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(23, 21, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(24, 22, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(25, 23, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(26, 24, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(27, 23, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(28, 24, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(29, 25, 1, 5, 10, NULL, NULL, 1500, 'activo'),
+(30, 25, 2, 5, 10, NULL, NULL, 4000, 'activo'),
+(33, 25, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(34, 25, 3, 0, 0, NULL, NULL, 2000, 'inactivo'),
+(35, 27, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(36, 27, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(37, 27, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(38, 27, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(39, 27, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(40, 27, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(41, 29, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(42, 29, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(43, 29, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(44, 29, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(45, 29, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(46, 29, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(47, 29, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(48, 29, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(49, 30, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(50, 30, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(51, 30, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(52, 30, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(53, 31, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(54, 31, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(55, 31, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(56, 31, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(57, 31, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(58, 31, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(59, 31, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(60, 31, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(61, 32, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(62, 32, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(63, 32, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(64, 32, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(65, 34, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(66, 34, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(67, 34, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(68, 34, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(69, 34, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(70, 34, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(71, 34, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(72, 34, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(73, 35, 1, 5, 1, 10, 4, 1500, 'activo'),
+(74, 35, 2, 5, 2, 10, 10, 4000, 'activo'),
+(75, 35, 3, 5, 3, 10, 4, 2000, 'activo'),
+(76, 35, 4, 5, 4, 10, 10, 1000, 'activo');
 
 -- --------------------------------------------------------
 
@@ -238,7 +306,8 @@ INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `
 (12, 3, 10, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'su casa', NULL, NULL, 'activo'),
 (13, 3, 11, 1, '2022-07-01', 'hfghfg', 'carnes', 'hfghfgh', 'gfhfgh', '16:12', '16:12', 'inactivo'),
 (14, 1, 2, 1, '2022-07-11', '123', '', 'urbano', 'su casa', '16:08', '16:08', 'inactivo'),
-(15, 1, 1, 1, '2022-07-14', 'kjkhjkhjk', 'carnes', 'urbano', 'khkhjkj', '12:02', '12:02', 'inactivo');
+(15, 1, 1, 1, '2022-07-14', 'kjkhjkhjk', 'carnes', 'urbano', 'khkhjkj', '12:02', '12:02', 'inactivo'),
+(16, 1, 6, 1, '2022-07-25', 'hgjdghjdgh', 'carnes', 'urbano', 'dhgdfj', NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -506,7 +575,10 @@ CREATE TABLE `producto` (
 --
 
 INSERT INTO `producto` (`id_producto`, `cod_producto`, `id_cat1`, `nombre_producto`, `descripcion`, `precio_producto`, `precio_producto2`, `precio_de_compra`, `existencias`, `id_proveedor1`, `estado`) VALUES
-(1, 123456, 1, 'botella 300ml', 'botella personal', 500, 400, 1500, 10, 36, 'activo');
+(1, 1, 1, 'botella 300ml', 'botella personal', 500, 400, 1500, 10, 36, 'activo'),
+(2, 2, 1, 'mega 3L', '3 litros', 5000, 4500, 4000, 10, 36, 'activo'),
+(3, 3, 1, 'bitella 1.5L', '', 3000, 2500, 2000, 10, 36, 'activo'),
+(4, 4, 1, 'litron', '', 1500, 1500, 1000, 10, 36, 'activo');
 
 -- --------------------------------------------------------
 
@@ -566,13 +638,13 @@ INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `user`, `pass`, `di
 (33, 'nuevo', NULL, NULL, 'fgdfgadfgadfg', '0000000000', 'ikyukukyu', '456565645456', ''),
 (34, 'otro prove', NULL, NULL, 'rionegro', '00000000', 'vendedor', '12345678', ''),
 (35, 'prueba', NULL, NULL, '123456', '00000000', '123456', '123456', ''),
-(36, 'cocacola', 'cocacola', 'cocacola', '', '', '', '', ''),
+(36, 'cocacola', 'cocacola', 'cocacola', '', '', '', '', 'activo'),
 (37, 'probando', NULL, NULL, 'ggggggggggggg', '0000', 'ggggggggggggg', 'ggggggg', ''),
 (38, 'probando 40', NULL, NULL, 'fffffff', '00000000', 'ffffffffffffffffffff', 'ffffffffffffffffffffff', ''),
 (39, 'Bimbo', 'Bimbo', 'Bimbo', '', '', '', '', 'activo'),
 (40, 'auralac', 'auralac', 'auralac', '', '', '', '', ''),
 (41, '', NULL, NULL, '', '', '', '', ''),
-(42, 'cocacola', NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(42, '', '', '', '', '', '', '', ''),
 (43, NULL, NULL, NULL, NULL, NULL, NULL, NULL, ''),
 (44, '', NULL, NULL, '', '', '', '', ''),
 (45, '', NULL, NULL, 'xdxd', '', '', '', ''),
@@ -733,9 +805,6 @@ CREATE TABLE `sugerido` (
   `nombre_provedor_sugerido` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre_empleado_provedor_sug` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `nombre_empleado_provedor_sug2` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `total_global_sugerido` int(11) DEFAULT NULL,
-  `total_global_pedido` int(11) DEFAULT NULL,
-  `total_global_confirmado` int(11) DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -743,9 +812,44 @@ CREATE TABLE `sugerido` (
 -- Volcado de datos para la tabla `sugerido`
 --
 
-INSERT INTO `sugerido` (`id_sugerido`, `id_pers2`, `fecha_sugerido`, `pedido_proxima_sugerido`, `pedido_llegada`, `pedido_fecha_factura`, `nombre_provedor_sugerido`, `nombre_empleado_provedor_sug`, `nombre_empleado_provedor_sug2`, `total_global_sugerido`, `total_global_pedido`, `total_global_confirmado`, `estado`) VALUES
-(1, 1, '2022-07-10', NULL, NULL, NULL, 'cocacola', NULL, NULL, NULL, NULL, NULL, 'activo'),
-(2, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, NULL, NULL, NULL, 'activo');
+INSERT INTO `sugerido` (`id_sugerido`, `id_pers2`, `fecha_sugerido`, `pedido_proxima_sugerido`, `pedido_llegada`, `pedido_fecha_factura`, `nombre_provedor_sugerido`, `nombre_empleado_provedor_sug`, `nombre_empleado_provedor_sug2`, `estado`) VALUES
+(1, 1, '2022-07-10', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(2, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(3, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(4, 25, '2022-07-22', NULL, NULL, NULL, '', NULL, NULL, 'inactivo'),
+(5, 1, '2022-07-22', NULL, NULL, NULL, '', NULL, NULL, 'inactivo'),
+(6, 1, '2022-07-22', NULL, NULL, NULL, '', NULL, NULL, 'inactivo'),
+(7, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(8, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(9, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(10, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(11, 1, '2022-07-22', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(12, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(13, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(14, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(15, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(16, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(17, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(18, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(19, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(20, 1, '2022-07-25', NULL, NULL, NULL, '', NULL, NULL, 'inactivo'),
+(21, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(22, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(23, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(24, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(25, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(26, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(27, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(28, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(29, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(30, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(31, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(32, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(33, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(34, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(35, 1, '2022-07-25', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'activo'),
+(36, 25, '2022-07-25', NULL, NULL, NULL, '', NULL, NULL, 'activo'),
+(37, 1, '2022-07-25', NULL, NULL, NULL, 'milo', NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -991,13 +1095,13 @@ ALTER TABLE `detalle_factura`
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
 --
 ALTER TABLE `detalle_sugerido`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=77;
 
 --
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
@@ -1051,7 +1155,7 @@ ALTER TABLE `pre_detalle_cat`
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
@@ -1075,7 +1179,7 @@ ALTER TABLE `r_operativos`
 -- AUTO_INCREMENT de la tabla `sugerido`
 --
 ALTER TABLE `sugerido`
-  MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicacion`

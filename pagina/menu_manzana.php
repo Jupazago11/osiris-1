@@ -46,7 +46,12 @@
         <?php
     }elseif($tipo_de_cuenta == 4){
         ?>
-        <a class='columna w3-blue' onclick="ocultarDivs('cont3')">Domicilios <br><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"></a>
+        <a class='columna w3-green' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
+        <?php
+    }
+    elseif($tipo_de_cuenta == 5){
+        ?>
+        <a class='columna w3-red' onclick="ocultarDivs('cont1')"><img src="../iconos/pedidos.png" alt="" width="40%" height="40%"><br>Pedidos</a>
         <?php
     }
     ?>
@@ -99,6 +104,7 @@
             </div>
             <div id="cont1_3" style="display:none;">
                 <div class="w3-container">
+                    Crear pedido
                     <?php   crear_pedido2($usuario);    ?>
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_3').style.display='none'">X</a>
                 </div>

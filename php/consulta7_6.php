@@ -130,7 +130,7 @@
         <br>
         <fieldset>
         <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta1').style.display='none'">X</a>
-        <form id="form_crear_sugerido_2" method="POST">
+        <form id="form_crear_sugerido_p" method="POST">
         <input type="hidden" name="usuario" value="<?php echo $nombre_usuario; ?>">
         <input type="hidden" name="proveedor" value="<?php echo $nombre_prove; ?>">
         <input type="hidden" name="fecha_creacion" value="<?php echo $fecha; ?>">
@@ -193,25 +193,24 @@
                 <br><br>
                 <br><br>
 
-                <button type="button" id="enviar1_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1_2').style.display='block'">Guardar</button><br><br>
+                <button type="button" id="enviar7_7" class="w3-btn w3-teal" onclick="document.getElementById('respuesta7_7').style.display='block'">Guardar</button><br><br>
             </fieldset>
 
-            <div id="respuesta1_2"></div>
+            <div id="respuesta7_7"></div>
 
             <script>
-                //<input type="date" name="fecha"/>
-                $('#enviar1_2').click(function(){
+                $('#enviar7_7').click(function(){
                     $.ajax({
-                        url:'../php/consulta1_2.php',
+                        url:'../php/consulta7_7.php',
                         type:'POST',
-                        data: $('#form_crear_sugerido_2').serialize(),
+                        data: $('#form_crear_sugerido_p').serialize(),
                         success: function(res){
                             Swal.fire(
                             '¡Muy bien!',
                             'Guardado Exitoso',
                             'success'
-                            )
-                            $('#enviar1').trigger('click')
+                            );
+
                         },
                         error: function(res){
                             alert("Problemas al tratar de enviar el formulario");

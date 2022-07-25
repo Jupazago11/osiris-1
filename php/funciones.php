@@ -6,276 +6,269 @@
 <?php
 
     //Funcion que verifica si existeel archivo de conexion de la base de datos
-    function existencia_de_la_conexion(){
-        try {
-            //Verificar si existe el archivo de conexion
-            if(!file_exists('../PHP/conexion.php')){
-                throw new Exception ('PHP: File  -conexion-  no existe',1);  //NO existe, captura excepcion
-            }else{
-                return true;
-                //require_once("../PHP/conexion.php");                //SI Existe, continuar y realizar la conexion
-            }
-        
-        } catch (Exception $excepcion) {
-            //Captura de excepcion y su respectivo codigo
-            echo 'Capture: ' .  $excepcion->getMessage(), "<br>";
-            echo 'Código: ' . $excepcion->getCode(), "<br>";
+function existencia_de_la_conexion(){
+    try {
+        //Verificar si existe el archivo de conexion
+        if(!file_exists('../PHP/conexion.php')){
+            throw new Exception ('PHP: File  -conexion-  no existe',1);  //NO existe, captura excepcion
+        }else{
+            return true;
+            //require_once("../PHP/conexion.php");                //SI Existe, continuar y realizar la conexion
         }
+    
+    } catch (Exception $excepcion) {
+        //Captura de excepcion y su respectivo codigo
+        echo 'Capture: ' .  $excepcion->getMessage(), "<br>";
+        echo 'Código: ' . $excepcion->getCode(), "<br>";
     }
+}
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    function iniciar_sesion($usuario, $clave){
+function iniciar_sesion($usuario, $clave){
         
-        if(existencia_de_la_conexion()){
-            require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-        }
-        $conexion = conectar();                     //Obtenemos la conexion
-        
-        //Consulta a la base de datos en la tabla login
-        $consulta = mysqli_query($conexion, "SELECT `user_pers`, `pass_pers`, `tipo_usuario_pers` FROM `personal` WHERE `estado` ='activo'")
-        or die ("Error al iniciar sesión: ");
+    if(existencia_de_la_conexion()){
+        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+    }
+    $conexion = conectar();                     //Obtenemos la conexion
+    
+    //Consulta a la base de datos en la tabla login
+    $consulta = mysqli_query($conexion, "SELECT `user_pers`, `pass_pers`, `tipo_usuario_pers` FROM `personal` WHERE `estado` ='activo'")
+    or die ("Error al iniciar sesión: ");
 
-        $encontrado = false;
-        while (($fila = mysqli_fetch_array($consulta))!=NULL){
+    $encontrado = false;
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
 
-        //Comprobamos la existencia del usuario y contraseña del formulario en los resulatdos de la bases de datos
-            if($usuario == $fila['user_pers'] && $clave == $fila['pass_pers']){
-                //Existe en la base de datos y es conrrecto los datos
-                $tipo_de_cuenta = $fila['tipo_usuario_pers']; //Obtenemos su tipo de cuenta
-                echo "<div class='usuario'>".$fila['user_pers'];
-                $encontrado = true;
-                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-                mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
-                break;
-            }
-        }
-        if($encontrado==false){
+    //Comprobamos la existencia del usuario y contraseña del formulario en los resulatdos de la bases de datos
+        if($usuario == $fila['user_pers'] && $clave == $fila['pass_pers']){
+            //Existe en la base de datos y es conrrecto los datos
+            $tipo_de_cuenta = $fila['tipo_usuario_pers']; //Obtenemos su tipo de cuenta
+            echo "<div class='usuario'>".$fila['user_pers'];
+            $encontrado = true;
             mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
             mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
-            //Si no se encontró registro alguno, regresamos al index de inicio de sesión
-            ?>
-            <script type="text/javascript">
-				window.history.back();
-			</script>
-            <?php
+            break;
         }
-        return $tipo_de_cuenta;
     }
-////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Funcion que verifica si existeel archivo de conexion de la base de datos
-    function crear_sugerido($usuario){
-        if(existencia_de_la_conexion()){
-            require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-        }
-        $conexion = conectar();                     //Obtenemos la conexion
+    if($encontrado==false){
+        mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+        mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
+        //Si no se encontró registro alguno, regresamos al index de inicio de sesión
         ?>
-        <input type="text" id="myInput" onkeyup="myFunctionTabla()" placeholder="Nombrel del proveedor.." title="Type in a name">
+        <script type="text/javascript">
+            window.history.back();
+        </script>
+        <?php
+    }
+    return $tipo_de_cuenta;
+}
+//////////////////////////////////////////////////////////////////////////////////////////////////
+function iniciar_sesion2($usuario, $clave){
+    
+    if(existencia_de_la_conexion()){
+        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+    }
+    $conexion = conectar();                     //Obtenemos la conexion
+    
+    //Consulta a la base de datos en la tabla login
+    $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor`, `user`, `pass`, `estado` FROM `proveedor` WHERE `estado` = 'activo'")
+    or die ("Error al iniciar sesión: ");
 
-        <form name="form_seleccionar_prove" id="form_seleccionar_prove" method='post'>
+    $encontrado = false;
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
 
-            <input type="hidden" name="nombre" id="prove_sugerido"/>
-            <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
-            <table id="myTable">
-            <tr>
-                <th>#</th>
-                <th>Nombre</th>
-                <th></th>
-            </tr>
-
-            <?php
-            $consulta = mysqli_query($conexion, "SELECT `id_proveedor`,`nombre_proveedor` 
-            FROM `proveedor` 
-            WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
-
-            $contador = 0;
-            while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                $contador++;
-                ?>
-                <tr id="<?php echo $contador ?>">
-                    <td><?php echo $contador ?></td>
-                    <td class="row-data"><?php echo $fila['nombre_proveedor'] ?></td>
-                    <td><input type="button"  value="submit" onclick="show1()" /></td>
-                </tr>
-                <?php
-            }
+    //Comprobamos la existencia del usuario y contraseña del formulario en los resulatdos de la bases de datos
+        if($usuario == $fila['user'] && $clave == $fila['pass']){
+            //Existe en la base de datos y es conrrecto los datos
+            $nombre_proveedor = $fila['nombre_proveedor']; //Obtenemos su tipo de cuenta
+            echo "<div class='usuario'>".$fila['user'];
+            $encontrado = true;
             mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+            mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
+            break;
+        }
+    }
+    if($encontrado==false){
+        mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+        mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
+        //Si no se encontró registro alguno, regresamos al index de inicio de sesión
+        ?>
+        <script type="text/javascript">
+            window.history.back();
+        </script>
+        <?php
+    }
+    return $nombre_proveedor;
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Funcion que verifica si existeel archivo de conexion de la base de datos
+function crear_sugerido($usuario){
+    if(existencia_de_la_conexion()){
+        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+    }
+    $conexion = conectar();                     //Obtenemos la conexion
+    ?>
+    <input type="text" id="myInput" onkeyup="myFunctionTabla()" placeholder="Nombrel del proveedor.." title="Type in a name">
 
-            ?>
-        <form>
-        </table>
-        <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
-        <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>
-                
-        <div id="respuesta1" style="position:absolute; top:0;left:0;background:white;width:100%;height: 100%;display:none;">
+    <form name="form_seleccionar_prove" id="form_seleccionar_prove" method='post'>
 
+        <input type="text" name="nombre" id="prove_sugerido"/>
+        <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
+        <table id="myTable">
+        <tr>
+            <th>#</th>
+            <th>Nombre</th>
+            <th></th>
+        </tr>
+
+        <?php
+        $consulta = mysqli_query($conexion, "SELECT `id_proveedor`,`nombre_proveedor` 
+        FROM `proveedor` 
+        WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
+
+        
+        $nombre_provee = array();
+        while (($fila = mysqli_fetch_array($consulta))!=NULL){
             
-
-        </div>
-        <script>
-            $('#enviar1').click(function(){
-                $.ajax({
-                    url:'../php/consulta1.php',
-                    type:'POST',
-                    data: $('#form_seleccionar_prove').serialize(),
-                    success: function(res){
-                        $('#respuesta1').html(res);
-                    },
-                    error: function(res){
-                        alert("Problemas al tratar de enviar el formulario");
-                    }
-                });
-            });
-        </script>
-        <style>
-
-        #myInput {
-        background-image: url('/css/searchicon.png');
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        width: 90%;
-        font-size: 16px;
-        padding: 12px 20px 12px 40px;
-        border: 1px solid #ddd;
-        margin-bottom: 12px;
+            array_push($nombre_provee , $fila['nombre_proveedor']);
+            
         }
+        mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
 
-        #myTable {
-        border-collapse: collapse;
-        width: 100%;
-        border: 1px solid #ddd;
-        font-size: 18px;
-        }
-
-        #myTable th, #myTable td {
-        text-align: left;
-        padding: 12px;
-        }
-
-        #myTable tr {
-        border-bottom: 1px solid #ddd;
-        }
-
-        #myTable tr.header, #myTable tr:hover {
-        background-color: #f1f1f1;
-        }
-        </style>
-        </div>
-    <?php
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Funcion que verifica si existeel archivo de conexion de la base de datos
-    function crear_pedido($usuario){
-        ?>
-        <div>
-        <form id="form_crear_pedido" method="POST">
-            <fieldset>
-            <label for="provedor">Selecciona el proveedor</label>
-            <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-            <input list="provedores" name="provedor" id="provedor"  required>
-            <datalist id="provedores"  required>
-
-            <?php
-                if(existencia_de_la_conexion()){
-                    require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-                }
-                $conexion = conectar();                     //Obtenemos la conexion
-                
-                //Consulta a la base de datos en la tabla provvedor
-                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
-
-                while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                    // traemos los proveedores existentes en la base de datos
-                    echo "<option value=".$fila['nombre_proveedor']."></option>";
-                }
-                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+        $contador = 0;
+        for ($i=0; $i < count($nombre_provee); $i++) { 
+            $contador++;
             ?>
-            </datalist>
-            <br><br>
-            Ingresa tu nombre
-            <input type="text" name="nombre_empleado_provedor" required></input>
-            <br><br>
-            <button type="button" id="enviar2" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='block'">Crear Pedido</button><br><br>
-            <input type="reset" value="Limpiar" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='none'">
-            </fieldset>
-        </form>
-                
-        <div id="respuesta2"></div>
-        <script>
-            $('#enviar2').click(function(){
-                $.ajax({
-                    url:'../php/consulta2.php',
-                    type:'POST',
-                    data: $('#form_crear_pedido').serialize(),
-                    success: function(res){
-                        $('#respuesta2').html(res);
-                    },
-                    error: function(res){
-                        alert("Problemas al tratar de enviar el formulario");
-                    }
-                });
-            });
-        </script>
-        </div>
-    <?php
-    }
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //Funcion que verifica si existeel archivo de conexion de la base de datos
-    function crear_pedido2($usuario){
-        ?>
-        <div>
-        <form id="form_confirmar_pedido" method="POST">
-            <fieldset>
-            <label for="provedor">Selecciona el proveedor</label>
-            <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-            <input list="provedores" name="provedor" id="provedor"  required>
-            <datalist id="provedores"  required>
-
+            <tr id="<?php echo $contador ?>">
+                <td><?php echo $contador ?></td>
+                <td class="row-data"><?php echo $nombre_provee[$i] ?></td>
+                <td><input type="button"  value="Continuar" onclick="show1()"/></td>
+            </tr>
             <?php
-                if(existencia_de_la_conexion()){
-                    require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-                }
-                $conexion = conectar();                     //Obtenemos la conexion
-                
-                //Consulta a la base de datos en la tabla provvedor
-                $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
+        }
+        
 
-                while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                    // traemos los proveedores existentes en la base de datos
-                    echo "<option value=".$fila['nombre_proveedor']."></option>";
+        ?>
+    <form>
+    </table>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
+    <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>
+            
+    <div id="respuesta1" style="position:absolute; top:0;left:0;background:white;width:100%;height: 100%;display:none;">
+
+        
+
+    </div>
+    <script>
+        $('#enviar1').click(function(){
+            $.ajax({
+                url:'../php/consulta1.php',
+                type:'POST',
+                data: $('#form_seleccionar_prove').serialize(),
+                success: function(res){
+                    $('#respuesta1').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
                 }
-                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-            ?>
-            </datalist>
-            <br><br>
-            Ingresa tu nombre
-            <input type="text" name="nombre_empleado_provedor" required></input>
-            <br><br>
-            <button type="button" id="enviar3" class="w3-btn w3-red" onclick="document.getElementById('respuesta3').style.display='block'">Pedido Final</button><br><br>
-            <input type="reset" value="Limpiar" class="w3-btn w3-red" onclick="document.getElementById('respuesta3').style.display='none'">
-            </fieldset>
-        </form>
-                
-        <div id="respuesta3"></div>
-        <script>
-            $('#enviar3').click(function(){
-                $.ajax({
-                    url:'../php/consulta3.php',
-                    type:'POST',
-                    data: $('#form_confirmar_pedido').serialize(),
-                    success: function(res){
-                        $('#respuesta3').html(res);
-                    },
-                    error: function(res){
-                        alert("Problemas al tratar de enviar el formulario");
-                    }
-                });
             });
-        </script>
-        </div>
-    <?php
+        });
+    </script>
+    <style>
+
+    #myInput {
+    background-image: url('/css/searchicon.png');
+    background-position: 10px 10px;
+    background-repeat: no-repeat;
+    width: 90%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 1px solid #ddd;
+    margin-bottom: 12px;
     }
+
+    #myTable {
+    border-collapse: collapse;
+    width: 100%;
+    border: 1px solid #ddd;
+    font-size: 18px;
+    }
+
+    #myTable th, #myTable td {
+    text-align: left;
+    padding: 12px;
+    }
+
+    #myTable tr {
+    border-bottom: 1px solid #ddd;
+    }
+
+    #myTable tr.header, #myTable tr:hover {
+    background-color: #f1f1f1;
+    }
+    </style>
+    </div>
+<?php
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Funcion que verifica si existeel archivo de conexion de la base de datos
+function crear_pedido($name_proveedor){
+    ?>
+    <div>
+    <form id="form_crear_pedido" method="POST">
+        <input type="hidden" name="name_proveedor" value="<?php echo $name_proveedor; ?>">
+        <button type="button" id="enviar2" class="w3-btn w3-green" onclick="document.getElementById('respuesta2').style.display='block';" style="display:none;">Crear Pedido</button><br><br>
+    </form>
+            
+    <div id="respuesta2"></div>
+    <script>
+        $('#enviar2').click(function(){
+            $.ajax({
+                url:'../php/consulta2.php',
+                type:'POST',
+                data: $('#form_crear_pedido').serialize(),
+                success: function(res){
+                    $('#respuesta2').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+    </div>
+<?php
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////
+//Funcion que verifica si existeel archivo de conexion de la base de datos
+function crear_pedido2($name_proveedor){
+    ?>
+    <div>
+    <form id="form_confirmar_pedido" method="POST">
+        <input type="hidden" name="name_proveedor" value="<?php echo $name_proveedor; ?>">
+        <button type="button" id="enviar3" class="w3-btn w3-green" onclick="document.getElementById('respuesta3').style.display='block';" style="display:none;">Siguiente</button><br><br>
+    </form>
+            
+    <div id="respuesta3"></div>
+    <script>
+        $('#enviar3').click(function(){
+            $.ajax({
+                url:'../php/consulta3.php',
+                type:'POST',
+                data: $('#form_confirmar_pedido').serialize(),
+                success: function(res){
+                    $('#respuesta3').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+    </div>
+<?php
+}
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Funcion que verifica si existeel archivo de conexion de la base de datos
@@ -443,6 +436,9 @@ function menu_proveedor($usuario){
     <button type="button" id="enviar7_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta7_1').style.display='block'"> Información</button>
     <button type="button" id="enviar7_0" class="w3-btn w3-red" onclick="document.getElementById('respuesta7_0').style.display='block'"> Acceso</button>
     
+    <form id="mandar_user" method="POST">
+        <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
+    </form>
 
     
     <script>
@@ -462,6 +458,8 @@ function menu_proveedor($usuario){
         $('#enviar7_1').click(function(){
             $.ajax({
                 url:'../php/consulta7_1.php',
+                type:'POST',
+                data: $('#mandar_user').serialize(),
                 success: function(res){
                     document.getElementById('respuesta7_0').style.display='none';
                     $('#respuesta7_1').html(res);

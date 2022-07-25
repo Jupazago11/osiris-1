@@ -7,53 +7,18 @@
     }
     $conexion = conectar();
 
-  
 
-    $nombre_usuario = strval($_POST['usuario']);
-    $nombre_provedo = strval($_POST['proveedor']);
-    $nombre_emplead = strval($_POST['empleado']);
-    $ide_sugerido   = strval($_POST['id_sugerido']);
     $fecha_creacion = strval($_POST['fecha']);
-    $ides			= $_POST["ides"];                   //array
-    $cantidad_pedid = $_POST["pedidos"];                //array
+    $id_sugerido   = strval($_POST['id_sugerido']);
 
+    $ides_detalle	= $_POST["ides_detalle"];   //array
+    $cantidad_pedid = $_POST["pedidos"];        //array
 
-    $ides_productos = $ides;
-    $precio_productos = array();
+    for ($i = 0; $i < count($ides_detalle); $i++) { 
 
-    foreach ($ides_productos as $valor) {
-        $consulta = mysqli_query($conexion, "SELECT  `precio_producto` FROM `producto` WHERE `estado` = 'activo' AND `id_producto` = $valor") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
+        $consulta = mysqli_query($conexion, "UPDATE `detalle_sugerido` SET `pedido_sugerido` = '$cantidad_pedid[$i]' WHERE `id_detalle` = '$ides_detalle[$i]' AND `id_sugerido1` = '$id_sugerido'") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
 
-        while (($fila = mysqli_fetch_array($consulta))!=NULL) {
-            array_push($precio_productos, $fila['precio_producto']);
-
-        }
     }
+
     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-
-    $tamanio_ = count($ides_productos); //obtenemos la cantidad exacta de productos
-
-/*
-    
-    $id_sugerido
-    $ides_productos
-    $cantidad_pedid
-    $precio_productos -> NULL
-    $precio_total -> $cantidad_pedid * $precio_productos
-*/
-    $costo_total = 0;
-    for($i = 0 ; $i < $tamanio_ ; $i++){
-        
-        $precio_total = abs($cantidad_pedid[$i]) * $precio_productos[$i];
-        $costo_total += $precio_total;
-        
-        $consulta = mysqli_query($conexion, "UPDATE `detalle_sugerido` SET `pedido_sugerido` = '$cantidad_pedid[$i]',`precio_total_pedido` = '$precio_total' WHERE `id_sugerido1` = '$ide_sugerido' AND `id_producto2` = '$ides_productos[$i]' AND `estado` = 'activo'") or die ("Error al actualizar: no se obtuvo los datos de los productos en pedidos");
-    }
-    //mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-
-
-    $consulta = mysqli_query($conexion, "UPDATE `sugerido` SET `total_global_pedido`='$costo_total',`pedido_proxima_sugerido`='$fecha_creacion',`nombre_empleado_provedor_sug`='$nombre_emplead' WHERE `id_sugerido` = '$ide_sugerido' AND `estado` = 'activo'") or die ("Error al actualizar: no se obtuvo la el la informacion de los productos");
-
-    //mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-    
 ?>

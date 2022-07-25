@@ -69,6 +69,24 @@ function myFunctionTabla() {
     }       
   }
 }
+function myFunctionTabla2() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput2");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable2");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
 function show1() {
   var rowId = event.target.parentNode.parentNode.id;
   //this gives id of tr whose button was clicked
@@ -82,4 +100,19 @@ function show1() {
   inputNombre.value = name;
   document.getElementById('respuesta1').style.display='none';
   $('#enviar1').trigger('click');
+}
+
+function show2() {
+  var rowId = event.target.parentNode.parentNode.id;
+  //this gives id of tr whose button was clicked
+  var data = document.getElementById(rowId).querySelectorAll(".row-data"); 
+  /*returns array of all elements with 
+  "row-data" class within the row with given id*/
+
+  var name = data[0].innerHTML;
+
+  var inputNombre = document.getElementById("prove_sugerido2");
+  inputNombre.value = name;
+  $('#enviar7_6').trigger('click');
+
 }
