@@ -18,10 +18,11 @@
     $existe_proveedor = false;
                      
     //verificamos si existe algun registro de sugeridos para ese proveedor
-    $consulta = mysqli_query($conexion, "SELECT `id_sugerido` FROM `sugerido` WHERE `estado` = 'activo' AND `nombre_provedor_sugerido` = '$name_proveedor' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
+    $consulta = mysqli_query($conexion, "SELECT `id_sugerido`,`pedido_proxima_sugerido` FROM `sugerido` WHERE `estado` = 'activo' AND `nombre_provedor_sugerido` = '$name_proveedor' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
                         
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         $existe_proveedor = true;
+        $fech = $fila['pedido_proxima_sugerido'];
         break;
     }
     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
@@ -33,9 +34,9 @@
         <fieldset>
         <form id="form_crear_sugerido2" method="POST">
         Fecha para el próximo pedido
-        <input type="date" name="fecha"/>
+        <input type="date" name="fecha" value="<?php echo $fech ?>"/>
         <legend>Crear Pedido</legend>
-            <table border="1" id="tabla_sugerido" width="100%">
+            <table border="1" class="tabla_sugerido" width="100%">
                     <tr>
                         <th width="5%">Codigo</th>
                         <th>Descripción</th>
@@ -86,7 +87,7 @@
                                 <td><span class="precio"><?php echo $fila['precio_sugerido'] ?></span></td>
                                 <td><?php echo $fila['cantidad_sugerido'] ?></td>
                                 <td><input  name="pedidos[]" type="text" class="puntos" value="<?php echo $fila['pedido_sugerido'] ?>"/></td>
-                                <td><?php echo $total_parcial ?><td>                  
+                                <td><?php echo number_format($total_parcial, 0, ',', '.'); ?><td>                  
                             <?php
                         }
                         mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
@@ -97,7 +98,7 @@
                     <tfoot>
                         <tr>
                             <td style="background-color: #04AA6D; color: white;">Total Factura</td>
-                            <td><?php echo $total_final; ?></td>
+                            <td><?php echo number_format($total_final, 0, ',', '.'); ?></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -150,7 +151,7 @@
         Fecha para el próximo pedido
         <input type="date" name="fecha"/>
         <legend>Crear Pedido</legend>
-            <table border="1" id="tabla_sugerido" width="100%">
+            <table  class="tabla_sugerido" width="100%">
                     <tr>
                         <th width="5%">Codigo</th>
                         <th>Descripción</th>

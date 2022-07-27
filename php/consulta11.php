@@ -73,7 +73,7 @@
         ?>
         <div id="form_presupuestos" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);width:100%;height: 100%;display:none;">
         <form id="menu_presupuestos2" method="POST">
-        <table id="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+        <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
             <tr>
                 <th colspan="4">Presupuesto</th>
                 <th><a class="w3-bar-item w3-button w3-hover-red active" id="clic_cat" onclick="document.getElementById('form_presupuestos').style.display='none'">X</a></th>
@@ -181,7 +181,7 @@
     <form id="actualizar_cat" method="POST">
     <div id="form_cat" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
     
-    <table id="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white" >
+    <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white" >
         <tr>
             <th>Nombre</th>
             <th>Estado</th>

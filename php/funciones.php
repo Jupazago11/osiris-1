@@ -111,12 +111,13 @@ function crear_sugerido($usuario){
 
     <form name="form_seleccionar_prove" id="form_seleccionar_prove" method='post'>
 
-        <input type="text" name="nombre" id="prove_sugerido"/>
+        <input type="hidden" name="nombre" id="prove_sugerido"/>
         <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
-        <table id="myTable">
+        <table class="table_sugerido" id="myTable">
         <tr>
             <th>#</th>
             <th>Nombre</th>
+            <th></th>
             <th></th>
         </tr>
 
@@ -141,7 +142,8 @@ function crear_sugerido($usuario){
             <tr id="<?php echo $contador ?>">
                 <td><?php echo $contador ?></td>
                 <td class="row-data"><?php echo $nombre_provee[$i] ?></td>
-                <td><input type="button"  value="Continuar" onclick="show1()"/></td>
+                <td><input type="button" class="w3-btn w3-green" value="Nuevo" onclick="show1_3();" ><td>
+                <td><input type="button" class="w3-btn w3-teal" value="Continuar" onclick="show1()"/></td>
             </tr>
             <?php
         }
@@ -152,8 +154,10 @@ function crear_sugerido($usuario){
     </table>
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
     <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>
+    <button type="button" id="enviar1_3" style="display: none;"></button>
             
-    <div id="respuesta1" style="position:absolute; top:0;left:0;background:white;width:100%;height: 100%;display:none;">
+    <div id="respuesta1" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
+
 
         
 
@@ -172,39 +176,52 @@ function crear_sugerido($usuario){
                 }
             });
         });
+        $('#enviar1_3').click(function(){
+            $.ajax({
+                url:'../php/consulta1_3.php',
+                type:'POST',
+                data: $('#form_seleccionar_prove').serialize(),
+                success: function(res){
+                    $('#enviar1').trigger('click');
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
     </script>
     <style>
 
-    #myInput {
-    background-image: url('/css/searchicon.png');
-    background-position: 10px 10px;
-    background-repeat: no-repeat;
-    width: 90%;
-    font-size: 16px;
-    padding: 12px 20px 12px 40px;
-    border: 1px solid #ddd;
-    margin-bottom: 12px;
-    }
+        #myInput {
+        background-image: url('/css/searchicon.png');
+        background-position: 10px 10px;
+        background-repeat: no-repeat;
+        width: 90%;
+        font-size: 16px;
+        padding: 12px 20px 12px 40px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        }
 
-    #myTable {
-    border-collapse: collapse;
-    width: 100%;
-    border: 1px solid #ddd;
-    font-size: 18px;
-    }
+        #myTable {
+        border-collapse: collapse;
+        width: 100%;
+        border: 1px solid #ddd;
+        font-size: 18px;
+        }
 
-    #myTable th, #myTable td {
-    text-align: left;
-    padding: 12px;
-    }
+        #myTable th, #myTable td {
+        text-align: left;
+        padding: 12px;
+        }
 
-    #myTable tr {
-    border-bottom: 1px solid #ddd;
-    }
+        #myTable tr {
+        border-bottom: 1px solid #ddd;
+        }
 
-    #myTable tr.header, #myTable tr:hover {
-    background-color: #f1f1f1;
-    }
+        #myTable tr.header, #myTable tr:hover {
+        background-color: #f1f1f1;
+        }
     </style>
     </div>
 <?php
@@ -275,13 +292,14 @@ function crear_pedido2($name_proveedor){
 function ver_pedidos($usuario){
     ?>
     <div>
+    <div id="respuesta4"></div>
     <form id="ver_pedidos" method="POST">
         <fieldset>
         <button type="button" id="enviar4" class="w3-btn w3-red" onclick="document.getElementById('respuesta4').style.display='block'">Ver fechas <i class='far fa-calendar-alt'></i></button>
         <input type="reset" value="Limpiar" class="w3-btn w3-red" onclick="document.getElementById('respuesta4').style.display='none'">
         </fieldset>
     </form>
-    <div id="respuesta4"></div>
+    
     <script>
         $('#enviar4').click(function(){
             $.ajax({
@@ -480,7 +498,7 @@ function menu_producto($usuario){
     ?>
     <div>
     <form id="menu_productos" method="POST"> 
-    <table border="1" id="tabla_sugerido">
+    <table class="tabla_sugerido">
     <tr>
         <th colspan="2">Datos Básicos</th>
         <th colspan="3">Información Tributaria</th>
@@ -813,6 +831,29 @@ function resultados_operativos($usuario){
                 success: function(res){
                     $('#respuesta12').html(res);
                     document.getElementById('form_ro').style.display='block';
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+<?php
+}
+/////////////////////////////////////////////////////////////////////////////////////////
+function caja1($usuario){
+    ?>
+    <button type="button" id="enviarv1" class="w3-btn w3-red" onclick="document.getElementById('respuestav1').style.display='block'"> Vehículos</button>
+
+    <div id="respuestav1" style="display:none; backgroung-color:white;">
+    </div>
+
+    <script>
+        $('#enviarv1').click(function(){
+            $.ajax({
+                url:'../php/consultav1.php',
+                success: function(res){
+                    $('#respuestav1').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

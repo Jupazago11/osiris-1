@@ -13,7 +13,7 @@
     $consulta = mysqli_query($conexion, "SELECT * FROM `personal` WHERE `tipo_usuario_pers` != '5' AND `tipo_usuario_pers` != '6' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
 
     ?>
-        <table id="tabla_sugerido">
+        <table class="tabla_sugerido">
             <tr>
                 <th>#</th>
                 <th>Nombre</th>

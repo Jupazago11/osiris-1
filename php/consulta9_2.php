@@ -13,7 +13,7 @@
 
     ?>
     <form id="actualizar_personal2" method="POST">
-    <table id="tabla_sugerido">
+    <table class="tabla_sugerido">
         <tr>
             <th colspan="12" style="text-align: center;"><h3>Información Personal</h3></th>
         <tr>

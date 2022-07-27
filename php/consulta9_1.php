@@ -22,7 +22,7 @@
     }
     ?>
     <form id="actualizar_personal" method="POST">
-    <table id="tabla_sugerido">
+    <table class="tabla_sugerido">
         <tr>
             <th colspan="9" style="text-align: center;"><h3>Información Laboral</h3></th>
         <tr>
@@ -139,7 +139,7 @@
     <form id="actualizar_cargos" method="POST">
     <div id="form_cargos" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
     
-    <table id="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white" >
+    <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white" >
         <tr>
             <th>Nombre</th>
             <th>Estado</th>

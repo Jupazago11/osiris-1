@@ -128,14 +128,14 @@
         }
         ?>
         <br>
-        <fieldset>
+
         <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta1').style.display='none'">X</a>
         <form id="form_crear_sugerido_p" method="POST">
         <input type="hidden" name="usuario" value="<?php echo $nombre_usuario; ?>">
         <input type="hidden" name="proveedor" value="<?php echo $nombre_prove; ?>">
         <input type="hidden" name="fecha_creacion" value="<?php echo $fecha; ?>">
-        <legend>Crear Sugerido</legend>
-            <table border="1" id="tabla_sugerido" width="100%">
+
+            <table class="tabla_sugerido" width="100%" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
                 <tr>
                     <th width="5%">#</th>
                     <th>Descripción</th>
@@ -143,7 +143,7 @@
                     <th>Toma Física</th>
                     <th>Sugerido</th>
                     <th>Total</th>
-                    <th></th>
+                    <th><a class="w3-bar-item w3-button w3-hover-red active" onclick="document.getElementById('respuesta7_6').style.display='none'">X</a></th>
                 </tr>
                 <?php
                 //Consulta a la base de datos en la tabla producto
@@ -179,10 +179,9 @@
                     </tr>
                 <tfoot>
                     <tr>
-                        <td style="background-color: #04AA6D; color: white;">Total Factura</td>
-                        <td class="final"><?php echo number_format($total_factura, 0, ',', '.') ?></td>
-                        <td></td>
-                        <td></td>
+                        <td style="background-color: #04AA6D; color: white;" colspan="2">Total Factura</td>
+                        <td><?php echo number_format($total_factura, 0, ',', '.') ?></td>
+                        <td><button type="button" id="enviar7_7" class="w3-btn w3-teal" onclick="document.getElementById('respuesta7_7').style.display='block'">Guardar</button></td>
                         <td></td>
                         <td></td>
                         <td></td>
@@ -190,11 +189,7 @@
                 </tfoot>
                 </tbody>
                 </table>
-                <br><br>
-                <br><br>
 
-                <button type="button" id="enviar7_7" class="w3-btn w3-teal" onclick="document.getElementById('respuesta7_7').style.display='block'">Guardar</button><br><br>
-            </fieldset>
 
             <div id="respuesta7_7"></div>
 
@@ -210,7 +205,7 @@
                             'Guardado Exitoso',
                             'success'
                             );
-
+                            $('#enviar7_6').trigger('click');
                         },
                         error: function(res){
                             alert("Problemas al tratar de enviar el formulario");

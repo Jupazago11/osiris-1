@@ -15,11 +15,11 @@
     $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` WHERE `estado` != ''") or die ("Error al consultar: existencia del proveedor");
 
 ?>
-<input type="text" id="myInput2" onkeyup="myFunctionTabla2()" placeholder="Nombrel del proveedor.." title="Type in a name">
+    
     <form id="actualizar_proveedores" method="POST">
     
 
-    <table id="myTable2">
+    <table class="tabla_sugerido" id="myTable2">
     <tr>
         <th>#</th>
         <th>Proveedor</th>
@@ -94,17 +94,21 @@
     <button type="button" id="enviar7_5" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta7_2').style.display='block'">Ver Proveedores</button>
     </form>
 
-    <br>
     <form id="actualizar_proveedores2" method="POST">
         <input type="hidden" name="nombre" id="prove_sugerido2"/>
         <input type="hidden" name="usuario" value="<?php echo $nombre_usuario ?>"/>
-        <button type="button" id="enviar7_6" class="w3-btn w3-green" onclick="document.getElementById('respuesta7_6').style.display='block'">Continuar <i class='fas fa-edit' style='font-size:24px;color:white' style="visibility:hidden;"></i></button>
+        <button type="button" id="enviar7_6" class="w3-btn w3-green" onclick="document.getElementById('respuesta7_6').style.display='block'" style="visibility:hidden;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></i></button>
     </form>
 
     
 
     <div id="respuesta7_2"></div>
-    <div id="respuesta7_6"></div>
+    <div id="respuesta7_6" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
+
+    
+
+
+    </div>
 
     <script>
     $('#enviar7_2').click(function(){

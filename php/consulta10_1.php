@@ -13,7 +13,7 @@
 
     ?>
     <form id="actualizar_vehiculos" method="POST">
-    <table id="tabla_sugerido">
+    <table class="tabla_sugerido">
         <tr>
             <th colspan="11" style="text-align: center;"><h3>Información Vehicular</h3></th>
         <tr>

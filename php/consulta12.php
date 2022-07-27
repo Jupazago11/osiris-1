@@ -61,7 +61,7 @@
         ?>
         <div id="form_ro" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);width:100%;height: 100%;display:none;">
         <form id="menu_ro" method="POST">
-        <table id="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;overflow:auto;margin-left: auto;  margin-right: auto;background-color:white; font-size:14px">
+        <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;overflow:auto;margin-left: auto;  margin-right: auto;background-color:white; font-size:14px">
             <tr>
                 <th colspan="11"><?php echo $year ?></th>
                 <th><a class="w3-bar-item w3-button w3-hover-red active" onclick="document.getElementById('form_ro').style.display='none'">X</a></th>

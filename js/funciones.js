@@ -69,6 +69,7 @@ function myFunctionTabla() {
     }       
   }
 }
+/*
 function myFunctionTabla2() {
   var input, filter, table, tr, td, i, txtValue;
   input = document.getElementById("myInput2");
@@ -87,6 +88,7 @@ function myFunctionTabla2() {
     }       
   }
 }
+*/
 function show1() {
   var rowId = event.target.parentNode.parentNode.id;
   //this gives id of tr whose button was clicked
@@ -100,6 +102,19 @@ function show1() {
   inputNombre.value = name;
   document.getElementById('respuesta1').style.display='none';
   $('#enviar1').trigger('click');
+}
+function show1_3() {
+  var rowId = event.target.parentNode.parentNode.id;
+  //this gives id of tr whose button was clicked
+  var data = document.getElementById(rowId).querySelectorAll(".row-data"); 
+  /*returns array of all elements with 
+  "row-data" class within the row with given id*/
+
+  var name = data[0].innerHTML;
+
+  var inputNombre = document.getElementById("prove_sugerido");
+  inputNombre.value = name;
+  $('#enviar1_3').trigger('click');
 }
 
 function show2() {
@@ -116,3 +131,23 @@ function show2() {
   $('#enviar7_6').trigger('click');
 
 }
+
+$(function () {
+  $(document).on('click', '.borrar', function (event) {
+      event.preventDefault();
+      $(this).closest('tr').remove();
+      $("#codigo_producto").focus();  //Poner el cursor en el input
+  });
+});
+
+$('#tbodyform')
+.on('input', '.cantidad', function() {
+    
+    var $input = $(this), // input.cantidad
+        cantidad = parseInt($input.val(), 10), // valor de input.cantidad
+        $tr = $input.closest('tr'), // fila del input.cantidad
+        precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
+        $total = $tr.find('.total'); // elemento span.total
+    
+    $total.text(precio * cantidad); // reseteamos el valor del span.total
+});

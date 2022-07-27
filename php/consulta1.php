@@ -31,7 +31,8 @@
     //Consulta a la base de datos en la tabla proveedor
     $consulta = mysqli_query($conexion, "SELECT `id_sugerido` 
     FROM `sugerido` 
-    WHERE `fecha_sugerido` = '$fecha' AND `nombre_provedor_sugerido` = '$nombre_prove' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
+    WHERE `nombre_provedor_sugerido` = '$nombre_prove' AND `estado` = 'activo'
+    ORDER BY `id_sugerido` DESC LIMIT 1") or die ("Error al consultar: existencia del proveedor");
                         
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         $id_sugerido = $fila['id_sugerido'];
@@ -41,10 +42,6 @@
 
     $total_factura = 0;
     $total_parcial = 0;
-
-
-
-
 
     if($existe == false){
         //Consulta a la base de datos para obtener el ide del usuario activo
@@ -57,14 +54,14 @@
 
         
         //Crearemos un sugerido
-        $consulta = mysqli_query($conexion, "INSERT INTO `sugerido`(`id_pers2`, `nombre_provedor_sugerido`, `fecha_sugerido`, `estado`) 
+        $consulta = mysqli_query($conexion, "INSERT INTO `sugerido`(`id_pers2`, `nombre_provedor_sugerido`, `fecha_sugerido`, `estado`)
         VALUES ('$id_persona', '$nombre_prove', '$fecha', 'activo')") or die ("Error al consultar: no se obtuvo la identificacion del usuario");
 
 
         //ahora lo capturamos
         $consulta = mysqli_query($conexion, "SELECT `id_sugerido` 
-        FROM `sugerido` 
-        WHERE `fecha_sugerido` = '$fecha' AND `nombre_provedor_sugerido` = '$nombre_prove' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
+        FROM `sugerido`
+        WHERE `nombre_provedor_sugerido` = '$nombre_prove' AND `estado` = 'activo'") or die ("Error al consultar: existencia del proveedor");
                             
         while (($fila = mysqli_fetch_array($consulta))!=NULL){
             $id_sugerido = $fila['id_sugerido'];
@@ -75,67 +72,88 @@
         //obtenemos los productos del proveedor
         $consulta = mysqli_query($conexion, "SELECT `id_producto`,`precio_de_compra` FROM `producto` WHERE `estado` = 'activo' AND `id_proveedor1` = '$id_prove'") or die ("Error al consultar: no se obtuvo la identificacion del usuario");
 
-        
+        $id     = array();
+        $precio = array();
+        $conta  = 0;
         while(($fila = mysqli_fetch_array($consulta))!=NULL){
-            $id = $fila['id_producto'];
-            $precio = $fila['precio_de_compra'];
-
-            mysqli_query($conexion, "INSERT INTO `detalle_sugerido`(`id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`,`precio_sugerido`,`estado`)  
-            VALUES ('$id_sugerido','$id','0','0','$precio','activo')") or die ("Error al consultar: no se obtuvo la identificacion del usuario");
+            $conta++;
+            array_push($id ,     $fila['id_producto']);
+            array_push($precio , $fila['precio_de_compra']);
         }
         mysqli_free_result($consulta);
 
-        echo "<script>$('#enviar1').trigger('click');</script>";
-        mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
+        for ($i=0; $i < $conta; $i++) { 
+            mysqli_query($conexion, "INSERT INTO `detalle_sugerido`(`id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`,`precio_sugerido`,`estado`)  
+            VALUES ('$id_sugerido','$id[$i]','0','0','$precio[$i]','activo')") or die ("Error al consultar: no se obtuvo la identificacion del usuario");
+        }
+        unset($id);
+        unset($precio);
+    }
 
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    }else{
+    if($existe == true){
         //Si ya existe un registro para ese día
 
         //primero verificamos que todos los productos del proveedor se encuentren en el array
         $productos = array();
-        $ides = array();
-        $precios = array();
-        $consulta = mysqli_query($conexion, "SELECT `nombre_producto`, `id_producto`, `precio_de_compra` 
+
+        $consulta  = mysqli_query($conexion, "SELECT `nombre_producto` 
         FROM `producto` 
         WHERE `estado` = 'activo' AND `id_proveedor1` = '$id_prove'") or die ("Error al consultar: ver datos generar sugerido");
 
         while (($fila = mysqli_fetch_array($consulta))!=NULL){
             array_push($productos, $fila['nombre_producto']);
-            array_push($ides, $fila['id_producto']);
-            array_push($precios, $fila['precio_de_compra']);
+
         }
         mysqli_free_result($consulta);
-
-        $productos2 = array();
+/*
         $consulta = mysqli_query($conexion, "SELECT producto.nombre_producto
         FROM `detalle_sugerido` 
         INNER JOIN `producto` ON producto.id_producto = detalle_sugerido.id_producto2
         INNER JOIN `sugerido` ON sugerido.id_sugerido = detalle_sugerido.id_sugerido1
         WHERE sugerido.id_sugerido = '$id_sugerido';");
 
+        $productos2 = array();
         while (($fila = mysqli_fetch_array($consulta))!=NULL){
             array_push($productos2, $fila['nombre_producto']);
         }
         mysqli_free_result($consulta);
-
-        for ($i=0; $i < count($productos); $i++){ 
-
-            if(in_array($productos[$i], $productos2) == false){
+        for ($i=0; $i < count($productos); $i++) { 
+            if(in_array($productos[$i], $productos2)){
+                continue;
+            }else{
                 $consulta = mysqli_query($conexion, "INSERT INTO `detalle_sugerido`(`id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`,`precio_sugerido`,`estado`)  
                 VALUES ('$id_sugerido','$ides[$i]','0','0','$precios[$i]','activo')");
             }
         }
-        ?>
-        <br>
-        <fieldset>
-        <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta1').style.display='none'">X</a>
-        <form id="form_crear_sugerido_2" method="POST">
-        <input type="hidden" name="usuario" value="<?php echo $nombre_usuario; ?>">
-        <input type="hidden" name="proveedor" value="<?php echo $nombre_prove; ?>">
-        <input type="hidden" name="fecha_creacion" value="<?php echo $fecha; ?>">
-        <legend>Crear Sugerido</legend>
-            <table border="1" id="tabla_sugerido" width="100%">
+        unset($productos);
+        unset($productos2);
+        unset($ides);
+        unset($precios);
+        */
+
+        $consulta = mysqli_query($conexion, "SELECT detalle_sugerido.id_detalle, producto.nombre_producto, producto.precio_de_compra, detalle_sugerido.inventario_sugerido, detalle_sugerido.cantidad_sugerido
+        FROM `detalle_sugerido` 
+        INNER JOIN `producto` ON producto.id_producto = detalle_sugerido.id_producto2
+        INNER JOIN `sugerido` ON sugerido.id_sugerido = detalle_sugerido.id_sugerido1
+        WHERE sugerido.id_sugerido = '$id_sugerido';") or die ("Error al consultar: ver datos generar sugerido");
+
+        $contador1 = 0;
+        while (($fila = mysqli_fetch_array($consulta))!=NULL){
+            $contador1++;
+        }
+
+        if($contador1 <= count($productos)){
+
+            ?>
+            <br>
+            <fieldset>
+            <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta1').style.display='none'">X</a>
+            <form id="form_crear_sugerido_2" method="POST">
+            <input type="hidden" name="usuario" value="<?php echo $nombre_usuario; ?>">
+            <input type="hidden" name="proveedor" value="<?php echo $nombre_prove; ?>">
+            <input type="hidden" name="fecha_creacion" value="<?php echo $fecha; ?>">
+            <table class="tabla_sugerido" width="100%" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
                 <tr>
                     <th width="5%">#</th>
                     <th>Descripción</th>
@@ -160,19 +178,19 @@
                     $total_factura += $total_parcial;
                     ?>
                     <tr>
-                        <tbody>
-                            <input type="hidden" name="id_sugerido" value="<?php echo $id_sugerido ?>"/>
-                            <input type="hidden" name="ides[]" value="<?php echo $fila['id_detalle'] ?>"/>
-                        <td><?php echo $contador ?></td>
-                        <td><?php echo ucwords($fila['nombre_producto']) ?></td>
-                        <td class="precios"><span class="precio"><?php echo number_format($fila['precio_de_compra'], 0, ',', '.') ?></span></td>
-                        <td><input type="text" class="puntos" name="existencias[]" style="width: 100px" value="<?php echo $fila['inventario_sugerido'] ?>"/></td>
-                        <td class="cantidades"><input  name="sugeridos[]" type="text" class="cantidad" style="width: 100px" value="<?php echo $fila['cantidad_sugerido'] ?>" class="puntos"/></td>
-                        <td><?php echo number_format($total_parcial, 0, ',', '.') ?><td>                  
+                    <tbody>
+                        <input type="hidden" name="id_sugerido" value="<?php echo $id_sugerido ?>"/>
+                        <input type="hidden" name="ides[]" value="<?php echo $fila['id_detalle'] ?>"/>
+                    <td><?php echo $contador ?></td>
+                    <td><?php echo ucwords($fila['nombre_producto']) ?></td>
+                    <td class="precios"><span class="precio"><?php echo number_format($fila['precio_de_compra'], 0, ',', '.') ?></span></td>
+                    <td><input type="text" class="puntos" name="existencias[]" style="width: 100px" value="<?php echo $fila['inventario_sugerido'] ?>"/></td>
+                    <td class="cantidades"><input  name="sugeridos[]" type="text" class="cantidad" style="width: 100px" value="<?php echo $fila['cantidad_sugerido'] ?>" class="puntos"/></td>
+                    <td><?php echo number_format($total_parcial, 0, ',', '.') ?><td>                  
                     <?php
                 }
                 mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-
+    
                 ?>
                     <tr>
                         <td colspan="7"></td>
@@ -184,43 +202,51 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td></td>
+                        <td><button type="button" id="enviar1_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1_2').style.display='block'">Guardar</button></td>
                         <td></td>
                     </tr>
                 </tfoot>
                 </tbody>
                 </table>
-                <br><br>
-                <br><br>
-
-                <button type="button" id="enviar1_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1_2').style.display='block'">Guardar</button><br><br>
-            </fieldset>
-
-            <div id="respuesta1_2"></div>
-
-            <script>
-                //<input type="date" name="fecha"/>
-                $('#enviar1_2').click(function(){
-                    $.ajax({
-                        url:'../php/consulta1_2.php',
-                        type:'POST',
-                        data: $('#form_crear_sugerido_2').serialize(),
-                        success: function(res){
-                            Swal.fire(
-                            '¡Muy bien!',
-                            'Guardado Exitoso',
-                            'success'
-                            )
-                            $('#enviar1').trigger('click')
-                        },
-                        error: function(res){
-                            alert("Problemas al tratar de enviar el formulario");
-                        }
+    
+    
+                <div id="respuesta1_2"></div>
+    
+                <script>
+                    //<input type="date" name="fecha"/>
+                    $('#enviar1_2').click(function(){
+                        $.ajax({
+                            url:'../php/consulta1_2.php',
+                            type:'POST',
+                            data: $('#form_crear_sugerido_2').serialize(),
+                            success: function(res){
+                                Swal.fire(
+                                '¡Muy bien!',
+                                'Guardado Exitoso',
+                                'success'
+                                )
+                                $('#enviar1').trigger('click')
+                            },
+                            error: function(res){
+                                alert("Problemas al tratar de enviar el formulario");
+                            }
+                        });
                     });
-                });
-            </script>
+                    
+                </script>
+    
+            </form>
+                <?php
 
-        </form>
+
+
+        }else{
+            ?>
+            <script>
+                document.getElementById('respuesta1').style.display='none';
+                    
+            </script>
             <?php
+        }      
     }
 ?>

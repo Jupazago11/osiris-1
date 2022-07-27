@@ -10,6 +10,7 @@
 
     $nombre_usuario = strval($_POST['usuario']);
     $nombre_provedo = strval($_POST['proveedor']);
+    $id_sugerido    = strval($_POST['id_sugerido']);
 
     date_default_timezone_set('America/Bogota');
     $fecha_creacion        = date('Y-m-d', time());

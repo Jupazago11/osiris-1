@@ -68,7 +68,7 @@
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
                     <a class="columna w3-red" onclick="ocultarDivs1('cont1_1')"><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"><br>Crea Sugerido</a>
-                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4')"><img src="../iconos/proximo.png" alt="proximo" width="40%" height="40%"><br>Ver próximos pedidos</a>
+                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4');$('#enviar4').trigger('click')"><img src="../iconos/proximo.png" alt="proximo" width="40%" height="40%"><br>Ver próximos pedidos</a>
                     <?php
                     if($tipo_de_cuenta == 1){
                         ?>
@@ -219,32 +219,36 @@
     </div>
     <div id="cont4" style="display:none;">
         <div class="w3-container" id="ventas"  style="display:none;">
-            <a class="w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs0()">_</a>
             <div class="menu">
-                <a class="columna w3-bar-item w3-button w3-hover-green" onclick="ocultarDivs4('cont4_1')">txt</a>
-                <a class="columna w3-bar-item w3-button w3-hover-teal" onclick="ocultarDivs4('cont4_2')">txt</a>
-                <a class="columna w3-bar-item w3-button w3-hover-blue" onclick="ocultarDivs4('cont4_3')">txt</a>
-                <a class="columna w3-bar-item w3-button w3-hover-red" onclick="ocultarDivs4('cont4_4')">txt</a>
+                <a class="columna w3-teal"  onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')">Caja 1</a>
+                <a class="columna w3-green" onclick="ocultarDivs4('cont4_2'); $('#enviarv2').trigger('click')">Caja 2</a>
+                <a class="columna w3-blue"  onclick="ocultarDivs4('cont4_3'); $('#enviarv3').trigger('click')">Caja 3</a>
+                <a class="columna w3-red"   onclick="ocultarDivs4('cont4_4'); $('#enviarv4').trigger('click')">Caja 4</a>
+                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0()">X</a>
             </div>
 
             <div id="cont4_1" style="display:none;">
                 <div class="w3-container">
-                    <?php   crear_sugerido($usuario);   ?>
+                    <?php   caja1($usuario);   ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont4_1').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont4_2" style="display:none;">
                 <div class="w3-container">
                     <?php   //crear_pedido($usuario);     ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont4_2').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont4_3" style="display:none;">
                 <div class="w3-container">
                     <?php   //crear_pedido2($usuario);    ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont4_3').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont4_4" style="display:none;">
                 <div class="w3-container">
                     <?php   //ver_pedidos($usuario);      ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont4_4').style.display='none'">X</a>
                 </div>
             </div>
         </div>
@@ -300,6 +304,11 @@ function ocultarDivs(no_oculta){
             break;
         case "cont4":
             document.getElementById("cont4").style.display='block';
+            document.getElementById("ventas").style.display='block';
+            document.getElementById("cont4_1").style.display='none';
+            document.getElementById("cont4_2").style.display='none';
+            document.getElementById("cont4_3").style.display='none';
+            document.getElementById("cont4_4").style.display='none';
             break;
         default:
           // code block
@@ -310,6 +319,7 @@ function ocultarDivs0(){
     document.getElementById("pedidos").style.display='none';
     document.getElementById("empresa").style.display='none';
     document.getElementById("control_domiciliario").style.display='none';
+    document.getElementById("ventas").style.display='none';
 
 }
 function ocultarDivs1(no_oculta){
@@ -396,5 +406,56 @@ function ocultarDivs3(no_oculta){
             break;
     }
 }
+function ocultarDivs4(no_oculta){
+    document.getElementById("cont4_1").style.display='none';
+    document.getElementById("cont4_2").style.display='none';
+    document.getElementById("cont4_3").style.display='none';
+    document.getElementById("cont4_4").style.display='none';
+    switch(no_oculta) {
+        //Pedidos
+        case "cont4_1":
+            document.getElementById("cont4_1").style.display='block';
+            break;
+        case "cont4_2":
+            document.getElementById("cont4_2").style.display='block';
+            break;
+        case "cont4_3":
+            document.getElementById("cont4_3").style.display='block';
+            break;
+        case "cont4_4":
+            document.getElementById("cont4_4").style.display='block';
+            break;
+        default:
+          // code block
+            break;
+    }
+}
+
+
+$('#tbodyform')
+.on('input', '.cantidad', function() {
+    
+    var $input = $(this), // input.cantidad
+        cantidad = parseInt($input.val(), 10), // valor de input.cantidad
+        $tr = $input.closest('tr'), // fila del input.cantidad
+        precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
+        $total = $tr.find('.total'); // elemento span.total
+    
+    $total.text(precio * cantidad); // reseteamos el valor del span.total
+});
+
+function multi2() {
+    var data = [];
+
+    $("td.total").each(function(){
+        data.push(parseFloat($(this).text()));
+    });
+
+
+    var suma = data.reduce(function(a,b){ return a+b; },0);
+
+    $('.final_v1_1').html(suma);
+}
+
 </script>
 </html>

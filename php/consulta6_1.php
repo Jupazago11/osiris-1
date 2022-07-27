@@ -43,7 +43,7 @@
 
     ?>
     <form id="actualizar_cuentas_cobro" method="POST">
-        <table border="1" id="tabla_sugerido" width="100%">
+        <table class="tabla_sugerido" width="100%">
         <tr>
             <th>#</th>
             <th>Empresa</th>

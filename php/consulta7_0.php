@@ -13,7 +13,7 @@
 
 ?>
     <form id="actualizar_proveedores2" method="POST">
-    <table id="tabla_sugerido" width="100%">
+    <table class="tabla_sugerido" width="100%">
     <tr>
         <th>#</th>
         <th>Proveedor</th>

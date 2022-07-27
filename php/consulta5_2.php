@@ -42,7 +42,7 @@
         ?>
         <p id="reloj"></p>
         <form id="configuracion" method="POST">
-        <table id="tabla_sugerido">
+        <table class="tabla_sugerido">
         <tr>
             <th>#</th>
             <th>Personal</th>
