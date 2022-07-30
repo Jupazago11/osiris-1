@@ -156,7 +156,7 @@ function crear_sugerido($usuario){
     <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>
     <button type="button" id="enviar1_3" style="display: none;"></button>
             
-    <div id="respuesta1" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
+    <div id="respuesta1" class="ventana">
 
 
         
@@ -843,15 +843,21 @@ function resultados_operativos($usuario){
 /////////////////////////////////////////////////////////////////////////////////////////
 function caja1($usuario){
     ?>
-    <button type="button" id="enviarv1" class="w3-btn w3-red" onclick="document.getElementById('respuestav1').style.display='block'"> Vehículos</button>
+    <button type="button" id="enviarv1" class="w3-btn w3-red" onclick="document.getElementById('respuestav1').style.display='block'" style="display:none;"></button>
 
-    <div id="respuestav1" style="display:none; backgroung-color:white;">
+    <form id="usuario_caja1" method="POST">
+        <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
+    </form>
+
+    <div id="respuestav1" style="display:none; backgroung-color:white;overflow-y: scroll">
     </div>
 
     <script>
         $('#enviarv1').click(function(){
             $.ajax({
                 url:'../php/consultav1.php',
+                type:'POST',
+                data: $('#usuario_caja1').serialize(),
                 success: function(res){
                     $('#respuestav1').html(res);
                 },

@@ -8,7 +8,6 @@
     }
     $conexion = conectar();                     //Obtenemos la conexion
 
-    echo "Hola";
 
     $id_presu_de    = $_POST['id_presu_de'];
     $nombre         = $_POST['nombre'];

@@ -134,20 +134,42 @@ function show2() {
 
 $(function () {
   $(document).on('click', '.borrar', function (event) {
-      event.preventDefault();
-      $(this).closest('tr').remove();
-      $("#codigo_producto").focus();  //Poner el cursor en el input
+    multi2();
+    event.preventDefault();
+    $(this).closest('tr').remove();
+    $("#codigo_producto").focus();  //Poner el cursor en el input
   });
 });
 
 $('#tbodyform')
 .on('input', '.cantidad', function() {
     
-    var $input = $(this), // input.cantidad
-        cantidad = parseInt($input.val(), 10), // valor de input.cantidad
-        $tr = $input.closest('tr'), // fila del input.cantidad
-        precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
-        $total = $tr.find('.total'); // elemento span.total
+  var $input = $(this), // input.cantidad
+    cantidad = parseInt($input.val(), 10), // valor de input.cantidad
+    $tr = $input.closest('tr'), // fila del input.cantidad
+    precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
+    $total = $tr.find('.total'); // elemento span.total
+  
+  $total.text(precio * cantidad); // reseteamos el valor del span.total
+});
+
+function ocultar_menu_venta() {
+  var x = document.getElementById("venta_menu");
+  if (x.style.display === "block") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "block";
+  }
+}
+
+$('#tbodyform2')
+.on('input', '.cantidad', function() {
     
-    $total.text(precio * cantidad); // reseteamos el valor del span.total
+  var $input = $(this), // input.cantidad
+    cantidad = parseInt($input.val(), 10), // valor de input.cantidad
+    $tr = $input.closest('tr'), // fila del input.cantidad
+    precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
+    $total = $tr.find('.total3'); // elemento span.total
+  
+  $total.text(precio * cantidad); // reseteamos el valor del span.total
 });

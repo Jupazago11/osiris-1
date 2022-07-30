@@ -8,52 +8,108 @@
     }
     $conexion = conectar();                     //Obtenemos la conexion
 
+    $usuario    = $_POST['usuario'];
+
+
+    $consulta = mysqli_query($conexion, "SELECT `nombre_pers` 
+    FROM `personal` 
+    WHERE `user_pers` = '$usuario'") or die ("Error al update: presupuesto");
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $nombre_pers = $fila['nombre_pers'];
+    }
+    mysqli_free_result($consulta);
     ?>
-    <div>
-        <form id="form_ventas_v1_1" method="POST">
-            <legend>Caja 1</legend>
-            <input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"><br><br>
-            <button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button>
-        </form>
 
-    
+
+    <div class="venta_header">
         <form id="form_caja_v1_1" method="POST">
-        <table class="tabla_sugerido" id="tabla_v1_1">
-            <tr>
-                <th>Header</th>
-            </tr>
+            <table class="tabla_sugerido" id="tabla_v1_1" border="1">
+                <tr>
+                    <th width="25%">Nombre</th>
+                    <th width="15%">Proveedor</th>
+                    <th width="15%">Costo</th>
+                    <th width="20%">Cantidad</th>
+                    <th width="15%">Total producto </th>
+                    <th width="10%"><img src="../iconos/opciones.png" onclick="ocultar_menu_venta();" width="50px" height="50px"></th>
+                </tr>
+            </table>
+    </div>
+    <div class="venta_superior">
+            <table style="font-size: 18px">
+                <tbody id="tbodyform">
+                <tr id="respuestav1_1" name="total">
 
-            <tbody id="tbodyform">
-            <tr id="respuestav1_1" name="total">
-                    
-            </tr>
-            </tbody>
-
-            <tfoot>
-            <tr>
-                <td>Total</td>
-                <td class="final_v1_1"></td>
-            </tr>
-            </tfoot>
-        </table>
-        <div id="precio_total_v1_1"></div>
+                </tr>
+                </tbody>
+            </table>
+            <div id="precio_total_v1_1">
+            </div>
         </form>
 
     </div>
+        
+    <div class="venta_inferior" style="">
+        <form id="form_ventas_v1_1" method="POST">
+            <table border="0" class="tabla_sugerido">
+                <tr>
+                    <td width="33%"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"></td>
+                    <td width="33%"><button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button></td>
+                    <th width="33%">Total: <span id="final_v1_1">0</span></th>
+                </tr>
+                <tr style="background-color:#dddddd">
+                    <td><?php echo ucwords($nombre_pers) ?></td>
+                    <td></td>
+                    <td><img src="../iconos/domicilios.png" width="60px" height="60px">
+                        <img src="../iconos/caja-registradora.png" id="Enviarv1_2" width="60px" height="60px" onclick="document.getElementById('respuesta_cuadre_caja').style.display='block'"></td>
+                </tr>
+                <tr></tr>
+            </table>
+            
+        </form>
+    </div>
+    <div id="venta_menu">
+        <img src="../iconos/add-contact.png" width="60px" height="60px">
+        <img src="../iconos/printer.png"     width="60px" height="60px">
+        <img src="../iconos/presupuesto.png" width="60px" height="60px">
+        <img src="../iconos/trash-bin.png"   width="60px" height="60px">
+        <img src="../iconos/presupuesto.png" width="60px" height="60px"><br>
+        <img src="../iconos/presupuesto.png" width="60px" height="60px">
+        <img src="../iconos/presupuesto.png" width="60px" height="60px">
+        <img src="../iconos/presupuesto.png" width="60px" height="60px">
+        <img src="../iconos/presupuesto.png" width="60px" height="60px">
+        <img src="../iconos/presupuesto.png" width="60px" height="60px">
+    </div>
+
+    <div id="respuesta_cuadre_caja" class="ventana">
+        
+    </div>
+
     <script>
         $('#Enviarv1_1').click(function(){
-                $.ajax({
-                    url:'../PHP/consultav1_1.php',
-                    type:'POST',
-                    data: $('#form_ventas_v1_1').serialize(),
-                    success: function(res){
-                        $('#respuestav1_1').append(res);   //Append para agregar nuevo
-                    },
-                    error: function(res){
-                        alert("Problemas al tratar de enviar el formulario productos en facturación");
-                    }
-                });
+            $.ajax({
+                url:'../PHP/consultav1_1.php',
+                type:'POST',
+                data: $('#form_ventas_v1_1').serialize(),
+                success: function(res){
+                    $('#respuestav1_1').append(res);   //Append para agregar nuevo
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario productos en facturación");
+                }
             });
+        });
+        $('#Enviarv1_2').click(function(){
+            $.ajax({
+                url:'../PHP/consultav1_2.php',
+                success: function(res){
+                    $('#respuesta_cuadre_caja').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al mostrar cuadre de caja");
+                }
+            });
+        });
     </script>
 
     <?php

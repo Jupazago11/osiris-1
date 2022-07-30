@@ -454,7 +454,22 @@ function multi2() {
 
     var suma = data.reduce(function(a,b){ return a+b; },0);
 
-    $('.final_v1_1').html(suma);
+
+    $('#final_v1_1').html(new Intl.NumberFormat('de-DE').format(suma));
+}
+
+function multi3() {
+    var data = [];
+
+    $("td.total3").each(function(){
+        data.push(parseFloat($(this).text()));
+    });
+
+
+    var suma = data.reduce(function(a,b){ return a+b; },0);
+
+
+    $('#total_cuadre3').html(new Intl.NumberFormat('de-DE').format(suma));
 }
 
 </script>
