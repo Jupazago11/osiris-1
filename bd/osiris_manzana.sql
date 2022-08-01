@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 30-07-2022 a las 07:34:57
+-- Tiempo de generación: 02-08-2022 a las 00:49:06
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -98,6 +98,37 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (9, NULL, 'pacho', NULL, NULL, NULL, 'activo'),
 (10, NULL, 'jairo', NULL, NULL, NULL, 'activo'),
 (11, NULL, 'Jaime R.h', NULL, NULL, NULL, 'activo');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `cuadre_caja`
+--
+
+CREATE TABLE `cuadre_caja` (
+  `id_cuadre_caja` int(11) NOT NULL,
+  `descripcion_cuadre` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `costo_cuadre` int(11) DEFAULT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `cuadre_caja`
+--
+
+INSERT INTO `cuadre_caja` (`id_cuadre_caja`, `descripcion_cuadre`, `costo_cuadre`, `estado`) VALUES
+(1, 'Base Inicial', 477500, 'activo'),
+(2, '', 0, ''),
+(3, '', 0, ''),
+(4, '', 0, ''),
+(5, '', 0, ''),
+(6, '', 0, ''),
+(7, '', 0, ''),
+(8, '', 0, ''),
+(9, '', 0, ''),
+(10, '', 0, ''),
+(11, '', 0, ''),
+(12, '', 0, '');
 
 -- --------------------------------------------------------
 
@@ -859,6 +890,39 @@ INSERT INTO `observacion` (`id_obs`, `id_vehiculo1`, `observacion`, `costo`, `fe
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `pagos_caja`
+--
+
+CREATE TABLE `pagos_caja` (
+  `id_pagos_caja` int(11) NOT NULL,
+  `descripcion_caja` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `costo_pagos` int(11) DEFAULT NULL,
+  `estado` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `pagos_caja`
+--
+
+INSERT INTO `pagos_caja` (`id_pagos_caja`, `descripcion_caja`, `costo_pagos`, `estado`) VALUES
+(1, 'Monedas', 71000, 'activo'),
+(2, '', 0, ''),
+(3, '', 20000, ''),
+(4, '', 20000, ''),
+(5, '', 0, ''),
+(6, '', 0, ''),
+(7, '', 0, ''),
+(8, '', 0, ''),
+(9, '', 0, ''),
+(10, '', 0, ''),
+(11, '', 0, ''),
+(12, '', 0, ''),
+(13, '', 50000, ''),
+(14, '', 50000, '');
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `personal`
 --
 
@@ -937,7 +1001,8 @@ INSERT INTO `presupuesto` (`id_presu`, `mes`, `year`) VALUES
 (3, 1, 2022),
 (4, 5, 2022),
 (5, 11, 2021),
-(6, 1, 2023);
+(6, 1, 2023),
+(7, 8, 2022);
 
 -- --------------------------------------------------------
 
@@ -994,7 +1059,9 @@ INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`, `costo
 (64, 1, '', 5000000, NULL, '', 1, ''),
 (65, 1, '', 0, NULL, '', 3, ''),
 (95, 1, '', 0, NULL, '', 1, ''),
-(98, 1, '', 0, NULL, '', 1, '');
+(98, 1, '', 0, NULL, '', 1, ''),
+(99, 7, NULL, NULL, NULL, NULL, NULL, 'activo'),
+(101, 1, '', 0, NULL, '', 1, '');
 
 -- --------------------------------------------------------
 
@@ -1579,6 +1646,12 @@ ALTER TABLE `cliente`
   ADD KEY `id_ubi` (`id_ubi1`);
 
 --
+-- Indices de la tabla `cuadre_caja`
+--
+ALTER TABLE `cuadre_caja`
+  ADD PRIMARY KEY (`id_cuadre_caja`);
+
+--
 -- Indices de la tabla `cuenta_cobro`
 --
 ALTER TABLE `cuenta_cobro`
@@ -1635,6 +1708,12 @@ ALTER TABLE `gas_detalle`
 ALTER TABLE `observacion`
   ADD PRIMARY KEY (`id_obs`),
   ADD KEY `id_vehiculo1` (`id_vehiculo1`);
+
+--
+-- Indices de la tabla `pagos_caja`
+--
+ALTER TABLE `pagos_caja`
+  ADD PRIMARY KEY (`id_pagos_caja`);
 
 --
 -- Indices de la tabla `personal`
@@ -1732,6 +1811,12 @@ ALTER TABLE `cliente`
   MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
+-- AUTO_INCREMENT de la tabla `cuadre_caja`
+--
+ALTER TABLE `cuadre_caja`
+  MODIFY `id_cuadre_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
 -- AUTO_INCREMENT de la tabla `cuenta_cobro`
 --
 ALTER TABLE `cuenta_cobro`
@@ -1780,6 +1865,12 @@ ALTER TABLE `observacion`
   MODIFY `id_obs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT de la tabla `pagos_caja`
+--
+ALTER TABLE `pagos_caja`
+  MODIFY `id_pagos_caja` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+
+--
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
@@ -1789,13 +1880,13 @@ ALTER TABLE `personal`
 -- AUTO_INCREMENT de la tabla `presupuesto`
 --
 ALTER TABLE `presupuesto`
-  MODIFY `id_presu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_presu` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `pre_detalle`
 --
 ALTER TABLE `pre_detalle`
-  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=102;
 
 --
 -- AUTO_INCREMENT de la tabla `pre_detalle_cat`
