@@ -82,7 +82,7 @@
     </div>
 
     <div id="respuesta_cuadre_caja" class="ventana">
-        
+    
     </div>
 
     <script>

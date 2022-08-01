@@ -230,7 +230,7 @@
             <div id="cont4_1" style="display:none;">
                 <div class="w3-container">
                     <?php   caja1($usuario);   ?>
-                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont4_1').style.display='none'">X</a>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" id="xcont_4_1" onclick="document.getElementById('cont4_1').style.display='none'">X</a>
                 </div>
             </div>
             <div id="cont4_2" style="display:none;">

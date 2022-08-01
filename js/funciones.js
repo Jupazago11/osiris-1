@@ -191,16 +191,6 @@ $('#tbodyform2')
 
 });
 
-//Pagos de caja
-
-function agregarFila(){
-  document.getElementById("tabla_pagos_de_caja").insertRow(-1).innerHTML = "<td><input type='text' size='10'/></td><td><input type='text' class='puntos cantidad' size='8'/></td><td><input type='button' class='borrar2 w3-tbn w3-red' value=' X '></input></td>";
-}
-
-function agregarFila1(){
-  document.getElementById("tabla_cuadre_caja").insertRow(-1).innerHTML = "<td><input type='text' size='10'/></td><td><input type='text' class='puntos cantidad1' size='8'/></td><td><input type='button' class='borrar2 w3-tbn w3-red' value=' X '></input></td>";
-}
-
 
 //Efectivo en caja
 $('#tabla_pagos_de_caja')

@@ -8,12 +8,56 @@
     }
     $conexion = conectar();                     //Obtenemos la conexion
 ?>
-<a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta_cuadre_caja').style.display='none'">X</a>
+<script>
+    document.getElementById('xcont_4_1').style.display='none';
+</script>
 
+
+
+<?php 
+    $id_cuadre_caja = array();
+    $descripcion_cuadre = array();
+    $costo_cuadre = array();
+
+
+    $consulta = mysqli_query($conexion, "SELECT * FROM `cuadre_caja` 
+    WHERE `estado` = 'activo'") or die ("Error al update: presupuesto");
+
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+
+        array_push($id_cuadre_caja ,$fila['id_cuadre_caja']);
+        array_push($descripcion_cuadre ,$fila['descripcion_cuadre']);
+        array_push($costo_cuadre ,$fila['costo_cuadre']);
+
+    }
+    mysqli_free_result($consulta);
+
+
+
+    $id_pagos_caja = array();
+    $descripcion_caja = array();
+    $costo_pagos = array();
+
+
+    $consulta = mysqli_query($conexion, "SELECT * FROM `pagos_caja` 
+    WHERE `estado` = 'activo'") or die ("Error al update: presupuesto");
+
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+
+        array_push($id_pagos_caja ,$fila['id_pagos_caja']);
+        array_push($descripcion_caja ,$fila['descripcion_caja']);
+        array_push($costo_pagos ,$fila['costo_pagos']);
+    }
+    mysqli_free_result($consulta);
+
+?>
 <div class="recuadro" style="left:0%; width:30%">
+    <form id="form_cuadre_de_caja" method="POST">
     <table class="tabla_sugerido" id="tabla_cuadre_caja">
         <tr>
-            <th colspan="3" style="background-color:green;">PAGOS DE CAJA</th>
+            <th colspan="3" style="background-color:green;">CUADRE CAJA</th>
         </tr>
         <tr>
             <td style="background-color:teal;">Descripción</td>
@@ -21,30 +65,58 @@
             <td style="background-color:teal;"></td>
         </tr>
         <tbody id="contenido-tabla">
+
+        <?php
+        $total_cuadre = 0;
+        $total_pagos  = 0;
+
+        $contador1 = 0;
+        for ($i=0; $i < count($id_cuadre_caja); $i++) { 
+            $contador1++;
+            ?>
+            <tr>
+            <input type="hidden" name="id_cuadre_caja[]" size="10" value="<?php echo $id_cuadre_caja[$i] ?>"/>
+            <td><input type="text" name="descripcion_cuadre[]" size="10" value="<?php echo $descripcion_cuadre[$i] ?>"/></td>
+            <td><input type="text" name="costo_cuadre[]" class="puntos" size="8" value="<?php echo number_format($costo_cuadre[$i], 0, ',', '.') ?>"/></td>
+
+            <?php
+            $total_cuadre += $costo_cuadre[$i];
+
+            if($descripcion_cuadre[$i] == ''){
+                ?>
+                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="eliminar" id="eliminar[<?php echo $contador1 ?>]" onchange="$('#enviarv1_7').trigger('click');">
+                <label for="eliminar[<?php echo $contador1 ?>]">X</label><br></td> 
+                <?php
+            }else{
+                ?>
+                <td><input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="eliminar" id="eliminar[<?php echo $contador1 ?>]" style="visibility:hidden;" onchange="$('#enviarv1_7').trigger('click');"></td> 
+                <?php
+            }
+
+            ?>
+
+            </tr>
+            <?php
+        }
+        ?>
+
         <tr>
-            <td><input type="text" size="10"/></td>
-            <td><input type="text" class="puntos cantidad1" size="8"/></td>
-            <td><input type="button" class="borrar2 w3-tbn w3-red" value=" X "></input></td>
+            <td><button type="button" id="enviarv1_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td><span id="total_cuadre1"><?php echo number_format($total_cuadre, 0, ',', '.') ?></span></td>
+            <td><button type="button" id="enviarv1_4" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
         </tr>
         </tbody>
     </table>
+    </form>
 
-    <button type="button" onclick="agregarFila1()">Agregar Fila</button>
-
-</div>
-<div class="recuadro" style="left:0%;top:90%; width:30%;height:10%">
-    <table class="tabla_sugerido">
-        <tfoot>
-        <tr>
-            <td>Total</td>
-            <td><span id="total_cuadre1">0</span></td>
-        </tr>
-        </tfoot>
-    </table>
 
 </div>
+
 
 <div class="recuadro" style="left:33%; width:30%">
+    <form id="form_pagos_de_caja" method="POST">
     <table class="tabla_sugerido" id="tabla_pagos_de_caja">
         <tr>
             <th colspan="3" style="background-color:green;">PAGOS DE CAJA</th>
@@ -55,34 +127,62 @@
             <td style="background-color:teal;"></td>
         </tr>
         <tbody id="contenido-tabla">
-        <tr>
-            <td><input type="text" size="10"/></td>
-            <td><input type="text" class="puntos cantidad" size="8"/></td>
-            <td><input type="button" class="borrar2 w3-tbn w3-red" value=" X "></input></td>
+        <?php
+
+        $contador2 = 0;
+        for ($i=0; $i < count($id_pagos_caja); $i++) { 
+            $contador2++;
+            ?>
+            <tr>
+            <input type="hidden" name="id_pagos_caja[]" size="10" value="<?php echo $id_pagos_caja[$i] ?>"/>
+            <td><input type="text" name="descripcion_caja[]" size="10" value="<?php echo $descripcion_caja[$i] ?>"/></td>
+            <td><input type="text" name="costo_pagos[]" class="puntos" size="8" value="<?php echo number_format($costo_pagos[$i], 0, ',', '.') ?>"/></td>
+
+            <?php
+            $total_pagos += $costo_pagos[$i];
+
+            if($descripcion_caja[$i] == ''){
+                ?>
+                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="eliminar" id="eliminar[<?php echo $contador2 ?>]" onchange="$('#enviarv1_7').trigger('click');">
+                <label for="eliminar[<?php echo $contador2 ?>]">X</label><br></td> 
+                <?php
+            }else{
+                ?>
+                <td><input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="eliminar" id="eliminar[<?php echo $contador2 ?>]" style="visibility:hidden;" onchange="$('#enviarv1_7').trigger('click');"></td> 
+                <?php
+            }
+            ?>
+
+            </tr>
+            <?php
+        }
+        ?>
         </tr>
+            <tr>
+                <td><button type="button" id="enviarv1_5" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button</td>
+                <td><span id="total_cuadre2"><?php echo number_format($total_pagos, 0, ',', '.') ?></span></td>
+                <td><button type="button" id="enviarv1_6" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
+            </tr>
         </tbody>
     </table>
+    <button type="button" id="enviarv1_7" class="w3-btn" style="background-color: #478248;color:white;" onclick="$('#enviarv1_6').trigger('click');$('#enviarv1_4').trigger('click');">Guardar</button>
 
-    <button type="button" onclick="agregarFila()">Agregar Fila</button>
+</form>
+<br>
+<span style="background-color:black;color:white;padding:5px;font-size:32px;margin:5px">Resultado<br></span>
 
-</div>
-<div class="recuadro" style="left:33%;top:90%; width:30%;height:10%">
-    <table class="tabla_sugerido">
-        <tfoot>
-        <tr>
-            <td>Total</td>
-            <td><span id="total_cuadre2">0</span></td>
-        </tr>
-        </tfoot>
-    </table>
+<span style="color:red;padding:5px;font-size:32px"><?php echo number_format($total_pagos-$total_cuadre, 0, ',', '.') ?></span>
 
 </div>
+
 
 
 <div class="recuadro" style="left:66%;width:34%;">
 <table class="tabla_sugerido">
     <tr>
-        <th colspan="4" style="background-color:orange;">EFECTIVO EN CAJA</th>
+        <th colspan="4" style="background-color:orange;">EFECTIVO EN CAJA <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta_cuadre_caja').style.display='none'; document.getElementById('xcont_4_1').style.display='block';">X</a></th>
 
     </tr>
     <tr>
@@ -167,5 +267,70 @@
     </tbody>
 </table>
 </div>
+<div id="rrr"></div>
+<script>
+    $('#enviarv1_3').click(function(){
+        $.ajax({
+            url:'../php/consultav1_3.php',
+            success: function(res){
+                $('#Enviarv1_2').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+
+    $('#enviarv1_4').click(function(){
+        $.ajax({
+            url:'../php/consultav1_4.php',
+            type:'POST',
+            data: $('#form_cuadre_de_caja').serialize(),
+            success: function(res){
+                //$('#Enviarv1_2').trigger('click');
+                //$('#rrr').html(res);
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+
+    $('#enviarv1_5').click(function(){
+        $.ajax({
+            url:'../php/consultav1_5.php',
+            success: function(res){
+                $('#Enviarv1_2').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    $('#enviarv1_6').click(function(){
+        $.ajax({
+            url:'../php/consultav1_6.php',
+            type:'POST',
+            data: $('#form_pagos_de_caja').serialize(),
+            success: function(res){
+                //$('#Enviarv1_2').trigger('click');
+                //$('#rrr').html(res);
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    $('#enviarv1_7').click(function(){
+        $.ajax({
+            success: function(res){
+                $('#Enviarv1_2').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+</script>
 <?php
 ?>
