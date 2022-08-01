@@ -137,7 +137,22 @@ $(function () {
     multi2();
     event.preventDefault();
     $(this).closest('tr').remove();
-    $("#codigo_producto").focus();  //Poner el cursor en el input
+  });
+});
+
+$(function () {
+  $(document).on('click', '.borrar2', function (event) {
+    multi2();
+    event.preventDefault();
+    $(this).closest('tr').remove();
+  });
+});
+
+$(function () {
+  $(document).on('click', '.borrar1', function (event) {
+    multi2();
+    event.preventDefault();
+    $(this).closest('tr').remove();
   });
 });
 
@@ -162,6 +177,7 @@ function ocultar_menu_venta() {
   }
 }
 
+//Efectivo en caja
 $('#tbodyform2')
 .on('input', '.cantidad', function() {
     
@@ -170,6 +186,58 @@ $('#tbodyform2')
     $tr = $input.closest('tr'), // fila del input.cantidad
     precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
     $total = $tr.find('.total3'); // elemento span.total
-  
+
   $total.text(precio * cantidad); // reseteamos el valor del span.total
+
 });
+
+//Pagos de caja
+
+function agregarFila(){
+  document.getElementById("tabla_pagos_de_caja").insertRow(-1).innerHTML = "<td><input type='text' size='10'/></td><td><input type='text' class='puntos cantidad' size='8'/></td><td><input type='button' class='borrar2 w3-tbn w3-red' value=' X '></input></td>";
+}
+
+function agregarFila1(){
+  document.getElementById("tabla_cuadre_caja").insertRow(-1).innerHTML = "<td><input type='text' size='10'/></td><td><input type='text' class='puntos cantidad1' size='8'/></td><td><input type='button' class='borrar2 w3-tbn w3-red' value=' X '></input></td>";
+}
+
+
+//Efectivo en caja
+$('#tabla_pagos_de_caja')
+.on('input', '.cantidad', function() {
+    
+  let total = 0;
+  //Captura la posición de la columna en la que se está haciendo el cambio
+  let index = $(this).parents('tr').find('.cantidad').index(this);
+  //Captura el valor que hay en cada celda
+  $("table tbody tr").each(function(i, row) {
+    let cantidad = $(row).find('td').eq(index + 1).find('.cantidad').val();
+    //Si el valor es numérico se hace la suma para evitar que muestre NaN en el total cuando las cantidades estén vacías
+    if ($.isNumeric(parseFloat(cantidad))) {
+      total = parseInt(total) + parseInt(cantidad)
+    }
+  });
+  //Se asigna la suma al total correspondiente
+  $('#total_cuadre2').eq(index).html(total);
+
+});
+
+$('#tabla_cuadre_caja')
+.on('input', '.cantidad1', function() {
+    
+  let total = 0;
+  //Captura la posición de la columna en la que se está haciendo el cambio
+  let index = $(this).parents('tr').find('.cantidad1').index(this);
+  //Captura el valor que hay en cada celda
+  $("table tbody tr").each(function(i, row) {
+    let cantidad = $(row).find('td').eq(index + 1).find('.cantidad1').val();
+    //Si el valor es numérico se hace la suma para evitar que muestre NaN en el total cuando las cantidades estén vacías
+    if ($.isNumeric(parseFloat(cantidad))) {
+      total = parseInt(total) + parseInt(cantidad)
+    }
+  });
+  //Se asigna la suma al total correspondiente
+  $('#total_cuadre1').eq(index).html(total);
+
+});
+

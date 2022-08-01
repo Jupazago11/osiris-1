@@ -708,5 +708,6 @@ img:hover {
 .recuadro{
   position: absolute;
   width: 30%;
+  height: 90%;
   top:0%;
 }

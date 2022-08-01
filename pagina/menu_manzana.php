@@ -472,5 +472,6 @@ function multi3() {
     $('#total_cuadre3').html(new Intl.NumberFormat('de-DE').format(suma));
 }
 
+
 </script>
 </html>

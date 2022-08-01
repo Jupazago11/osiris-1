@@ -11,48 +11,73 @@
 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta_cuadre_caja').style.display='none'">X</a>
 
 <div class="recuadro" style="left:0%; width:30%">
-<table class="tabla_sugerido">
-    <tr>
-        <th colspan="2" style="background-color:teal;">CUADRE CAJA</th>
-    </tr>
-    <tr>
-        <td style="background-color:teal;">Descripción</td>
-        <td style="background-color:teal;">Valor</td>
-    </tr>
-    <tfoot>
-    <tr>
-        <td>Total</td>
-        <td>0</td>
-    </tr>
-    </tfoot>
-    <tr>
-        <td><input type="text" size="8"/></td>
-        <td><input type="text" class="puntos" size="8"/></td>
-    </tr>
-</table>
+    <table class="tabla_sugerido" id="tabla_cuadre_caja">
+        <tr>
+            <th colspan="3" style="background-color:green;">PAGOS DE CAJA</th>
+        </tr>
+        <tr>
+            <td style="background-color:teal;">Descripción</td>
+            <td style="background-color:teal;">Valor</td>
+            <td style="background-color:teal;"></td>
+        </tr>
+        <tbody id="contenido-tabla">
+        <tr>
+            <td><input type="text" size="10"/></td>
+            <td><input type="text" class="puntos cantidad1" size="8"/></td>
+            <td><input type="button" class="borrar2 w3-tbn w3-red" value=" X "></input></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="button" onclick="agregarFila1()">Agregar Fila</button>
+
+</div>
+<div class="recuadro" style="left:0%;top:90%; width:30%;height:10%">
+    <table class="tabla_sugerido">
+        <tfoot>
+        <tr>
+            <td>Total</td>
+            <td><span id="total_cuadre1">0</span></td>
+        </tr>
+        </tfoot>
+    </table>
+
 </div>
 
 <div class="recuadro" style="left:33%; width:30%">
-<table class="tabla_sugerido">
-    <tr>
-        <th colspan="2" style="background-color:green;">PAGOS DE CAJA</th>
-    </tr>
-    <tr>
-        <td style="background-color:teal;">Descripción</td>
-        <td style="background-color:teal;">Valor</td>
-    </tr>
-    <tfoot>
-    <tr>
-        <td>Total</td>
-        <td>0</td>
-    </tr>
-    </tfoot>
-    <tr>
-        <td><input type="text" size="8"/></td>
-        <td><input type="text" class="puntos" size="8"/></td>
-    </tr>
-</table>
+    <table class="tabla_sugerido" id="tabla_pagos_de_caja">
+        <tr>
+            <th colspan="3" style="background-color:green;">PAGOS DE CAJA</th>
+        </tr>
+        <tr>
+            <td style="background-color:teal;">Descripción</td>
+            <td style="background-color:teal;">Valor</td>
+            <td style="background-color:teal;"></td>
+        </tr>
+        <tbody id="contenido-tabla">
+        <tr>
+            <td><input type="text" size="10"/></td>
+            <td><input type="text" class="puntos cantidad" size="8"/></td>
+            <td><input type="button" class="borrar2 w3-tbn w3-red" value=" X "></input></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <button type="button" onclick="agregarFila()">Agregar Fila</button>
+
 </div>
+<div class="recuadro" style="left:33%;top:90%; width:30%;height:10%">
+    <table class="tabla_sugerido">
+        <tfoot>
+        <tr>
+            <td>Total</td>
+            <td><span id="total_cuadre2">0</span></td>
+        </tr>
+        </tfoot>
+    </table>
+
+</div>
+
 
 <div class="recuadro" style="left:66%;width:34%;">
 <table class="tabla_sugerido">
@@ -76,7 +101,7 @@
     <tr>
         <td>Moneda</td>
         <td><span class="precio">50<span></td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td><input type="text" class="cantidad puntos" size="5" onchange="multi3()"/></td>
         <td class="total3">0</td>
     </tr>
     <tr>
