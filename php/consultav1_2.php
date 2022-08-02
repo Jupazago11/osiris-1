@@ -180,92 +180,117 @@
 
 
 <div class="recuadro" style="left:66%;width:34%;">
+<form>
 <table class="tabla_sugerido">
     <tr>
-        <th colspan="4" style="background-color:orange;">EFECTIVO EN CAJA <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta_cuadre_caja').style.display='none'; document.getElementById('xcont_4_1').style.display='block';">X</a></th>
+        <th colspan="4" style="background-color:orange;">EFECTIVO EN CAJA <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta_cuadre_caja').style.display='none'; document.getElementById('xcont_4_1').style.display='block';$('#enviarv1_6').trigger('click');$('#enviarv1_4').trigger('click');">X</a></th>
 
     </tr>
     <tr>
-        <td style="background-color:teal;">Nominación</td>
-        <td style="background-color:teal;">Valor</td>
-        <td style="background-color:teal;">Cantidad</td>
-        <td style="background-color:teal;">Total</td>
+        <td style="background-color:teal;width:20%;">Nominación</td>
+        <td style="background-color:teal;width:20%;">Valor</td>
+        <td style="background-color:teal;width:20%;">Cantidad</td>
+        <td style="background-color:teal;width:40%;">Total</td>
     </tr>
     <tfoot>
     <tr>
-        <td colspan="3">Total efectivo</td>
+        <td colspan="2">Total efectivo</td>
+        <td><button type="button" id="limpiar">Limpiar</button></td>
         <td><span id="total_cuadre3">0</span></td>
     </tr>
     </tfoot>
     <tbody id="tbodyform2">
     <tr>
         <td>Moneda</td>
-        <td><span class="precio">50<span></td>
-        <td><input type="text" class="cantidad puntos" size="5" onchange="multi3()"/></td>
+        <td class="precio">50</td>
+        <td class="precio2" style="display:none">50</td>
+        <td><input type="text" class="cantidad puntos" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Moneda</td>
         <td class="precio">100</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio2" style="display:none">100</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Moneda</td>
         <td class="precio">200</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio2" style="display:none">200</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Moneda</td>
         <td class="precio">500</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio2" style="display:none">500</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Moneda</td>
-        <td class="precio">1000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio">1,000</td>
+        <td class="precio2" style="display:none">1000</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Billete</td>
-        <td class="precio">2000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio">2.000</td>
+        <td class="precio2" style="display:none">2000</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Billete</td>
-        <td class="precio">5000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio">5.000</td>
+        <td class="precio2" style="display:none">5000</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Billete</td>
-        <td class="precio">10000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio">10.000</td>
+        <td class="precio2" style="display:none">10000</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Billete</td>
-        <td class="precio">20000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio">20.000</td>
+        <td class="precio2" style="display:none">20000</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Billete</td>
-        <td class="precio">50000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio">50.000</td>
+        <td class="precio2" style="display:none">50000</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     <tr>
         <td>Billete</td>
-        <td class="precio">100000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()"/></td>
+        <td class="precio">100.000</td>
+        <td class="precio2" style="display:none">100000</td>
+        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
+        <td class="total3_2" style="display:none">0</td>
     </tr>
     </tbody>
 </table>
+</form>
 </div>
 <div id="rrr"></div>
 <script>
@@ -321,9 +346,25 @@
             }
         });
     });
+    
     $('#enviarv1_7').click(function(){
         $.ajax({
             success: function(res){
+                $('#Enviarv1_4').trigger('click');
+                $('#Enviarv1_6').trigger('click');
+                $('#Enviarv1_2').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    
+    $('#limpiar').click(function(){
+        $.ajax({
+            success: function(res){
+                $('#Enviarv1_4').trigger('click');
+                $('#Enviarv1_6').trigger('click');
                 $('#Enviarv1_2').trigger('click');
             },
             error: function(res){

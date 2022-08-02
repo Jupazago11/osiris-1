@@ -461,7 +461,7 @@ function multi2() {
 function multi3() {
     var data = [];
 
-    $("td.total3").each(function(){
+    $("td.total3_2").each(function(){
         data.push(parseFloat($(this).text()));
     });
 

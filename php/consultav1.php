@@ -20,7 +20,9 @@
     }
     mysqli_free_result($consulta);
     ?>
-
+    <form id="form_domicilios_d" method="POST" style="display:none">
+        <input type="text" name="usuario" value="<?php echo $usuario; ?>">
+    </form> 
 
     <div class="venta_header">
         <form id="form_caja_v1_1" method="POST">
@@ -60,7 +62,7 @@
                 <tr style="background-color:#dddddd">
                     <td><?php echo ucwords($nombre_pers) ?></td>
                     <td></td>
-                    <td><img src="../iconos/domicilios.png" width="60px" height="60px">
+                    <td><img src="../iconos/domicilios.png" id="Enviard1_1" width="60px" height="60px"          onclick="document.getElementById('respuesta_domicilio').style.display='block'">
                         <img src="../iconos/caja-registradora.png" id="Enviarv1_2" width="60px" height="60px" onclick="document.getElementById('respuesta_cuadre_caja').style.display='block'"></td>
                 </tr>
                 <tr></tr>
@@ -84,6 +86,9 @@
     <div id="respuesta_cuadre_caja" class="ventana">
     
     </div>
+    <div id="respuesta_domicilio" class="ventana">
+    
+    </div>
 
     <script>
         $('#Enviarv1_1').click(function(){
@@ -104,6 +109,19 @@
                 url:'../PHP/consultav1_2.php',
                 success: function(res){
                     $('#respuesta_cuadre_caja').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al mostrar cuadre de caja");
+                }
+            });
+        });
+        $('#Enviard1_1').click(function(){
+            $.ajax({
+                url:'../PHP/consultad1_1.php',
+                type:'POST',
+                data: $('#form_domicilios_d').serialize(),
+                success: function(res){
+                    $('#respuesta_domicilio').html(res);
                 },
                 error: function(res){
                     alert("Problemas al mostrar cuadre de caja");

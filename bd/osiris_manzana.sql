@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 02-08-2022 a las 00:49:06
+-- Tiempo de generación: 02-08-2022 a las 23:59:07
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -117,7 +117,7 @@ CREATE TABLE `cuadre_caja` (
 --
 
 INSERT INTO `cuadre_caja` (`id_cuadre_caja`, `descripcion_cuadre`, `costo_cuadre`, `estado`) VALUES
-(1, 'Base Inicial', 477500, 'activo'),
+(1, 'Base Inicial', 10000, 'activo'),
 (2, '', 0, ''),
 (3, '', 0, ''),
 (4, '', 0, ''),
@@ -868,6 +868,26 @@ INSERT INTO `gas_detalle` (`id_gasto_de`, `id_gasto1`, `nombre`, `costo`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `kilometraje`
+--
+
+CREATE TABLE `kilometraje` (
+  `id_kilometraje` int(11) NOT NULL,
+  `fecha` date NOT NULL,
+  `id_vehiculo3` int(11) NOT NULL,
+  `kilometra` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `kilometraje`
+--
+
+INSERT INTO `kilometraje` (`id_kilometraje`, `fecha`, `id_vehiculo3`, `kilometra`) VALUES
+(1, '2022-08-01', 1, 1000);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `observacion`
 --
 
@@ -905,7 +925,7 @@ CREATE TABLE `pagos_caja` (
 --
 
 INSERT INTO `pagos_caja` (`id_pagos_caja`, `descripcion_caja`, `costo_pagos`, `estado`) VALUES
-(1, 'Monedas', 71000, 'activo'),
+(1, 'Monedas', 40000, 'activo'),
 (2, '', 0, ''),
 (3, '', 20000, ''),
 (4, '', 20000, ''),
@@ -1599,8 +1619,8 @@ INSERT INTO `ubicacion` (`id_ubi`, `ubicacion`, `estado`) VALUES
 
 CREATE TABLE `vehiculo` (
   `id_vehiculo` int(11) NOT NULL,
-  `tipo` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `placa` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tipo` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `fecha_soat` date DEFAULT NULL,
   `fecha_tecn` date DEFAULT NULL,
   `kilometraje` int(11) DEFAULT NULL,
@@ -1611,9 +1631,9 @@ CREATE TABLE `vehiculo` (
 -- Volcado de datos para la tabla `vehiculo`
 --
 
-INSERT INTO `vehiculo` (`id_vehiculo`, `tipo`, `placa`, `fecha_soat`, `fecha_tecn`, `kilometraje`, `estado`) VALUES
-(1, 'moto', 'ABC-12A', '2022-07-13', '2021-09-30', 1000, 'activo'),
-(2, 'moto', 'XYZ-12A', '2022-06-02', '2022-06-02', 0, 'activo'),
+INSERT INTO `vehiculo` (`id_vehiculo`, `placa`, `tipo`, `fecha_soat`, `fecha_tecn`, `kilometraje`, `estado`) VALUES
+(1, 'ABC-12A', 'moto', '2022-07-13', '2021-09-30', 1000, 'activo'),
+(2, 'XYZ-12A', 'moto', '2022-06-02', '2022-06-02', 0, 'activo'),
 (3, '', '', '2022-07-14', '2022-07-14', 0, ''),
 (4, '', '', '2022-07-14', '2022-07-14', 0, ''),
 (5, '', '', '2022-07-14', '2022-07-14', 0, ''),
@@ -1701,6 +1721,13 @@ ALTER TABLE `gasto`
 ALTER TABLE `gas_detalle`
   ADD PRIMARY KEY (`id_gasto_de`),
   ADD KEY `id_gasto1` (`id_gasto1`);
+
+--
+-- Indices de la tabla `kilometraje`
+--
+ALTER TABLE `kilometraje`
+  ADD PRIMARY KEY (`id_kilometraje`),
+  ADD KEY `id_vehiculo3` (`id_vehiculo3`);
 
 --
 -- Indices de la tabla `observacion`
@@ -1859,6 +1886,12 @@ ALTER TABLE `gas_detalle`
   MODIFY `id_gasto_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT de la tabla `kilometraje`
+--
+ALTER TABLE `kilometraje`
+  MODIFY `id_kilometraje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `observacion`
 --
 ALTER TABLE `observacion`
@@ -1979,6 +2012,12 @@ ALTER TABLE `factura`
 --
 ALTER TABLE `gas_detalle`
   ADD CONSTRAINT `gas_detalle_ibfk_1` FOREIGN KEY (`id_gasto1`) REFERENCES `gasto` (`id_gasto`);
+
+--
+-- Filtros para la tabla `kilometraje`
+--
+ALTER TABLE `kilometraje`
+  ADD CONSTRAINT `kilometraje_ibfk_1` FOREIGN KEY (`id_vehiculo3`) REFERENCES `vehiculo` (`id_vehiculo`);
 
 --
 -- Filtros para la tabla `observacion`

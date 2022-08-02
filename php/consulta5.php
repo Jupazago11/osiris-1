@@ -1,69 +1,4 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
-<style>
-* {
-  box-sizing: border-box;
-}
-
-input[type=text], select, textarea {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  resize: vertical;
-}
-
-label {
-  padding: 12px 12px 12px 0;
-  display: inline-block;
-}
-
-input[type=submit] {
-  background-color: #04AA6D;
-  color: white;
-  padding: 12px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  float: right;
-}
-
-input[type=submit]:hover {
-  background-color: #45a049;
-}
-
-.container {
-  border-radius: 5px;
-  background-color: #f2f2f2;
-  padding: 20px;
-}
-
-.col-25 {
-  float: left;
-  width: 25%;
-  margin-top: 6px;
-}
-
-.col-75 {
-  float: left;
-  width: 75%;
-  margin-top: 6px;
-}
-
-/* Clear floats after the columns */
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
-@media screen and (max-width: 600px) {
-  .col-25, .col-75, input[type=submit] {
-    width: 100%;
-    margin-top: 0;
-  }
-}
-</style>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
     require_once("../PHP/funciones.php");
@@ -78,19 +13,46 @@ input[type=submit]:hover {
 
     $usuario         = strval($_POST['usuario']);//obtenemos el nombre del proveedor seleccionado
     $vehiculo        = $_POST['vehiculo'];
-    $bandera         = false;
+    $bandera         = array(false, false, false);
 
     //id del cliente
-    $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `placa` = '$vehiculo'") or die ("Error al consultar: cliente");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` 
+    WHERE `placa` = '$vehiculo'") or die ("Error al consultar: cliente");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         if($vehiculo == $fila['placa']){
-            $bandera = true;
+            $bandera[0] = true;
         }
     }
     mysqli_free_result($consulta);
 
-    if($bandera == true){
+    //Ahora consultaremos si el vehiculo ya tiene registrado el valore del kilometraje para ese día
+    $consulta = mysqli_query($conexion, "SELECT `fecha` FROM `kilometraje`
+    INNER JOIN vehiculo ON vehiculo.id_vehiculo = kilometraje.id_vehiculo3
+    WHERE vehiculo.placa = '$vehiculo' AND `fecha`='$fecha'") or die ("Error al consultar: cliente");
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $bandera[1] = true;
+    }
+    mysqli_free_result($consulta);
+
+    if($bandera[0] == true && $bandera[1] == false){
+
+        ?>
+        <form id="ingresa_kilometraje" method="POST">
+            Ingresa el kilometraje del vehículo
+            <input type="text" name="vehiculo" value="<?php echo $vehiculo; ?>"/>
+            <input type="text" name="kilometraje"/>
+            <button type="button" id="enviard1_3" class="w3-btn w3-red" onclick="document.getElementById('respuesta5_1').style.display='block'">Continuar</button>
+        </form>
+
+
+        <?php
+    }elseif($bandera[0] == true && $bandera[1] == true){
+        $bandera[2] = true;
+    }
+
+    if($bandera[2] == true){
 
     
         ?>
@@ -185,7 +147,9 @@ input[type=submit]:hover {
         </form>
         </div>
         
-        <div id="respuesta5_1"></div>
+        <div id="respuesta5_1">
+            Hola
+        </div>
             <script>
                 $('#enviar5_1').click(function(){
                     $.ajax({
@@ -201,6 +165,21 @@ input[type=submit]:hover {
                         }
                     });
                 });
+
+                $('#enviard1_3').click(function(){
+                    $.ajax({
+                        url:'../PHP/consultad1_2.php',
+                        type:'POST',
+                        data: $('#ingresa_kilometraje').serialize(),
+                        success: function(res){
+                            alert("xd");
+                            $('#respuesta5_1').html(res);
+                        },
+                        error: function(res){
+                            alert("Problemas al mostrar cuadre de caja");
+                        }
+                    });
+                });
             </script>
         </div>
     <?PHP
@@ -211,13 +190,5 @@ input[type=submit]:hover {
             </table>
         <?PHP
         mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
-    }else{
-        ?>
-        <br>
-        <div class="alert warning">
-            <span class="closebtn">&times;</span>  
-            <strong>Información!</strong> No se encontró el Vehículo en la base de datos
-        </div>
-        <?php
     }
 ?>

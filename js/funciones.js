@@ -184,50 +184,12 @@ $('#tbodyform2')
   var $input = $(this), // input.cantidad
     cantidad = parseInt($input.val(), 10), // valor de input.cantidad
     $tr = $input.closest('tr'), // fila del input.cantidad
-    precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
-    $total = $tr.find('.total3'); // elemento span.total
+    precio = parseFloat($tr.find('.precio2').text(), 10), // valor del span.precio
+    $total = $tr.find('.total3'), // elemento span.total
+    $total2 = $tr.find('.total3_2');
 
-  $total.text(precio * cantidad); // reseteamos el valor del span.total
-
+  $total.text((precio * cantidad).toLocaleString('es-MX')); // reseteamos el valor del span.total
+  $total2.text(precio * cantidad); // reseteamos el valor del span.total
 });
 
-
-//Efectivo en caja
-$('#tabla_pagos_de_caja')
-.on('input', '.cantidad', function() {
-    
-  let total = 0;
-  //Captura la posición de la columna en la que se está haciendo el cambio
-  let index = $(this).parents('tr').find('.cantidad').index(this);
-  //Captura el valor que hay en cada celda
-  $("table tbody tr").each(function(i, row) {
-    let cantidad = $(row).find('td').eq(index + 1).find('.cantidad').val();
-    //Si el valor es numérico se hace la suma para evitar que muestre NaN en el total cuando las cantidades estén vacías
-    if ($.isNumeric(parseFloat(cantidad))) {
-      total = parseInt(total) + parseInt(cantidad)
-    }
-  });
-  //Se asigna la suma al total correspondiente
-  $('#total_cuadre2').eq(index).html(total);
-
-});
-
-$('#tabla_cuadre_caja')
-.on('input', '.cantidad1', function() {
-    
-  let total = 0;
-  //Captura la posición de la columna en la que se está haciendo el cambio
-  let index = $(this).parents('tr').find('.cantidad1').index(this);
-  //Captura el valor que hay en cada celda
-  $("table tbody tr").each(function(i, row) {
-    let cantidad = $(row).find('td').eq(index + 1).find('.cantidad1').val();
-    //Si el valor es numérico se hace la suma para evitar que muestre NaN en el total cuando las cantidades estén vacías
-    if ($.isNumeric(parseFloat(cantidad))) {
-      total = parseInt(total) + parseInt(cantidad)
-    }
-  });
-  //Se asigna la suma al total correspondiente
-  $('#total_cuadre1').eq(index).html(total);
-
-});
 
