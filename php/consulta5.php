@@ -15,40 +15,34 @@
     $vehiculo        = $_POST['vehiculo'];
     $bandera         = array(false, false, false);
 
-    //id del cliente
+    //Existe el vehiculo
     $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` 
     WHERE `placa` = '$vehiculo'") or die ("Error al consultar: cliente");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
-        if($vehiculo == $fila['placa']){
-            $bandera[0] = true;
-        }
+        $bandera[0] = true;
     }
     mysqli_free_result($consulta);
 
+
     //Ahora consultaremos si el vehiculo ya tiene registrado el valore del kilometraje para ese día
-    $consulta = mysqli_query($conexion, "SELECT `fecha` FROM `kilometraje`
+    $consulta = mysqli_query($conexion, "SELECT `fecha`,`kilometra` FROM `kilometraje`
     INNER JOIN vehiculo ON vehiculo.id_vehiculo = kilometraje.id_vehiculo3
     WHERE vehiculo.placa = '$vehiculo' AND `fecha`='$fecha'") or die ("Error al consultar: cliente");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $kilometraje = $fila['kilometra'];
         $bandera[1] = true;
     }
     mysqli_free_result($consulta);
 
     if($bandera[0] == true && $bandera[1] == false){
 
-        ?>
-        <form id="ingresa_kilometraje" method="POST">
-            Ingresa el kilometraje del vehículo
-            <input type="text" name="vehiculo" value="<?php echo $vehiculo; ?>"/>
-            <input type="text" name="kilometraje"/>
-            <button type="button" id="enviard1_3" class="w3-btn w3-red" onclick="document.getElementById('respuesta5_1').style.display='block'">Continuar</button>
-        </form>
+        $kilometraje = 0;
+        $bandera[1] = true;
 
-
-        <?php
-    }elseif($bandera[0] == true && $bandera[1] == true){
+    }
+    if($bandera[0] == true && $bandera[1] == true){
         $bandera[2] = true;
     }
 
@@ -59,6 +53,18 @@
         <br>
         <div class="container">
         <form id="creacion_domicilio" method="POST">
+        <?php
+            if($kilometraje == 0){
+                ?>
+                <input type="text" name="kilometraje" value="<?php echo $kilometraje; ?>">
+                <?php
+            }else{
+                ?>
+                <input type="hidden" name="kilometraje" value="<?php echo $kilometraje; ?>">
+                <?php
+            }
+
+        ?>
         <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
         <input type="hidden" name="vehiculo" value="<?php echo $vehiculo; ?>">
             <div class="row">
@@ -123,8 +129,8 @@
                 <label for="country">Categoría</label>
             </div>
             <div class="col-75">
-                <input list="categorias" name="categoria" id="categoria"  required>
-                <datalist id="categorias"  required>
+                <input list="categoriass" name="categorias" id="categorias"  required>
+                <datalist id="categoriass"  required>
                     <option value="normal">
                     <option value="Prioritario">
                 </datalist>
@@ -148,7 +154,10 @@
         </div>
         
         <div id="respuesta5_1">
-            Hola
+
+        </div>
+        <div id="respuesta5_11">
+
         </div>
             <script>
                 $('#enviar5_1').click(function(){
@@ -162,21 +171,6 @@
                         },
                         error: function(res){
                             alert("Problemas al tratar de enviar el formulario");
-                        }
-                    });
-                });
-
-                $('#enviard1_3').click(function(){
-                    $.ajax({
-                        url:'../PHP/consultad1_2.php',
-                        type:'POST',
-                        data: $('#ingresa_kilometraje').serialize(),
-                        success: function(res){
-                            alert("xd");
-                            $('#respuesta5_1').html(res);
-                        },
-                        error: function(res){
-                            alert("Problemas al mostrar cuadre de caja");
                         }
                     });
                 });

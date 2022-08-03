@@ -16,9 +16,47 @@
     $cliente         = strval($_POST['cliente']);
     $ubicacion       = strval($_POST['ubicacion']);
     $destino         = strval($_POST['destino']);
-    $categor         = strval($_POST['categoria']);
+    $categor         = strval($_POST['categorias']);
     $observa         = strval($_POST['observacion']);
+    $kilometraje     = strval($_POST['kilometraje']);
 
+
+
+if($kilometraje > 0){
+    //Registraremos su kilometraje
+    //id del vehiculo
+
+    $consulta = mysqli_query($conexion, "SELECT `id_vehiculo` FROM `vehiculo` WHERE `placa` = '$vehiculo'") or die ("Error al consultar: vehiculo");
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $id_vehiculo = $fila['id_vehiculo'];
+    }
+    mysqli_free_result($consulta);
+
+
+    //Ahora consultaremos si el vehiculo ya tiene registrado el valore del kilometraje para ese día
+    $consulta = mysqli_query($conexion, "SELECT `fecha`,`kilometra` FROM `kilometraje`
+    INNER JOIN vehiculo ON vehiculo.id_vehiculo = kilometraje.id_vehiculo3
+    WHERE vehiculo.placa = '$vehiculo' AND `fecha`='$fecha'") or die ("Error al consultar: cliente");
+
+    $encontrado = false;
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $encontrado = true;
+    }
+    mysqli_free_result($consulta);
+
+    if($encontrado == false){
+        $consulta = mysqli_query($conexion, "INSERT INTO `kilometraje`(`fecha`, `id_vehiculo3`, `kilometra`) 
+        VALUES ('$fecha','$id_vehiculo','$kilometraje')") or die ("Error al consultar: kilometraje");
+    }
+
+
+    
+
+
+
+    /// Creación de domicilio
 
     $banderas = array(false, false, false);
     
@@ -75,11 +113,15 @@
 
         $consulta = mysqli_query($conexion, "INSERT INTO `domicilio`(`id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `estado`) VALUES ('$id_pers','$id_cliente','$id_vehiculo','$fecha','$observa','$categor','$ubicacion','$destino','activo')") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
         ?>
-        <br>
-        <div class="alert success">
-            <span class="closebtn">&times;</span>  
-            <strong>Muy bien!</strong> El domicilio ha sido agregado exitosamente
-        </div>
+        <script>
+            document.getElementById('respuesta_domicilio').style.display='none';
+            document.getElementById('xcont_4_1').style.display='block';
+            Swal.fire(
+                '¡Muy bien!',
+                'Domicilio guardado exitosamente',
+                'success'
+                );
+        </script>
         <?php
 
 
@@ -87,20 +129,37 @@
     }else{
         //No cumple con las condiciones
         ?>
-        <br>
-        <div class="alert warning">
-            <span class="closebtn">&times;</span>  
-            <strong>Información!</strong> No se Completó correctamente los datos
-        </div>
+        <script>
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Agrega una Ubicación y un destino válido',
+            })
+        </script>
         <?php
         if($banderas[1] != true){
             ?>
-            <div class="alert info">
-                <span class="closebtn">&times;</span>  
-                <strong>Sugerencia: </strong> Agrega el nombre del cliente registrado en la base de datos
-            </div>
+            <script>
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Agrega el nombre del cliente registrado en la base de datos',
+                })
+            </script>
             <?php
         }
     }
+}else{
+    ?>
+    <script>
+        
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Debes agregar el kilometraje de la moto para el día de hoy',
+        })
+    </script>
+    <?php
+}
     
 ?>
