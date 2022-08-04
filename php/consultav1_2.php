@@ -57,12 +57,12 @@
     <form id="form_cuadre_de_caja" method="POST">
     <table class="tabla_sugerido" id="tabla_cuadre_caja">
         <tr>
-            <th colspan="3" style="background-color:green;">CUADRE CAJA</th>
+            <th colspan="3" style="background-color:#182c63;">CUADRE CAJA</th>
         </tr>
         <tr>
-            <td style="background-color:teal;">Descripción</td>
-            <td style="background-color:teal;">Valor</td>
-            <td style="background-color:teal;"></td>
+            <td style="background-color:#244d77;color:white">Descripción</td>
+            <td style="background-color:#244d77;color:white">Valor</td>
+            <td style="background-color:#244d77;color:white"></td>
         </tr>
         <tbody id="contenido-tabla">
 
@@ -122,9 +122,9 @@
             <th colspan="3" style="background-color:green;">PAGOS DE CAJA</th>
         </tr>
         <tr>
-            <td style="background-color:teal;">Descripción</td>
-            <td style="background-color:teal;">Valor</td>
-            <td style="background-color:teal;"></td>
+            <td style="background-color:#244d77;color:white">Descripción</td>
+            <td style="background-color:#244d77;color:white">Valor</td>
+            <td style="background-color:#244d77;color:white"></td>
         </tr>
         <tbody id="contenido-tabla">
         <?php
@@ -187,10 +187,10 @@
 
     </tr>
     <tr>
-        <td style="background-color:teal;width:20%;">Nominación</td>
-        <td style="background-color:teal;width:20%;">Valor</td>
-        <td style="background-color:teal;width:20%;">Cantidad</td>
-        <td style="background-color:teal;width:40%;">Total</td>
+        <td style="background-color:#244d77;width:20%;color:white">Nominación</td>
+        <td style="background-color:#244d77;width:20%;color:white">Valor</td>
+        <td style="background-color:#244d77;width:20%;color:white">Cantidad</td>
+        <td style="background-color:#244d77;width:40%;color:white">Total</td>
     </tr>
     <tfoot>
     <tr>

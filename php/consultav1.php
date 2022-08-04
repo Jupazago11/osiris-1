@@ -53,9 +53,9 @@
         
     <div class="venta_inferior" style="">
         <form id="form_ventas_v1_1" method="POST">
-            <table border="0" class="tabla_sugerido">
+            <table border="0" class="tabla_sugerido" style="box-shadow: 3px 3px 5px 3px #999;">
                 <tr>
-                    <td width="33%"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"></td>
+                    <td width="33%" style="border-top-color: #dddddd;"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"></td>
                     <td width="33%"><button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button></td>
                     <th width="33%">Total: <span id="final_v1_1">0</span></th>
                 </tr>
@@ -71,7 +71,7 @@
         </form>
     </div>
     <div id="venta_menu">
-        <img src="../iconos/add-contact.png" width="60px" height="60px">
+        <img src="../iconos/add-contact.png" id="Enviarcc1_1" width="60px" height="60px" onclick="document.getElementById('respuesta_crear_cliente').style.display='block'">
         <img src="../iconos/printer.png"     width="60px" height="60px">
         <img src="../iconos/presupuesto.png" width="60px" height="60px">
         <img src="../iconos/trash-bin.png"   width="60px" height="60px">
@@ -86,9 +86,13 @@
     <div id="respuesta_cuadre_caja" class="ventana">
     
     </div>
-    <div id="respuesta_domicilio" class="ventana">
+    <div id="respuesta_domicilio" class="ventana" style="background-color:white">
     
     </div>
+    <div id="respuesta_crear_cliente" class="ventana">
+    
+    </div>
+
 
     <script>
         $('#Enviarv1_1').click(function(){
@@ -122,6 +126,17 @@
                 data: $('#form_domicilios_d').serialize(),
                 success: function(res){
                     $('#respuesta_domicilio').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al mostrar cuadre de caja");
+                }
+            });
+        });
+        $('#Enviarcc1_1').click(function(){
+            $.ajax({
+                url:'../PHP/consultacc1_1.php',
+                success: function(res){
+                    $('#respuesta_crear_cliente').html(res);
                 },
                 error: function(res){
                     alert("Problemas al mostrar cuadre de caja");

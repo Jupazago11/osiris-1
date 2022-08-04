@@ -37,7 +37,7 @@
     </form>
 </div>
 
-<div id="respuestad1_2">
+<div id="respuestad1_2" style="background-color:white">
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuestad1_2').style.display='none'; document.getElementById('xcont_d1_1').style.display='block';">X</a>
 </div>
 

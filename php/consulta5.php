@@ -17,10 +17,13 @@
 
     //Existe el vehiculo
     $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` 
-    WHERE `placa` = '$vehiculo'") or die ("Error al consultar: cliente");
+    WHERE `placa` = '$vehiculo' AND `estado` = 'activo'") or die ("Error al consultar: cliente");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
-        $bandera[0] = true;
+        if($vehiculo == $fila['placa']){
+            $bandera[0] = true;
+        }
+        
     }
     mysqli_free_result($consulta);
 
