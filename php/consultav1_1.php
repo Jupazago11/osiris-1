@@ -24,11 +24,12 @@
         <tr>
         
             
-            <td width="25%" class="ides" style="display:none" name="ides[]"><?php echo $fila['id_producto'] ?></td>
+                <td class="ides" style="display:none" name="ides[]"><input type="text" name="idess[]" value="<?php echo $fila['id_producto'] ?>"/></td>
+                <input type="hidden" name="precio_producto[]" value="<?php echo $fila['precio_producto'] ?>"/>
             <td width="25%" class="names"><?php echo ucwords($fila['nombre_producto']) ?></td>
             <td width="15%"><?php echo $fila['nombre_proveedor'] ?></td>
             <td width="15%" class="precios" name="precios[]"><span class="precio"><?php echo $fila['precio_producto'] ?></span></td>
-            <td width="20%" name="cantidades[]"><input type="number" class="cantidad" value="1" min="0" onchange="multi2()"/></td>
+            <td width="20%" name="cantidades[]"><input type="number" name="cantidad[]" class="cantidad" value="1" min="0" onchange="multi2()"/></td>
             <td width="15%" class="total"><span class="total"><?php echo $fila['precio_producto'] ?></span></td>
             <td width="10%"><input type="button" class="borrar w3-tbn w3-red" value=" X "></input></td>
         

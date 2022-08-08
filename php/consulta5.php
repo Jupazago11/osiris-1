@@ -53,29 +53,29 @@
 
     
         ?>
-        <br>
-        <div class="container">
+
         <form id="creacion_domicilio" method="POST">
+        <table class="tabla_sugerido"  style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+        
+
         <?php
             if($kilometraje == 0){
                 ?>
-                <input type="text" name="kilometraje" value="<?php echo $kilometraje; ?>">
+                <tr>
+                    <th>Kilometraje</th>
+                    <td><input type="text" name="kilometraje" value="<?php echo $kilometraje; ?>"></td>
                 <?php
             }else{
                 ?>
+                <tr>
                 <input type="hidden" name="kilometraje" value="<?php echo $kilometraje; ?>">
                 <?php
             }
 
         ?>
-        <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
-        <input type="hidden" name="vehiculo" value="<?php echo $vehiculo; ?>">
-            <div class="row">
-            <div class="col-25">
-                <label for="fname">Cliente</label>
-            </div>
-            <div class="col-75">
-                <input list="clientes" name="cliente" id="cliente"  required>
+        
+            <th>Cliente</th>
+            <td><input list="clientes" name="cliente" id="cliente"  required>
                 <datalist id="clientes" onchange="traer_ubicacion()" required>
                 <?php
                     //Consulta a la base de datos en la tabla para desplegar los clientes
@@ -91,15 +91,17 @@
                     }
                     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
                 ?>
-                </datalist>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-25">
-                <label for="lname">Ubicación</label>
-            </div>
-            <div class="col-75">
-                <input list="ubicaciones" name="ubicacion" id="ubicacion"  required>
+                </datalist></td>
+        </tr>
+        <tr>
+            <th>Ubicación</th>
+            <th>Destino</th>
+            <th>Categoría</th>
+            <th>Observación</th>
+        </tr>
+        <tr>
+            
+            <td><input list="ubicaciones" name="ubicacion" id="ubicacion"  required>
                 <datalist id="ubicaciones" onchange="traer_ubicacion()" required>
                 <?php
                     
@@ -116,45 +118,27 @@
                     }
                     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
                 ?>
-                </datalist>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-25">
-                <label for="country">Destino</label>
-            </div>
-            <div class="col-75">
-                <input type="text" name="destino" id="destino"  required>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-25">
-                <label for="country">Categoría</label>
-            </div>
-            <div class="col-75">
-                <input list="categoriass" name="categorias" id="categorias"  required>
+                </datalist></td>
+            <td><input type="text" name="destino" id="destino"  required></td>
+            <td><input list="categoriass" name="categorias" id="categorias"  required>
                 <datalist id="categoriass"  required>
                     <option value="normal">
                     <option value="Prioritario">
-                </datalist>
-            </div>
-            </div>
-            <div class="row">
-            <div class="col-25">
-                <label for="country">Observación</label>
-            </div>
-            <div class="col-75">
-                <input type="text" name="observacion"   required>
-            </div>
-            </div>
-            <br>
-            <br>
-            <div class="row">
-            <button type="button" id="enviar5_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta5_1').style.display='block'">Agregar</button>
-            </div>
-            <br>
+                </datalist></td>
+            <td><input type="text" name="observacion"   required></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><button type="button" id="enviar5_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta5_1').style.display='block'">Agregar</button></td>
+            <td></td>
+        </tr>
+        <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
+        <input type="hidden" name="vehiculo" value="<?php echo $vehiculo; ?>">
+            
+        </table>
         </form>
-        </div>
+
         
         <div id="respuesta5_1">
 

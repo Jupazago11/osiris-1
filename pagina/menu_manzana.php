@@ -220,7 +220,7 @@
     <div id="cont4" style="display:none;">
         <div class="w3-container" id="ventas"  style="display:none;">
             <div class="menu">
-                <a class="columna w3-teal"  onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')">Caja 1</a>
+                <a class="columna w3-teal" onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')">Caja 1</a>
                 <a class="columna w3-green" onclick="ocultarDivs4('cont4_2'); $('#enviarv2').trigger('click')">Caja 2</a>
                 <a class="columna w3-blue"  onclick="ocultarDivs4('cont4_3'); $('#enviarv3').trigger('click')">Caja 3</a>
                 <a class="columna w3-red"   onclick="ocultarDivs4('cont4_4'); $('#enviarv4').trigger('click')">Caja 4</a>
