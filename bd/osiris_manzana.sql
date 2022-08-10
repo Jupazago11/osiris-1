@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-08-2022 a las 01:09:45
+-- Tiempo de generación: 11-08-2022 a las 00:25:06
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -221,9 +221,20 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (8, 4, 4, 3, 4500, 'activo'),
 (9, 4, 2, 4, 20000, 'activo'),
 (10, 4, 8, 10, 40000, 'activo'),
-(12, 7, 1, 1, 500, 'activo'),
-(13, 7, 2, 2, 10000, 'activo'),
-(14, 7, 3, 3, 9000, 'activo');
+(12, 7, 1, 1, 500, ''),
+(13, 7, 2, 2, 10000, ''),
+(14, 7, 3, 3, 9000, ''),
+(15, 8, 4, 8, 12000, 'activo'),
+(16, 8, 8, 4, 16000, 'activo'),
+(17, 8, 5, 10, 40000, 'activo'),
+(18, 9, 2, 5, 25000, 'activo'),
+(19, 9, 4, 5, 7500, 'activo'),
+(20, 10, 1, 1, 500, 'activo'),
+(21, 10, 2, 2, 10000, 'activo'),
+(22, 10, 3, 3, 9000, 'activo'),
+(23, 7, 1, 1, 500, 'activo'),
+(24, 7, 2, 2, 10000, 'activo'),
+(25, 7, 3, 3, 9000, 'activo');
 
 -- --------------------------------------------------------
 
@@ -853,6 +864,7 @@ CREATE TABLE `factura` (
   `id_cliente3` int(11) DEFAULT NULL,
   `id_pers1` int(11) NOT NULL,
   `precio_total` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `nombre_congelado` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -860,14 +872,17 @@ CREATE TABLE `factura` (
 -- Volcado de datos para la tabla `factura`
 --
 
-INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, `id_cliente3`, `id_pers1`, `precio_total`, `estado`) VALUES
-(1, 'Juanito V.', '2022-08-04 17:05:53', 'credito', 1, 1, '19100', 'finalizada'),
-(2, 'Jaime R.', '2022-08-05 11:41:35', 'contado', 2, 3, '100000', 'finalizada'),
-(4, NULL, '2022-08-08 16:08:59', NULL, NULL, 1, NULL, 'congelado'),
-(5, NULL, '2022-08-08 16:10:32', NULL, NULL, 3, NULL, 'activo'),
-(6, NULL, '2022-08-08 18:00:56', NULL, NULL, 1, NULL, ''),
-(7, NULL, '2022-08-08 18:01:22', NULL, NULL, 1, NULL, 'congelado'),
-(8, NULL, '2022-08-08 18:02:53', NULL, NULL, 1, NULL, 'activo');
+INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, `id_cliente3`, `id_pers1`, `precio_total`, `nombre_congelado`, `estado`) VALUES
+(1, 'Juanito V.', '2022-08-04 17:05:53', 'credito', 1, 1, '19100', NULL, 'finalizada'),
+(2, 'Jaime R.', '2022-08-05 11:41:35', 'contado', 2, 3, '100000', NULL, 'finalizada'),
+(4, NULL, '2022-08-08 16:08:59', NULL, NULL, 1, NULL, 'juan', 'congelado'),
+(5, NULL, '2022-08-08 16:10:32', NULL, NULL, 3, NULL, NULL, 'activo'),
+(6, NULL, '2022-08-08 18:00:56', NULL, NULL, 1, NULL, NULL, ''),
+(7, NULL, '2022-08-08 18:01:22', NULL, NULL, 1, NULL, 'yaned', 'finalizada'),
+(8, NULL, '2022-08-08 18:02:53', NULL, NULL, 1, NULL, 'santiago', 'congelado'),
+(9, NULL, '2022-08-09 20:30:34', NULL, NULL, 1, NULL, NULL, 'finalizada'),
+(10, NULL, '2022-08-10 17:20:30', NULL, NULL, 1, NULL, NULL, 'finalizada'),
+(11, NULL, '2022-08-10 17:22:01', NULL, NULL, 1, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1908,7 +1923,7 @@ ALTER TABLE `cuenta_cobro`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
@@ -1926,7 +1941,7 @@ ALTER TABLE `domicilio`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `gasto`

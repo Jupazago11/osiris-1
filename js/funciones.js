@@ -152,20 +152,8 @@ function show2() {
   $('#enviar7_6').trigger('click');
 
 }
-$('#myTable3').on('click', '.btn_congelados', function(event) {
-	//Primera fila
-	//console.log("Primera Fila  : " + $(this).parents('tr').find('td:first-child').text());
 
-  var inputNombre = document.getElementById("nombre_sug");
-  inputNombre.value = $(this).parents('tr').find('td:nth-child(2)').text();
-  /*
-	//todos las columnas de la fila  
-  console.log("Columnas de la Fila");
-	$.each($(this).parents('tr'), function(index, val) {
-		console.log($(val).text());
-	});*/
-  
-});
+
 
 $(function () {
   $(document).on('click', '.borrar', function (event) {

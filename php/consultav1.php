@@ -61,25 +61,11 @@
         </div>
         <div class="venta_superior">
             <form id="form_caja_v1_1" method="POST">
-                <input type="hidden" name="id_facturacion" value="<?php echo $id_facturacion ?>"/>
+                <input type="hidden" name="id_facturacion" id="Nfactura2" value="<?php echo $id_facturacion ?>"/>
                 <table style="font-size: 18px">
                     <tbody id="tbodyform">
                     <tr id="respuestav1_1" name="total">
 
-                    <?php
-                    /*
-                    $consulta = mysqli_query($conexion, "SELECT `id_producto1` 
-                    FROM `detalle_factura` 
-                    WHERE `id_facturacion1`='$id_facturacion'") or die ("Error al consultar: datos de  producto");
-
-                    $array_idpro = array();
-                    while (($fila = mysqli_fetch_array($consulta))!=NULL) {
-                        
-                        array_push($array_idpro ,$fila['precio_producto']);
-                    }
-                    mysqli_free_result($consulta);
-                    */
-                    ?>
                     </tr>
                     </tbody>
                 </table>
@@ -105,10 +91,15 @@
                             <option value="credito">Crédito</option>
                             <option value="tarjeta">Tarjeta</option>
                         </select>
+                        <img id="laImagen" width="60px" height="60px" src="../iconos/contado.png"/>
                         </td>
-                        <td><img src="../iconos/domicilios.png" id="Enviard1_1" width="60px" height="60px"          onclick="document.getElementById('respuesta_domicilio').style.display='block'">
+                        <td><img src="../iconos/domicilios.png" id="Enviard1_1" width="60px" height="60px" onclick="document.getElementById('respuesta_domicilio').style.display='block'">
                             <img src="../iconos/caja-registradora.png" id="Enviarv1_2" width="60px" height="60px" onclick="document.getElementById('respuesta_cuadre_caja').style.display='block'">
-                            Factura: <?php echo $id_facturacion ?>
+                            Factura: 
+
+                            <input type="text" name="Nfactura" id="Nfactura" value="<?php echo $id_facturacion ?>" readonly style="background: transparent;border: none;"/>
+                            <button type="button" id="Enviarccongeladas1_2" style="display:none"></button>
+        
                         
                         </td>
                     </tr>
@@ -123,7 +114,7 @@
             <img src="../iconos/presupuesto.png" width="60px" height="60px">
             <img src="../iconos/trash-bin.png"   width="60px" height="60px">
             <img src="../iconos/factura_congelar.png" id="Enviarcongelarc1_1" width="60px" height="60px"><br>
-            <img src="../iconos/presupuesto.png" width="60px" height="60px">
+            <img src="../iconos/cuenta.png" id="Enviarfactura1_1" width="60px" height="60px">
             <img src="../iconos/presupuesto.png" width="60px" height="60px">
             <img src="../iconos/presupuesto.png" width="60px" height="60px">
             <img src="../iconos/presupuesto.png" width="60px" height="60px">
@@ -131,10 +122,12 @@
         </div>
 
         <div id="respuesta_cuadre_caja" class="ventana"></div>
-        <div id="respuesta_domicilio" class="ventana"></div>
+        <div id="respuesta_domicilio"   class="ventana"></div>
         <div id="respuesta_crear_cliente" class="ventana"></div>
-        <div id="respuesta_congelar" class="ventana"></div>
-        <div id="respuesta_congeladas" class="ventana"></div>
+        <div id="respuesta_congelar"    class="ventana"></div>
+        <div id="respuesta_congeladas"  class="ventana"></div>
+        <div id="respuesta_facturar"    class="ventana"></div>
+        
 
         <?php
 
@@ -153,6 +146,10 @@
     }
     ?>
     <script>
+        metodo_de_pago.addEventListener("change",()=>{
+            laImagen.setAttribute("src","../iconos/" + metodo_de_pago.selectedOptions[0].value + ".png")
+        })
+
         $('#Enviarv1_1').click(function(){
             $.ajax({
                 url:'../PHP/consultav1_1.php',
@@ -224,6 +221,34 @@
                 },
                 error: function(res){
                     alert("Problemas al mostrar cuadre de caja");
+                }
+            });
+        });
+
+        $('#Enviarccongeladas1_2').click(function(){
+            $.ajax({
+                url:'../PHP/consultaccongeladas1_2.php',
+                type:'POST',
+                data: $('#form_ventas_v1_1').serialize(),
+                success: function(res){
+                    $('#respuestav1_1').append(res);   //Append para agregar nuevo
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario productos en facturación");
+                }
+            });
+        });
+        $('#Enviarfactura1_1').click(function(){
+            $.ajax({
+                url:'../PHP/consultafactura1_1.php',
+                type:'POST',
+                data: $('#form_caja_v1_1').serialize(),
+                success: function(res){
+                    document.getElementById('respuesta_facturar').style.display='block';
+                    $('#respuesta_facturar').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario productos en facturación");
                 }
             });
         });
