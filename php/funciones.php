@@ -5,7 +5,7 @@
 
 <?php
 
-    //Funcion que verifica si existeel archivo de conexion de la base de datos
+//Funcion que verifica si existeel archivo de conexion de la base de datos
 function existencia_de_la_conexion(){
     try {
         //Verificar si existe el archivo de conexion
@@ -22,6 +22,7 @@ function existencia_de_la_conexion(){
         echo 'Código: ' . $excepcion->getCode(), "<br>";
     }
 }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function iniciar_sesion($usuario, $clave){
@@ -61,6 +62,7 @@ function iniciar_sesion($usuario, $clave){
     }
     return $tipo_de_cuenta;
 }
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 function iniciar_sesion2($usuario, $clave){
     
@@ -99,6 +101,7 @@ function iniciar_sesion2($usuario, $clave){
     }
     return $nombre_proveedor;
 }
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Funcion que verifica si existeel archivo de conexion de la base de datos
 function crear_sugerido($usuario){
@@ -150,7 +153,7 @@ function crear_sugerido($usuario){
         
 
         ?>
-    <form>
+    </form>
     </table>
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
     <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>

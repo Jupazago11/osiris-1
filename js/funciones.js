@@ -89,6 +89,26 @@ function myFunctionTabla2() {
   }
 }
 */
+
+function myFunctionTabla3() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput3");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable3");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
 function show1() {
   var rowId = event.target.parentNode.parentNode.id;
   //this gives id of tr whose button was clicked
@@ -111,6 +131,7 @@ function show1_3() {
   "row-data" class within the row with given id*/
 
   var name = data[0].innerHTML;
+  
 
   var inputNombre = document.getElementById("prove_sugerido");
   inputNombre.value = name;
@@ -131,6 +152,20 @@ function show2() {
   $('#enviar7_6').trigger('click');
 
 }
+$('#myTable3').on('click', '.btn_congelados', function(event) {
+	//Primera fila
+	//console.log("Primera Fila  : " + $(this).parents('tr').find('td:first-child').text());
+
+  var inputNombre = document.getElementById("nombre_sug");
+  inputNombre.value = $(this).parents('tr').find('td:nth-child(2)').text();
+  /*
+	//todos las columnas de la fila  
+  console.log("Columnas de la Fila");
+	$.each($(this).parents('tr'), function(index, val) {
+		console.log($(val).text());
+	});*/
+  
+});
 
 $(function () {
   $(document).on('click', '.borrar', function (event) {

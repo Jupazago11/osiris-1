@@ -127,21 +127,14 @@
             <img src="../iconos/presupuesto.png" width="60px" height="60px">
             <img src="../iconos/presupuesto.png" width="60px" height="60px">
             <img src="../iconos/presupuesto.png" width="60px" height="60px">
-            <img src="../iconos/presupuesto.png" width="60px" height="60px">
+            <img src="../iconos/factura_congelar2.png" id="Enviarccongeladas1_1" width="60px" height="60px">
         </div>
 
-        <div id="respuesta_cuadre_caja" class="ventana">
-        
-        </div>
-        <div id="respuesta_domicilio" class="ventana">
-        
-        </div>
-        <div id="respuesta_crear_cliente" class="ventana">
-        
-        </div>
-        <div id="respuesta_congelar" class="ventana">
-        
-        </div>
+        <div id="respuesta_cuadre_caja" class="ventana"></div>
+        <div id="respuesta_domicilio" class="ventana"></div>
+        <div id="respuesta_crear_cliente" class="ventana"></div>
+        <div id="respuesta_congelar" class="ventana"></div>
+        <div id="respuesta_congeladas" class="ventana"></div>
 
         <?php
 
@@ -216,6 +209,18 @@
                 success: function(res){
                     document.getElementById('respuesta_congelar').style.display='block';
                     $('#respuesta_congelar').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al mostrar cuadre de caja");
+                }
+            });
+        });
+        $('#Enviarccongeladas1_1').click(function(){
+            $.ajax({
+                url:'../PHP/consultaccongeladas1_1.php',
+                success: function(res){
+                    document.getElementById('respuesta_congeladas').style.display='block';
+                    $('#respuesta_congeladas').html(res);
                 },
                 error: function(res){
                     alert("Problemas al mostrar cuadre de caja");
