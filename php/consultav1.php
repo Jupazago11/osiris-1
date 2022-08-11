@@ -62,6 +62,10 @@
         <div class="venta_superior">
             <form id="form_caja_v1_1" method="POST">
                 <input type="hidden" name="id_facturacion" id="Nfactura2" value="<?php echo $id_facturacion ?>"/>
+                <input type="hidden" name="id_pers" id="id_pers" value="<?php echo $id_pers ?>"/>
+                <input type="hidden" name="nombre" id="copia1"/>
+                <input type="hidden" name="cedula" id="copia2"/>
+                <input type="hidden" name="tipo_pago" id="tipo_pago" value="contado"/>
                 <table style="font-size: 18px">
                     <tbody id="tbodyform">
                     <tr id="respuestav1_1" name="total">
@@ -78,15 +82,22 @@
             <form id="form_ventas_v1_1" method="POST">
                 <table border="0" class="tabla_sugerido" style="box-shadow: 3px 3px 5px 3px #999;">
                     <tr>
-                        <td width="33%" style="border-top-color: #dddddd;"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"></td>
-                        <td width="33%"><button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button></td>
+                        <td width="33%" style="border-top-color: #dddddd;"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"/>&nbsp;<button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button></td>
+                        <td width="33%">
+                            <table style="padding:0px; border:0px;">
+                                <tr>
+                                   <td><input type="text" name="nombre" id="texto1" placeholder="Nombre..."/></td> 
+                                   <td><input type="text" name="cedula" id="texto2" placeholder="Identificación"/></td> 
+                                </tr>
+                            </table>
+                        </td>
                         <th width="33%">Total: <span id="final_v1_1">0</span></th>
                     </tr>
                     <tr style="background-color:#dddddd">
                         <td>Cajero(a): <?php echo ucwords($nombre_pers) ?></td>
                         <td>
                         <label for="metodo_de_pago">Método de pago:</label>
-                        <select name="metodo_de_pago" id="metodo_de_pago">
+                        <select name="metodo_de_pago" id="metodo_de_pago"  onchange="mandar_texto()">
                             <option value="contado">Contado</option>
                             <option value="credito">Crédito</option>
                             <option value="tarjeta">Tarjeta</option>
@@ -99,7 +110,8 @@
 
                             <input type="text" name="Nfactura" id="Nfactura" value="<?php echo $id_facturacion ?>" readonly style="background: transparent;border: none;"/>
                             <button type="button" id="Enviarccongeladas1_2" style="display:none"></button>
-        
+                            <button type="button" id="Enviarfacturaobs1_2" style="display:none"></button>
+                            <input type="hidden" name="Nufactura" id="Nufactura"/>
                         
                         </td>
                     </tr>
@@ -111,13 +123,13 @@
         <div id="venta_menu">
             <img src="../iconos/add-contact.png" id="Enviarcc1_1" width="60px" height="60px" onclick="document.getElementById('respuesta_crear_cliente').style.display='block'">
             <a href="../php/impresion1.php" target="popup" onclick="window.open('../php/impresion1.php','name','width=600,height=800')"><img src="../iconos/printer.png"     width="60px" height="60px"></a>
-            <img src="../iconos/presupuesto.png" width="60px" height="60px">
-            <img src="../iconos/trash-bin.png"   width="60px" height="60px">
+            <img src="../iconos/black.png" width="60px" height="60px">
+            <img src="../iconos/trash-bin.png" width="60px" height="60px" onclick="$('#enviarv1').trigger('click');">
             <img src="../iconos/factura_congelar.png" id="Enviarcongelarc1_1" width="60px" height="60px"><br>
             <img src="../iconos/cuenta.png" id="Enviarfactura1_1" width="60px" height="60px">
-            <img src="../iconos/presupuesto.png" width="60px" height="60px">
-            <img src="../iconos/presupuesto.png" width="60px" height="60px">
-            <img src="../iconos/presupuesto.png" width="60px" height="60px">
+            <img src="../iconos/cuentaobs.png" id="Enviarfacturaobs1_1" width="60px" height="60px">
+            <img src="../iconos/black.png" width="60px" height="60px">
+            <img src="../iconos/black.png" width="60px" height="60px">
             <img src="../iconos/factura_congelar2.png" id="Enviarccongeladas1_1" width="60px" height="60px">
         </div>
 
@@ -127,7 +139,8 @@
         <div id="respuesta_congelar"    class="ventana"></div>
         <div id="respuesta_congeladas"  class="ventana"></div>
         <div id="respuesta_facturar"    class="ventana"></div>
-        
+        <div id="respuesta_facturarobs" class="ventana"></div>
+        <div id="respuesta_probador" class="ventana"></div>
 
         <?php
 
@@ -206,25 +219,28 @@
                 success: function(res){
                     document.getElementById('respuesta_congelar').style.display='block';
                     $('#respuesta_congelar').html(res);
+                    $('#venta_menu').trigger('click');
                 },
                 error: function(res){
                     alert("Problemas al mostrar cuadre de caja");
                 }
             });
         });
+        //ver cuentas congeladas
         $('#Enviarccongeladas1_1').click(function(){
             $.ajax({
                 url:'../PHP/consultaccongeladas1_1.php',
                 success: function(res){
                     document.getElementById('respuesta_congeladas').style.display='block';
                     $('#respuesta_congeladas').html(res);
+                    ocultar_menu_venta();
                 },
                 error: function(res){
                     alert("Problemas al mostrar cuadre de caja");
                 }
             });
         });
-
+        //traer productos de la cuenta congelada
         $('#Enviarccongeladas1_2').click(function(){
             $.ajax({
                 url:'../PHP/consultaccongeladas1_2.php',
@@ -246,6 +262,36 @@
                 success: function(res){
                     document.getElementById('respuesta_facturar').style.display='block';
                     $('#respuesta_facturar').html(res);
+                    ocultar_menu_venta();
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario productos en facturación");
+                }
+            });
+        });
+        $('#Enviarfacturaobs1_1').click(function(){
+            $.ajax({
+                url:'../PHP/consultafacturaobs1_1.php',
+                success: function(res){
+                    document.getElementById('respuesta_facturarobs').style.display='block';
+                    $('#respuesta_facturarobs').html(res);
+                    ocultar_menu_venta();
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario productos en facturación");
+                }
+            });
+        });
+        $('#Enviarfacturaobs1_2').click(function(){
+            $.ajax({
+                url:'../PHP/impresion2.php',
+                type:'POST',
+                data: $('#form_ventas_v1_1').serialize(),
+                success: function(res){
+                    //$('#respuesta_probador').html(res);
+                    document.getElementById('respuesta_facturarobs').style.display='none';
+                    document.getElementById('xcont_factuobs1_1').style.display='none';
+                    document.getElementById('xcont_4_1').style.display='block';
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario productos en facturación");
@@ -258,3 +304,22 @@
 
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>
+
+<script>
+    document.getElementById("texto1").addEventListener('keyup', autoCompleteNew);
+    document.getElementById("texto2").addEventListener('keyup', autoCompleteNew2);
+
+    function autoCompleteNew(e) {            
+        var value = $(this).val();         
+        $("#copia1").val(value); 
+    }
+    function autoCompleteNew2(e) {            
+        var value = $(this).val();         
+        $("#copia2").val(value); 
+    }
+
+    function mandar_texto() {
+        var x = document.getElementById("metodo_de_pago").value;
+        document.getElementById("tipo_pago").value = x;
+    }
+</script>

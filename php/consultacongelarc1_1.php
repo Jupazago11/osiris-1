@@ -45,9 +45,21 @@
 
         ?>
 
+        <br><br><br><br><br><br><br><br>
+        <form id="mandar_nombre_refe" method="POST">
+            <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+                <tr>
+                    <th>Nombre de referencia</th>
+                    <td><input type="text" name="name_refe"></input>&nbsp;&nbsp;&nbsp;<button type="button" class="w3-btn w3-teal" id="Enviar_nombre_refe">Guardar</button></td>
+                    <input type="hidden" name="id_facturacion" value="<?php echo $id_facturacion ?>"></input>
+                </tr>
+            </table>
+        </form>
+
+
         <script>
-            $('#enviarv1').trigger('click');
-            document.getElementById('xcont_4_1').style.display='block';
+            //$('#enviarv1').trigger('click');
+            //document.getElementById('xcont_4_1').style.display='block';
         </script>
         
         <?php
@@ -60,6 +72,8 @@
                 title: 'Oops...',
                 text: 'No se puede congelar una cuenta sin productos',
             })
+            document.getElementById('respuesta_congelar').style.display='none';
+            document.getElementById('xcont_4_1').style.display='block';
         </script>
         <?php
     }
@@ -73,3 +87,19 @@
 
 
 ?>
+<script>
+    $('#Enviar_nombre_refe').click(function(){
+        $.ajax({
+            url:'../PHP/consultacongelarc1_2.php',
+            type:'POST',
+            data: $('#mandar_nombre_refe').serialize(),
+            success: function(res){
+                $('#enviarv1').trigger('click');
+                document.getElementById('xcont_4_1').style.display='block';
+            },
+            error: function(res){
+                alert("Problemas al mostrar cuadre de caja");
+            }
+        });
+    });
+</script>

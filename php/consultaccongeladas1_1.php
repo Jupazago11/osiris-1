@@ -12,15 +12,16 @@
 ?>
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" id="xcont_conge1_1" onclick="document.getElementById('respuesta_congeladas').style.display='none'; document.getElementById('xcont_4_1').style.display='block';">X</a>
 
-    <table class="tabla_sugerido" id="myTable3" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+    <table class="tabla_sugerido" id="myTable3" style="width:60%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
         <tr>
-            <th colspan="5"><input type="text" id="myInput3" onkeyup="myFunctionTabla3()" placeholder="Nombre.." title="Type in a name"></th>
+            <th colspan="6"><input type="text" id="myInput3" onkeyup="myFunctionTabla3()" placeholder="Nombre.." title="Type in a name"></th>
         </tr>
         <tr>
             <th>#</th>
             <th>Código</th>
             <th>Nombre</th>
             <th>Cajero</th>
+            <th>Fecha</th>
             <th></th>
         </tr>
 
@@ -54,6 +55,7 @@
                 <td><?php echo $ids_fact[$i] ?></td>
                 <td><?php echo $nom_cong[$i] ?></td>
                 <td><?php echo $nom_pers[$i] ?></td>
+                <td><?php echo $fechas[$i] ?></td>
                 <td><input type="button" class="w3-btn w3-teal btn_congelados" value="Seleccionar"/></td>
             </tr>
             <?php

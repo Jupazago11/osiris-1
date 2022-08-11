@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-08-2022 a las 00:25:06
+-- Tiempo de generación: 12-08-2022 a las 01:31:37
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -234,7 +234,35 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (22, 10, 3, 3, 9000, 'activo'),
 (23, 7, 1, 1, 500, 'activo'),
 (24, 7, 2, 2, 10000, 'activo'),
-(25, 7, 3, 3, 9000, 'activo');
+(25, 7, 3, 3, 9000, 'activo'),
+(26, 11, 1, 1, 500, 'activo'),
+(27, 11, 2, 2, 10000, 'activo'),
+(28, 11, 3, 3, 9000, 'activo'),
+(29, 11, 4, 4, 6000, 'activo'),
+(30, 11, 5, 5, 20000, 'activo'),
+(31, 12, 5, 5, 20000, 'activo'),
+(32, 12, 4, 8, 12000, 'activo'),
+(33, 13, 9, 50, 90000, 'activo'),
+(34, 13, 8, 50, 200000, 'activo'),
+(35, 14, 5, 4, 16000, 'activo'),
+(36, 14, 6, 4, 14000, 'activo'),
+(37, 15, 5, 5, 20000, ''),
+(38, 15, 4, 6, 9000, ''),
+(39, 15, 3, 7, 21000, ''),
+(40, 15, 5, 5, 20000, 'activo'),
+(41, 15, 4, 6, 9000, 'activo'),
+(42, 15, 3, 7, 21000, 'activo'),
+(43, 16, 5, 1, 4000, 'activo'),
+(44, 17, 1, 1, 500, ''),
+(45, 17, 2, 2, 10000, ''),
+(46, 17, 3, 3, 9000, ''),
+(47, 17, 4, 4, 6000, ''),
+(48, 17, 5, 5, 20000, ''),
+(49, 17, 1, 1, 500, 'activo'),
+(50, 17, 2, 2, 10000, 'activo'),
+(51, 17, 3, 3, 9000, 'activo'),
+(52, 17, 4, 4, 6000, 'activo'),
+(53, 17, 5, 5, 20000, 'activo');
 
 -- --------------------------------------------------------
 
@@ -878,11 +906,18 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 (4, NULL, '2022-08-08 16:08:59', NULL, NULL, 1, NULL, 'juan', 'congelado'),
 (5, NULL, '2022-08-08 16:10:32', NULL, NULL, 3, NULL, NULL, 'activo'),
 (6, NULL, '2022-08-08 18:00:56', NULL, NULL, 1, NULL, NULL, ''),
-(7, NULL, '2022-08-08 18:01:22', NULL, NULL, 1, NULL, 'yaned', 'finalizada'),
+(7, 'pedro', '2022-08-08 18:01:22', 'tarjeta', NULL, 1, NULL, 'yaned', 'finalizada'),
 (8, NULL, '2022-08-08 18:02:53', NULL, NULL, 1, NULL, 'santiago', 'congelado'),
-(9, NULL, '2022-08-09 20:30:34', NULL, NULL, 1, NULL, NULL, 'finalizada'),
-(10, NULL, '2022-08-10 17:20:30', NULL, NULL, 1, NULL, NULL, 'finalizada'),
-(11, NULL, '2022-08-10 17:22:01', NULL, NULL, 1, NULL, NULL, 'activo');
+(9, 'gabriel', '2022-08-09 20:30:34', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
+(10, 'susana', '2022-08-10 17:20:30', 'contado', NULL, 3, NULL, NULL, 'finalizada'),
+(11, NULL, '2022-08-10 17:22:01', NULL, NULL, 1, NULL, NULL, 'congelado'),
+(12, NULL, '2022-08-10 19:12:06', NULL, NULL, 1, NULL, NULL, 'congelado'),
+(13, NULL, '2022-08-10 19:13:46', NULL, NULL, 1, NULL, 'carlos', 'congelado'),
+(14, NULL, '2022-08-10 19:15:56', NULL, NULL, 1, NULL, NULL, 'congelado'),
+(15, 'rosa', '2022-08-10 19:19:35', 'tarjeta', NULL, 1, NULL, 'juanito', 'finalizada'),
+(16, NULL, '2022-08-11 11:56:41', NULL, NULL, 1, NULL, 'JOSE', 'congelado'),
+(17, 'juanpa', '2022-08-11 17:06:42', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
+(18, NULL, '2022-08-11 17:06:42', NULL, NULL, 1, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1923,7 +1958,7 @@ ALTER TABLE `cuenta_cobro`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
@@ -1941,7 +1976,7 @@ ALTER TABLE `domicilio`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `gasto`
