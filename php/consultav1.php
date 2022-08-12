@@ -121,26 +121,27 @@
             </form>
         </div>
         <div id="venta_menu">
-            <img src="../iconos/add-contact.png" id="Enviarcc1_1" width="60px" height="60px" onclick="document.getElementById('respuesta_crear_cliente').style.display='block'">
-            <a href="../php/impresion1.php" target="popup" onclick="window.open('../php/impresion1.php','name','width=600,height=800')"><img src="../iconos/printer.png"     width="60px" height="60px"></a>
-            <img src="../iconos/black.png" width="60px" height="60px">
+            <img src="../iconos/add-contact.png"        id="Enviarcc1_1"            width="60px" height="60px" onclick="document.getElementById('respuesta_crear_cliente').style.display='block'">
+            <a href="../php/impresion1.php" target="popup" onclick="window.open('../php/impresion1.php','name','width=600,height=800')"><img src="../iconos/printer.png"               width="60px" height="60px"></a>
+            <img src="../iconos/pago.png"               id="Enviarabonar1_1"        width="60px" height="60px">
             <img src="../iconos/trash-bin.png" width="60px" height="60px" onclick="$('#enviarv1').trigger('click');">
-            <img src="../iconos/factura_congelar.png" id="Enviarcongelarc1_1" width="60px" height="60px"><br>
-            <img src="../iconos/cuenta.png" id="Enviarfactura1_1" width="60px" height="60px">
-            <img src="../iconos/cuentaobs.png" id="Enviarfacturaobs1_1" width="60px" height="60px">
+            <img src="../iconos/factura_congelar.png"   id="Enviarcongelarc1_1"     width="60px" height="60px"><br>
+            <img src="../iconos/cuenta.png"             id="Enviarfactura1_1"       width="60px" height="60px">
+            <img src="../iconos/cuentaobs.png"          id="Enviarfacturaobs1_1"    width="60px" height="60px">
             <img src="../iconos/black.png" width="60px" height="60px">
             <img src="../iconos/black.png" width="60px" height="60px">
-            <img src="../iconos/factura_congelar2.png" id="Enviarccongeladas1_1" width="60px" height="60px">
+            <img src="../iconos/factura_congelar2.png"  id="Enviarccongeladas1_1"   width="60px" height="60px">
         </div>
 
-        <div id="respuesta_cuadre_caja" class="ventana"></div>
-        <div id="respuesta_domicilio"   class="ventana"></div>
-        <div id="respuesta_crear_cliente" class="ventana"></div>
-        <div id="respuesta_congelar"    class="ventana"></div>
-        <div id="respuesta_congeladas"  class="ventana"></div>
-        <div id="respuesta_facturar"    class="ventana"></div>
-        <div id="respuesta_facturarobs" class="ventana"></div>
-        <div id="respuesta_probador" class="ventana"></div>
+        <div id="respuesta_cuadre_caja"     class="ventana"></div>
+        <div id="respuesta_domicilio"       class="ventana"></div>
+        <div id="respuesta_crear_cliente"   class="ventana"></div>
+        <div id="respuesta_congelar"        class="ventana"></div>
+        <div id="respuesta_congeladas"      class="ventana"></div>
+        <div id="respuesta_facturar"        class="ventana"></div>
+        <div id="respuesta_facturarobs"     class="ventana"></div>
+        <div id="respuesta_abonar"          class="ventana"></div>
+        <div id="respuesta_probador"        class="ventana"></div>
 
         <?php
 
@@ -176,6 +177,7 @@
                 }
             });
         });
+
         $('#Enviarv1_2').click(function(){
             $.ajax({
                 url:'../PHP/consultav1_2.php',
@@ -187,6 +189,7 @@
                 }
             });
         });
+
         $('#Enviard1_1').click(function(){
             $.ajax({
                 url:'../PHP/consultad1_1.php',
@@ -200,6 +203,7 @@
                 }
             });
         });
+
         $('#Enviarcc1_1').click(function(){
             $.ajax({
                 url:'../PHP/consultacc1_1.php',
@@ -211,6 +215,7 @@
                 }
             });
         });
+
         $('#Enviarcongelarc1_1').click(function(){
             $.ajax({
                 url:'../PHP/consultacongelarc1_1.php',
@@ -226,6 +231,7 @@
                 }
             });
         });
+
         //ver cuentas congeladas
         $('#Enviarccongeladas1_1').click(function(){
             $.ajax({
@@ -240,6 +246,7 @@
                 }
             });
         });
+
         //traer productos de la cuenta congelada
         $('#Enviarccongeladas1_2').click(function(){
             $.ajax({
@@ -254,6 +261,7 @@
                 }
             });
         });
+
         $('#Enviarfactura1_1').click(function(){
             $.ajax({
                 url:'../PHP/consultafactura1_1.php',
@@ -269,6 +277,7 @@
                 }
             });
         });
+
         $('#Enviarfacturaobs1_1').click(function(){
             $.ajax({
                 url:'../PHP/consultafacturaobs1_1.php',
@@ -282,9 +291,11 @@
                 }
             });
         });
+
         $('#Enviarfacturaobs1_2').click(function(){
             $.ajax({
                 url:'../PHP/impresion2.php',
+                //url:'../PHP/probador_mensajes.php',
                 type:'POST',
                 data: $('#form_ventas_v1_1').serialize(),
                 success: function(res){
@@ -292,6 +303,20 @@
                     document.getElementById('respuesta_facturarobs').style.display='none';
                     document.getElementById('xcont_factuobs1_1').style.display='none';
                     document.getElementById('xcont_4_1').style.display='block';
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario productos en facturación");
+                }
+            });
+        });
+
+        $('#Enviarabonar1_1').click(function(){
+            $.ajax({
+                url:'../PHP/consultaabonar1_1.php',
+                success: function(res){
+                    document.getElementById('respuesta_abonar').style.display='block';
+                    $('#respuesta_abonar').html(res);
+                    ocultar_menu_venta();
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario productos en facturación");

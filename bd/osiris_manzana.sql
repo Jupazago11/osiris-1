@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 12-08-2022 a las 01:31:37
+-- Tiempo de generación: 13-08-2022 a las 01:21:16
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -92,12 +92,12 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (2, 2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
 (3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo'),
 (5, 3, 'anónimo', NULL, 'anonima', 'anonima', 'activo'),
-(6, NULL, 'jacinto', NULL, NULL, NULL, 'activo'),
-(7, NULL, 'juana', NULL, NULL, NULL, 'activo'),
-(8, NULL, 'carmen', NULL, NULL, NULL, 'activo'),
-(9, NULL, 'pacho', NULL, NULL, NULL, 'activo'),
-(10, NULL, 'jairo', NULL, NULL, NULL, 'activo'),
-(11, NULL, 'Jaime R.h', NULL, NULL, NULL, 'activo'),
+(6, 4, 'jacinto', NULL, NULL, NULL, 'activo'),
+(7, 4, 'juana', NULL, NULL, NULL, 'activo'),
+(8, 4, 'carmen', NULL, NULL, NULL, 'activo'),
+(9, 4, 'pacho', NULL, NULL, NULL, 'activo'),
+(10, 4, 'jairo', NULL, NULL, NULL, 'activo'),
+(11, 4, 'Jaime R.h', NULL, NULL, NULL, 'activo'),
 (12, 1, 'juan pa', 123456, 'carrera', '123456 ', 'activo');
 
 -- --------------------------------------------------------
@@ -224,9 +224,9 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (12, 7, 1, 1, 500, ''),
 (13, 7, 2, 2, 10000, ''),
 (14, 7, 3, 3, 9000, ''),
-(15, 8, 4, 8, 12000, 'activo'),
-(16, 8, 8, 4, 16000, 'activo'),
-(17, 8, 5, 10, 40000, 'activo'),
+(15, 8, 4, 8, 12000, ''),
+(16, 8, 8, 4, 16000, ''),
+(17, 8, 5, 10, 40000, ''),
 (18, 9, 2, 5, 25000, 'activo'),
 (19, 9, 4, 5, 7500, 'activo'),
 (20, 10, 1, 1, 500, 'activo'),
@@ -262,7 +262,10 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (50, 17, 2, 2, 10000, 'activo'),
 (51, 17, 3, 3, 9000, 'activo'),
 (52, 17, 4, 4, 6000, 'activo'),
-(53, 17, 5, 5, 20000, 'activo');
+(53, 17, 5, 5, 20000, 'activo'),
+(54, 8, 4, 50, 75000, 'activo'),
+(55, 8, 8, 50, 200000, 'activo'),
+(56, 8, 5, 50, 200000, 'activo');
 
 -- --------------------------------------------------------
 
@@ -907,7 +910,7 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 (5, NULL, '2022-08-08 16:10:32', NULL, NULL, 3, NULL, NULL, 'activo'),
 (6, NULL, '2022-08-08 18:00:56', NULL, NULL, 1, NULL, NULL, ''),
 (7, 'pedro', '2022-08-08 18:01:22', 'tarjeta', NULL, 1, NULL, 'yaned', 'finalizada'),
-(8, NULL, '2022-08-08 18:02:53', NULL, NULL, 1, NULL, 'santiago', 'congelado'),
+(8, 'Camilo', '2022-08-12 16:39:40', 'credito', 12, 1, NULL, 'santiago', 'finalizada'),
 (9, 'gabriel', '2022-08-09 20:30:34', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
 (10, 'susana', '2022-08-10 17:20:30', 'contado', NULL, 3, NULL, NULL, 'finalizada'),
 (11, NULL, '2022-08-10 17:22:01', NULL, NULL, 1, NULL, NULL, 'congelado'),
@@ -1702,7 +1705,7 @@ INSERT INTO `sugerido` (`id_sugerido`, `id_pers2`, `fecha_sugerido`, `pedido_pro
 
 CREATE TABLE `ubicacion` (
   `id_ubi` int(11) NOT NULL,
-  `ubicacion` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `ubicacion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -1713,7 +1716,8 @@ CREATE TABLE `ubicacion` (
 INSERT INTO `ubicacion` (`id_ubi`, `ubicacion`, `estado`) VALUES
 (1, 'urbano', 'activo'),
 (2, 'Sopetran', 'activo'),
-(3, 'san francisco', 'activo');
+(3, 'san francisco', 'activo'),
+(4, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1958,7 +1962,7 @@ ALTER TABLE `cuenta_cobro`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
@@ -2066,7 +2070,7 @@ ALTER TABLE `sugerido`
 -- AUTO_INCREMENT de la tabla `ubicacion`
 --
 ALTER TABLE `ubicacion`
-  MODIFY `id_ubi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_ubi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `vehiculo`

@@ -51,7 +51,9 @@
                 <td><?php echo $fila['fecha'] ?></td>
                 <td><?php echo $fila['forma_pago'] ?></td>
                 <td><?php echo $fila['nombre_pers'] ?></td>
-                <td><a href="../php/impresion2.php" target="popup" onclick="window.open('../php/impresion2.php','name','width=600,height=800')"><img src="../iconos/buscar.png" width="40px" height="40px" class="btn_facturados"></a></td>
+                <td><?php 
+                $id = $fila['id_facturacion'];
+                echo "<a href='../php/impresion2.php?Nufactura=$id?>' target='popup'><img src='../iconos/buscar.png' width='40px' height='40px' class='btn_facturados'></a>"?></td>
             </tr>
             <?php
         }
