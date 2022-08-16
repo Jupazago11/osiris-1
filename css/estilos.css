@@ -694,6 +694,7 @@ img:hover {
 
 .ventana{
   position:absolute; 
+  overflow-y: scroll;
   align-content: center;
   align-items: center;
   top:0;

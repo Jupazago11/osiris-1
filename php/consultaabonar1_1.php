@@ -16,11 +16,11 @@
         <tr>
             <th></th>
             <th><input type="text" id="myInput5" onkeyup="myFunctionTabla5()" placeholder="Nombre.." title="Type in a name"></th>
-            <th><input type="text" id="myInput6" onkeyup="myFunctionTabla6()" placeholder="Nombre.." title="Type in a name" size="6"></th>
+            <th><input type="text" id="myInput6" onkeyup="myFunctionTabla6()" placeholder="Cédula.." title="Type in a name" size="6"></th>
             <th></th>
             <th></th>
             <th></th>
-            <th></th>
+
         </tr>
         <tr>
             <th>#</th>
@@ -29,13 +29,14 @@
             <th>Dirección</th>
             <th>Ubicación</th>
             <th></th>
-            <th></th>
+
         </tr>
 
         <?php
         $consulta = mysqli_query($conexion, "SELECT `id_cliente`, ubicacion.ubicacion, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente` 
         FROM `cliente` 
-        INNER JOIN ubicacion ON ubicacion.id_ubi = cliente.id_ubi1;") or die ("Error al consultar: proveedores");
+        INNER JOIN ubicacion ON ubicacion.id_ubi = cliente.id_ubi1
+        WHERE cliente.identificacion_cliente != ''") or die ("Error al consultar: proveedores");
 
         $contador = 0;
         while (($fila = mysqli_fetch_array($consulta))!=NULL){
@@ -44,12 +45,12 @@
             ?>
             <tr>
                 <th><?php echo $contador ?></th>
+                <td style="display:none"><?php echo $fila['id_cliente'] ?></td>
                 <td><?php echo $fila['nombre_cliente'] ?></td>
                 <td><?php echo $fila['identificacion_cliente'] ?></td>
                 <td><?php echo $fila['direccion_cliente'] ?></td>
                 <td><?php echo $fila['ubicacion'] ?></td>
-                <td><img src="../iconos/contado.png" width="40px" height="40px"></td>
-                <td><img src="../iconos/calculadora.png" width="40px" height="40px"></td>
+                <td><img src="../iconos/configuraciones.png" class="btn_con" width="40px" height="40px"></td>
             </tr>
             <?php
         }
@@ -57,17 +58,31 @@
         ?>
     
     </table>
+    <form id="form_seleccionar_cliente" method='post'>
+        <input type="hidden" name="id" id="id_sug"/>
+    </form>
+
+    <div id="respuesta_abonar2"          class="ventana" style=" overflow: hidden;"></div>
 <?php
 
 
 ?>
 <script>
-    //era show3 pero no funcionó
-$('#myTable4').on('click', '.btn_facturados', function(event) {
+$('#myTable5').on('click', '.btn_con', function(event) {
+    var inputid = document.getElementById("id_sug");
+    inputid.value = $(this).parents('tr').find('td:nth-child(2)').text();
 
-  var inputNombre = document.getElementById("Nufactura");
-  inputNombre.value = $(this).parents('tr').find('td:nth-child(2)').text();
-
-  $('#Enviarfacturaobs1_2').trigger('click');  
+    $.ajax({
+        url:'../PHP/consultaabonar1_2.php',
+        type:'POST',
+        data: $('#form_seleccionar_cliente').serialize(),
+        success: function(res){
+            document.getElementById('respuesta_abonar2').style.display='block';
+            $('#respuesta_abonar2').html(res);
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario abonar");
+        }
+    });
 });
 </script>

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 13-08-2022 a las 01:21:16
+-- Tiempo de generación: 17-08-2022 a las 00:13:25
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -88,7 +88,7 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente`, `telefono_cliente`, `estado`) VALUES
-(1, 1, 'Juanito V.', 123456, 'carrera 1 #12-12', '123456789', 'activo'),
+(1, 1, 'Juanito V.', 102030, 'carrera 1 #12-12', '1', 'activo'),
 (2, 2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
 (3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo'),
 (5, 3, 'anónimo', NULL, 'anonima', 'anonima', 'activo'),
@@ -98,7 +98,7 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (9, 4, 'pacho', NULL, NULL, NULL, 'activo'),
 (10, 4, 'jairo', NULL, NULL, NULL, 'activo'),
 (11, 4, 'Jaime R.h', NULL, NULL, NULL, 'activo'),
-(12, 1, 'juan pa', 123456, 'carrera', '123456 ', 'activo');
+(12, 1, 'juan pa', 1037977046, 'carrera', '123456 ', 'activo');
 
 -- --------------------------------------------------------
 
@@ -925,6 +925,19 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `factura_abono`
+--
+
+CREATE TABLE `factura_abono` (
+  `id_factura_abono` int(11) NOT NULL,
+  `abono` int(11) NOT NULL,
+  `fecha_abono` date NOT NULL,
+  `id_cliente1` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `gasto`
 --
 
@@ -1717,7 +1730,7 @@ INSERT INTO `ubicacion` (`id_ubi`, `ubicacion`, `estado`) VALUES
 (1, 'urbano', 'activo'),
 (2, 'Sopetran', 'activo'),
 (3, 'san francisco', 'activo'),
-(4, NULL, 'activo');
+(4, NULL, 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -1817,6 +1830,13 @@ ALTER TABLE `factura`
   ADD PRIMARY KEY (`id_facturacion`),
   ADD KEY `id_cliente3` (`id_cliente3`),
   ADD KEY `id_pers1` (`id_pers1`) USING BTREE;
+
+--
+-- Indices de la tabla `factura_abono`
+--
+ALTER TABLE `factura_abono`
+  ADD PRIMARY KEY (`id_factura_abono`),
+  ADD KEY `id_cliente1` (`id_cliente1`);
 
 --
 -- Indices de la tabla `gasto`
@@ -1983,6 +2003,12 @@ ALTER TABLE `factura`
   MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
+-- AUTO_INCREMENT de la tabla `factura_abono`
+--
+ALTER TABLE `factura_abono`
+  MODIFY `id_factura_abono` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de la tabla `gasto`
 --
 ALTER TABLE `gasto`
@@ -2116,6 +2142,12 @@ ALTER TABLE `domicilio`
 ALTER TABLE `factura`
   ADD CONSTRAINT `factura_ibfk_1` FOREIGN KEY (`id_pers1`) REFERENCES `personal` (`id_pers`),
   ADD CONSTRAINT `factura_ibfk_2` FOREIGN KEY (`id_cliente3`) REFERENCES `cliente` (`id_cliente`);
+
+--
+-- Filtros para la tabla `factura_abono`
+--
+ALTER TABLE `factura_abono`
+  ADD CONSTRAINT `factura_abono_ibfk_1` FOREIGN KEY (`id_cliente1`) REFERENCES `cliente` (`id_cliente`);
 
 --
 -- Filtros para la tabla `gas_detalle`
