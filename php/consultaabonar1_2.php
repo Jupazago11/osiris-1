@@ -9,7 +9,7 @@
     }
     $conexion = conectar();                     //Obtenemos la conexion
 
-
+    
 
     $id_cliente             = $_POST['id'];
 
@@ -77,13 +77,38 @@
             <th></th>
         </tr>
         <tr>
-            <td><img src="../iconos/pago.png" class="btn_abonar" width="50px" height="50px">
-            <img src="../iconos/printer2.png" class="btn_imprimir" width="50px" height="50px"></td>
+            <td><img src="../iconos/pago.png" width="50px" height="50px" onclick="document.getElementById('myTable7').style.display='block';">
+            <?php 
+                echo "<a href='../php/impresion3.php?Nucliente=$id_cliente?>' target='popup'><img src='../iconos/printer2.png' width='50px' height='50px' class='btn_abonados'></a>"?>
+
             <td style="text-align: right"><img src="../iconos/disquete.png" class="btn_guardar" width="50px" height="50px"></td>
         </tr>
 
     </table>
     </form>
+
+    <form id="formu_abonar" method="post">
+        <table class="tabla_sugerido" id="myTable7" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white; display:none">
+
+            <input type="hidden" name="id_cliente" value="<?php echo $id_cliente ?>"/>
+
+            <tr>
+                <th style="width:40%;">Cantidad</th>
+                <td style="width:60%;"><input type="text" name="abono" value="0" class="puntos"/>
+                    <select name="metodo_de_pago2" id="metodo_de_pago2">
+                        <option value="efectivo">Efectivo</option>
+                        <option value="tarjeta">Tarjeta</option>
+                    </select>
+                    <img src="../iconos/dinero.png" class="btn_abonar" width="50px" height="50px" class="btn_abonar">
+                </td>
+            </tr>       
+        </table>
+    </form>
+
+    <?php 
+    echo "<a href='../php/impresion4.php?Nucliente=$id_cliente?>' target='popup' style='display:none;'><img src='../iconos/printer2.png' width='50px' height='50px' class='btn_abonados' id='ver_factus'></a>"?>
+
+
     <div id="respuesta_abonar2"          class="ventana"></div>
 
 <script>
@@ -93,12 +118,45 @@
             type:'POST',
             data: $('#formulario_de_abonos').serialize(),
             success: function(res){
-                document.getElementById('respuesta_abonar2').style.display='block';
+                Swal.fire(
+                '¡Muy bien!',
+                'Guardado Exitoso',
+                'success'
+                )
                 $('#respuesta_abonar2').html(res);
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario abonar");
             }
         });
+        document.getElementById('respuesta_abonar2').style.display='none';
+        document.getElementById('xcont_factuabo1_1').style.display='block';
+        $('#Enviarabonar1_1').trigger('click');
+        
     });
+
+    $('#myTable7').on('click', '.btn_abonar', function(event) {
+        $.ajax({
+            url:'../PHP/consultaabonar1_4.php',
+            type:'POST',
+            data: $('#formu_abonar').serialize(),
+            success: function(res){
+                Swal.fire(
+                '¡Muy bien!',
+                'Guardado Exitoso',
+                'success'
+                )
+                
+                //Vamos a ver el recibo del ultimo pago
+                $('#ver_factus').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario abonar");
+            }
+        });
+        document.getElementById('respuesta_abonar2').style.display='none';
+        document.getElementById('xcont_factuabo1_1').style.display='block';
+        
+    });
+
 </script>

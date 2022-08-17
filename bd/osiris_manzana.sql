@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-08-2022 a las 00:13:25
+-- Tiempo de generación: 18-08-2022 a las 01:06:06
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -88,8 +88,8 @@ CREATE TABLE `cliente` (
 --
 
 INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente`, `telefono_cliente`, `estado`) VALUES
-(1, 1, 'Juanito V.', 102030, 'carrera 1 #12-12', '1', 'activo'),
-(2, 2, 'Jaime R.', 1234567, 'sopetran', '3154975645', 'activo'),
+(1, 1, 'Juanito V.', 102030, 'carrera 3 #11-13', '3131234567', 'activo'),
+(2, 2, 'Jaime R.', 1234567, 'ramada', '3154975645', 'activo'),
 (3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo'),
 (5, 3, 'anónimo', NULL, 'anonima', 'anonima', 'activo'),
 (6, 4, 'jacinto', NULL, NULL, NULL, 'activo'),
@@ -223,7 +223,7 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (10, 4, 8, 10, 40000, 'activo'),
 (12, 7, 1, 1, 500, ''),
 (13, 7, 2, 2, 10000, ''),
-(14, 7, 3, 3, 9000, ''),
+(14, 7, 3, 2, 6000, ''),
 (15, 8, 4, 8, 12000, ''),
 (16, 8, 8, 4, 16000, ''),
 (17, 8, 5, 10, 40000, ''),
@@ -932,8 +932,19 @@ CREATE TABLE `factura_abono` (
   `id_factura_abono` int(11) NOT NULL,
   `abono` int(11) NOT NULL,
   `fecha_abono` date NOT NULL,
-  `id_cliente1` int(11) NOT NULL
+  `id_cliente1` int(11) NOT NULL,
+  `metodo_abono` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
+
+--
+-- Volcado de datos para la tabla `factura_abono`
+--
+
+INSERT INTO `factura_abono` (`id_factura_abono`, `abono`, `fecha_abono`, `id_cliente1`, `metodo_abono`) VALUES
+(1, 0, '2022-08-17', 1, ''),
+(2, 0, '2022-08-17', 1, ''),
+(3, 2000, '2022-08-17', 1, ''),
+(4, 4000, '2022-08-16', 1, '');
 
 -- --------------------------------------------------------
 
@@ -2006,7 +2017,7 @@ ALTER TABLE `factura`
 -- AUTO_INCREMENT de la tabla `factura_abono`
 --
 ALTER TABLE `factura_abono`
-  MODIFY `id_factura_abono` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_factura_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `gasto`
