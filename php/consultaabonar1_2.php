@@ -40,7 +40,7 @@
         </tr>
         <tr>
             <th>Identificación</th>
-            <td><input type="text" name="identificacion_cliente" value="<?php echo $identificacion_cliente ?>" size="40"/></td>
+            <td><input type="text" name="identificacion_cliente" value="<?php echo $identificacion_cliente ?>" size="40" readonly style="background: transparent;border: none;"/></td>
         </tr>
         <tr>
             <th>Dirección</th>

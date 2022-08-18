@@ -121,21 +121,15 @@
             </form>
         </div>
         <div id="venta_menu">
+            <img src="../iconos/fondo.png"              width="60px" height="60px">
+            <img src="../iconos/cuenta.png"             id="Enviarfactura1_1"     width="60px" height="60px">
+            <img src="../iconos/factura_congelar.png"   id="Enviarcongelarc1_1"   width="60px" height="60px">
+            <img src="../iconos/add-contact.png"        id="Enviarcc1_1"          width="60px" height="60px" onclick="document.getElementById('respuesta_crear_cliente').style.display='block'">
             
-            <a href="../php/impresion1.php" target="popup" onclick="window.open('../php/impresion1.php','name','width=600,height=800')"><img src="../iconos/printer.png"               width="60px" height="60px"></a>
             <img src="../iconos/trash-bin.png" width="60px" height="60px" onclick="$('#enviarv1').trigger('click');">
-            <img src="../iconos/cuenta.png"             id="Enviarfactura1_1"       width="60px" height="60px">
-            <img src="../iconos/add-contact.png"        id="Enviarcc1_1"            width="60px" height="60px" onclick="document.getElementById('respuesta_crear_cliente').style.display='block'">
-            <img src="../iconos/factura_congelar.png"   id="Enviarcongelarc1_1"     width="60px" height="60px"><br>
-
-            <img src="../iconos/black.png" width="60px" height="60px">
-            
-            <img src="../iconos/black.png" width="60px" height="60px">
-            <img src="../iconos/cuentaobs.png"          id="Enviarfacturaobs1_1"    width="60px" height="60px">
-            
-            
-            <img src="../iconos/add-contact2.png"               id="Enviarabonar1_1"        width="60px" height="60px">
-            <img src="../iconos/factura_congelar2.png"  id="Enviarccongeladas1_1"   width="60px" height="60px">
+            <img src="../iconos/cuentaobs.png"          id="Enviarfacturaobs1_1"  width="60px" height="60px">
+            <img src="../iconos/factura_congelar2.png"  id="Enviarccongeladas1_1" width="60px" height="60px">
+            <img src="../iconos/add-contact2.png"       id="Enviarabonar1_1"      width="60px" height="60px">
         </div>
 
         <div id="respuesta_cuadre_caja"     class="ventana"></div>

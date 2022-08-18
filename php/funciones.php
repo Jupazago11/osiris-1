@@ -329,9 +329,12 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
         require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
     }
     $conexion = conectar();                     //Obtenemos la conexion
-
+    ?>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_1').style.display='none';">X</a>
+    <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
         ?>
+        
         <form id="seleccion_vehiculo" method="POST">
             <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
             <input type="hidden" name="tipo_de_cuenta" value="<?php echo $tipo_de_cuenta; ?>">
@@ -415,6 +418,141 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
         </script>
         </div>
         <?php
+    }
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+function control_domiciliario2($usuario, $tipo_de_cuenta){
+
+    if(existencia_de_la_conexion()){
+        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+    }
+    $conexion = conectar();                     //Obtenemos la conexion
+
+    date_default_timezone_set('America/Bogota');
+    $fecha = date('Y-m-d', time());
+
+
+    $vehiculo        = "ABC-12A";
+
+    if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
+        ?>
+        <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_2').style.display='none';">X</a>
+
+        <?php
+        $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado, domicilio.tiempo_salida, domicilio.tiempo_llegada, domicilio.id_domi
+        FROM `domicilio` 
+        INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers 
+        INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente  
+        INNER JOIN `vehiculo` ON vehiculo.id_vehiculo = domicilio.id_vehiculo2 
+        WHERE vehiculo.placa = '$vehiculo' 
+        AND `fecha` = '$fecha'
+        ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
+        ?>
+
+        
+
+        <table class="tabla_sugerido">
+        <tr>
+            <th>#</th>
+            <th>Personal</th>
+            <th colspan="3">Cliente</th>
+            <th>Destino</th>
+            <th>Salida</th>
+            <th>LLegada</th>
+            <th></th>
+        </tr>
+        <tbody id="tbodyform">
+        
+            <?php
+            $contador = 1;
+            
+            //<span class="numeral"><?php echo $contador ? ></span>
+            //<input type="number" class="numeral" value="<?php echo $contador ? >"></input>
+            while (($fila = mysqli_fetch_array($consulta)) != NULL){
+                ?>
+                <tr>
+                
+                    <td><span class="numeral"><?php echo $contador ?></span></td> 
+                    <td><?php echo $fila['user_pers']; ?></td>
+                    <td><?php echo $fila['nombre_cliente']; ?></td>
+                    <td><div class="tooltip"><i class='fa fa-search' style='font-size:36px'></i>
+                    <span class="tooltiptext"><?php echo $fila['observacion']; ?></span></div></td>
+                    <?php
+                    if($fila['nivel_urgencia'] == "Prioritario"){
+                        ?>
+                        <td><i class='fa fa-exclamation' style='font-size:36px;color:red'></i></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td></td>
+                        <?php
+                    }
+                    ?>
+                    <td><?php echo $fila['ubicacion'].": ".$fila['destino']; ?></td>
+                    <?php
+                    if($fila['tiempo_salida'] == NULL){
+                        ?>
+                        <td>
+                        <label class="switch">
+                        <input type="checkbox" name="salidass[]" onclick="enviar_update()" value="<?php echo $fila['id_domi'] ?>">
+                        <span class="slider"></span>
+                        </label></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td></td>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    if($fila['tiempo_llegada'] == NULL){
+                        ?>
+                        <td>
+                        <label class="switch">
+                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $fila['id_domi'] ?>">
+                        <span class="slider"></span>
+                        </label></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td></td>
+                        <?php
+                    }
+                    ?>
+
+                    <?php
+                    if($fila['estado'] == "activo"){
+                        ?>
+                        <td><i class='fa fa-hourglass-half' style='font-size:36px;color:red'></i></td>
+                        <?php
+                    }elseif($fila['estado'] == "inactivo"){
+                        ?>
+                        <td><i class='fa fa-check' style='font-size:36px;color:green'></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td><i class='fa fa-motorcycle' style='font-size:36px;color:blue'></td>
+                        <?php
+                    }
+                    ?>
+
+                </tr>
+                
+            <?php
+            $contador++;
+        }
+        ?>
+        
+        </tbody>
+        <?php
+        mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+        ?>
+        </table>
+
+        </div>
+        <?php
+
     }
 }
 

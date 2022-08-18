@@ -8,7 +8,10 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="jquery-3.6.0.min.js"></script>
+    <script
+  src="https://code.jquery.com/jquery-3.6.0.js"
+  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+  crossorigin="anonymous"></script>
 </head>
 <body>
 <div class="header">
@@ -24,7 +27,7 @@
 
     $tipo_de_cuenta = iniciar_sesion($usuario, $clave);
 
-    echo " - Nivel de centa ".$tipo_de_cuenta."</div>";
+    echo " - Nivel de cuenta ".$tipo_de_cuenta."</div>";
     // Notificar todos los errores de PHP
     error_reporting(-1);
 ?>
@@ -32,7 +35,7 @@
     <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
         ?>
-        <a class='columna w3-yellow' onclick="ocultarDivs('cont4')"><img src="../iconos/ventas.png" alt="ventas" width="40%" height="40%"><br>Caja</a>
+        <a class='columna w3-yellow' onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="40%" height="40%"><br>Caja</a>
         <a class='columna w3-red' onclick="ocultarDivs('cont1')"><img src="../iconos/pedidos.png" alt="" width="40%" height="40%"><br>Pedidos</a>
         <a class='columna w3-blue' onclick="ocultarDivs('cont2')"><img src="../iconos/empresa.png" alt="empresa" width="40%" height="40%"><br>Empresa</a>
         <a class='columna w3-green' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
@@ -185,7 +188,11 @@
 
             <div class="menu">
                 <?php
-                if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3 || $tipo_de_cuenta == 4){
+                if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
+                    ?>
+                    <a class="columna w3-green" onclick="ocultarDivs3('cont3_2')"><img src="../iconos/proximo.png" width="40%" height="40%"><br>Ver Domicilios</a>
+                    <?php
+                }elseif($tipo_de_cuenta == 4){
                     ?>
                     <a class="columna w3-blue" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="40%" height="40%"><br>Domicilio</a>
                     <?php
@@ -202,7 +209,7 @@
             </div>
             <div id="cont3_2" style="display:none;">
                 <div class="w3-container">
-                    <?php   //crear_pedido($usuario);     ?>
+                    <?php   control_domiciliario2($usuario, $tipo_de_cuenta);     ?>
                 </div>
             </div>
             <div id="cont3_3" style="display:none;">
@@ -221,7 +228,7 @@
     <div id="cont4" style="display:none;">
         <div class="w3-container" id="ventas"  style="display:none;">
             <div class="menu">
-                <a class="columna w3-teal" onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')">Caja 1</a>
+                <a class="columna w3-teal" id="entrar_caja"onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')">Caja 1</a>
                 <a class="columna w3-green" onclick="ocultarDivs4('cont4_2'); $('#enviarv2').trigger('click')">Caja 2</a>
                 <a class="columna w3-blue"  onclick="ocultarDivs4('cont4_3'); $('#enviarv3').trigger('click')">Caja 3</a>
                 <a class="columna w3-red"   onclick="ocultarDivs4('cont4_4'); $('#enviarv4').trigger('click')">Caja 4</a>
@@ -231,7 +238,7 @@
             <div id="cont4_1" style="display:none;">
                 <div class="w3-container">
                     <?php   caja1($usuario);   ?>
-                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" id="xcont_4_1" onclick="document.getElementById('cont4_1').style.display='none'">X</a>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" id="xcont_4_1" onclick="document.getElementById('cont4_1').style.display='none';ocultarDivs0();">X</a>
                 </div>
             </div>
             <div id="cont4_2" style="display:none;">
