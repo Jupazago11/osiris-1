@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-08-2022 a las 01:06:06
+-- Tiempo de generación: 18-08-2022 a las 21:32:55
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -89,7 +89,7 @@ CREATE TABLE `cliente` (
 
 INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacion_cliente`, `direccion_cliente`, `telefono_cliente`, `estado`) VALUES
 (1, 1, 'Juanito V.', 102030, 'carrera 3 #11-13', '3131234567', 'activo'),
-(2, 2, 'Jaime R.', 1234567, 'ramada', '3154975645', 'activo'),
+(2, 1, 'Jaime R.', 1234567, 'ramada', '3154975645', 'activo'),
 (3, 3, 'Juanita F.', 12345678, 'san francisco', '54515454', 'activo'),
 (5, 3, 'anónimo', NULL, 'anonima', 'anonima', 'activo'),
 (6, 4, 'jacinto', NULL, NULL, NULL, 'activo'),
@@ -98,7 +98,7 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (9, 4, 'pacho', NULL, NULL, NULL, 'activo'),
 (10, 4, 'jairo', NULL, NULL, NULL, 'activo'),
 (11, 4, 'Jaime R.h', NULL, NULL, NULL, 'activo'),
-(12, 1, 'juan pa', 1037977046, 'carrera', '123456 ', 'activo');
+(12, 1, 'juan pablo zapata', 1037977046, 'carrera', '123456 ', 'activo');
 
 -- --------------------------------------------------------
 
@@ -265,7 +265,11 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (53, 17, 5, 5, 20000, 'activo'),
 (54, 8, 4, 50, 75000, 'activo'),
 (55, 8, 8, 50, 200000, 'activo'),
-(56, 8, 5, 50, 200000, 'activo');
+(56, 8, 5, 50, 200000, 'activo'),
+(57, 18, 5, 1000, 4000000, 'activo'),
+(58, 19, 5, 50, 200000, 'activo'),
+(59, 20, 4, 1, 1500, 'activo'),
+(60, 5, 6, 1, 3500, 'activo');
 
 -- --------------------------------------------------------
 
@@ -907,7 +911,7 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 (1, 'Juanito V.', '2022-08-04 17:05:53', 'credito', 1, 1, '19100', NULL, 'finalizada'),
 (2, 'Jaime R.', '2022-08-05 11:41:35', 'contado', 2, 3, '100000', NULL, 'finalizada'),
 (4, NULL, '2022-08-08 16:08:59', NULL, NULL, 1, NULL, 'juan', 'congelado'),
-(5, NULL, '2022-08-08 16:10:32', NULL, NULL, 3, NULL, NULL, 'activo'),
+(5, '', '2022-08-18 14:31:24', 'contado', NULL, 3, NULL, NULL, 'finalizada'),
 (6, NULL, '2022-08-08 18:00:56', NULL, NULL, 1, NULL, NULL, ''),
 (7, 'pedro', '2022-08-08 18:01:22', 'tarjeta', NULL, 1, NULL, 'yaned', 'finalizada'),
 (8, 'Camilo', '2022-08-12 16:39:40', 'credito', 12, 1, NULL, 'santiago', 'finalizada'),
@@ -920,7 +924,11 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 (15, 'rosa', '2022-08-10 19:19:35', 'tarjeta', NULL, 1, NULL, 'juanito', 'finalizada'),
 (16, NULL, '2022-08-11 11:56:41', NULL, NULL, 1, NULL, 'JOSE', 'congelado'),
 (17, 'juanpa', '2022-08-11 17:06:42', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
-(18, NULL, '2022-08-11 17:06:42', NULL, NULL, 1, NULL, NULL, 'activo');
+(18, 'juan', '2022-08-18 14:29:18', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
+(19, 'juan', '2022-08-18 14:29:51', 'credito', 12, 1, NULL, NULL, 'finalizada'),
+(20, 'jorge', '2022-08-18 14:30:16', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
+(21, NULL, '2022-08-18 14:30:16', NULL, NULL, 1, NULL, NULL, 'activo'),
+(22, NULL, '2022-08-18 14:31:24', NULL, NULL, 3, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -944,7 +952,8 @@ INSERT INTO `factura_abono` (`id_factura_abono`, `abono`, `fecha_abono`, `id_cli
 (1, 0, '2022-08-17', 1, ''),
 (2, 0, '2022-08-17', 1, ''),
 (3, 2000, '2022-08-17', 1, ''),
-(4, 4000, '2022-08-16', 1, '');
+(4, 4000, '2022-08-16', 1, ''),
+(5, 200000, '2022-08-18', 12, 'efectivo');
 
 -- --------------------------------------------------------
 
@@ -1993,7 +2002,7 @@ ALTER TABLE `cuenta_cobro`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
@@ -2011,13 +2020,13 @@ ALTER TABLE `domicilio`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_abono`
 --
 ALTER TABLE `factura_abono`
-  MODIFY `id_factura_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_factura_abono` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `gasto`

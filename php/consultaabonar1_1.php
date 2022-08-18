@@ -50,7 +50,7 @@
                 <td><?php echo $fila['identificacion_cliente'] ?></td>
                 <td><?php echo $fila['direccion_cliente'] ?></td>
                 <td><?php echo $fila['ubicacion'] ?></td>
-                <td><img src="../iconos/configuraciones.png" class="btn_con" width="40px" height="40px"></td>
+                <td><img src="../iconos/buscar.png" class="btn_con" width="40px" height="40px"></td>
             </tr>
             <?php
         }

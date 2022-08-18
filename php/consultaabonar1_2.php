@@ -52,16 +52,31 @@
             <td><select name="id_ubi1">
                     
                 <?php
+                $array_id_ubi = array();
+                $array_ubicacion = array();
                     //Consulta a la base de datos en la tabla provvedor
                     $consulta = mysqli_query($conexion, "SELECT * FROM `ubicacion` 
                     WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
 
                     while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                        // traemos los proveedores existentes en la base de datos
+                        array_push($array_id_ubi,    $fila['id_ubi']);
+                        array_push($array_ubicacion, $fila['ubicacion']);
+                    }
+                    
+                    $consulta = mysqli_query($conexion, "SELECT `id_ubi1` 
+                    FROM `cliente` 
+                    WHERE `id_cliente` = '$id_cliente'") or die ("Error al consultar: proveedores");
+
+                    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                        $id_ubi_cliente = $fila['id_ubi1'];
+                    }
+
+                    for ($i=0; $i < count($array_id_ubi); $i++) { 
                         ?>
-                        <option value="<?php echo $fila['id_ubi'] ?>"><?php echo $fila['ubicacion'] ?></option>
+                            <option value="<?php echo $array_id_ubi[$i] ?>" <?php if($id_ubi_cliente == $array_id_ubi[$i]){echo "selected";} ?>><?php echo $array_ubicacion[$i] ?></option>
                         <?php 
                     }
+                    
                     mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
                 ?>
 
@@ -140,22 +155,17 @@
             url:'../PHP/consultaabonar1_4.php',
             type:'POST',
             data: $('#formu_abonar').serialize(),
-            success: function(res){
-                Swal.fire(
-                '¡Muy bien!',
-                'Guardado Exitoso',
-                'success'
-                )
+            success: function(res){      
+                $('#ver_factus').trigger('click');        
+                $('#respuesta_abonar2').html(res);  
+                document.getElementById('respuesta_abonar2').style.display='none';
+                document.getElementById('xcont_factuabo1_1').style.display='block';  
                 
-                //Vamos a ver el recibo del ultimo pago
-                $('#ver_factus').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario abonar");
             }
-        });
-        document.getElementById('respuesta_abonar2').style.display='none';
-        document.getElementById('xcont_factuabo1_1').style.display='block';
+        });      
         
     });
 
