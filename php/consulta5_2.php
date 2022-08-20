@@ -166,7 +166,7 @@
                     success: function(res){
                         $('#respuesta5_4').html(res);
                         setTimeout(function(){ 
-                            $('#enviar5_2').trigger('click');;
+                            $('#enviar5_2').trigger('click');
                         }, 4000);
                     },
                     error: function(res){

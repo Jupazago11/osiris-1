@@ -124,7 +124,7 @@
             <img src="../iconos/fondo.png"              width="60px" height="60px">
             <img src="../iconos/cuenta.png"             id="Enviarfactura1_1"     width="60px" height="60px">
             <img src="../iconos/factura_congelar.png"   id="Enviarcongelarc1_1"   width="60px" height="60px">
-            <img src="../iconos/add-contact.png"        id="Enviarcc1_1"          width="60px" height="60px" onclick="document.getElementById('respuesta_crear_cliente').style.display='block'">
+            <img src="../iconos/add-contact.png"        id="Enviarcc1_1"          width="60px" height="60px">
             
             <img src="../iconos/trash-bin.png" width="60px" height="60px" onclick="$('#enviarv1').trigger('click');">
             <img src="../iconos/cuentaobs.png"          id="Enviarfacturaobs1_1"  width="60px" height="60px">
@@ -204,6 +204,7 @@
         });
 
         $('#Enviarcc1_1').click(function(){
+            document.getElementById('respuesta_crear_cliente').style.display='block';
             $.ajax({
                 url:'../PHP/consultacc1_1.php',
                 success: function(res){

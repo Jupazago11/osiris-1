@@ -1,4 +1,3 @@
-<script type="text/javascript" src="../js/funciones.js"></script>
 <?php
     //Incluir el archivo que contiene las funciones del lenguaje PHP
     require_once("../PHP/funciones.php");

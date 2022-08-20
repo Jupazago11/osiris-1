@@ -47,8 +47,8 @@
 
     if($abono <= $Total_factura){
         if($abono > 0){
-            //$consulta = mysqli_query($conexion, "INSERT INTO `factura_abono`(`abono`, `fecha_abono`, `id_cliente1`, `metodo_abono`) 
-            //VALUES ('$abono', '$fecha', '$id_cliente', '$metodo_de_pago2')") or die ("Error al consultar: proveedores");
+            $consulta = mysqli_query($conexion, "INSERT INTO `factura_abono`(`abono`, `fecha_abono`, `id_cliente1`, `metodo_abono`) 
+            VALUES ('$abono', '$fecha', '$id_cliente', '$metodo_de_pago2')") or die ("Error al consultar: proveedores");
             ?>
             <script>
                 Swal.fire(

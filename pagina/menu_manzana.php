@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script
-  src="https://code.jquery.com/jquery-3.6.0.js"
-  integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-  crossorigin="anonymous"></script>
+        src="https://code.jquery.com/jquery-3.6.0.js"
+        integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+        crossorigin="anonymous">
+    </script>
+    <script type="text/javascript" src="../js/funciones.js"></script>
 </head>
 <body>
 <div class="header">
@@ -133,11 +135,11 @@
         <div class="osiris"><div class="contenido">Empresa</div></div>
             <div class="menu" style="margin-top: 3%;">
             
-            <a class="columna w3-red" onclick="ocultarDivs2('cont2_1');; $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="40%" height="40%"><br>Proveedor</a>
+            <a class="columna w3-red" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="40%" height="40%"><br>Proveedor</a>
             <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2')"><img src="../iconos/producto.png" width="40%" height="40%"><br>Producto</a>
             <a class="columna w3-green" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="40%" height="40%"><br>Personal</a>
             <a class="columna w3-teal" onclick="ocultarDivs2('cont2_4')"><img src="../iconos/presupuesto.png" width="40%" height="40%"><br>Presupuestos</a>
-            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5')"><img src="../iconos/vehiculos.png" width="40%" height="40%"><br>Vehículos</a>
+            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="40%" height="40%"><br>Vehículos</a>
             <a class="columna w3-green" onclick="ocultarDivs2('cont2_6')"><img src="../iconos/indicador.png" width="40%" height="40%"><br>Resultados Operativos</a>
             <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0()">X</a>
 
@@ -228,7 +230,7 @@
     <div id="cont4" style="display:none;">
         <div class="w3-container" id="ventas"  style="display:none;">
             <div class="menu">
-                <a class="columna w3-teal" id="entrar_caja"onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')">Caja 1</a>
+                <a class="columna w3-teal"  onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')" id="entrar_caja">Caja 1</a>
                 <a class="columna w3-green" onclick="ocultarDivs4('cont4_2'); $('#enviarv2').trigger('click')">Caja 2</a>
                 <a class="columna w3-blue"  onclick="ocultarDivs4('cont4_3'); $('#enviarv3').trigger('click')">Caja 3</a>
                 <a class="columna w3-red"   onclick="ocultarDivs4('cont4_4'); $('#enviarv4').trigger('click')">Caja 4</a>
@@ -269,7 +271,6 @@
 function multi() {
 
     var valores = document.getElementsByClassName('cantidad');
-
     document.getElementById("total_sugeridos").innerHTML = valores.length;
 }
 

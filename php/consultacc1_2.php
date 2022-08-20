@@ -36,11 +36,7 @@ if(strlen($nombre_cliente) > 4 && strlen($identificacion_cliente) > 5){
     if($existe == true){
         ?>
         <script>
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Ya existe un registro con esa identificación',
-            })
+            Swal.fire({icon: 'error',title: 'Oops...',text: 'Ya existe un registro con esa identificación',})
         </script>
         <?php
     }else{
@@ -54,7 +50,7 @@ if(strlen($nombre_cliente) > 4 && strlen($identificacion_cliente) > 5){
                 '¡Muy bien!',
                 'Cliente registrado exitosamente',
                 'success'
-                );
+                )
         </script>
         <?php
     }
@@ -64,11 +60,7 @@ if(strlen($nombre_cliente) > 4 && strlen($identificacion_cliente) > 5){
 }else{
     ?>
     <script>
-        Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Agrega un nombre e identificación válidos con más de 6 digitos',
-        })
+        Swal.fire({icon: 'error',title: 'Oops...',text: 'Agrega un nombre e identificación válidos con más de 6 digitos',})
     </script>
     <?php
 }

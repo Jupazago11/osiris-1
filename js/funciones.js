@@ -235,7 +235,6 @@ $(function () {
 
 $('#tbodyform')
 .on('input', '.cantidad', function() {
-  console.log("Hola");
   var $input = $(this), // input.cantidad
     cantidad = parseInt($input.val(), 10), // valor de input.cantidad
     $tr = $input.closest('tr'), // fila del input.cantidad

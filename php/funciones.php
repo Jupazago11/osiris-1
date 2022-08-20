@@ -436,17 +436,17 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
     $vehiculo        = "ABC-12A";
 
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
+        
         ?>
         <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_2').style.display='none';">X</a>
 
         <?php
         $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado, domicilio.tiempo_salida, domicilio.tiempo_llegada, domicilio.id_domi
         FROM `domicilio` 
-        INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers 
-        INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente  
-        INNER JOIN `vehiculo` ON vehiculo.id_vehiculo = domicilio.id_vehiculo2 
-        WHERE vehiculo.placa = '$vehiculo' 
-        AND `fecha` = '$fecha'
+        INNER JOIN `personal`   ON domicilio.id_pers3 = personal.id_pers 
+        INNER JOIN `cliente`    ON domicilio.id_cliente2 = cliente.id_cliente  
+        INNER JOIN `vehiculo`   ON vehiculo.id_vehiculo = domicilio.id_vehiculo2 
+        WHERE vehiculo.placa = '$vehiculo' AND `fecha` = '$fecha'
         ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
         ?>
 
@@ -462,14 +462,16 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
             <th>LLegada</th>
             <th></th>
         </tr>
-        <tbody id="tbodyform">
+        <tbody id="tbodyfor">
         
             <?php
+            
             $contador = 1;
             
             //<span class="numeral"><?php echo $contador ? ></span>
             //<input type="number" class="numeral" value="<?php echo $contador ? >"></input>
             while (($fila = mysqli_fetch_array($consulta)) != NULL){
+                
                 ?>
                 <tr>
                 
@@ -495,7 +497,7 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
                         ?>
                         <td>
                         <label class="switch">
-                        <input type="checkbox" name="salidass[]" onclick="enviar_update()" value="<?php echo $fila['id_domi'] ?>">
+                        <input type="checkbox" name="salidass[]" value="<?php echo $fila['id_domi'] ?>">
                         <span class="slider"></span>
                         </label></td>
                         <?php
@@ -510,7 +512,7 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
                         ?>
                         <td>
                         <label class="switch">
-                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $fila['id_domi'] ?>">
+                        <input type="checkbox" name="llegadass[]" value="<?php echo $fila['id_domi'] ?>">
                         <span class="slider"></span>
                         </label></td>
                         <?php
@@ -541,6 +543,7 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
                 
             <?php
             $contador++;
+            
         }
         ?>
         
@@ -903,14 +906,12 @@ function ver_presupuestos($usuario){
 /////////////////////////////////////////////////////////////////////////////////////////
 function menu_vehiculos($usuario){
     ?>
+    <div id="respuesta10_1" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta10_2" style="display:none; backgroung-color:white;"></div>
+    <br>
     <br>
     <button type="button" id="enviar10_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta10_1').style.display='block'"> Vehículos</button>
     <button type="button" id="enviar10_2" class="w3-btn w3-red" onclick="document.getElementById('respuesta10_2').style.display='block'"> Generar reporte</button>
-
-    <br>
-    <br>
-    <div id="respuesta10_1" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta10_2" style="display:none; backgroung-color:white;"></div>
 
     <script>
         $('#enviar10_1').click(function(){
