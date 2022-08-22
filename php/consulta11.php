@@ -17,6 +17,7 @@
     $id_pre_detalle_cat = array();
     $cate_pre = array();
     
+    //  id del usuario
     $consulta = mysqli_query($conexion, "SELECT `id_pers` 
     FROM `personal` 
     WHERE `user_pers` = '$user'") or die ("Error al update: presupuesto");
@@ -27,9 +28,9 @@
     mysqli_free_result($consulta);
 
 
-    
+    // traer categorias
     $consulta = mysqli_query($conexion, "SELECT * FROM `pre_detalle_cat` 
-    WHERE `estado` != '' AND `estado` != 'inactivo'") or die ("Error al consultar: existencia del cargo");
+    WHERE `estado` != '' OR `estado` != 'inactivo'") or die ("Error al consultar: existencia del cargo");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         array_push($id_pre_detalle_cat, $fila['id_pre_detalle_cat']);
@@ -38,6 +39,7 @@
     mysqli_free_result($consulta);
 
 
+    //  obtener id del presupuesto
 
     $consulta = mysqli_query($conexion, "SELECT * FROM `presupuesto`  
     WHERE `mes`= '$mes' AND `year`= '$year'") or die ("Error al consultar: proveedores");
@@ -170,8 +172,9 @@
         }
         mysqli_free_result($consulta);
 
-        $consulta = mysqli_query($conexion, "INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`, `costo_gasto`, `estado`) 
-        VALUES (NULL, '$id_presu', NULL, NULL, NULL, 'activo')") or die ("Error al update: presupuesto");
+
+        $consulta = mysqli_query($conexion, "INSERT INTO `pre_detalle` (`id_presu1`, `nombre`, `costo`, `costo_gasto`, `estado`, `id_pers4`) 
+        VALUES ('$id_presu', NULL, NULL, NULL, 'activo', '$id_user')") or die ("Error al update: presupuesto");
 
         echo "<script>$('#enviar11').trigger('click');</script>";
     }   
@@ -179,6 +182,7 @@
     <div id="respuesta11_1"></div>
 
     <form id="actualizar_cat" method="POST">
+    <input type="hidden" name="id_user" value="<?php echo $id_user ?>"/>
     <div id="form_cat" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
     
     <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white" >

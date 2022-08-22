@@ -102,6 +102,18 @@ function iniciar_sesion2($usuario, $clave){
     return $nombre_proveedor;
 }
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
+function ver_notificaciones(){
+    require_once("../PHP/notificaciones.php");    //Hacer conexion con la base de datos
+
+    tiempo_contratos();
+    echo "<br>";
+    tiempo_cumpleani();
+    echo "<br>";
+    tiempo_soat_tecn();
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Funcion que verifica si existeel archivo de conexion de la base de datos
 function crear_sugerido($usuario){

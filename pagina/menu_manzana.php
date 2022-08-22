@@ -33,6 +33,13 @@
     // Notificar todos los errores de PHP
     error_reporting(-1);
 ?>
+<div class="usuario notificaciones"><img src="../iconos/activo.png" width="40px" height="40px" onclick="ocultar_notificaciones();"></div>
+<div id="venta_noti">
+<?php 
+    ver_notificaciones();
+?>
+</div>
+
 <div class="menu w3-animate-zoom">
     <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){

@@ -253,6 +253,15 @@ function ocultar_menu_venta() {
   }
 }
 
+function ocultar_notificaciones() {
+  var x = document.getElementById("venta_noti");
+  if (x.style.display === "block") {
+      x.style.display = "none";
+  } else {
+      x.style.display = "block";
+  }
+}
+
 //Efectivo en caja, cuadre de caja
 $('#tbodyform2')
 .on('input', '.cantidad', function() {

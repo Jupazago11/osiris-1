@@ -9,13 +9,13 @@
     $conexion = conectar();                     //Obtenemos la conexion
 
     
-    $id_pers   = $_POST['id_pers'];
-    $nombre_pers   = $_POST['nombre_pers'];
-    $cargo    = $_POST['cargo'];
-    $tipo_contrato_pers  = $_POST['tipo_contrato_pers'];
+    $id_pers                    = $_POST['id_pers'];
+    $nombre_pers                = $_POST['nombre_pers'];
+    $cargo                      = $_POST['cargo'];
+    $tipo_contrato_pers         = $_POST['tipo_contrato_pers'];
     $fecha_inicio_contrato_pers = $_POST['fecha_inicio_contrato_pers'];
-    $salario_pers    = $_POST['salario_pers'];
-    $eliminar = $_POST['eliminar'];
+    $salario_pers               = str_replace(".","",$_POST['salario_pers']);
+    $eliminar                   = $_POST['eliminar'];
 
 
     $id_cargos = array();

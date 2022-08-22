@@ -20,6 +20,9 @@
         array_push($id_cargo, $fila['id_cargo']);
         array_push($cargo, $fila['cargo']);
     }
+
+
+    $tota_nomina = 0;
     ?>
     <form id="actualizar_personal" method="POST">
     <table class="tabla_sugerido">
@@ -81,9 +84,12 @@
                     $fecha_final = date("d-m-Y",strtotime($fila['fecha_inicio_contrato_pers']." +".intval($fila['tipo_contrato_pers'])." month"));
                     $fecha_final = date("d-m-Y",strtotime($fecha_final."- 1 days"));
                     ?>
-                    <td><input type="text" name="salario_pers[]" size="8" value="<?php echo $fila['salario_pers'] ?>"/></td>
+                    <td><input type="text" name="salario_pers[]" size="8" value="<?php echo number_format($fila['salario_pers'], 0, ',', '.') ?>" class="puntos"/></td>
                     
                     <?php
+
+                    //Suma de nomina
+                    $tota_nomina += $fila['salario_pers'];
 
                     $fecha1  = new DateTime($fecha);
                     $fecha2  = new DateTime($fecha_final);
@@ -126,7 +132,8 @@
         <tr>
             <td></td>
             <td><button type="button" id="enviar9_4_1" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
-            <td colspan="5"></td>
+            <td colspan="4"></td>
+            <td><?php echo number_format($tota_nomina, 0, ',', '.') ?></td>
             <td><button type="button" id="enviar9" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta9').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
             <td></td>
         </tr>
