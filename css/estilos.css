@@ -695,14 +695,15 @@ textarea {
   background-color: #ffffff;
   border-radius: 0px 0px 5px 5px;
   position: absolute;
-  width: 350px;
+  width: 400px;
   height: auto;
   padding: 5px;
   right: 5%;
   top: 0%;
   text-align: left;
-  overflow: hidden;
+
   display: none;
+  max-height: 50%;
 }
 
 img {

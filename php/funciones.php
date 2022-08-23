@@ -104,14 +104,34 @@ function iniciar_sesion2($usuario, $clave){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ver_notificaciones(){
-    require_once("../PHP/notificaciones.php");    //Hacer conexion con la base de datos
+    require_once("../PHP/notificaciones.php");   
 
-    tiempo_contratos();
-    echo "<br>";
-    tiempo_cumpleani();
-    echo "<br>";
-    tiempo_soat_tecn();
+    $eva = array(false, false, false, false);
 
+    ?>
+    <table class="tabla_sugerido">
+        <tr>
+            <th>Indicador</th>
+            <th>Evento</th>
+            <th>Tiempo</th>
+        </tr>
+    <?php
+    
+    $eva[0] = tiempo_contratos();
+    $eva[1] = tiempo_cumpleani();
+    $eva[2] = tiempo_soat_tecn();
+    $eva[3] = tiempo_cuentaxpa();
+    ?>
+    </table> 
+    <?php
+    if($eva[0] == false && $eva[1] == false && $eva[2] == false && $eva[3] == false){
+        ?>
+        <script>
+            var img_noti = document.getElementById("img_noti");
+            img_noti.src = "../iconos/inactivo.png";
+        </script>
+        <?php
+    }
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////

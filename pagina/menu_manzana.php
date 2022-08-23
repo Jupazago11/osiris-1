@@ -33,11 +33,9 @@
     // Notificar todos los errores de PHP
     error_reporting(-1);
 ?>
-<div class="usuario notificaciones"><img src="../iconos/activo.png" width="40px" height="40px" onclick="ocultar_notificaciones();"></div>
+<div class="usuario notificaciones"><img src="../iconos/activo.png" id="img_noti" width="40px" height="40px" onclick="ocultar_notificaciones();"></div>
 <div id="venta_noti">
-<?php 
-    ver_notificaciones();
-?>
+
 </div>
 
 <div class="menu w3-animate-zoom">
@@ -447,6 +445,17 @@ function ocultarDivs4(no_oculta){
     }
 }
 
+$('#img_noti').click(function(){
+    $.ajax({
+        url:'../php/consultanoti_1_1.php',
+        success: function(res){
+            $('#venta_noti').html(res);
+        },
+        error: function(res){
+            alert("Problemas al tratar de mostrar notificaciones");
+        }
+    });
+});
 
 $('#tbodyform')
 .on('input', '.cantidad', function() {

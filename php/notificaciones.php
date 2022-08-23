@@ -6,6 +6,8 @@
 <?php
 
 function tiempo_contratos(){
+    $evaluar = false;
+
     if(existencia_de_la_conexion()){
         require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
     }
@@ -33,15 +35,21 @@ function tiempo_contratos(){
 
         $intvl   = $fecha1->diff($fecha2);
         if($fecha1 > $fecha2 || $intvl->days < 30 && $intvl->days > 0){
-            echo $fila['nombre_pers']." Días de contrato - ".$intvl->days." Días";
+            $evaluar = true;
+            ?>
+
+            <tr onclick="ocultarDivs('cont2'); ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $fila['nombre_pers'] ?></td><td>Días de contrato</td><td><?php echo $intvl->days ?> Días</td></tr>
+            <?php
 
         }
     }
     mysqli_free_result($consulta);
+    return $evaluar;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 function tiempo_cumpleani(){
+    $evaluar = false;
     if(existencia_de_la_conexion()){
         require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
     }
@@ -69,15 +77,23 @@ function tiempo_cumpleani(){
         $intvl2 = $fecha1->diff($fecha3);
 
         if($intvl2->m == 0){
-            echo $fila['nombre_pers']." ".$intvl2->d." Días para su cumpleaños";
+            $evaluar = true;
+            ?>
+
+            <tr onclick="ocultarDivs('cont2'); ocultarDivs2('cont2_3'); $('#enviar9_2').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $fila['nombre_pers'] ?></td><td>Cumpleaños en</td><td><?php echo $intvl2->d ?> Días</td></tr>
+
+            <?php
         }
     
     }
     mysqli_free_result($consulta);
+    return $evaluar;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 function tiempo_soat_tecn(){
+    $evaluar = false;
+
     if(existencia_de_la_conexion()){
         require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
     }
@@ -97,7 +113,12 @@ function tiempo_soat_tecn(){
 
         $intvl   = $fecha1->diff($fecha2);
         if($intvl->m <=0 && $intvl->d >=0){
-            echo $fila['tipo'].": ".$fila['placa']." vence SOAT en ".$intvl->d." días";
+            $evaluar = true;
+            ?>
+
+            <tr onclick="ocultarDivs('cont2'); ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $fila['tipo'].": ".$fila['placa'] ?></td><td>Vence SOAT en</td><td><?php echo  $intvl->d ?> Días</td></tr>
+
+            <?php 
         }
 
         //Tecnicomecánica
@@ -105,11 +126,69 @@ function tiempo_soat_tecn(){
         $intvl   = $fecha1->diff($fecha2);
 
         if($intvl->m <=0 && $intvl->d >=0){
-            echo "<br>".$fila['tipo'].": ".$fila['placa']." vence Tecnicomecánica en ".$intvl->d." días";
+            $evaluar = true;
+            ?>
+
+            <tr onclick="ocultarDivs('cont2'); ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $fila['tipo'].": ".$fila['placa']?></td><td>Vence Tecnicomecánica en</td><td><?php echo $intvl->d ?> Días</td></tr>
+
+            <?php
         }
     
     }
     mysqli_free_result($consulta);
+    return $evaluar;
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////
+function tiempo_cuentaxpa(){
+    $evaluar = false;
+
+    if(existencia_de_la_conexion()){
+        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+    }
+    $conexion = conectar();                     //Obtenemos la conexion
+
+    date_default_timezone_set('America/Bogota');
+    $fecha          = date('Y-m-d', time());
+
+    $nombre         = array();
+    $fechas_limite  = array();
+
+    $consulta = mysqli_query($conexion, "SELECT * FROM `cuenta_cobro` 
+    WHERE `estado` = 'activo' 
+    ORDER BY `id_cuenta` ASC") or die ("Error al consultar: existencia del proveedor");
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        array_push($nombre, $fila['nombre']);
+
+        $fecha_limite = date("Y-m-d",strtotime($fila['fecha']." + ".$fila['dias']." days"));
+
+        array_push($fechas_limite, $fecha_limite);
+    
+    }
+    mysqli_free_result($consulta);
+
+    for ($i = 0; $i < count($nombre); $i++) { 
+        $fecha1  = new DateTime($fecha);
+        $fecha2  = new DateTime($fechas_limite[$i]);
+        
+        $intvl   = $fecha1->diff($fecha2);
+
+        if($fecha1 > $fecha2){
+            $evaluar = true;
+            ?>
+            <tr onclick="ocultarDivs('cont1'); ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $nombre[$i] ?></td><td>Factura por pagar</td><td><?php echo "-".$intvl->d ?> Días</td></tr>
+
+            <?php
+
+        }elseif($intvl->days <= 7){
+            $evaluar = true;
+            ?>
+            <tr onclick="ocultarDivs('cont1'); ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $nombre[$i] ?></td><td>Factura por pagar</td><td><?php echo $intvl->d ?> Días</td></tr>
+            <?php
+        }
+    }
+    return $evaluar;
 }
 
 ?>

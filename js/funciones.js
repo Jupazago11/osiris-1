@@ -276,5 +276,3 @@ $('#tbodyform2')
   $total.text((precio * cantidad).toLocaleString('es-MX')); // reseteamos el valor del span.total
   $total2.text(precio * cantidad); // reseteamos el valor del span.total
 });
-
-
