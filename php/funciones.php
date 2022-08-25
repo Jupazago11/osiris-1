@@ -1014,6 +1014,7 @@ function resultados_operativos($usuario){
     </script>
 <?php
 }
+
 /////////////////////////////////////////////////////////////////////////////////////////
 function caja1($usuario){
     ?>
@@ -1042,5 +1043,60 @@ function caja1($usuario){
         });
     </script>
 <?php
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function ver_control(){
+    ?>
+    <button type="button" id="enviar13_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta13_1').style.display='block'" style="display:none">xd</button>
+
+    <div id="respuesta13_1" class="ventana"></div>
+    
+    <script>
+        $('#enviar13_1').click(function(){
+            $.ajax({
+                url:'../php/consulta13_1.php',
+                success: function(res){
+                    $('#respuesta13_1').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+
+    </script>
+    <?php
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function registrar_control($usuario){
+    ?>
+    <button type="button" id="enviar13_2" class="w3-btn w3-red" onclick="document.getElementById('respuesta13_2').style.display='block'" style="display:none">xd</button>
+
+    <form id="mandar_usuario_control13_2" method="post">
+        <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
+    </form>
+
+
+    <div id="respuesta13_2" class="ventana"></div>
+    
+    <script>
+        $('#enviar13_2').click(function(){
+            $.ajax({
+                url:'../php/consulta13_2.php',
+                type:'POST',
+                data: $('#mandar_usuario_control13_2').serialize(),
+                success: function(res){
+                    $('#respuesta13_2').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+
+    </script>
+    <?php
 }
 ?>

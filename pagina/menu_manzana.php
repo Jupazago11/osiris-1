@@ -46,7 +46,7 @@
         <a class='columna w3-red' onclick="ocultarDivs('cont1')"><img src="../iconos/pedidos.png" alt="" width="40%" height="40%"><br>Pedidos</a>
         <a class='columna w3-blue' onclick="ocultarDivs('cont2')"><img src="../iconos/empresa.png" alt="empresa" width="40%" height="40%"><br>Empresa</a>
         <a class='columna w3-green' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
-        <a class='columna w3-teal'><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
+        <a class='columna w3-teal' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
         
         <?php
     }elseif($tipo_de_cuenta == 3){
@@ -54,10 +54,12 @@
         <a class='columna w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
         <a class='columna w3-blue' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
         <a class='columna w3-red' onclick="ocultarDivs('cont4')">Caja</a>
+        <a class='columna w3-teal' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
         <?php
     }elseif($tipo_de_cuenta == 4){
         ?>
         <a class='columna w3-green' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
+        <a class='columna w3-teal' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
         <?php
     }
     elseif($tipo_de_cuenta == 5){
@@ -268,6 +270,40 @@
             </div>
         </div>
     </div>
+    <div id="cont5" style="display:none;">
+        <div class="w3-container" id="control"  style="display:none;">
+        <div class="osiris"><div class="contenido">Control</div></div>
+
+            <div class="menu">
+                <?php
+                if($tipo_de_cuenta == 1){
+                    ?>
+                    <a class="columna w3-green" onclick="ocultarDivs5('cont5_1');$('#enviar13_1').trigger('click')"><img src="../iconos/controlobs.png" width="40%" height="40%"><br>Ver control</a>
+                    
+                    <?php
+                }else{
+                    ?>
+                    <a class="columna w3-blue" onclick="ocultarDivs5('cont5_2');$('#enviar13_2').trigger('click')"><img src="../iconos/evaluacion.png" width="40%" height="40%"><br>Control</a>
+                    
+                    <?php
+                }
+                ?>
+
+                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
+
+            </div>
+            <div id="cont5_1" style="display:none;">
+                <div class="w3-container">
+                    <?php   ver_control();   ?>
+                </div>
+            </div>
+            <div id="cont5_2" style="display:none;">
+                <div class="w3-container">
+                    <?php   registrar_control($usuario);     ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 
 <script type="text/javascript" src="../js/funciones.js"></script>
@@ -286,6 +322,7 @@ function ocultarDivs(no_oculta){
     document.getElementById("cont2").style.display='none';
     document.getElementById("cont3").style.display='none';
     document.getElementById("cont4").style.display='none';
+    document.getElementById("cont5").style.display='none';
 
     switch(no_oculta) {
         //Pedidos
@@ -324,18 +361,27 @@ function ocultarDivs(no_oculta){
             document.getElementById("cont4_3").style.display='none';
             document.getElementById("cont4_4").style.display='none';
             break;
+        case "cont5":
+            document.getElementById("cont5").style.display='block';
+            document.getElementById("control").style.display='block';
+            document.getElementById("cont5_1").style.display='none';
+            document.getElementById("cont5_2").style.display='none';
+            break;
         default:
           // code block
             break;
     }
 }
+
 function ocultarDivs0(){
     document.getElementById("pedidos").style.display='none';
     document.getElementById("empresa").style.display='none';
     document.getElementById("control_domiciliario").style.display='none';
     document.getElementById("ventas").style.display='none';
+    document.getElementById("control").style.display='none';
 
 }
+
 function ocultarDivs1(no_oculta){
     document.getElementById("cont1_1").style.display='none';
     document.getElementById("cont1_2").style.display='none';
@@ -364,6 +410,7 @@ function ocultarDivs1(no_oculta){
             break;
     }
 }
+
 function ocultarDivs2(no_oculta){
     document.getElementById("cont2_1").style.display='none';
     document.getElementById("cont2_2").style.display='none';
@@ -396,6 +443,7 @@ function ocultarDivs2(no_oculta){
             break;
     }
 }
+
 function ocultarDivs3(no_oculta){
     document.getElementById("cont3_1").style.display='none';
     document.getElementById("cont3_2").style.display='none';
@@ -420,6 +468,7 @@ function ocultarDivs3(no_oculta){
             break;
     }
 }
+
 function ocultarDivs4(no_oculta){
     document.getElementById("cont4_1").style.display='none';
     document.getElementById("cont4_2").style.display='none';
@@ -438,6 +487,23 @@ function ocultarDivs4(no_oculta){
             break;
         case "cont4_4":
             document.getElementById("cont4_4").style.display='block';
+            break;
+        default:
+          // code block
+            break;
+    }
+}
+
+function ocultarDivs5(no_oculta){
+    document.getElementById("cont5_1").style.display='none';
+    document.getElementById("cont5_2").style.display='none';
+    switch(no_oculta) {
+        //Pedidos
+        case "cont5_1":
+            document.getElementById("cont5_1").style.display='block';
+            break;
+        case "cont5_2":
+            document.getElementById("cont5_2").style.display='block';
             break;
         default:
           // code block
