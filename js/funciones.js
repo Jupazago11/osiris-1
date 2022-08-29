@@ -276,3 +276,38 @@ $('#tbodyform2')
   $total.text((precio * cantidad).toLocaleString('es-MX')); // reseteamos el valor del span.total
   $total2.text(precio * cantidad); // reseteamos el valor del span.total
 });
+
+/////////////////////////////////////////////////////////
+//  Productos
+
+function utilidades() {
+  
+
+
+  //////////////////////////////
+  // Generamos el valor del costo
+  var precio_compra = document.getElementById("precio_de_compra").value;
+  var t_iva = document.getElementById("t_iva").value;
+  var flete = document.getElementById("flete").value;
+
+  flete = isNaN(parseInt(document.getElementById("flete").value)) ? 0 : parseInt(document.getElementById("flete").value);
+
+  precio_compra = isNaN(parseInt(document.getElementById("precio_de_compra").value)) ? 0 : parseInt(document.getElementById("precio_de_compra").value);
+
+  t_iva = isNaN(parseInt(document.getElementById("t_iva").value)) ? 0 : parseInt(document.getElementById("t_iva").value);
+
+  var total = parseInt(precio_compra) + parseInt(flete) + (precio_compra*t_iva/100);
+  document.getElementById("cost_impu").innerHTML = total;
+
+  ////////////////////////////////////////////////
+  // calculamos las utilidades 
+  var venta1 = document.getElementById("venta1").value;
+  document.getElementById("utilidad1").innerHTML = ((venta1*100/total)-100).toFixed(2);
+
+  var venta2 = document.getElementById("venta2").value;
+  document.getElementById("utilidad2").innerHTML = ((venta2*100/total)-100).toFixed(2);
+
+  var venta3 = document.getElementById("venta3").value;
+  document.getElementById("utilidad3").innerHTML = ((venta3*100/total)-100).toFixed(2);
+
+}

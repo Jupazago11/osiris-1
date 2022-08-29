@@ -16,10 +16,10 @@ $fecha   = date('Y-m-d', time());
 <table class="tabla_sugerido">
     <tr>
         <th>Nombre</th>
-        <th>Llegada</th>
+        <th>Inicio</th>
         <th>Desayuno</th>
         <th>Regreso Desayuno</th>
-        <th>Aluerzo</th>
+        <th>Almuerzo</th>
         <th>Regreso Almuerzo</th>
         <th>Salida</th>
     </tr>
@@ -32,12 +32,12 @@ $fecha   = date('Y-m-d', time());
         ?>
         <tr>
             <td><?php echo $fila['nombre_pers'] ?></td>
-            <td><?php echo $fila['llegada'] ?></td>
-            <td><?php echo $fila['ir_desayuno'] ?></td>
-            <td><?php echo $fila['regre_desayuno'] ?></td>
-            <td><?php echo $fila['ir_almuerzo'] ?></td>
-            <td><?php echo $fila['regre_almuerzo'] ?></td>
-            <td><?php echo $fila['salida'] ?></td>
+            <td><?php if($fila['llegada'] != ''){echo date("g:i:s a", strtotime($fila['llegada']));}else{echo "";} ?></td>
+            <td><?php if($fila['ir_desayuno'] != ''){echo date("g:i:s a", strtotime($fila['ir_desayuno']));}else{echo "";} ?></td>
+            <td><?php if($fila['regre_desayuno'] != ''){echo date("g:i:s a", strtotime($fila['regre_desayuno']));}else{echo "";} ?></td>
+            <td><?php if($fila['ir_almuerzo'] != ''){echo date("g:i:s a", strtotime($fila['ir_almuerzo']));}else{echo "";} ?></td>
+            <td><?php if($fila['regre_almuerzo'] != ''){echo date("g:i:s a", strtotime($fila['regre_almuerzo']));}else{echo "";} ?></td>
+            <td><?php if($fila['salida'] != ''){echo date("g:i:s a", strtotime($fila['salida']));}else{echo "";} ?></td>
         </tr>
         <?php
 

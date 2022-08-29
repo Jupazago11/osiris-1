@@ -701,7 +701,8 @@ function menu_producto($usuario){
         ?>
         </datalist></td>
         <td>Tarifas de IVA</td>
-        <td><input type="text" id="t_iva" name=""/></td>
+        <td><input type="text" size="2" id="t_iva" name="t_iva" onkeyup="utilidades()"/>%</td>
+        <td></td>
     </tr>
     <tr>
         <td>Proveedor</td>
@@ -734,24 +735,28 @@ function menu_producto($usuario){
                 <label for="civa2">Incluido</label>
             <input type="radio" id="civa3" name="clasi_iva" value="excluido">
                 <label for="civa3">Excluido</label><br></td>
+        <td></td>
     </tr>
     <tr>
         <td>Descripción</td>
         <td><input type="text" name="descripcion"/></td>
         <td>Costo del producto</td>
-        <td><input type="text" id="" name=""/></td>
+        <td><input type="text" id="precio_de_compra" name="precio_de_compra" onkeyup="utilidades()"/></td>
+        <td></td>
     </tr>
     <tr>
         <td>Referencia</td>
         <td><input type="text" name="referencia"/></td>
         <td>Costo + Impuesto</td>
-        <td><input type="text" id="" name=""/></td>
+        <td><span id="cost_impu"></span></td>
+        <td></td>
     </tr>
     <tr>
         <td>Código de barra</td>
         <td><input type="text" name="codigo_barras"/></td>
         <td>Flete</td>
-        <td><input type="text" id="" name=""/></td>
+        <td><input type="text" id="flete" name="flete" value="0" onkeyup="utilidades()"/></td>
+        <td></td>
     </tr>
     <tr>
         <td>Control Inventario</td>
@@ -760,7 +765,8 @@ function menu_producto($usuario){
             <input type="radio" id="c2" name="control_inventario" value="no">
                 <label for="c2">No</label><br></td>
         <td>Utilidad estimada</td>
-        <td><input type="text" id="" name=""/></td>
+        <td><span id=""></span>%</td>
+        <td></td>
     </tr>
     <tr>
         <td>Decimales en cantidad</td>
@@ -771,9 +777,9 @@ function menu_producto($usuario){
 
 
 
-        <td>Precio Sugerido<br><input type="text" id="" name=""/></td>
-        <td>Venta 2<br><input type="text" id="" name=""/></td>
-        <td>Venta 3<br><input type="text" id="" name=""/></td>
+        <td>Venta 1<br><input type="text" id="venta1" name="venta1" value="0" onkeyup="utilidades()"/></td>
+        <td>Venta 2<br><input type="text" id="venta2" name="venta2" value="0" onkeyup="utilidades()"/></td>
+        <td>Venta 3<br><input type="text" id="venta3" name="venta3" value="0" onkeyup="utilidades()"/></td>
     </tr>
     <tr>
         <td>Días rotación</td>
@@ -785,14 +791,21 @@ function menu_producto($usuario){
                 <label for="r1">Activo</label><br>
             <input type="radio" id="r2" name="estado" value="inactivo">
                 <label for="r2">Inactivo</label><br></td>
-        <td>Utilidad<br><input type="text" id="" name=""/></td>
-        <td>Utilidad 2<br><input type="text" id="" name=""/></td>
-        <td>Utilidad 3<br><input type="text" id="" name=""/></td>
+        <td>Utilidad: <span id="utilidad1"></span>%</td>
+        <td>Utilidad: <span id="utilidad2"></span>%</td>
+        <td>Utilidad: <span id="utilidad3"></span>%</td>
+    </tr>
+    <tr>
+        <td>Crear Categoría</td>
+        <td>Eliminar producto</td>
+        <td>modificar producto</td>
+        <td>Crear producto</td>
+        <td>Buscar producto</td>
     </tr>
 
     </form>
     </table>
-    <button type="button" id="enviar8" class="w3-red" onclick="document.getElementById('respuesta8').style.display='block'"><i class='fas fa-edit' style='font-size:24px;color:white'></i></button>
+    <button type="button" id="enviar8" class="w3-red" onclick="document.getElementById('respuesta8').style.display='block'"><i class='fas fa-edit' style='font-size:24px;color:white'> Guardar</i></button>
 
     <div id="respuesta8"></div>
     
