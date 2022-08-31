@@ -143,7 +143,7 @@
             <div class="menu" style="margin-top: 3%;">
             
             <a class="columna w3-red" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="40%" height="40%"><br>Proveedor</a>
-            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2')"><img src="../iconos/producto.png" width="40%" height="40%"><br>Producto</a>
+            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2');$('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="40%" height="40%"><br>Producto</a>
             <a class="columna w3-green" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="40%" height="40%"><br>Personal</a>
             <a class="columna w3-teal" onclick="ocultarDivs2('cont2_4')"><img src="../iconos/presupuesto.png" width="40%" height="40%"><br>Presupuestos</a>
             <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="40%" height="40%"><br>Vehículos</a>
@@ -161,7 +161,7 @@
             <div id="cont2_2" style="display:none;">
                 <div class="w3-container">
                     <?php   menu_producto($usuario);     ?>
-                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_2').style.display='none'">X</a>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_2').style.display='none'" id="xcont2_2">X</a>
                 </div>
             </div>
             <div id="cont2_3" style="display:none;">

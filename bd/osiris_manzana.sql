@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 26-08-2022 a las 00:16:36
+-- Tiempo de generación: 01-09-2022 a las 01:33:43
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -46,7 +46,8 @@ INSERT INTO `cargo` (`id_cargo`, `cargo`, `estado`) VALUES
 (6, 'Proveedor', ''),
 (7, 'Bodeguera', 'inactivo'),
 (8, '', ''),
-(9, 'camionero', 'inactivo');
+(9, 'camionero', 'inactivo'),
+(10, '', '');
 
 -- --------------------------------------------------------
 
@@ -56,7 +57,7 @@ INSERT INTO `cargo` (`id_cargo`, `cargo`, `estado`) VALUES
 
 CREATE TABLE `categoria` (
   `id_cat` int(11) NOT NULL,
-  `categorias` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `categorias` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -65,7 +66,18 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`id_cat`, `categorias`, `estado`) VALUES
-(1, 'carnes', 'activo');
+(1, 'carnes', 'activo'),
+(2, 'aseo', 'activo'),
+(3, '', ''),
+(4, '', ''),
+(5, '', ''),
+(6, '', ''),
+(7, '', ''),
+(8, '', ''),
+(9, '', ''),
+(10, '', ''),
+(11, '', ''),
+(12, '', '');
 
 -- --------------------------------------------------------
 
@@ -126,7 +138,9 @@ CREATE TABLE `control` (
 INSERT INTO `control` (`id_control`, `id_pers4`, `llegada`, `ir_desayuno`, `regre_desayuno`, `ir_almuerzo`, `regre_almuerzo`, `salida`, `fecha`) VALUES
 (1, 3, '08:00:00', NULL, NULL, NULL, NULL, NULL, '2022-08-24'),
 (2, 3, NULL, NULL, NULL, NULL, NULL, NULL, '2022-08-23'),
-(3, 3, '08:00:00', NULL, NULL, NULL, NULL, NULL, '2022-08-25');
+(3, 3, '08:00:00', NULL, NULL, NULL, NULL, NULL, '2022-08-25'),
+(4, 3, '08:00:00', NULL, NULL, NULL, NULL, NULL, '2022-08-26'),
+(5, 2, '08:30:04', '18:04:12', '18:04:27', NULL, NULL, NULL, '2022-08-26');
 
 -- --------------------------------------------------------
 
@@ -184,7 +198,7 @@ CREATE TABLE `cuenta_cobro` (
 --
 
 INSERT INTO `cuenta_cobro` (`id_cuenta`, `nombre`, `costo`, `factura`, `fecha`, `fecha_pago`, `dias`, `estado`) VALUES
-(1, 'prove', 1000000, 'ss', '2022-08-10', '2022-07-09 11:56:52', 20, 'activo'),
+(1, 'prove', 1000000, 'ss', '2022-08-10', '2022-07-09 11:56:52', 30, 'activo'),
 (2, 'prove', 200000, '5A45SDAS4D5AS', '2022-07-04', '2022-07-05 16:13:29', 10, 'inactivo'),
 (3, 'prove', 300000, '', '2022-08-25', '2022-07-06 12:25:02', 25, 'activo'),
 (4, 'prove', 4000000, 'ABC123', '2022-07-03', '2022-07-06 00:00:00', 20, 'inactivo'),
@@ -1262,13 +1276,14 @@ INSERT INTO `pre_detalle` (`id_presu_de`, `id_presu1`, `nombre`, `costo`, `costo
 (65, 1, '', 0, NULL, '', 3, ''),
 (95, 1, '', 0, NULL, '', 1, ''),
 (98, 1, '', 0, NULL, '', 1, ''),
-(99, 7, '', 0, NULL, '', 1, 'activo'),
+(99, 7, 'Arriendo', 0, NULL, '', 1, 'activo'),
 (101, 1, '', 0, NULL, '', 1, ''),
 (103, 8, '', 0, NULL, '', 1, 'activo'),
 (105, 7, '', 0, NULL, '', 1, ''),
 (106, 7, '', 0, NULL, '', 1, ''),
 (109, 9, '', 20000, NULL, '', 1, 'activo'),
-(110, 10, NULL, NULL, NULL, NULL, 1, 'activo');
+(110, 10, NULL, NULL, NULL, NULL, 1, 'activo'),
+(111, 7, 'Servicios', 0, NULL, '', 1, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1292,7 +1307,8 @@ INSERT INTO `pre_detalle_cat` (`id_pre_detalle_cat`, `cate_pre`, `estado`) VALUE
 (3, 'Ferreteria', 'activo'),
 (4, '', ''),
 (5, '', ''),
-(6, '', '');
+(6, '', ''),
+(7, '', '');
 
 -- --------------------------------------------------------
 
@@ -1308,10 +1324,16 @@ CREATE TABLE `producto` (
   `descripcion` varchar(100) COLLATE utf8_spanish_ci DEFAULT NULL,
   `precio_producto` int(11) DEFAULT NULL,
   `precio_producto2` int(11) DEFAULT NULL,
+  `precio_producto3` int(11) DEFAULT NULL,
   `precio_de_compra` int(11) NOT NULL,
   `existencias` int(11) DEFAULT NULL,
   `id_proveedor1` int(11) NOT NULL,
   `iva` int(11) DEFAULT NULL,
+  `control_inv` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `decimales_cant` varchar(10) COLLATE utf8_spanish_ci NOT NULL,
+  `dias_rotacion` int(11) NOT NULL,
+  `class_iva` varchar(50) COLLATE utf8_spanish_ci NOT NULL,
+  `flete` int(11) NOT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -1319,17 +1341,18 @@ CREATE TABLE `producto` (
 -- Volcado de datos para la tabla `producto`
 --
 
-INSERT INTO `producto` (`id_producto`, `cod_producto`, `id_cat1`, `nombre_producto`, `descripcion`, `precio_producto`, `precio_producto2`, `precio_de_compra`, `existencias`, `id_proveedor1`, `iva`, `estado`) VALUES
-(1, 1, 1, 'botella 300ml', 'botella personal', 500, 400, 1500, 10, 36, 19, 'activo'),
-(2, 2, 1, 'mega 3L', '3 litros', 5000, 4500, 4000, 10, 36, 19, 'activo'),
-(3, 3, 1, 'bitella 1.5L', '', 3000, 2500, 2000, 10, 36, 19, 'activo'),
-(4, 4, 1, 'litron', '', 1500, 1500, 1000, 10, 36, 19, 'activo'),
-(5, 5, 1, 'leche 1L', '', 4000, 3800, 3000, 20, 64, 19, 'activo'),
-(6, 6, 1, 'pan integral 100gr', '', 3500, 0, 5000, 110, 65, 19, 'activo'),
-(7, 7, 1, 'pan leche 250 gr', NULL, 3500, NULL, 3000, 10, 65, 19, 'activo'),
-(8, 8, 1, 'ballena', NULL, 4000, NULL, 4000, NULL, 67, 19, 'activo'),
-(9, 9, 1, 'cangrejitos', NULL, 1800, NULL, 2500, NULL, 67, 19, 'activo'),
-(10, 10, 1, 'almejas', NULL, 2300, NULL, 6000, NULL, 67, 19, 'activo');
+INSERT INTO `producto` (`id_producto`, `cod_producto`, `id_cat1`, `nombre_producto`, `descripcion`, `precio_producto`, `precio_producto2`, `precio_producto3`, `precio_de_compra`, `existencias`, `id_proveedor1`, `iva`, `control_inv`, `decimales_cant`, `dias_rotacion`, `class_iva`, `flete`, `estado`) VALUES
+(1, 1, 1, 'botella 300ml', 'botella personal', 500, 400, NULL, 1500, 10, 36, 19, '', '', 0, '', 0, 'activo'),
+(2, 2, 1, 'mega 3L', '3 litros', 5000, 4500, NULL, 4000, 10, 36, 19, '', '', 0, '', 0, 'activo'),
+(3, 3, 1, 'bitella 1.5L', '', 3000, 2500, NULL, 2000, 10, 36, 19, '', '', 0, '', 0, 'activo'),
+(4, 4, 1, 'litron', '', 1500, 1500, NULL, 1000, 10, 36, 19, '', '', 0, '', 0, 'activo'),
+(5, 5, 1, 'leche 1L', '', 4000, 3800, NULL, 3000, 20, 64, 19, '', '', 0, '', 0, 'activo'),
+(6, 6, 1, 'pan integral 100gr', '', 3500, 0, NULL, 5000, 110, 65, 19, '', '', 0, '', 0, 'activo'),
+(7, 7, 1, 'pan leche 250 gr', NULL, 3500, NULL, NULL, 3000, 10, 65, 19, '', '', 0, '', 0, 'activo'),
+(8, 8, 1, 'ballena', NULL, 4000, NULL, NULL, 4000, NULL, 67, 19, '', '', 0, '', 0, 'activo'),
+(9, 9, 1, 'cangrejitos', NULL, 1800, NULL, NULL, 2500, NULL, 67, 19, '', '', 0, '', 0, 'activo'),
+(10, 10, 1, 'almejas', NULL, 2300, NULL, NULL, 6000, NULL, 67, 19, '', '', 0, '', 0, 'activo'),
+(12, 11, 2, 'karne 500g', 'paquete', 26000, 25000, 24000, 20000, 0, 64, 19, 'si', 'si', 10, 'gravado', 0, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1422,7 +1445,8 @@ INSERT INTO `proveedor` (`id_proveedor`, `nombre_proveedor`, `user`, `pass`, `di
 (66, '', NULL, NULL, '', '', '', '', ''),
 (67, 'natipan', 'natipan', 'natipan', 'medellin', '', '', '', 'activo'),
 (68, '', NULL, NULL, '', '', '', '', ''),
-(69, '', NULL, NULL, '', '', '', '', '');
+(69, '', NULL, NULL, '', '', '', '', ''),
+(70, '', NULL, NULL, '', '', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -2030,13 +2054,13 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `cliente`
@@ -2048,7 +2072,7 @@ ALTER TABLE `cliente`
 -- AUTO_INCREMENT de la tabla `control`
 --
 ALTER TABLE `control`
-  MODIFY `id_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `cuadre_caja`
@@ -2138,25 +2162,25 @@ ALTER TABLE `presupuesto`
 -- AUTO_INCREMENT de la tabla `pre_detalle`
 --
 ALTER TABLE `pre_detalle`
-  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id_presu_de` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=112;
 
 --
 -- AUTO_INCREMENT de la tabla `pre_detalle_cat`
 --
 ALTER TABLE `pre_detalle_cat`
-  MODIFY `id_pre_detalle_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_pre_detalle_cat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `producto`
 --
 ALTER TABLE `producto`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `proveedor`
 --
 ALTER TABLE `proveedor`
-  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=70;
+  MODIFY `id_proveedor` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de la tabla `ro_detalles`

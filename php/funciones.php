@@ -672,140 +672,8 @@ function menu_proveedor($usuario){
 ////////////////////////////////////////////////////////////////////////////////////////////////
 function menu_producto($usuario){
     ?>
-    <div>
-    <form id="menu_productos" method="POST"> 
-    <table class="tabla_sugerido">
-    <tr>
-        <th colspan="2">Datos Básicos</th>
-        <th colspan="3">Información Tributaria</th>
-    </tr>
-    <tr>
-        <td>Categoría</td>
-        <td><input list="categorias" name="categoria" id="categoria"></th>
-        <datalist id="categorias"  required>
-
-        <?php
-            if(existencia_de_la_conexion()){
-                require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-            }
-            $conexion = conectar();                     //Obtenemos la conexion
-            
-            //Consulta a la base de datos en la tabla provvedor
-            $consulta = mysqli_query($conexion, "SELECT `categorias` FROM `categoria` WHERE `estado` = 'activo' ORDER BY `categorias` ASC") or die ("Error al consultar: proveedores");
-
-            while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                // traemos los proveedores existentes en la base de datos
-                echo "<option value=".$fila['categorias']."></option>";
-            }
-            mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-        ?>
-        </datalist></td>
-        <td>Tarifas de IVA</td>
-        <td><input type="text" size="2" id="t_iva" name="t_iva" onkeyup="utilidades()"/>%</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Proveedor</td>
-        <td><input list="proveedores" name="proveedor" id="proveedor"></th>
-        <datalist id="proveedores"  required>
-
-        <?php
-            if(existencia_de_la_conexion()){
-                require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-            }
-            $conexion = conectar();                     //Obtenemos la conexion
-            
-            //Consulta a la base de datos en la tabla provvedor
-            $consulta = mysqli_query($conexion, "SELECT `nombre_proveedor` FROM `proveedor` WHERE `estado` = 'activo' ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: proveedores");
-
-            while (($fila = mysqli_fetch_array($consulta))!=NULL){
-                // traemos los proveedores existentes en la base de datos
-
-                ?>
-                <option value="<?php echo $fila['nombre_proveedor'] ?>">1</option>";
-                <?php
-            }
-            mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-        ?>
-        </datalist></td>
-        <td>Clasificación de IVA</td>
-        <td><input type="radio" id="civa1" name="clasi_iva" value="gravado" checked>
-                <label for="civa1">Gravado</label>
-            <input type="radio" id="civa2" name="clasi_iva" value="incluido">
-                <label for="civa2">Incluido</label>
-            <input type="radio" id="civa3" name="clasi_iva" value="excluido">
-                <label for="civa3">Excluido</label><br></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Descripción</td>
-        <td><input type="text" name="descripcion"/></td>
-        <td>Costo del producto</td>
-        <td><input type="text" id="precio_de_compra" name="precio_de_compra" onkeyup="utilidades()"/></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Referencia</td>
-        <td><input type="text" name="referencia"/></td>
-        <td>Costo + Impuesto</td>
-        <td><span id="cost_impu"></span></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Código de barra</td>
-        <td><input type="text" name="codigo_barras"/></td>
-        <td>Flete</td>
-        <td><input type="text" id="flete" name="flete" value="0" onkeyup="utilidades()"/></td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Control Inventario</td>
-        <td><input type="radio" id="c1" name="control_inventario" value="si" checked>
-                <label for="c1">Si</label><br>
-            <input type="radio" id="c2" name="control_inventario" value="no">
-                <label for="c2">No</label><br></td>
-        <td>Utilidad estimada</td>
-        <td><span id=""></span>%</td>
-        <td></td>
-    </tr>
-    <tr>
-        <td>Decimales en cantidad</td>
-        <td><input type="radio" id="d1" name="decimales_en_cantidad" value="si" checked>
-                <label for="d1">Si</label><br>
-            <input type="radio" id="d2" name="decimales_en_cantidad" value="no">
-                <label for="d2">No</label><br></td>
-
-
-
-        <td>Venta 1<br><input type="text" id="venta1" name="venta1" value="0" onkeyup="utilidades()"/></td>
-        <td>Venta 2<br><input type="text" id="venta2" name="venta2" value="0" onkeyup="utilidades()"/></td>
-        <td>Venta 3<br><input type="text" id="venta3" name="venta3" value="0" onkeyup="utilidades()"/></td>
-    </tr>
-    <tr>
-        <td>Días rotación</td>
-        <td><input type="number" name="codigo_barras" min="0" value="0"/></td>
-    </tr>
-    <tr>
-        <td>Activo</td>
-        <td><input type="radio" id="r1" name="estado" value="activo" checked>
-                <label for="r1">Activo</label><br>
-            <input type="radio" id="r2" name="estado" value="inactivo">
-                <label for="r2">Inactivo</label><br></td>
-        <td>Utilidad: <span id="utilidad1"></span>%</td>
-        <td>Utilidad: <span id="utilidad2"></span>%</td>
-        <td>Utilidad: <span id="utilidad3"></span>%</td>
-    </tr>
-    <tr>
-        <td>Crear Categoría</td>
-        <td>Eliminar producto</td>
-        <td>modificar producto</td>
-        <td>Crear producto</td>
-        <td>Buscar producto</td>
-    </tr>
-
-    </form>
-    </table>
-    <button type="button" id="enviar8" class="w3-red" onclick="document.getElementById('respuesta8').style.display='block'"><i class='fas fa-edit' style='font-size:24px;color:white'> Guardar</i></button>
+    
+    <button type="button" id="enviar8" class="w3-red" style="display:none;">Guardar</button>
 
     <div id="respuesta8"></div>
     
@@ -814,8 +682,6 @@ function menu_producto($usuario){
         $('#enviar8').click(function(){
             $.ajax({
                 url:'../php/consulta8.php',
-                type:'POST',
-                data: $('#menu_productos').serialize(),
                 success: function(res){
                     $('#respuesta8').html(res);
                 },
