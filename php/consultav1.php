@@ -79,7 +79,7 @@
         </div>
             
         <div class="venta_inferior" style="">
-            <form id="form_ventas_v1_1" method="POST">
+            <form id="form_ventas_v1_1">
                 <table border="0" class="tabla_sugerido" style="box-shadow: 3px 3px 5px 3px #999;">
                     <tr>
                         <td width="33%" style="border-top-color: #dddddd;"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"/>&nbsp;<button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button></td>

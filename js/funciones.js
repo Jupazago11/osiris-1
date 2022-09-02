@@ -163,6 +163,44 @@ function myFunctionTabla6() {
   }
 }
 
+//  menu productos
+function myFunctionTabla7() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput7");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable6");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+function myFunctionTabla8() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("myInput8");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable6");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+}
+
 function show1() {
   var rowId = event.target.parentNode.parentNode.id;
   //this gives id of tr whose button was clicked
@@ -286,28 +324,40 @@ function utilidades() {
 
   //////////////////////////////
   // Generamos el valor del costo
-  var precio_compra = document.getElementById("precio_de_compra").value;
-  var t_iva = document.getElementById("t_iva").value;
-  var flete = document.getElementById("flete").value;
+  var precio_compra = document.getElementById("precio_de_compra_menu_pro").value;
+  var t_iva = document.getElementById("t_iva_menu_pro").value;
+  var flete = document.getElementById("flete_menu_pro").value;
 
-  flete = isNaN(parseInt(document.getElementById("flete").value)) ? 0 : parseInt(document.getElementById("flete").value);
+  flete = isNaN(parseInt(document.getElementById("flete_menu_pro").value)) ? 0 : parseInt(document.getElementById("flete_menu_pro").value);
 
-  precio_compra = isNaN(parseInt(document.getElementById("precio_de_compra").value)) ? 0 : parseInt(document.getElementById("precio_de_compra").value);
+  precio_compra = isNaN(parseInt(document.getElementById("precio_de_compra_menu_pro").value)) ? 0 : parseInt(document.getElementById("precio_de_compra_menu_pro").value);
 
-  t_iva = isNaN(parseInt(document.getElementById("t_iva").value)) ? 0 : parseInt(document.getElementById("t_iva").value);
+  t_iva = isNaN(parseInt(document.getElementById("t_iva_menu_pro").value)) ? 0 : parseInt(document.getElementById("t_iva_menu_pro").value);
 
   var total = parseInt(precio_compra) + parseInt(flete) + (precio_compra*t_iva/100);
   document.getElementById("cost_impu").innerHTML = total;
 
   ////////////////////////////////////////////////
   // calculamos las utilidades 
-  var venta1 = document.getElementById("venta1").value;
+  var venta1 = document.getElementById("venta1_menu_pro").value;
   document.getElementById("utilidad1").innerHTML = ((venta1*100/total)-100).toFixed(2);
 
-  var venta2 = document.getElementById("venta2").value;
+  var venta2 = document.getElementById("venta2_menu_pro").value;
   document.getElementById("utilidad2").innerHTML = ((venta2*100/total)-100).toFixed(2);
 
-  var venta3 = document.getElementById("venta3").value;
+  var venta3 = document.getElementById("venta3_menu_pro").value;
   document.getElementById("utilidad3").innerHTML = ((venta3*100/total)-100).toFixed(2);
 
 }
+////////////////////////////
+//  enviar producto para caja
+
+document.getElementById('codigo_producto_v1_1')
+  .addEventListener('keyup', function(event) {
+    if (event.code === 'Enter'){
+      $('#Enviarv1_1').trigger('click');
+
+      var inputNombre = document.getElementById("codigo_producto_v1_1");
+      inputNombre.value = "";
+    }
+  });

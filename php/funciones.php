@@ -899,7 +899,7 @@ function caja1($usuario){
     ?>
     <button type="button" id="enviarv1" class="w3-btn w3-red" onclick="document.getElementById('respuestav1').style.display='block'" style="display:none;"></button>
 
-    <form id="usuario_caja1" method="POST">
+    <form id="usuario_caja1">
         <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
     </form>
 

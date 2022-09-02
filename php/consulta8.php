@@ -12,12 +12,12 @@
     <table class="tabla_sugerido">
         <tr>
             <th colspan="2">Datos Básicos</th>
-            <th colspan="3">Información Tributaria</th>
+            <th colspan="3">Información Tributaria <input type="hidden" name="id" id="id_menu_pro" value="0"/></th>
         </tr>
         <tr>
             <td>Categoría</td>
             <td></th>
-            <select id="categorias" name="categorias">
+            <select id="categorias_menu_pro" name="categorias">
             <option value="0"></option>
 
             <?php
@@ -39,13 +39,13 @@
             <img src="../iconos/plus.png" id="plus_cat" width="35px" height="35px" onclick="document.getElementById('form_categorias_prod').style.display='block';document.getElementById('xcont2_2').style.display='none'">
             </td>
             <td>Tarifas de IVA</td>
-            <td><input type="text" size="2" id="t_iva" name="t_iva" onkeyup="utilidades()"/>%</td>
+            <td><input type="text" size="2" id="t_iva_menu_pro" name="t_iva" onkeyup="utilidades()"/>%</td>
             <td></td>
         </tr>
         <tr>
             <td>Proveedor</td>
             <td></th>
-            <select id="proveedores" name="proveedores">
+            <select id="proveedores_menu_pro" name="proveedores">
             <option value="0"></option>
             <?php
                 if(existencia_de_la_conexion()){
@@ -70,76 +70,78 @@
             ?>
             </select></td>
             <td>Clasificación de IVA</td>
-            <td><input type="radio" id="civa1" name="clasi_iva" value="gravado" checked>
-                    <label for="civa1">Gravado</label>
-                <input type="radio" id="civa2" name="clasi_iva" value="incluido">
-                    <label for="civa2">Incluido</label>
-                <input type="radio" id="civa3" name="clasi_iva" value="excluido">
-                    <label for="civa3">Excluido</label><br></td>
+            <td><input type="radio" id="gravado" name="clasi_iva" value="gravado" checked>
+                    <label for="gravado">Gravado</label>
+                <input type="radio" id="incluido" name="clasi_iva" value="incluido">
+                    <label for="incluido">Incluido</label>
+                <input type="radio" id="excluido" name="clasi_iva" value="excluido">
+                    <label for="excluido">Excluido</label><br></td>
             <td></td>
         </tr>
         <tr>
             <td>Descripción</td>
-            <td><input type="text" name="descripcion"/></td>
+            <td><input type="text" id="nombre_menu_pro" name="descripcion"/></td>
             <td>Costo del producto</td>
-            <td><input type="text" id="precio_de_compra" name="precio_de_compra" onkeyup="utilidades()"/></td>
+            <td><input type="text" id="precio_de_compra_menu_pro" name="precio_de_compra" onkeyup="utilidades()"/></td>
             <td></td>
         </tr>
         <tr>
             <td>Referencia</td>
-            <td><input type="text" name="referencia"/></td>
+            <td><input type="text" id="referencia_menu_pro" name="referencia"/></td>
             <td>Costo + Impuesto</td>
             <td><span id="cost_impu"></span></td>
             <td></td>
         </tr>
         <tr>
             <td>Código de barra</td>
-            <td><input type="text" name="codigo_barras"/></td>
+            <td><input type="text" id="cod_barras_menu_pro" name="codigo_barras"/></td>
             <td>Flete</td>
-            <td><input type="text" id="flete" name="flete" value="0" onkeyup="utilidades()"/></td>
+            <td><input type="text" id="flete_menu_pro" name="flete" value="0" onkeyup="utilidades()"/></td>
             <td></td>
         </tr>
         <tr>
             <td>Control Inventario</td>
-            <td><input type="radio" id="c1" name="control_inventario" value="si" checked>
-                    <label for="c1">Si</label><br>
-                <input type="radio" id="c2" name="control_inventario" value="no">
-                    <label for="c2">No</label><br></td>
+            <td><input type="radio" id="sicontrol" name="control_inventario" value="si" checked>
+                    <label for="sicontrol">Si</label><br>
+                <input type="radio" id="nocontrol" name="control_inventario" value="no">
+                    <label for="nocontrol">No</label><br></td>
             <td>Utilidad estimada</td>
             <td><span id=""></span>%</td>
             <td></td>
         </tr>
         <tr>
             <td>Decimales en cantidad</td>
-            <td><input type="radio" id="d1" name="decimales_en_cantidad" value="si" checked>
-                    <label for="d1">Si</label><br>
-                <input type="radio" id="d2" name="decimales_en_cantidad" value="no">
-                    <label for="d2">No</label><br></td>
+            <td><input type="radio" id="sidecimales" name="decimales_en_cantidad" value="si" checked>
+                    <label for="sidecimales">Si</label><br>
+                <input type="radio" id="nodecimales" name="decimales_en_cantidad" value="no">
+                    <label for="nodecimales">No</label><br></td>
 
 
 
-            <td>Venta 1<br><input type="text" id="venta1" name="venta1" value="0" onkeyup="utilidades()"/></td>
-            <td>Venta 2<br><input type="text" id="venta2" name="venta2" value="0" onkeyup="utilidades()"/></td>
-            <td>Venta 3<br><input type="text" id="venta3" name="venta3" value="0" onkeyup="utilidades()"/></td>
+            <td>Venta 1<br><input type="text" id="venta1_menu_pro" name="venta1" value="0" onkeyup="utilidades()"/></td>
+            <td>Venta 2<br><input type="text" id="venta2_menu_pro" name="venta2" value="0" onkeyup="utilidades()"/></td>
+            <td>Venta 3<br><input type="text" id="venta3_menu_pro" name="venta3" value="0" onkeyup="utilidades()"/></td>
         </tr>
         <tr>
             <td>Días rotación</td>
-            <td><input type="number" name="dias_rotacion" min="0" value="0"/></td>
+            <td><input type="number" id="dias_rotacion_menu_pro" name="dias_rotacion" min="0" value="0"/></td>
         </tr>
         <tr>
             <td>Activo</td>
-            <td><input type="radio" id="r1" name="estado" value="activo" checked>
-                    <label for="r1">Activo</label><br>
-                <input type="radio" id="r2" name="estado" value="inactivo">
-                    <label for="r2">Inactivo</label><br></td>
+            <td><input type="radio" id="activo" name="estado" value="activo" checked>
+                    <label for="activo">Activo</label><br>
+                <input type="radio" id="inactivo" name="estado" value="inactivo">
+                    <label for="inactivo">Inactivo</label><br></td>
             <td>Utilidad: <span id="utilidad1"></span>%</td>
             <td>Utilidad: <span id="utilidad2"></span>%</td>
             <td>Utilidad: <span id="utilidad3"></span>%</td>
         </tr>
         <tr>
-            <td><img src="../iconos/black.png" id="enviar_modif_produ" width="60px" height="60px"></td>
-            <td><img src="../iconos/box.png" id="enviar_crear_produ" width="60px" height="60px"></td>
-            <td><img src="../iconos/black.png" id="enviar_busca_produ" width="60px" height="60px"></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td><img src="../iconos/caja.png" id="enviar_crear_produ" width="60px" height="60px"></td>
+            <td><img src="../iconos/cajaobs.png" id="enviar_busca_produ" width="60px" height="60px"></td>
         </tr>
     </table>
 </form>
