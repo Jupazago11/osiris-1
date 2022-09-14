@@ -142,19 +142,21 @@ function crear_sugerido($usuario){
     }
     $conexion = conectar();                     //Obtenemos la conexion
     ?>
-    <input type="text" id="myInput" onkeyup="myFunctionTabla()" placeholder="Nombrel del proveedor.." title="Type in a name">
+    
 
     <form name="form_seleccionar_prove" id="form_seleccionar_prove" method='post'>
 
         <input type="hidden" name="nombre" id="prove_sugerido"/>
         <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
-        <table class="table_sugerido" id="myTable">
+        <table class="tabla_sugerido" id="myTable">
         <tr>
             <th>#</th>
-            <th>Nombre</th>
+            <th>Nombre <input type="text" id="myInput" onkeyup="myFunctionTabla()" title="Type in a name"></th>
+            <th></th>
             <th></th>
             <th></th>
         </tr>
+
 
         <?php
         $consulta = mysqli_query($conexion, "SELECT `id_proveedor`,`nombre_proveedor` 
@@ -225,39 +227,7 @@ function crear_sugerido($usuario){
             });
         });
     </script>
-    <style>
 
-        #myInput {
-        background-image: url('/css/searchicon.png');
-        background-position: 10px 10px;
-        background-repeat: no-repeat;
-        width: 90%;
-        font-size: 16px;
-        padding: 12px 20px 12px 40px;
-        border: 1px solid #ddd;
-        margin-bottom: 12px;
-        }
-
-        #myTable {
-        border-collapse: collapse;
-        width: 100%;
-        border: 1px solid #ddd;
-        font-size: 18px;
-        }
-
-        #myTable th, #myTable td {
-        text-align: left;
-        padding: 12px;
-        }
-
-        #myTable tr {
-        border-bottom: 1px solid #ddd;
-        }
-
-        #myTable tr.header, #myTable tr:hover {
-        background-color: #f1f1f1;
-        }
-    </style>
     </div>
 <?php
 }
@@ -467,7 +437,21 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
 
     $vehiculo        = "ABC-12A";
 
-    if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
+    $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado, domicilio.tiempo_salida, domicilio.tiempo_llegada, domicilio.id_domi
+    FROM `domicilio` 
+    INNER JOIN `personal`   ON domicilio.id_pers3 = personal.id_pers 
+    INNER JOIN `cliente`    ON domicilio.id_cliente2 = cliente.id_cliente  
+    INNER JOIN `vehiculo`   ON vehiculo.id_vehiculo = domicilio.id_vehiculo2 
+    WHERE vehiculo.placa = '$vehiculo' AND `fecha` = '$fecha'
+    ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
+
+    $existe_registro = false;
+    while (($fila = mysqli_fetch_array($consulta)) != NULL){
+        $existe_registro = true;
+    }
+    mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+
+    if(($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3) && $existe_registro == true){
         
         ?>
         <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_2').style.display='none';">X</a>
@@ -588,6 +572,13 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
         </div>
         <?php
 
+    }elseif($existe_registro == false){
+        ?>
+        <script>
+            //document.getElementById('cont3_2').style.display='none';
+        </script>
+
+        <?php
     }
 }
 
@@ -761,7 +752,7 @@ function ver_presupuestos($usuario){
     ?>
     <form id="menu_presupuestos" method="POST" class="form-inline">
     <input type="hidden" name="user" value="<?php echo $usuario ?>">
-    <table id="tabla_sugerido">
+    <table class="tabla_sugerido">
         <tr>
             <th colspan="6">Selección</th>
         </tr>
@@ -859,7 +850,7 @@ function menu_vehiculos($usuario){
 function resultados_operativos($usuario){
     ?>
     <form id="menu_roo" method="POST" class="form-inline">
-    <table id="tabla_sugerido">
+    <table class="tabla_sugerido">
         <tr>
             <th colspan="6">Selección</th>
         </tr>

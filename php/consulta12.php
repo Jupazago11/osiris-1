@@ -61,6 +61,11 @@
         ?>
         <div id="form_ro" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);width:100%;height: 100%;display:none;">
         <form id="menu_ro" method="POST">
+
+            <input type="hidden" name="name_ro" id="name_ro"/>
+            <input type="hidden" name="anio" value="<?php echo $id_presu ?>"/>
+            <input type="hidden" name="mes_ro" id="mes_ro" value="<?php echo $id_presu ?>"/>
+
         <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;overflow:auto;margin-left: auto;  margin-right: auto;background-color:white; font-size:14px">
             <tr>
                 <th colspan="11"><?php echo $year ?></th>
@@ -68,17 +73,17 @@
             </tr>
             <tr>
                 <th>Mes</th>
-                <th>Inventario</th>
-                <th>Ventas</th>
-                <th>G. Operación</th>
-                <th>Margen</th>
+                <th onclick="grafico_r_operativos('inventario');">Inventario</th>
+                <th onclick="grafico_r_operativos('ventas');">Ventas</th>
+                <th onclick="grafico_r_operativos('g_operacion');">G. Operación</th>
+                <th onclick="grafico_r_operativos('margen');">Margen</th>
                 <th>U. Bruta</th>
                 <th>U. Neta</th>
-                <th>Dividendo</th>
-                <th>Cxpagar</th>
-                <th>Cartera</th>
-                <th>Efectivo</th>
-                <th>Tarjeta</th>
+                <th onclick="grafico_r_operativos('dividendo');">Dividendo</th>
+                <th onclick="grafico_r_operativos('cxpagar');">Cxpagar</th>
+                <th onclick="grafico_r_operativos('credito');">Cartera</th>
+                <th onclick="grafico_r_operativos('efectivo');">Efectivo</th>
+                <th onclick="grafico_r_operativos('tarjeta');">Tarjeta</th>
                 
             </tr>
             <tr>
@@ -93,19 +98,32 @@
 
                 ?>
                 <input type="hidden" name="id_ro1" value="<?php echo $id_ro1 ?>"/>
+                
                 <input type="hidden" name="id_ro_de[]" value="<?php echo $id_ro_de[$i] ?>"/>
-                <td><?php echo $nmeses[$i] ?></td>
-                <td><input type="text" name="inventario[]" size="9" value="<?php echo number_format($inventario[$i], 0, ',', '.') ?>" class="puntos"/></td>
-                <td><input type="text" name="ventas[]" size="9" value="<?php echo number_format($ventas[$i], 0, ',', '.') ?>" class="puntos"/></td>
-                <td><input type="text" name="g_operacion[]" size="9" value="<?php echo number_format($g_operacion[$i], 0, ',', '.') ?>" class="puntos"/></td>
-                <td><input type="text" name="margen[]" size="2" value="<?php echo $margen[$i] ?>"/></td>
+               
+                <td onclick="grafico_r_operativosxmes('<?php echo $nmeses[$i] ?>');"><?php echo $nmeses[$i] ?></td>
+                
+                <td><input type="text" name="inventario[]" size="9" value="<?php echo number_format($inventario[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+                
+                <td><input type="text" name="ventas[]" size="9" value="<?php echo number_format($ventas[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+                
+                <td><input type="text" name="g_operacion[]" size="9" value="<?php echo number_format($g_operacion[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+                
+                <td><input type="text" name="margen[]" size="2" value="<?php echo $margen[$i] ?>" onchange="guardar_r_operativos()"/></td>
+                
                 <td><?php echo number_format($ventas[$i]*$margen[$i]/100, 0, ',', '.') ?></td>
+                
                 <td><?php echo number_format(($ventas[$i]*$margen[$i]/100)-$g_operacion[$i], 0, ',', '.') ?></td>
-                <td><input type="text" name="dividendo[]" size="9" value="<?php echo number_format($dividendo[$i], 0, ',', '.') ?>" class="puntos"/></td>
-                <td><input type="text" name="cxpagar[]" size="9" value="<?php echo number_format($cxpagar[$i], 0, ',', '.') ?>" class="puntos"/></td>
-                <td><input type="text" name="credito[]" size="9" value="<?php echo number_format($credito[$i], 0, ',', '.') ?>" class="puntos"/></td>
-                <td><input type="text" name="efectivo[]" size="9" value="<?php echo number_format($efectivo[$i], 0, ',', '.') ?>" class="puntos"/></td>
-                <td><input type="text" name="tarjeta[]" size="9" value="<?php echo number_format($tarjeta[$i], 0, ',', '.') ?>" class="puntos"/></td>
+                
+                <td><input type="text" name="dividendo[]" size="9" value="<?php echo number_format($dividendo[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+                
+                <td><input type="text" name="cxpagar[]" size="9" value="<?php echo number_format($cxpagar[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+                
+                <td><input type="text" name="credito[]" size="9" value="<?php echo number_format($credito[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+                
+                <td><input type="text" name="efectivo[]" size="9" value="<?php echo number_format($efectivo[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+
+                <td><input type="text" name="tarjeta[]" size="9" value="<?php echo number_format($tarjeta[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
                 <?php
 
 
@@ -167,10 +185,18 @@
             <tr style="background-color:#87CEEB;">
                 <td></td>
                 <?php
-                for ($i=0; $i < count($total); $i++) { 
-                    ?>
-                    <td><?php echo number_format($total[$i], 0, ',', '.') ?></td>
-                    <?php
+                for ($i=0; $i < count($total); $i++) {
+                    if($i==3){
+                        //margen
+                        ?>
+                        <td><?php echo number_format($total[$i], 2, ',', '.') ?></td>
+                        <?php
+                    }else{
+                        ?>
+                        <td><?php echo number_format($total[$i], 0, ',', '.') ?></td>
+                        <?php
+                    }
+                    
                 }
                 ?> 
             </tr>
@@ -183,6 +209,7 @@
         </table>
         </form>
         </div>
+        
         <?php
     }else{
         $consulta = mysqli_query($conexion, "INSERT INTO `r_operativos`(`year`)
@@ -206,6 +233,9 @@
     }   
     ?>
     <div id="respuesta12_1"></div>
+
+    <div class="ventana" id="div_canvas" style="background:rgba(0, 0, 0, 0.8);"></div>
+
     <?php
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>
@@ -229,4 +259,52 @@
             }
         });
     });
+
+    
+function guardar_r_operativos() {
+
+    $.ajax({
+        url:'../php/consulta12_1.php',
+        type:'POST',
+        data: $('#menu_ro').serialize(),
+        success: function(res){
+            $('#enviar12').trigger('click');
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+}
+function grafico_r_operativos(valor) {
+    document.getElementById("name_ro").setAttribute('value',valor);
+    $.ajax({
+        url:'../php/grafica1.php',
+        type:'POST',
+        data: $('#menu_ro').serialize(),
+        success: function(res){
+            $('#div_canvas').html(res);
+            document.getElementById('div_canvas').style.display='block';
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+}
+
+function grafico_r_operativosxmes(valor) {
+    document.getElementById("mes_ro").setAttribute('value',valor);
+
+    $.ajax({
+        url:'../php/grafica2.php',
+        type:'POST',
+        data: $('#menu_ro').serialize(),
+        success: function(res){
+            $('#div_canvas').html(res);
+            document.getElementById('div_canvas').style.display='block';
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+}
 </script>

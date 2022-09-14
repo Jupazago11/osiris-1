@@ -51,7 +51,7 @@
                     <th>Costo con IVA</th>
                     <th>Existencia</th>
                     <th>Sugerido</th>
-                    <th>Recibido</th>
+                    <th>Pedido</th>
                     <th>Total</th>
                 </tr>
                 <?php

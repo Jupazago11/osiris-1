@@ -47,8 +47,8 @@
     <tr>
         <td></td>
         <td></td>
-        <td><button type="button" id="enviar7_4" class="w3-btn w3-green" onclick="document.getElementById('respuesta7_4').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></td>
         <td></td>
+        <td><button type="button" id="enviar7_4" class="w3-btn" onclick="document.getElementById('respuesta7_4').style.display='block'"><img src="../iconos/guardar.png" width="30%" height="30%"></td>
     </tr>
     </table>
     </form>

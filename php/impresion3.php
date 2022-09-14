@@ -137,7 +137,10 @@ if(!empty($_GET['Nucliente'])){
 
 
     $dompdf->loadHtml($html);      //contenido, puede ser "texto"
-    $dompdf->setPaper("b7", "portrait");    //Papel
+    //$dompdf->setPaper("b7", "portrait");    //Papel
+    $dompdf->setPaper(array(0,0,204,650));    //Papel
+
+    
 
     $dompdf->render();
 

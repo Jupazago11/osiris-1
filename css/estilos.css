@@ -254,35 +254,7 @@ th, td {
 
 tr:nth-child(even) {background-color: #f2f2f2;}
 
-.tabla_sugerido {
-  font-family: Arial, Helvetica, sans-serif;
-  border-collapse: collapse;
-  font-size: 16px;
-  width: 100%;
-  overflow:auto;
-  background-color: white;
-}
 
-.tabla_sugerido td, .tabla_sugerido th {
-  border: 0px solid #ddd;
-  padding: 8px;
-}
-
-.tabla_sugerido tr:nth-child(even){background-color: #f2f2f2;}
-
-.tabla_sugerido tr:hover {background-color: #ddd;}
-
-.tabla_sugerido th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #0e2f5c;
-  color: white;
-}
-
-.sin_borde{
-  border: 0;
-}
 
 /* ---------------------------------------------------------------------- */
 
@@ -335,14 +307,41 @@ body {
   border-radius: 15px 15px 15px 15px;
   float: left;
   margin: 1%;
-  width: 22.00%;
+  width: 20%;
   padding: 0px;
   height: 100%; /* altura */
   justify-content: center;
   padding: 10px;
   text-align: center;
+  color: black;
+}
+a{
+  color:black;
+}
+.columna1 {
+  border-radius: 15px 15px 15px 15px;
+  float: left;
+  width: 66.00%;
+  padding: 0px;
+  height: 100%; /* altura */
+  justify-content: center;
+  text-align: center;
+}
+.columna2 {
+  border-radius: 15px 15px 15px 15px;
+  float: left;
+  width: 100.00%;
+  padding: 18px;
+  margin: 1%;
+  height: 100%; /* altura */
+  justify-content: center;
+  text-align: center;
 }
 
+.columna2:hover {
+  opacity: 0.7;
+
+}
 .columna:hover {
   opacity: 0.7;
 
@@ -361,6 +360,7 @@ body {
   margin-left: 8%;
   margin-right: 8%;
   margin-bottom: 0%;
+  color: black;
 }
 
 /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
@@ -735,4 +735,36 @@ img:hover {
   width: 30%;
   height: 90%;
   top:0%;
+}
+
+/*////////////////////////////////////////////////////////////////*/
+
+.tabla_sugerido {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  font-size: 16px;
+  width: 100%;
+  overflow:auto;
+  background-color: white;
+}
+
+.tabla_sugerido td, .tabla_sugerido th {
+  border: 0px solid #ddd;
+  padding: 8px;
+}
+
+.tabla_sugerido tr:nth-child(even){background-color: #f2f2f2;}
+
+.tabla_sugerido tr:hover {background-color: #ddd;}
+
+.tabla_sugerido th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #0e2f5c;
+  color: white;
+}
+
+.sin_borde{
+  border: 0;
 }

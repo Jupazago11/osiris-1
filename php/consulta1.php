@@ -147,7 +147,7 @@
 
             ?>
             <br>
-            <fieldset>
+
             <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta1').style.display='none'">X</a>
             <form id="form_crear_sugerido_2" method="POST">
             <input type="hidden" name="usuario" value="<?php echo $nombre_usuario; ?>">
@@ -161,8 +161,9 @@
                     <th>Toma Física</th>
                     <th>Sugerido</th>
                     <th>Total</th>
-                    <th></th>
+    
                 </tr>
+                <tbody id="tbodyform3">
                 <?php
                 //Consulta a la base de datos en la tabla producto
                 $consulta = mysqli_query($conexion, "SELECT detalle_sugerido.id_detalle, producto.nombre_producto, producto.precio_de_compra, detalle_sugerido.inventario_sugerido, detalle_sugerido.cantidad_sugerido
@@ -177,36 +178,38 @@
                     $total_parcial = $fila['cantidad_sugerido'] * $fila['precio_de_compra'];
                     $total_factura += $total_parcial;
                     ?>
+                    
                     <tr>
-                    <tbody>
-                        <input type="hidden" name="id_sugerido" value="<?php echo $id_sugerido ?>"/>
-                        <input type="hidden" name="ides[]" value="<?php echo $fila['id_detalle'] ?>"/>
-                    <td><?php echo $contador ?></td>
-                    <td><?php echo ucwords($fila['nombre_producto']) ?></td>
-                    <td class="precios"><span class="precio"><?php echo number_format($fila['precio_de_compra'], 0, ',', '.') ?></span></td>
-                    <td><input type="text" class="puntos" name="existencias[]" style="width: 100px" value="<?php echo $fila['inventario_sugerido'] ?>"/></td>
-                    <td class="cantidades"><input  name="sugeridos[]" type="text" class="cantidad" style="width: 100px" value="<?php echo $fila['cantidad_sugerido'] ?>" class="puntos"/></td>
-                    <td><?php echo number_format($total_parcial, 0, ',', '.') ?><td>                  
+                        
+                            <input type="hidden" name="id_sugerido" value="<?php echo $id_sugerido ?>"/>
+                            <input type="hidden" name="ides[]" value="<?php echo $fila['id_detalle'] ?>"/>
+                        <td><?php echo $contador ?></td>
+                        <td><?php echo ucwords($fila['nombre_producto']) ?></td>
+                        <td><?php echo number_format($fila['precio_de_compra'], 0, ',', '.') ?></td>
+                        <td class="precios4_2" style="display:none"><?php echo $fila['precio_de_compra'] ?></td>
+                        <td><input type="text" name="existencias[]" size="5" value="<?php echo $fila['inventario_sugerido'] ?>"/></td>
+                        <td><input name="sugeridos[]" size="5" type="text" class="cantidad" onchange="multi4()" value="<?php echo $fila['cantidad_sugerido'] ?>"/></td>
+                        <td class="total4"><?php echo number_format($total_parcial, 0, ',', '.') ?></td>     
+                        <td class="total4_2" style="display:none"><?php echo $total_parcial ?></td>   
+
+                    </tr>           
                     <?php
                 }
                 mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
     
                 ?>
+                </tbody>
                     <tr>
                         <td colspan="7"></td>
                     </tr>
                 <tfoot>
                     <tr>
-                        <td style="background-color: #04AA6D; color: white;">Total Factura</td>
-                        <td class="final"><?php echo number_format($total_factura, 0, ',', '.') ?></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td><button type="button" id="enviar1_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta1_2').style.display='block'">Guardar</button></td>
-                        <td></td>
+                        <td style="background-color: #04AA6D; color: white;" colspan="4">Total Factura</td>
+                        <td><span id="total4_2"><?php echo number_format($total_factura, 0, ',', '.') ?></span></td>
+                        <td><button type="button" id="enviar1_2" onclick="document.getElementById('respuesta1_2').style.display='block'"><img src="../iconos/guardar.png" width="30%" height="30%"></button></td>
                     </tr>
                 </tfoot>
-                </tbody>
+                
                 </table>
     
     
@@ -225,7 +228,7 @@
                                 'Guardado Exitoso',
                                 'success'
                                 )
-                                $('#enviar1').trigger('click')
+                                $('#enviar1').trigger('click');
                             },
                             error: function(res){
                                 alert("Problemas al tratar de enviar el formulario");

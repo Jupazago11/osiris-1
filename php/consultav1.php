@@ -105,7 +105,7 @@
                         <img id="laImagen" width="60px" height="60px" src="../iconos/contado.png"/>
                         </td>
                         <td><img src="../iconos/domicilios.png" id="Enviard1_1" width="60px" height="60px" onclick="document.getElementById('respuesta_domicilio').style.display='block'">
-                            <img src="../iconos/caja-registradora.png" id="Enviarv1_2" width="60px" height="60px" onclick="document.getElementById('respuesta_cuadre_caja').style.display='block'">
+                            <img src="../iconos/ventas.png" id="Enviarv1_2" width="60px" height="60px" onclick="document.getElementById('respuesta_cuadre_caja').style.display='block'">
                             Factura: 
 
                             <input type="text" name="Nfactura" id="Nfactura" value="<?php echo $id_facturacion ?>" readonly style="background: transparent;border: none;"/>
@@ -322,6 +322,16 @@
                     alert("Problemas al tratar de enviar el formulario productos en facturación");
                 }
             });
+        });
+
+        document.getElementById('codigo_producto_v1_1')
+        .addEventListener('keyup', function(event) {
+            if (event.code === 'Enter'){
+            $('#Enviarv1_1').trigger('click');
+
+            var inputNombre = document.getElementById("codigo_producto_v1_1");
+            inputNombre.value = "";
+            }
         });
     </script>
 

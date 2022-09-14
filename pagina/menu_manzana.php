@@ -14,6 +14,7 @@
         crossorigin="anonymous">
     </script>
     <script type="text/javascript" src="../js/funciones.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <div class="header">
@@ -42,29 +43,35 @@
     <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
         ?>
-        <a class='columna w3-yellow' onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="40%" height="40%"><br>Caja</a>
-        <a class='columna w3-red' onclick="ocultarDivs('cont1')"><img src="../iconos/pedidos.png" alt="" width="40%" height="40%"><br>Pedidos</a>
-        <a class='columna w3-blue' onclick="ocultarDivs('cont2')"><img src="../iconos/empresa.png" alt="empresa" width="40%" height="40%"><br>Empresa</a>
-        <a class='columna w3-green' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
-        <a class='columna w3-teal' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
-        
+        <div class="columna1" style="width:60%">
+        <a class='columna2' style="width:33%"></a>
+        <a class='columna2' style="background-color: #9AAB09;width:30%" onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
+        <a class='columna2' style="background-color: #AB0909;width:30%" onclick="ocultarDivs('cont1');ocultarDivs1('cont1_1')"><img src="../iconos/pedidos.png" alt="" width="50%" height="50%"><br>Toma Pedidos</a>
+        <a class='columna2' style="width:33%"></a>
+        <a class='columna2' style="background-color: #22AB09;width:30%" onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
+        <a class='columna2' style="background-color: #0969AB;width:30%" onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
+        </div> 
+
+        <div class="columna1" style="width:40%">
+        <a class='columna2' style="background-color: #09AB83;padding-top:21%;padding-bottom:21%;width:50%" onclick="ocultarDivs('cont2')"><img src="../iconos/empresa.png" alt="empresa" width="50%" height="50%"><br>Empresa</a>
+        </div>
         <?php
     }elseif($tipo_de_cuenta == 3){
         ?>
-        <a class='columna w3-green' onclick="ocultarDivs('cont1')">Pedidos</a>
-        <a class='columna w3-blue' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
-        <a class='columna w3-red' onclick="ocultarDivs('cont4')">Caja</a>
-        <a class='columna w3-teal' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
+        <a class='columna' onclick="ocultarDivs('cont1')">Pedidos</a>
+        <a class='columna' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
+        <a class='columna' onclick="ocultarDivs('cont4')">Caja</a>
+        <a class='columna' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
         <?php
     }elseif($tipo_de_cuenta == 4){
         ?>
-        <a class='columna w3-green' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
-        <a class='columna w3-teal' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
+        <a class='columna' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
+        <a class='columna' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
         <?php
     }
     elseif($tipo_de_cuenta == 5){
         ?>
-        <a class='columna w3-red' onclick="ocultarDivs('cont1')"><img src="../iconos/pedidos.png" alt="" width="40%" height="40%"><br>Pedidos</a>
+        <a class='columna' onclick="ocultarDivs('cont1')"><img src="../iconos/pedidos.png" alt="" width="40%" height="40%"><br>Pedidos</a>
         <?php
     }
     ?>
@@ -80,22 +87,22 @@
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
-                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_1')"><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"><br>Crea Sugerido</a>
-                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4');$('#enviar4').trigger('click')"><img src="../iconos/proximo.png" alt="proximo" width="40%" height="40%"><br>Ver próximos pedidos</a>
+                    <a class="columna" style="background-color: #AB0909" onclick="ocultarDivs1('cont1_1')"><img src="../iconos/existencias.png" alt="existencias" width="50%" height="50%"><br>Crea Sugerido</a>
+                    <a class="columna" style="background-color: #C11818" onclick="ocultarDivs1('cont1_4');$('#enviar4').trigger('click')"><img src="../iconos/proximo.png" alt="proximo" width="50%" height="50%"><br>Ver próximos pedidos</a>
                     <?php
                     if($tipo_de_cuenta == 1){
                         ?>
-                        <a class="columna w3-blue" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')"><img src="../iconos/pago.png" alt="pago" width="40%" height="40%"><br>cuentas por pagar</a>
+                        <a class="columna" style="background-color: #AB0909" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')"><img src="../iconos/pago.png" alt="pago" width="50%" height="50%"><br>cuentas por pagar</a>
                         <?php
                     }
                 }elseif($tipo_de_cuenta == 5){
                     ?>
-                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_2')"><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"><br>Crear Pedido</a>
+                    <a class="columna" style="background-color: #AB0909" onclick="ocultarDivs1('cont1_2')"><img src="../iconos/existencias.png" alt="existencias" width="50%" height="50%"><br>Crear Pedido</a>
                     <?php
                 }
                 elseif($tipo_de_cuenta == 6){
                     ?>
-                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_3')"><img src="../iconos/existencias.png" alt="existencias" width="40%" height="40%"><br> Pedido</a>
+                    <a class="columna" style="background-color: #AB0909" onclick="ocultarDivs1('cont1_3')"><img src="../iconos/existencias.png" alt="existencias" width="50%" height="50%"><br> Pedido</a>
                     <?php
                 }
                 ?>
@@ -106,6 +113,8 @@
             <div id="cont1_1" style="display:none;">
                 <div class="w3-container">
                     <?php   crear_sugerido($usuario);   ?>
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_1')"><img src="../iconos/existencias.png" alt="existencias" width="30%" height="30%"><br>Crea Sugerido</a>
+                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4');$('#enviar4').trigger('click')"><img src="../iconos/proximo.png" alt="proximo" width="30%" height="30%"><br>Ver próximos pedidos</a>
                     
                 </div>
             </div>
@@ -142,12 +151,12 @@
         <div class="osiris"><div class="contenido">Empresa</div></div>
             <div class="menu" style="margin-top: 3%;">
             
-            <a class="columna w3-red" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="40%" height="40%"><br>Proveedor</a>
-            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_2');$('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="40%" height="40%"><br>Producto</a>
-            <a class="columna w3-green" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="40%" height="40%"><br>Personal</a>
-            <a class="columna w3-teal" onclick="ocultarDivs2('cont2_4')"><img src="../iconos/presupuesto.png" width="40%" height="40%"><br>Presupuestos</a>
-            <a class="columna w3-blue" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="40%" height="40%"><br>Vehículos</a>
-            <a class="columna w3-green" onclick="ocultarDivs2('cont2_6')"><img src="../iconos/indicador.png" width="40%" height="40%"><br>Resultados Operativos</a>
+            <a class="columna" style="background-color: #1DC69D" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="50%" height="50%"><br>Proveedor</a>
+            <a class="columna" style="background-color: #09AB83" onclick="ocultarDivs2('cont2_2');$('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="50%" height="50%"><br>Producto</a>
+            <a class="columna" style="background-color: #1DC69D" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="50%" height="50%"><br>Personal</a>
+            <a class="columna" style="background-color: #09AB83" onclick="ocultarDivs2('cont2_4')"><img src="../iconos/presupuesto.png" width="50%" height="50%"><br>Presupuestos</a>
+            <a class="columna" style="background-color: #09AB83" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="50%" height="50%"><br>Vehículos</a>
+            <a class="columna" style="background-color: #1DC69D" onclick="ocultarDivs2('cont2_6'); $('#enviar12').trigger('click')"><img src="../iconos/indicador.png" width="50%" height="50%"><br>Resultados Operativos</a>
             <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0()">X</a>
 
             </div>
@@ -561,6 +570,20 @@ function multi3() {
 
 
     $('#total_cuadre3').html(new Intl.NumberFormat('de-DE').format(suma));
+}
+
+function multi4() {
+    var data = [];
+
+    $("td.total4_2").each(function(){
+        data.push(parseFloat($(this).text()));
+    });
+
+
+    var suma = data.reduce(function(a,b){ return a+b; },0);
+
+
+    $('#total4_2').html(new Intl.NumberFormat('de-DE').format(suma));
 }
 
 

@@ -315,6 +315,23 @@ $('#tbodyform2')
   $total2.text(precio * cantidad); // reseteamos el valor del span.total
 });
 
+//Efectivo en sugeridos
+$('#tbodyform3')
+.on('input', '.cantidad', function() {
+    
+  var $input = $(this), // input.cantidad
+    cantidad = parseInt($input.val(), 10), // valor de input.cantidad
+    $tr = $input.closest('tr'), // fila del input.cantidad
+    precio = parseFloat($tr.find('.precios4_2').text(), 10), // valor del span.precio
+    $total = $tr.find('.total4'), // elemento span.total
+    $total2 = $tr.find('.total4_2');
+
+
+    $total.text((precio * cantidad).toLocaleString('es-MX')); // reseteamos el valor del span.total
+    $total2.text(precio * cantidad); // reseteamos el valor del span.total
+
+});
+
 /////////////////////////////////////////////////////////
 //  Productos
 
@@ -350,14 +367,7 @@ function utilidades() {
 
 }
 ////////////////////////////
-//  enviar producto para caja
+//  grafica r operativos
 
-document.getElementById('codigo_producto_v1_1')
-  .addEventListener('keyup', function(event) {
-    if (event.code === 'Enter'){
-      $('#Enviarv1_1').trigger('click');
 
-      var inputNombre = document.getElementById("codigo_producto_v1_1");
-      inputNombre.value = "";
-    }
-  });
+
