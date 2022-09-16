@@ -152,7 +152,7 @@
                 <td><button type="button" id="enviar11_2" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
                 <td></td>
                 <td></td>
-                <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_icono" id="enviar11_1" class="w3-btn" onclick="document.getElementById('respuesta11_1').style.display='block'" class="btn_icono"></td>
+                <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar11_1" class="w3-btn" onclick="document.getElementById('respuesta11_1').style.display='block'" class="btn_icono"></td>
                 <td></td>
 
             </tr>
@@ -239,7 +239,7 @@
     ?>
         <tr>
             <td><button type="button" id="enviar11_3" class="w3-btn" style="background-color: transparent;"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
-            <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_icono" id="enviar11_4" class="w3-btn" onclick="document.getElementById('respuesta7_2').style.display='block'" class="btn_icono"></td>
+            <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar11_4" class="w3-btn" onclick="document.getElementById('respuesta7_2').style.display='block'" class="btn_icono"></td>
             <td></td>
         </tr>
 

@@ -585,15 +585,17 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
 /////////////////////////////////////////////////////////////////////////////////////////
 function cuentas_por_pagar($usuario){
     ?>
-    <button type="button" id="enviar6_1" class="w3-btn w3-red"  style="visibility:hidden;" onclick="document.getElementById('respuesta6_1').style.display='block'">Inscribir Cuenta</button>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_7').style.display='none';document.getElementById('cont2_6').style.display='none';">X</a>
+    <button type="button" id="enviar6_1" class="w3-btn w3-red"  style="display:none;">Inscribir Cuenta</button>
     
     <div id="respuesta6_1"></div>
 
     <script>
+        document.getElementById('cont2_7').style.display='block';
         $('#enviar6_1').click(function(){
+            document.getElementById('respuesta6_1').style.display='block';
             $.ajax({
                 url:'../php/consulta6_1.php',
-                type:'POST',
                 success: function(res){
                     $('#respuesta6_1').html(res);
                 },
@@ -618,8 +620,8 @@ function menu_proveedor($usuario){
     <div id="respuesta7_1" style="display:none; backgroung-color:white;"></div>
 
     <br>
-    <button type="button" id="enviar7_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta7_1').style.display='block'"> Información</button>
-    <button type="button" id="enviar7_0" class="w3-btn w3-red" onclick="document.getElementById('respuesta7_0').style.display='block'"> Acceso</button>
+    <button type="button" id="enviar7_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta7_1').style.display='block'"> Información</button>
+    <button type="button" id="enviar7_0" class="w3-btn btn_gris" onclick="document.getElementById('respuesta7_0').style.display='block'"> Acceso</button>
     
     <form id="mandar_user" method="POST">
         <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
@@ -697,9 +699,9 @@ function menu_personal($usuario){
     <div id="respuesta9_2" style="display:none; backgroung-color:white;"></div>
     <div id="respuesta9_3" style="display:none; backgroung-color:white;"></div>
     <br>
-    <button type="button" id="enviar9_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Laboral</button>
-    <button type="button" id="enviar9_2" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_2').style.display='block'"> Información Personal</button>
-    <button type="button" id="enviar9_3" class="w3-btn w3-red" onclick="document.getElementById('respuesta9_3').style.display='block'"> Datos</button>
+    <button type="button" id="enviar9_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Laboral</button>
+    <button type="button" id="enviar9_2" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_2').style.display='block'"> Información Personal</button>
+    <button type="button" id="enviar9_3" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_3').style.display='block'"> Datos</button>
     <script>
         $('#enviar9_1').click(function(){
             $.ajax({
@@ -809,10 +811,9 @@ function menu_vehiculos($usuario){
     ?>
     <div id="respuesta10_1" style="display:none; backgroung-color:white;"></div>
     <div id="respuesta10_2" style="display:none; backgroung-color:white;"></div>
-    <br>
-    <br>
-    <button type="button" id="enviar10_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta10_1').style.display='block'"> Vehículos</button>
-    <button type="button" id="enviar10_2" class="w3-btn w3-red" onclick="document.getElementById('respuesta10_2').style.display='block'"> Generar reporte</button>
+
+    <button type="button" id="enviar10_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta10_1').style.display='block'"> Vehículos</button>
+    <button type="button" id="enviar10_2" class="w3-btn btn_gris" onclick="document.getElementById('respuesta10_2').style.display='block'"> Generar reporte</button>
 
     <script>
         $('#enviar10_1').click(function(){
@@ -959,6 +960,37 @@ function registrar_control($usuario){
                 data: $('#mandar_usuario_control13_2').serialize(),
                 success: function(res){
                     $('#respuesta13_2').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+
+    </script>
+    <?php
+}
+
+/////////////////////////////////////////////////////////////////////////////////////////
+function ver_requerimientos($usuario){
+    ?>
+    <button type="button" id="enviar14_1" class="w3-btn w3-red" onclick="document.getElementById('respuesta13_2').style.display='block'" style="display:none"></button>
+
+    <form id="ver_requerimiento" method="post">
+        <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
+    </form>
+
+
+    <div id="respuesta14_1"></div>
+    
+    <script>
+        $('#enviar14_1').click(function(){
+            $.ajax({
+                url:'../php/consulta14.php',
+                type:'POST',
+                data: $('#ver_requerimiento').serialize(),
+                success: function(res){
+                    $('#respuesta14_1').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

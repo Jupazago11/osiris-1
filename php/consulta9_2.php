@@ -105,7 +105,7 @@
             <td colspan="7"></td>
             <td></td>
 
-            <td colspan="2"><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_5" class="w3-btn" onclick="document.getElementById('respuesta9_5').style.display='block'" class="btn_icono"></td>
+            <td colspan="2"><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_5" class="w3-btn" onclick="document.getElementById('respuesta9_5').style.display='block'" class="btn_guardar"></td>
         </tr>
     </table>
     </form>

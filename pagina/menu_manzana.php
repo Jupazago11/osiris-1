@@ -139,7 +139,7 @@
             </div>
             <div id="cont1_5" style="display:none;">
                 <div class="w3-container">
-                    <?php   cuentas_por_pagar($usuario);?>
+                    <?php   //cuentas_por_pagar($usuario);?>
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_5').style.display='none'">X</a>
                 </div>
             </div>
@@ -152,11 +152,13 @@
             <div class="menu" style="margin-top: 3%;">
             
             <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="50%" height="50%"><br>Proveedor</a>
-            <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_2');$('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="50%" height="50%"><br>Producto</a>
+            <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_2'); $('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="50%" height="50%"><br>Producto</a>
             <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="50%" height="50%"><br>Personal</a>
-            <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_4');; $('#enviar11').trigger('click')"><img src="../iconos/presupuesto.png" width="50%" height="50%"><br>Presupuestos</a>
+            <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_4'); $('#enviar11').trigger('click')"><img src="../iconos/presupuesto.png" width="50%" height="50%"><br>Presupuestos</a>
             <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="50%" height="50%"><br>Vehículos</a>
             <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_6'); $('#enviar12').trigger('click')"><img src="../iconos/indicador.png" width="50%" height="50%"><br>Resultados Operativos</a>
+            <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_7'); $('#enviar6_1').trigger('click');"><img src="../iconos/pago.png" width="50%" height="50%"><br>Cuentas pos pagar</a>
+            <a class="columna" style="background-color: #09AB83;color:white" onclick="ocultarDivs2('cont2_8'); $('#enviar14_1').trigger('click')"><img src="../iconos/requerimiento.png" width="50%" height="50%"><br>Requerimientos</a>
             
             <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0()">X</a>
 
@@ -194,7 +196,19 @@
             </div>
             <div id="cont2_6" style="display:none;">
                 <div class="w3-container">
-                    <?php   resultados_operativos($usuario);      ?>
+                    <?php   resultados_operativos($usuario);  ?>
+                    
+                </div>
+            </div>
+            <div id="cont2_7" style="display:none;">
+                <div class="w3-container">
+                    <?php   cuentas_por_pagar($usuario);      ?>
+                    
+                </div>
+            </div>
+            <div id="cont2_8" style="display:none;">
+                <div class="w3-container">
+                    <?php   ver_requerimientos($usuario);    ?>
                     
                 </div>
             </div>
@@ -354,6 +368,8 @@ function ocultarDivs(no_oculta){
             document.getElementById("cont2_4").style.display='none';
             document.getElementById("cont2_5").style.display='none';
             document.getElementById("cont2_6").style.display='none';
+            document.getElementById("cont2_7").style.display='none';
+            document.getElementById("cont2_8").style.display='none';
             break;
         case "cont3":
             document.getElementById("cont3").style.display='block';
@@ -428,6 +444,8 @@ function ocultarDivs2(no_oculta){
     document.getElementById("cont2_4").style.display='none';
     document.getElementById("cont2_5").style.display='none';
     document.getElementById("cont2_6").style.display='none';
+    document.getElementById("cont2_7").style.display='none';
+    document.getElementById("cont2_8").style.display='none';
     switch(no_oculta) {
         //empresa
         case "cont2_1":
@@ -447,6 +465,14 @@ function ocultarDivs2(no_oculta){
             break;
         case "cont2_6":
             document.getElementById("cont2_6").style.display='block';
+            break;
+        case "cont2_7":
+            document.getElementById("cont2_6").style.display='block';
+            document.getElementById("cont2_7").style.display='block';
+            break;
+        case "cont2_8":
+
+            document.getElementById("cont2_8").style.display='block';
             break;
         default:
           // code block

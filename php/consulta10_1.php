@@ -143,7 +143,7 @@
             <td colspan="4"></td>
             <td></td>
             <td></td>
-            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar10_4" class="w3-btn" onclick="document.getElementById('respuesta10_3').style.display='block'" class="btn_icono"></td>
+            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar10_4" class="w3-btn" onclick="document.getElementById('respuesta10_3').style.display='block'" class="btn_guardar"></td>
             <td></td>
             <td></td>
         </tr>

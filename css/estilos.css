@@ -779,3 +779,16 @@ img:hover {
   background-color: #575656;
   border-radius:10px
 }
+.btn_guardar{
+  background-color: transparent;
+  border-radius:10px
+}
+.btn_gris{
+  background-color: #575656;
+  color: white;
+  border-radius:10px
+}
+
+textarea {
+  resize: enable;
+}

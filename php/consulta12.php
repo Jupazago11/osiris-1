@@ -220,7 +220,7 @@
                 <td></td>
                 <td></td>
                 <td colspan="9"></td>
-                <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_icono" id="enviar12_1" class="w3-btn" onclick="document.getElementById('respuesta12_1').style.display='block'" class="btn_icono"></td>
+                <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar12_1" class="w3-btn" onclick="document.getElementById('respuesta12_1').style.display='block'" class="btn_icono"></td>
                 <td></td>
             </tr>
         </table>

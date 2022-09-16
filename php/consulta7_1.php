@@ -90,7 +90,7 @@
         <td></td>
         
         <td colspan="3"></td>
-        <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_icono" id="enviar7_2" class="w3-btn" onclick="document.getElementById('respuesta7_2').style.display='block'" class="btn_icono"></td>
+        <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar7_2" class="w3-btn" onclick="document.getElementById('respuesta7_2').style.display='block'" class="btn_icono"></td>
         <td></td>
     </tr>
     </table>

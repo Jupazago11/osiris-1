@@ -54,7 +54,7 @@
             <th>Estado</th>
             <th>Valor</th>
             <th></th>
-            <th>Eliminar</th>
+            <th> </th>
         </tr>
         <tr>
         <?php
@@ -200,13 +200,17 @@
             
         <tr>
             <td></td>
-            <td><button type="button" id="enviar6_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td><button type="button" id="enviar6_3" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
             <td></td>
             <td><button type="button" id="enviar6_4" class="w3-btn" onclick="document.getElementById('respuesta6_4').style.display='block'" style="width:auto; background-color:#305490; color:white;">Ver cuentas canceladas</button></td>
         <?php
         echo "<td colspan='2'></td><td>Total</td><th>".number_format($costo_total, 0, ',', '.')."</th>";
         ?>
-        <td><button type="button" id="enviar6_2" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta6_2').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td></tr>
+        <td>    
+        <img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar6_2" class="w3-btn" onclick="document.getElementById('respuesta6_2').style.display='block'" class="btn_icono"></td>
+        <td><td>
+
+        </tr>
         <?php
         
         ?>
@@ -216,6 +220,7 @@
     <div id="respuesta6_2"></div>
     <div id="respuesta6_4" style="position:absolute; top:0;left:0;background:white;width:100%;height: 100%;display:none;"></div>
     <script>
+    //console.log("a ver xd");
     $('#enviar6_2').click(function(){
         $.ajax({
             url:'../php/consulta6_2.php',
