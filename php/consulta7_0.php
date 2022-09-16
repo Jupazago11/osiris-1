@@ -13,7 +13,7 @@
 
 ?>
     <form id="actualizar_proveedores2" method="POST">
-    <table class="tabla_sugerido" width="100%">
+    <table class="tabla_sugerido" width="100%" style="font-size:16px">
     <tr>
         <th>#</th>
         <th>Proveedor</th>
@@ -48,7 +48,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><button type="button" id="enviar7_4" class="w3-btn" onclick="document.getElementById('respuesta7_4').style.display='block'"><img src="../iconos/guardar.png" width="30%" height="30%"></td>
+        <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar7_4" onclick="document.getElementById('respuesta7_4').style.display='block'" class="btn_icono"></td>
     </tr>
     </table>
     </form>

@@ -43,7 +43,7 @@ function iniciar_sesion($usuario, $clave){
         if($usuario == $fila['user_pers'] && $clave == $fila['pass_pers']){
             //Existe en la base de datos y es conrrecto los datos
             $tipo_de_cuenta = $fila['tipo_usuario_pers']; //Obtenemos su tipo de cuenta
-            echo "<div class='usuario'>".$fila['user_pers'];
+            echo "<div class='usuario' style='bakcground-color:#575656;color:white'>".$fila['user_pers'];
             $encontrado = true;
             mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
             mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
@@ -804,7 +804,6 @@ function ver_presupuestos($usuario){
     </script>
 <?php
 }
-
 /////////////////////////////////////////////////////////////////////////////////////////
 function menu_vehiculos($usuario){
     ?>
@@ -849,22 +848,22 @@ function menu_vehiculos($usuario){
 /////////////////////////////////////////////////////////////////////////////////////////
 function resultados_operativos($usuario){
     ?>
-    <form id="menu_roo" method="POST" class="form-inline">
-    <table class="tabla_sugerido">
-        <tr>
-            <th colspan="6">Selección</th>
-        </tr>
-        <tr>
-            <td>Año</td>
-            <td><input type="text" name="year" value="2022"></td>
-            <td></td>
-            <td><button type="button" id="enviar12" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
-        </tr>
-    </table>
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_6').style.display='none'">X</a>
-    </form>
-    <br>
-    </div>
+        <form id="menu_roo">
+        <table class="tabla_sugerido">
+            <tr>
+                <th colspan="6">Selección</th>
+            </tr>
+            <tr>
+                <td>Año</td>
+                <td><input type="number" name="year" value="2022" onchange="$('#enviar12').trigger('click');"></td>
+                <td></td>
+                <td style="display:none"><button type="button" id="enviar12" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            </tr>
+        </table>
+        
+        </form>
+    
     <div id="respuesta12">
     <script>
         $('#enviar12').click(function(){
@@ -874,7 +873,8 @@ function resultados_operativos($usuario){
                 data: $('#menu_roo').serialize(),
                 success: function(res){
                     $('#respuesta12').html(res);
-                    document.getElementById('form_ro').style.display='block';
+                    //$('#enviar12_1').trigger('click');
+                    
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

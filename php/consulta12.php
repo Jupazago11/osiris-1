@@ -38,6 +38,7 @@
         $credito = array();
         $efectivo = array();
         $tarjeta = array();
+        $inversion = array();
         
 
         $consulta = mysqli_query($conexion, "SELECT * FROM `ro_detalles` 
@@ -56,20 +57,20 @@
             array_push($credito, $fila['credito']);
             array_push($efectivo, $fila['efectivo']);
             array_push($tarjeta, $fila['tarjeta']);
+            array_push($inversion, $fila['inversion']);
         }
         mysqli_free_result($consulta);
         ?>
-        <div id="form_ro" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);width:100%;height: 100%;display:none;">
-        <form id="menu_ro" method="POST">
-
+        <div style="background-color:#dddddd">
+        <form id="menu_ro">
+        
             <input type="hidden" name="name_ro" id="name_ro"/>
             <input type="hidden" name="anio" value="<?php echo $id_presu ?>"/>
             <input type="hidden" name="mes_ro" id="mes_ro" value="<?php echo $id_presu ?>"/>
 
-        <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;overflow:auto;margin-left: auto;  margin-right: auto;background-color:white; font-size:14px">
+        <table class="tabla_sugerido" style="width:100%;border: 1px solid black; border-collapse: collapse;overflow:auto;margin-left: auto;  margin-right: auto; font-size:12.5px">
             <tr>
-                <th colspan="11"><?php echo $year ?></th>
-                <th><a class="w3-bar-item w3-button w3-hover-red active" onclick="document.getElementById('form_ro').style.display='none'">X</a></th>
+                <th colspan="12"><?php echo $year ?><th>
             </tr>
             <tr>
                 <th>Mes</th>
@@ -80,6 +81,7 @@
                 <th>U. Bruta</th>
                 <th>U. Neta</th>
                 <th onclick="grafico_r_operativos('dividendo');">Dividendo</th>
+                <th onclick="grafico_r_operativos('inversion');">Inversión</th>
                 <th onclick="grafico_r_operativos('cxpagar');">Cxpagar</th>
                 <th onclick="grafico_r_operativos('credito');">Cartera</th>
                 <th onclick="grafico_r_operativos('efectivo');">Efectivo</th>
@@ -88,10 +90,10 @@
             </tr>
             <tr>
             <?php
-            $total = array(0,0,0,0,0,0,0,0,0,0,0);
+            $total = array(0,0,0,0,0,0,0,0,0,0,0,0);
             $nmeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
-            $cant =  array(0,0,0,0,0,0,0,0,0,0,0);
-            $canti=  array(0,0,0,0,0,0,0,0,0,0,0);
+            $cant =  array(0,0,0,0,0,0,0,0,0,0,0,0);
+            $canti=  array(0,0,0,0,0,0,0,0,0,0,0,0);
             for ($i = 0; $i < count($mes); $i++) { 
                 $contador = $i + 1;
 
@@ -116,6 +118,8 @@
                 <td><?php echo number_format(($ventas[$i]*$margen[$i]/100)-$g_operacion[$i], 0, ',', '.') ?></td>
                 
                 <td><input type="text" name="dividendo[]" size="9" value="<?php echo number_format($dividendo[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+
+                <td><input type="text" name="inversion[]" size="9" value="<?php echo number_format($inversion[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
                 
                 <td><input type="text" name="cxpagar[]" size="9" value="<?php echo number_format($cxpagar[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
                 
@@ -124,6 +128,8 @@
                 <td><input type="text" name="efectivo[]" size="9" value="<?php echo number_format($efectivo[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
 
                 <td><input type="text" name="tarjeta[]" size="9" value="<?php echo number_format($tarjeta[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+
+                
                 <?php
 
 
@@ -144,16 +150,25 @@
                     $cant[3]++;
                     $canti[3] += $margen[$i];
                 }
+
+                //prom de inversion
+                if($inversion[$i] != 0){
+                    $cant[7]++;
+                    $canti[7] += $inversion[$i];
+                }
+
                 //prom de cxpagar
                 if($cxpagar[$i] != 0){
-                    $cant[7]++;
-                    $canti[7] += $cxpagar[$i];
+                    $cant[8]++;
+                    $canti[8] += $cxpagar[$i];
                 }
                 //prom de cartera/credito
                 if($credito[$i] != 0){
-                    $cant[8]++;
-                    $canti[8] += $credito[$i];
+                    $cant[9]++;
+                    $canti[9] += $credito[$i];
                 }
+
+                
 
                 //totales
                 //$total[0] = $total[0] + $inventario[$i];
@@ -167,8 +182,8 @@
                 $total[6] = $total[6] + $dividendo[$i];
                 //$total[7] = $total[7] + $cxpagar[$i];
                 //$total[8] = $total[8] + $credito[$i];
-                $total[9] = $total[9] + $efectivo[$i];
-                $total[10] = $total[10] + $tarjeta[$i];
+                $total[10] = $total[10] + $efectivo[$i];
+                $total[11] = $total[11] + $tarjeta[$i];
 
 
             ?>
@@ -178,22 +193,23 @@
             if($cant[0] != 0){$total[0] = $canti[0] / $cant[0];}else{$total[0] = 0;}
             if($cant[2] != 0){$total[2] = $canti[2] / $cant[2];}else{$total[2] = 0;}
             if($cant[3] != 0){$total[3] = $canti[3] / $cant[3];}else{$total[3] = 0;}
-            if($cant[7] != 0){$total[7] = $canti[7] / $cant[7];}else{$total[7] = 0;}
-            if($cant[8] != 0){$total[8] = $canti[8] / $cant[8];}else{$total[8] = 0;}
+            if($cant[8] != 0){$total[8] = $canti[8] / $cant[8];}else{$total[8] = 0;} //cxpagar
+            if($cant[9] != 0){$total[9] = $canti[9] / $cant[9];}else{$total[9] = 0;} //credito
+            if($cant[7] != 0){$total[7] = $canti[7] / $cant[7];}else{$total[7] = 0;} //inversion
             
             ?>
-            <tr style="background-color:#87CEEB;">
+            <tr style="background-color:#575656">
                 <td></td>
                 <?php
                 for ($i=0; $i < count($total); $i++) {
                     if($i==3){
                         //margen
                         ?>
-                        <td><?php echo number_format($total[$i], 2, ',', '.') ?></td>
+                        <td style="color:white;font-weight: bold;"><?php echo number_format($total[$i], 2, ',', '.') ?></td>
                         <?php
                     }else{
                         ?>
-                        <td><?php echo number_format($total[$i], 0, ',', '.') ?></td>
+                        <td style="color:white;font-weight: bold;"><?php echo number_format($total[$i], 0, ',', '.') ?></td>
                         <?php
                     }
                     
@@ -204,11 +220,14 @@
                 <td></td>
                 <td></td>
                 <td colspan="9"></td>
-                <td><button type="button" id="enviar12_1" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta12_1').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+                <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_icono" id="enviar12_1" class="w3-btn" onclick="document.getElementById('respuesta12_1').style.display='block'" class="btn_icono"></td>
+                <td></td>
             </tr>
         </table>
         </form>
+        <br>
         </div>
+            </div>
         
         <?php
     }else{

@@ -84,9 +84,9 @@
         </tr>
         <tr>
             <td></td>
-            <td><button type="button" id="enviar9_4_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td><button type="button" id="enviar9_4_3" class="w3-btn" style="background-color: transparent;"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
             <td colspan="4"></td>
-            <td><button type="button" id="enviar9_6" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta9_6').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_6" onclick="document.getElementById('respuesta9_6').style.display='block'" class="btn_icono"></td>
             <td></td>
         </tr>
     </table>

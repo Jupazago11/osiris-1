@@ -64,7 +64,7 @@
 
                     $intvl2   = $fecha1->diff($fecha3);
                     if($intvl2->d == 0 && $intvl2->m == 0){
-                        echo "<td style='background-color:transparent;border: 2px solid white;text-align: center;color:white;'><img src='../iconos/pastel.png' width='40%' height='40%'></td>";
+                        echo "<td style='background-color:transparent;border: 2px solid white;text-align: center;color:white;'><img src='../iconos/pastel.png' width='40%' height='40%' class='btn_icono'></td>";
                     }else{
                         if($intvl2->m == 0){
                             echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'>".$intvl2->d." Días</td>";
@@ -101,11 +101,11 @@
         </tr>
         <tr>
             <td></td>
-            <td><button type="button" id="enviar9_4_2" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
-            <td colspan="8"></td>
-            <td><button type="button" id="enviar9_5" class="w3-btn" style="background-color: #478248;color:white;" onclick="document.getElementById('respuesta9_5').style.display='block'">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            <td><button type="button" id="enviar9_4_2" class="w3-btn" style="background-color: transparent;"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td colspan="7"></td>
             <td></td>
-            <td></td>
+
+            <td colspan="2"><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_5" class="w3-btn" onclick="document.getElementById('respuesta9_5').style.display='block'" class="btn_icono"></td>
         </tr>
     </table>
     </form>

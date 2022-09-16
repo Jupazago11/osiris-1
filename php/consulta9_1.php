@@ -199,8 +199,8 @@
     }
     ?>
         <tr>
-            <td><button type="button" id="enviar9_7" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
-            <td><button type="button" id="enviar9_8" class="w3-btn" style="background-color: #478248;color:white;">Guardar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            <td><button type="button" id="enviar9_7" class="w3-btn" style="background-color: transparent;"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_8" class="btn_icono"></td>
             <td></td>
         </tr>
 

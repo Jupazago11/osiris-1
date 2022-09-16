@@ -19,7 +19,7 @@
     <form id="actualizar_proveedores" method="POST">
     
 
-    <table class="tabla_sugerido" id="myTable2">
+    <table class="tabla_sugerido" id="myTable2" style="font-size:16px">
     <tr>
         <th>#</th>
         <th>Proveedor</th>
@@ -86,11 +86,12 @@
     ?> 
     <tr>
         <td></td>
-        <td><button type="button" id="enviar7_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+        <td><button type="button" id="enviar7_3" class="w3-btn" style="background-color: transparent;"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
         <td></td>
         
-        <td colspan="4"></td>
-        <td><button type="button" id="enviar7_2" class="w3-btn" onclick="document.getElementById('respuesta7_2').style.display='block'"><img src="../iconos/guardar.png" width="35%" height="35%"></td>
+        <td colspan="3"></td>
+        <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_icono" id="enviar7_2" class="w3-btn" onclick="document.getElementById('respuesta7_2').style.display='block'" class="btn_icono"></td>
+        <td></td>
     </tr>
     </table>
 

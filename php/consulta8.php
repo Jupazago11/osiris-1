@@ -140,8 +140,8 @@
             <td></td>
             <td></td>
             <td></td>
-            <td><img src="../iconos/caja.png" id="enviar_crear_produ" width="60px" height="60px"></td>
-            <td><img src="../iconos/cajaobs.png" id="enviar_busca_produ" width="60px" height="60px"></td>
+            <td><img src="../iconos/caja.png" id="enviar_crear_produ" width="60px" height="60px" class="btn_icono"></td>
+            <td><img src="../iconos/cajaobs.png" id="enviar_busca_produ" width="60px" height="60px" class="btn_icono"></td>
         </tr>
     </table>
 </form>

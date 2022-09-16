@@ -285,9 +285,9 @@ $('#tbodyform')
 function ocultar_menu_venta() {
   var x = document.getElementById("venta_menu");
   if (x.style.display === "block") {
-      x.style.display = "none";
+      //x.style.display = "none";
   } else {
-      x.style.display = "block";
+      //x.style.display = "block";
   }
 }
 

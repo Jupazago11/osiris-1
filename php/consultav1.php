@@ -50,12 +50,12 @@
             
             <table class="tabla_sugerido" id="tabla_v1_1" border="1">
                 <tr>
-                    <th width="25%">Nombre</th>
-                    <th width="15%">Proveedor</th>
+                    <th width="15%">Código</th>
+                    <th width="25%">Producto</th>
                     <th width="15%">Costo</th>
                     <th width="20%">Cantidad</th>
                     <th width="15%">Total producto </th>
-                    <th width="10%"><img src="../iconos/opciones.png" onclick="ocultar_menu_venta();" width="50px" height="50px"></th>
+                    <th width="10%"></th>
                 </tr>
             </table>
         </div>
@@ -82,7 +82,7 @@
             <form id="form_ventas_v1_1">
                 <table border="0" class="tabla_sugerido" style="box-shadow: 3px 3px 5px 3px #999;">
                     <tr>
-                        <td width="33%" style="border-top-color: #dddddd;"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1"/>&nbsp;<button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button></td>
+                        <td width="33%" style="border-top-color: #dddddd;"><input type="text" id="codigo_producto_v1_1" name="codigo_producto_v1_1" placeholder="Código"/>&nbsp;<button type="button" id="Enviarv1_1" class="w3-btn w3-teal">Consultar</button></td>
                         <td width="33%">
                             <table style="padding:0px; border:0px;">
                                 <tr>
@@ -91,29 +91,47 @@
                                 </tr>
                             </table>
                         </td>
-                        <th width="33%">Total: <span id="final_v1_1">0</span></th>
+                        <th width="33%">Total: <span id="final_v1_1">0</span>
+                        <br>
+                        Factura: 
+                        <input type="text" name="Nfactura" id="Nfactura" value="<?php echo $id_facturacion ?>" readonly style="background: transparent;border: none;color:white"/>
+                
+                        </th>
                     </tr>
-                    <tr style="background-color:#dddddd">
-                        <td>Cajero(a): <?php echo ucwords($nombre_pers) ?></td>
-                        <td>
-                        <label for="metodo_de_pago">Método de pago:</label>
-                        <select name="metodo_de_pago" id="metodo_de_pago"  onchange="mandar_texto()">
-                            <option value="contado">Contado</option>
-                            <option value="credito">Crédito</option>
-                            <option value="tarjeta">Tarjeta</option>
-                        </select>
-                        <img id="laImagen" width="60px" height="60px" src="../iconos/contado.png"/>
-                        </td>
-                        <td><img src="../iconos/domicilios.png" id="Enviard1_1" width="60px" height="60px" onclick="document.getElementById('respuesta_domicilio').style.display='block'">
-                            <img src="../iconos/ventas.png" id="Enviarv1_2" width="60px" height="60px" onclick="document.getElementById('respuesta_cuadre_caja').style.display='block'">
-                            Factura: 
+                    <tr style="background-color:#dddddd; height:20%">
+                        <th>
+                            <label for="metodo_de_pago">Método de pago:</label>
+                            <select name="metodo_de_pago" id="metodo_de_pago"  onchange="mandar_texto()">
+                                <option value="contado">Contado</option>
+                                <option value="credito">Crédito</option>
+                                <option value="tarjeta">Tarjeta</option>
+                            </select>
+                            <img id="laImagen" width="60px" height="60px" src="../iconos/contado.png"/>
+                        </th>
 
-                            <input type="text" name="Nfactura" id="Nfactura" value="<?php echo $id_facturacion ?>" readonly style="background: transparent;border: none;"/>
+                        <th colspan="2">
+                            <img src="../iconos/cuenta.png"            id="Enviarfactura1_1"     width="60px" height="60px">
+                            <img src="../iconos/cuentaobs.png"         id="Enviarfacturaobs1_1"  width="60px" height="60px">
+                            <img src="../iconos/factura_congelar.png"  id="Enviarcongelarc1_1"   width="60px" height="60px">
+                            <img src="../iconos/factura_congelar2.png" id="Enviarccongeladas1_1" width="60px" height="60px">
+                            <img src="../iconos/add-contact.png"       id="Enviarcc1_1"          width="60px" height="60px">
+                            <img src="../iconos/add-contact2.png"      id="Enviarabonar1_1"      width="60px" height="60px">
+                            <img src="../iconos/trash-bin.png" width="60px" height="60px" onclick="$('#enviarv1').trigger('click');">
+                            
+                            
+                            
+
+                            <img src="../iconos/domicilios.png" id="Enviard1_1" width="60px" height="60px" onclick="document.getElementById('respuesta_domicilio').style.display='block'">
+                            <img src="../iconos/ventas.png" id="Enviarv1_2" width="60px" height="60px" onclick="document.getElementById('respuesta_cuadre_caja').style.display='block'">
+                        
+
                             <button type="button" id="Enviarccongeladas1_2" style="display:none"></button>
                             <button type="button" id="Enviarfacturaobs1_2" style="display:none"></button>
                             <input type="hidden" name="Nufactura" id="Nufactura"/>
+
+                            Cajero(a): <?php echo ucwords($nombre_pers) ?>
                         
-                        </td>
+                        </th>
                     </tr>
                     <tr></tr>
                 </table>
@@ -121,15 +139,7 @@
             </form>
         </div>
         <div id="venta_menu">
-            <img src="../iconos/fondo.png"              width="60px" height="60px">
-            <img src="../iconos/cuenta.png"             id="Enviarfactura1_1"     width="60px" height="60px">
-            <img src="../iconos/factura_congelar.png"   id="Enviarcongelarc1_1"   width="60px" height="60px">
-            <img src="../iconos/add-contact.png"        id="Enviarcc1_1"          width="60px" height="60px">
             
-            <img src="../iconos/trash-bin.png" width="60px" height="60px" onclick="$('#enviarv1').trigger('click');">
-            <img src="../iconos/cuentaobs.png"          id="Enviarfacturaobs1_1"  width="60px" height="60px">
-            <img src="../iconos/factura_congelar2.png"  id="Enviarccongeladas1_1" width="60px" height="60px">
-            <img src="../iconos/add-contact2.png"       id="Enviarabonar1_1"      width="60px" height="60px">
         </div>
 
         <div id="respuesta_cuadre_caja"     class="ventana"></div>

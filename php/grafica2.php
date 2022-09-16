@@ -74,7 +74,7 @@
     ?>
     <script>
         const labels = [
-        'Inventario', 'Ventas', 'G. Operación', 'Dividendo', 'Cxpagar', 'Cartera', 'Efectivo', 'Tarjeta',
+        'Inventario', 'Ventas', 'G. Operación', 'Dividendo', 'Inversión','Cxpagar', 'Cartera', 'Efectivo', 'Tarjeta',
         ];
 
         const data = {
@@ -83,7 +83,7 @@
             label: '<?php echo $valor ?>',
             data: 
             <?php
-                $consulta = mysqli_query($conexion, "SELECT `inventario`, `ventas`, `g_operacion`, `dividendo`, `cxpagar`, `credito`, `efectivo`, `tarjeta` 
+                $consulta = mysqli_query($conexion, "SELECT `inventario`, `ventas`, `g_operacion`, `dividendo`, `cxpagar`, `credito`, `efectivo`, `tarjeta`, `inversion` 
                 FROM `ro_detalles` 
                 WHERE `id_ro1` = '$anio' AND `mes` = $nmes") or die ("Error al consultar: proveedores");
             ?>
@@ -92,6 +92,7 @@
                 echo $fila['ventas'] ?>, <?php
                 echo $fila['g_operacion'] ?>, <?php
                 echo $fila['dividendo'] ?>, <?php
+                echo $fila['inversion'] ?>, <?php
                 echo $fila['cxpagar'] ?>, <?php
                 echo $fila['credito'] ?>, <?php
                 echo $fila['efectivo'] ?>, <?php
@@ -101,21 +102,18 @@
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1,
             backgroundColor: [
-            'rgb(255, 99, 132)',
-            'rgb(54, 162, 235)',
-            'rgb(255, 205, 86)',
-            'rgb(80, 190, 20)',
-            'rgb(200, 20, 200)',
-            'rgb(90, 0, 0)',
-            'rgb(0, 90, 30)',
-            'rgb(0, 30, 90)',
-            'rgb(160, 160, 160)'
+            'rgb(90, 190, 180)',
+            'rgb(240, 220, 170)',
+            'rgb(230, 130, 90)',
+            'rgb(230, 40, 60)',
+            'rgb(20, 40, 60)',
+            'rgb(20, 110, 15)'
             ]
         }]
         };
 
         const config = {
-            type: 'pie',
+            type: 'doughnut',
             data: data,
         };
 
