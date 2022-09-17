@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-09-2022 a las 01:41:07
+-- Tiempo de generación: 18-09-2022 a las 01:06:41
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -114,7 +114,10 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (12, 1, 'juan pablo zapata', 1037977046, 'carrera 18', '123456 ', 'activo'),
 (13, 1, 'pacho', 1122334455, '', ' ', 'activo'),
 (14, NULL, 'camilo', NULL, NULL, NULL, 'activo'),
-(15, NULL, 'pacho zuleta', NULL, NULL, NULL, 'activo');
+(15, NULL, 'pacho zuleta', NULL, NULL, NULL, 'activo'),
+(16, NULL, 'Juan pablo', NULL, NULL, NULL, 'activo'),
+(17, NULL, 'hfhfh', NULL, NULL, NULL, 'activo'),
+(18, NULL, 'juan pablo kfugisadghsdbfg', NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -147,7 +150,9 @@ INSERT INTO `control` (`id_control`, `id_pers4`, `llegada`, `ir_desayuno`, `regr
 (6, 3, '10:08:45', '10:37:43', '10:37:49', '10:39:41', '10:39:50', '10:39:51', '2022-09-05'),
 (7, 2, '19:05:53', NULL, NULL, NULL, NULL, NULL, '2022-09-09'),
 (8, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-16'),
-(9, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-16');
+(9, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-16'),
+(10, 2, '16:12:15', '16:21:00', '17:36:46', NULL, NULL, NULL, '2022-09-17'),
+(11, 3, '17:40:12', NULL, NULL, NULL, NULL, NULL, '2022-09-17');
 
 -- --------------------------------------------------------
 
@@ -327,7 +332,9 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (63, 24, 5, 100, 400000, 'activo'),
 (64, 25, 4, 1, 1500, 'activo'),
 (65, 25, 8, 1, 4000, 'activo'),
-(66, 25, 9, 1, 1800, 'activo');
+(66, 25, 9, 1, 1800, 'activo'),
+(67, 26, 4, 20, 30000, 'activo'),
+(68, 26, 5, 3, 12000, 'activo');
 
 -- --------------------------------------------------------
 
@@ -966,8 +973,8 @@ CREATE TABLE `domicilio` (
   `nivel_urgencia` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `ubicacion` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
   `destino` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `tiempo_salida` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
-  `tiempo_llegada` varchar(50) COLLATE utf8_spanish_ci DEFAULT NULL,
+  `tiempo_salida` time DEFAULT NULL,
+  `tiempo_llegada` time DEFAULT NULL,
   `estado` varchar(50) COLLATE utf8_spanish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_spanish_ci;
 
@@ -976,31 +983,35 @@ CREATE TABLE `domicilio` (
 --
 
 INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `tiempo_salida`, `tiempo_llegada`, `estado`) VALUES
-(1, 1, 1, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'parque', '12:05', '12:05', 'inactivo'),
+(1, 1, 1, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'parque', '12:05:00', '12:05:00', 'inactivo'),
 (2, 1, 2, 1, '2022-06-28', 'al final del recorrido', 'Prioritario', 'Sopetran', 'ramada', NULL, NULL, 'activo'),
-(3, 1, 3, 1, '2022-06-29', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', '15:57', NULL, 'proceso'),
-(4, 1, 2, 1, '2022-06-29', 'despues de la escuela de manizales', 'Prioritario', 'san francisco', 'por la fabrica de agua', '12:07', '12:07', 'inactivo'),
+(3, 1, 3, 1, '2022-06-29', 'delicado', 'normal', 'san francisco', 'carrera 20 #50-50', '15:57:00', NULL, 'proceso'),
+(4, 1, 2, 1, '2022-06-29', 'despues de la escuela de manizales', 'Prioritario', 'san francisco', 'por la fabrica de agua', '12:07:00', '12:07:00', 'inactivo'),
 (5, 1, 1, 1, '2022-06-28', 'nada', 'normal', 'urbano', 'la casa', NULL, NULL, 'activo'),
 (6, 1, 2, 1, '2022-06-29', 'nada', 'Prioritario', 'urbano', 'mi casa', NULL, NULL, 'activo'),
-(8, 1, 1, 1, '2022-06-29', 'werqwerqwerqwer', 'normal', 'urbano', 'fasdfasd', '12:06', '12:06', 'inactivo'),
+(8, 1, 1, 1, '2022-06-29', 'werqwerqwerqwer', 'normal', 'urbano', 'fasdfasd', '12:06:00', '12:06:00', 'inactivo'),
 (9, 3, 1, 1, '2022-06-29', 'nada', 'normal', 'san francisco', 'vereda', NULL, NULL, 'activo'),
-(10, 3, 5, 1, '2022-06-29', 'villa jardin', 'normal', 'villa jardin', 'jardin', '12:19', '12:24', 'inactivo'),
-(11, 3, 7, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'hogar', '15:52', '15:52', 'inactivo'),
+(10, 3, 5, 1, '2022-06-29', 'villa jardin', 'normal', 'villa jardin', 'jardin', '12:19:00', '12:24:00', 'inactivo'),
+(11, 3, 7, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'hogar', '15:52:00', '15:52:00', 'inactivo'),
 (12, 3, 10, 1, '2022-06-29', 'ninguna', 'normal', 'urbano', 'su casa', NULL, NULL, 'activo'),
-(13, 3, 11, 1, '2022-07-01', 'hfghfg', 'carnes', 'hfghfgh', 'gfhfgh', '16:12', '16:12', 'inactivo'),
-(14, 1, 2, 1, '2022-07-11', '123', '', 'urbano', 'su casa', '16:08', '16:08', 'inactivo'),
-(15, 1, 1, 1, '2022-07-14', 'kjkhjkhjk', 'carnes', 'urbano', 'khkhjkj', '12:02', '12:02', 'inactivo'),
+(13, 3, 11, 1, '2022-07-01', 'hfghfg', 'carnes', 'hfghfgh', 'gfhfgh', '16:12:00', '16:12:00', 'inactivo'),
+(14, 1, 2, 1, '2022-07-11', '123', '', 'urbano', 'su casa', '16:08:00', '16:08:00', 'inactivo'),
+(15, 1, 1, 1, '2022-07-14', 'kjkhjkhjk', 'carnes', 'urbano', 'khkhjkj', '12:02:00', '12:02:00', 'inactivo'),
 (16, 1, 6, 1, '2022-07-25', 'hgjdghjdgh', 'carnes', 'urbano', 'dhgdfj', NULL, NULL, 'activo'),
-(17, 1, 1, 1, '2022-08-03', 'ninguna', '', 'urbano', 'casa', '11:32', '11:32', 'inactivo'),
+(17, 1, 1, 1, '2022-08-03', 'ninguna', '', 'urbano', 'casa', '11:32:00', '11:32:00', 'inactivo'),
 (18, 1, 2, 2, '2022-08-03', '', 'normal', 'Sopetran', 'casa', NULL, NULL, 'activo'),
 (19, 1, 6, 1, '2022-08-03', '', 'normal', 'Sopetran', 'cacerío', NULL, NULL, 'activo'),
 (20, 1, 8, 1, '2022-08-03', 'jgfjgh', 'normal', 'urbano', 'hjghj', NULL, NULL, 'activo'),
 (21, 1, 2, 1, '2022-08-04', 'fsdfdsfsdf', 'normal', 'urbano', 'casa', NULL, NULL, 'activo'),
 (22, 1, 3, 1, '2022-08-08', '', 'normal', 'urbano', 'carrera tal', NULL, NULL, 'activo'),
 (23, 1, 1, 1, '2022-08-19', '', 'normal', 'urbano', 'carrera 18', NULL, NULL, 'activo'),
-(24, 1, 1, 1, '2022-09-05', '', 'Prioritario', 'urbano', 'carrea 20 50-59', '10:19', '10:19', 'inactivo'),
-(25, 1, 14, 1, '2022-09-15', '', 'normal', 'urbano', 'al frente de la mzana', '18:58', '18:58', 'inactivo'),
-(26, 1, 15, 1, '2022-09-15', 'delicado', 'Prioritario', 'san francisco', 'vereda', '19:01', '19:01', 'inactivo');
+(24, 1, 1, 1, '2022-09-05', '', 'Prioritario', 'urbano', 'carrea 20 50-59', '10:19:00', '10:19:00', 'inactivo'),
+(25, 1, 14, 1, '2022-09-15', '', 'normal', 'urbano', 'al frente de la mzana', '18:58:00', '18:58:00', 'inactivo'),
+(26, 1, 15, 1, '2022-09-15', 'delicado', 'Prioritario', 'san francisco', 'vereda', '19:01:00', '19:01:00', 'inactivo'),
+(27, 1, 16, 1, '2022-09-17', '', 'normal', 'urbano', 'carrera', '12:20:27', '15:34:34', 'inactivo'),
+(28, 1, 1, 1, '2022-09-17', '', 'Prioritario', 'urbano', 'hhhhhhhhhhh', NULL, NULL, 'activo'),
+(29, 1, 17, 1, '2022-09-17', 'vvvv', 'normal', 'urbano', 'fhfhfhhfhf', '15:56:20', '17:37:53', 'inactivo'),
+(30, 1, 18, 1, '2022-09-17', '', 'Prioritario', 'urbano', 'calle colombia', NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1049,7 +1060,8 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 (23, '', '2022-09-15 16:26:48', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
 (24, 'santiago', '2022-09-15 18:42:50', 'credito', 12, 1, NULL, NULL, 'finalizada'),
 (25, '', '2022-09-15 18:52:53', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
-(26, NULL, '2022-09-15 18:52:53', NULL, NULL, 1, NULL, NULL, 'activo');
+(26, '', '2022-09-17 17:44:35', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
+(27, NULL, '2022-09-17 17:44:35', NULL, NULL, 1, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1143,7 +1155,8 @@ INSERT INTO `kilometraje` (`id_kilometraje`, `fecha`, `id_vehiculo3`, `kilometra
 (5, '2022-08-08', 1, 1),
 (6, '2022-08-19', 1, 2000),
 (7, '2022-09-05', 1, 3000),
-(8, '2022-09-15', 1, 1);
+(8, '2022-09-15', 1, 1),
+(9, '2022-09-17', 1, 100);
 
 -- --------------------------------------------------------
 
@@ -1165,12 +1178,14 @@ CREATE TABLE `observacion` (
 --
 
 INSERT INTO `observacion` (`id_obs`, `id_vehiculo1`, `observacion`, `costo`, `fecha`, `estado`) VALUES
-(1, 1, 'combustible', 10000, '2022-07-14', 'activo'),
-(2, 2, 'repuestos guaya', 14000, '2022-08-10', 'activo'),
+(1, 1, 'gasolina moto', 10000, '2022-07-14', 'activo'),
+(2, 2, '', 14000, '2022-08-10', 'activo'),
 (3, 1, '', 50000, '2022-08-19', ''),
 (4, 1, '', 0, '2022-08-19', ''),
-(5, 1, 'bandas de frenos', 45000, '2022-08-19', 'activo'),
-(6, 1, 'Compra de rin', 450000, '2022-09-09', 'activo');
+(5, 1, 'nuevo presupuesto', 45000, '2022-08-19', 'activo'),
+(6, 1, 'Compra de rin', 450000, '2022-09-09', 'activo'),
+(7, 1, 'moto teeran', 20000, '2022-09-17', 'activo'),
+(8, 1, 'combustible', 15000, '2022-09-17', 'activo');
 
 -- --------------------------------------------------------
 
@@ -1559,7 +1574,16 @@ CREATE TABLE `requerimiento` (
 --
 
 INSERT INTO `requerimiento` (`id_reque`, `id_pers5`, `reque`, `costo`, `estado`, `fecha`) VALUES
-(1, 1, 'contratación de nuevo empleado', 1000000, 'activo', '2022-09-30');
+(1, 1, 'contratación de nuevo empleado', 1000000, 'activo', '2022-09-30'),
+(2, 3, 'Instalación de productos', 1200000, 'activo', '2022-09-30'),
+(3, 1, '', 0, '', '2022-09-17'),
+(4, 1, '', 0, '', '2022-09-17'),
+(5, 1, '', 0, '', '2022-09-17'),
+(6, 1, '', 5000000, '', '2022-09-17'),
+(7, 1, '', 0, '', '2022-09-17'),
+(8, 1, '', 0, '', '2022-09-17'),
+(9, 1, '', 0, '', '2022-09-17'),
+(10, 1, 'compra de nevera', 5400000, 'activo', '2022-09-30');
 
 -- --------------------------------------------------------
 
@@ -2207,13 +2231,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT de la tabla `control`
 --
 ALTER TABLE `control`
-  MODIFY `id_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `cuadre_caja`
@@ -2231,7 +2255,7 @@ ALTER TABLE `cuenta_cobro`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=67;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
@@ -2243,13 +2267,13 @@ ALTER TABLE `detalle_sugerido`
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_abono`
@@ -2273,13 +2297,13 @@ ALTER TABLE `gas_detalle`
 -- AUTO_INCREMENT de la tabla `kilometraje`
 --
 ALTER TABLE `kilometraje`
-  MODIFY `id_kilometraje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_kilometraje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `observacion`
 --
 ALTER TABLE `observacion`
-  MODIFY `id_obs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_obs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `pagos_caja`
@@ -2327,7 +2351,7 @@ ALTER TABLE `proveedor`
 -- AUTO_INCREMENT de la tabla `requerimiento`
 --
 ALTER TABLE `requerimiento`
-  MODIFY `id_reque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_reque` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `ro_detalles`

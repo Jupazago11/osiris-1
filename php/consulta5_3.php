@@ -10,7 +10,7 @@
 
     date_default_timezone_set('America/Bogota');
     $fecha = date('Y-m-d', time());
-    $hoy = date("H:i");
+    $hoy = date("H:i:s");
 
     // Desactivar toda notificación de error
     error_reporting(0);

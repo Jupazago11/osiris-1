@@ -73,7 +73,7 @@ if($existe_registro == true){
                     ?>
                     <tr>
                         <th><?php echo $nombr[$i] ?></th>
-                        <td><img src="../iconos/proximo.png" id="enviar13_3" width="40px" height="40px"></td>
+                        <td><img src="../iconos/proximo2.png" id="enviar13_3" width="40px" height="40px"></td>
                         <input type="hidden" name="valor" value="<?php echo $i ?>"/>
                     </tr> 
                     <?php

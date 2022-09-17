@@ -34,7 +34,7 @@
     // Notificar todos los errores de PHP
     error_reporting(-1);
 ?>
-<div class="usuario notificaciones"><img src="../iconos/activo.png" id="img_noti" width="40px" height="40px" onclick="ocultar_notificaciones();"></div>
+
 <div id="venta_noti">
 
 </div>
@@ -54,10 +54,14 @@
 
         <div class="columna1" style="width:40%">
         <a class='columna2' style="background-color: #09AB83;padding-top:21%;padding-bottom:21%;width:50%;color:white" onclick="ocultarDivs('cont2')"><img src="../iconos/equipo.png" alt="empresa" width="50%" height="50%"><br>Empresa</a>
+
+        <a class='columna2' style="padding-top:30%;padding-bottom:21%;width:15%;color:white" onclick="ocultar_notificaciones();"><img src="../iconos/activo.png" id="img_noti" width="60px" height="60px" class="notificaciones"></a>
+
         </div>
         <?php
     }elseif($tipo_de_cuenta == 3){
         ?>
+
         <a class='columna' onclick="ocultarDivs('cont1')">Pedidos</a>
         <a class='columna' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
         <a class='columna' onclick="ocultarDivs('cont4')">Caja</a>
@@ -65,8 +69,10 @@
         <?php
     }elseif($tipo_de_cuenta == 4){
         ?>
-        <a class='columna' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
-        <a class='columna' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
+        <div class="columna1" style="width:100%">
+        <a class='columna2' style="background-color: #22AB09;width:25%;color:white" onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="35%" height="35%"><br>Domicilios</a>
+        <a class='columna2' style="background-color: #0969AB;width:25%;color:white" onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="35%" height="35%"><br>Control</a>
+        </div>
         <?php
     }
     elseif($tipo_de_cuenta == 5){
@@ -223,16 +229,16 @@
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
-                    <a class="columna w3-green" onclick="ocultarDivs3('cont3_2')"><img src="../iconos/proximo.png" width="40%" height="40%"><br>Ver Domicilios</a>
+                    <a class="columna" style="background-color: #22AB09;color:white" onclick="ocultarDivs3('cont3_2')"><img src="../iconos/proximo.png" width="40%" height="40%"><br>Ver Domicilios</a>
                     <?php
                 }elseif($tipo_de_cuenta == 4){
                     ?>
-                    <a class="columna w3-blue" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="40%" height="40%"><br>Domicilio</a>
+                    <a class="columna" style="background-color: #22AB09;color:white" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="40%" height="40%"><br>Domicilio</a>
                     <?php
                 }
                 ?>
 
-                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0(); var intervalo_time = setInterval(myTimer2, 60000); setInterval(myTimer2, 60000);clearInterval(intervalo_time);">X</a>
+                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
 
             </div>
             <div id="cont3_1" style="display:none;">
@@ -302,12 +308,12 @@
                 <?php
                 if($tipo_de_cuenta == 1){
                     ?>
-                    <a class="columna w3-green" onclick="ocultarDivs5('cont5_1');$('#enviar13_1').trigger('click')"><img src="../iconos/controlobs.png" width="40%" height="40%"><br>Ver control</a>
+                    <a class="columna" style="background-color:#0969AB;color:white" onclick="ocultarDivs5('cont5_1');$('#enviar13_1').trigger('click')"><img src="../iconos/controlobs.png" width="40%" height="40%"><br>Ver control</a>
                     
                     <?php
                 }else{
                     ?>
-                    <a class="columna w3-blue" onclick="ocultarDivs5('cont5_2');$('#enviar13_2').trigger('click')"><img src="../iconos/evaluacion.png" width="40%" height="40%"><br>Control</a>
+                    <a class="columna" style="background-color:#0969AB;color:white" onclick="ocultarDivs5('cont5_2');$('#enviar13_2').trigger('click')"><img src="../iconos/opciones.png" width="40%" height="40%"><br>Control</a>
                     
                     <?php
                 }

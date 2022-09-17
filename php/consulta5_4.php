@@ -10,7 +10,7 @@
 
     date_default_timezone_set('America/Bogota');
     $fecha = date('Y-m-d', time());
-    $hoy = date("H:i");
+    $hoy = date("H:i:s");
 
     // Desactivar toda notificación de error
     error_reporting(0);
@@ -37,10 +37,13 @@
                     
                     ?>
                     <br>
-                    <div class="alert warning">
-                        <span class="closebtn">&times;</span>  
-                        <strong>Información!</strong> Primero debes iniciar el domicilio
-                    </div>
+                    <script>
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'Primero debes iniciar el domicilio',
+                    })
+            </script>
                     <?php
                 }
                 break;

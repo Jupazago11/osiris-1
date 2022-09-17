@@ -85,7 +85,7 @@
                         ?>
                         <td>
                         <label class="switch">
-                        <input type="checkbox" name="salidass[]" onclick="enviar_update()" value="<?php echo $fila['id_domi'] ?>">
+                        <input type="checkbox" name="salidass[]" onclick="enviar_update()" value="<?php echo $fila['id_domi'] ?>" disabled>
                         <span class="slider"></span>
                         </label></td>
                         <?php
@@ -107,7 +107,7 @@
                         ?>
                         <td>
                         <label class="switch">
-                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $fila['id_domi'] ?>">
+                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $fila['id_domi'] ?>" disabled>
                         <span class="slider"></span>
                         </label></td>
                         <?php
@@ -170,41 +170,7 @@
         <button type="button" id="enviar5_4" class="w3-btn w3-teal" style="visibility:hidden;"></button>
         </form>
         <div id="respuesta5_4"></div>
-        <script>
-            $('#enviar5_3').click(function(){
-                $.ajax({
-                    url:'../php/consulta5_3.php',
-                    type:'POST',
-                    data: $('#configuracion').serialize(),
-                    success: function(res){
-                        setTimeout(function(){ 
-                            $('#enviar5_2').trigger('click');
-                        }, 1000);
-                    },
-                    error: function(res){
-                        alert("Problemas al tratar de enviar el formulario");
-                    }
-                });
-            });
-
-            $('#enviar5_4').click(function(){
-                $.ajax({
-                    url:'../php/consulta5_4.php',
-                    type:'POST',
-                    data: $('#configuracion').serialize(),
-                    success: function(res){
-                        $('#respuesta5_4').html(res);
-                        setTimeout(function(){ 
-                            $('#enviar5_2').trigger('click');
-                        }, 1000);
-                    },
-                    error: function(res){
-                        alert("Problemas al tratar de enviar el formulario");
-                    }
-                });
-            });
-        </script>
-
+        
         <?php
     }else{
         ?>

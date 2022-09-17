@@ -287,10 +287,13 @@ body {
 }
 
 .notificaciones {
-  background-color: rgb(255, 255, 255);
-  top: 0px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 50%;
+
+  /*top: 0px;
   right: 1%;
-  left: 95%;
+  left: 95%;*/
 }
 
 

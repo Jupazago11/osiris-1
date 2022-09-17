@@ -397,7 +397,7 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
             ?>
             </datalist>
 
-            <button type="button" id="enviar5_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5_2').style.display='block'; var intervalo_time = setInterval(myTimer2, 60000); setInterval(myTimer2, 60000)">Continuar</button>
+            <button type="button" id="enviar5_2" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5_2').style.display='block';">Continuar</button>
             </fieldset>
         </form>
 
@@ -425,7 +425,62 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 function control_domiciliario2($usuario, $tipo_de_cuenta){
+    if(existencia_de_la_conexion()){
+        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+    }
+    $conexion = conectar();                     //Obtenemos la conexion
+    ?>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_2').style.display='none';">X</a>
 
+        <form id="seleccion_vehiculover" method="POST">
+            <fieldset><legend>Selecciona el vehículo:</legend>
+            <input list="vehiculos" name="vehiculo" id="vehiculo"  required>
+            <datalist id="vehiculos"  required>
+            <?php
+                //Consulta a la base de datos en la tabla provvedor
+                $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
+
+                while (($fila = mysqli_fetch_array($consulta))!=NULL){
+                    // traemos los proveedores existentes en la base de datos
+                    echo "<option value=".$fila['placa']."></option>";
+                }
+                mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
+            ?>
+            </datalist>
+
+            <button type="button" id="enviar5_5" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5_5').style.display='block';">Continuar</button>
+            </fieldset>
+        </form>
+
+        <div id="respuesta5_5"></div>
+        <script>
+            $('#enviar5_5').click(function(){
+                $.ajax({
+                    url:'../php/consulta5_5.php',
+                    type:'POST',
+                    data: $('#seleccion_vehiculover').serialize(),
+                    success: function(res){
+                        $('#respuesta5_5').html(res);
+                        
+                    },
+                    error: function(res){
+                        alert("Problemas al tratar de enviar el formulario");
+                    }
+                });
+            });
+        </script>
+        </div>
+        <?php
+
+
+
+
+
+
+
+
+    ////////////////////////////////////////
+    /*
     if(existencia_de_la_conexion()){
         require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
     }
@@ -459,15 +514,14 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
         <?php
         $consulta = mysqli_query($conexion, "SELECT personal.user_pers,cliente.nombre_cliente, domicilio.observacion, domicilio.nivel_urgencia, domicilio.ubicacion, domicilio.destino, domicilio.estado, domicilio.tiempo_salida, domicilio.tiempo_llegada, domicilio.id_domi
         FROM `domicilio` 
-        INNER JOIN `personal`   ON domicilio.id_pers3 = personal.id_pers 
-        INNER JOIN `cliente`    ON domicilio.id_cliente2 = cliente.id_cliente  
-        INNER JOIN `vehiculo`   ON vehiculo.id_vehiculo = domicilio.id_vehiculo2 
-        WHERE vehiculo.placa = '$vehiculo' AND `fecha` = '$fecha'
+        INNER JOIN `personal` ON domicilio.id_pers3 = personal.id_pers 
+        INNER JOIN `cliente` ON domicilio.id_cliente2 = cliente.id_cliente  
+        INNER JOIN `vehiculo` ON vehiculo.id_vehiculo = domicilio.id_vehiculo2 
+        WHERE vehiculo.placa = '$vehiculo' 
+        AND `fecha` = '$fecha'
         ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
         ?>
-
-        
-
+        <form id="configuracion" method="POST">
         <table class="tabla_sugerido">
         <tr>
             <th>#</th>
@@ -478,16 +532,14 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
             <th>LLegada</th>
             <th></th>
         </tr>
-        <tbody id="tbodyfor">
+        <tbody id="tbodyform">
         
             <?php
-            
             $contador = 1;
             
             //<span class="numeral"><?php echo $contador ? ></span>
             //<input type="number" class="numeral" value="<?php echo $contador ? >"></input>
             while (($fila = mysqli_fetch_array($consulta)) != NULL){
-                
                 ?>
                 <tr>
                 
@@ -513,13 +565,20 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
                         ?>
                         <td>
                         <label class="switch">
-                        <input type="checkbox" name="salidass[]" value="<?php echo $fila['id_domi'] ?>">
+                        <input type="checkbox" name="salidass[]" onclick="enviar_update()" value="<?php echo $fila['id_domi'] ?>"  disabled>
                         <span class="slider"></span>
                         </label></td>
                         <?php
                     }else{
                         ?>
-                        <td></td>
+                        <td>
+                        <label class="switch">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider"></span>
+                        </label>
+                        <br>
+                        <?php echo date("g:i:s a", strtotime($fila['tiempo_salida'])) ?>
+                        </td>
                         <?php
                     }
                     ?>
@@ -528,13 +587,19 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
                         ?>
                         <td>
                         <label class="switch">
-                        <input type="checkbox" name="llegadass[]" value="<?php echo $fila['id_domi'] ?>">
+                        <input type="checkbox" name="llegadass[]" onclick="enviar_update2()" value="<?php echo $fila['id_domi'] ?>"  disabled>
                         <span class="slider"></span>
                         </label></td>
                         <?php
                     }else{
                         ?>
-                        <td></td>
+                        <td>
+                        <label class="switch">
+                        <input type="checkbox" checked disabled>
+                        <span class="slider"></span>
+                        </label>
+                        <br>
+                        <?php echo date("g:i:s a", strtotime($fila['tiempo_llegada'])) ?></td>
                         <?php
                     }
                     ?>
@@ -546,7 +611,21 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
                         <?php
                     }elseif($fila['estado'] == "inactivo"){
                         ?>
-                        <td><i class='fa fa-check' style='font-size:36px;color:green'></td>
+                        <td><i class='fa fa-check' style='font-size:36px;color:green'></i>
+                        <br>
+                        <?php
+                            $fecha1  = new DateTime($fila['tiempo_salida']);
+                            $fecha2  = new DateTime($fila['tiempo_llegada']);
+                            $intvl   = $fecha1->diff($fecha2);
+
+                            if($intvl->h > 0){
+                                echo $intvl->h." horas y ".$intvl->i." minutos";
+                            }else{
+                                echo "Minutos: ".$intvl->i;
+                            }
+
+                        ?>
+                        </td>
                         <?php
                     }else{
                         ?>
@@ -559,7 +638,6 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
                 
             <?php
             $contador++;
-            
         }
         ?>
         
@@ -575,11 +653,11 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
     }elseif($existe_registro == false){
         ?>
         <script>
-            //document.getElementById('cont3_2').style.display='none';
+            document.getElementById('cont3_2').style.display='none';
         </script>
 
         <?php
-    }
+    }*/
 }
 
 /////////////////////////////////////////////////////////////////////////////////////////
