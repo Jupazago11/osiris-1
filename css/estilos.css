@@ -654,7 +654,7 @@ textarea {
   background-color: #dddddd;
   position: absolute;
   width: 100%;
-  height: 20%;
+  height: 23%;
   left: 0%;
   bottom: 0%;
 }
@@ -664,7 +664,7 @@ textarea {
   overflow: scroll;
   position: absolute;
   width: 100%;
-  height: 79%;
+  height: 76%;
   left: 0%;
   top: 6%;
   overflow-x: hidden;
@@ -794,4 +794,9 @@ img:hover {
 
 textarea {
   resize: enable;
+}
+
+.icon_caja{
+  margin-left: 7px;
+  margin-right: 7px;
 }

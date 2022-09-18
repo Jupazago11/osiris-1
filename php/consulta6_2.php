@@ -14,7 +14,7 @@
     $factura    = $_POST['factura'];
     $fecha    = $_POST['fecha'];
     $dias    = $_POST['dias'];
-    $costo    = $_POST['costo'];
+    $costo    = str_replace(".","",$_POST['costo']);;
     $estado    = $_POST['estado'];
     $eliminar = $_POST['eliminar'];
 

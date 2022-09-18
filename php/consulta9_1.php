@@ -55,12 +55,13 @@
                     <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
                     <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
-                    <td>
+                    <td><select name="cargo">
                     <?php
                     if($fila['cargo'] != '' ){
                         echo "<input list='cargos' name='cargo[]' id='cargo' value='".$fila['cargo']."'>";
                     }else{
                         echo "<input list='cargos' name='cargo[]' id='cargo'>";
+                        
                     }
                     ?>
                     <datalist id="cargos">

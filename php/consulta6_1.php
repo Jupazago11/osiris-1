@@ -166,7 +166,7 @@
 
             ?>
 
-            <td><input type="text" name="costo[]" value="<?php echo $costo[$i] ?>" size="10"/></td>
+            <td><input type="text" name="costo[]" value="<?php echo number_format($costo[$i], 0, ',', '.') ?>" size="10" class="puntos"/></td>
 
             <?php
             $costo_total += $costo[$i];

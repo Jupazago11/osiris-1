@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-09-2022 a las 01:06:41
+-- Tiempo de generación: 19-09-2022 a las 00:53:38
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -47,7 +47,8 @@ INSERT INTO `cargo` (`id_cargo`, `cargo`, `estado`) VALUES
 (7, 'Bodeguera', 'inactivo'),
 (8, '', ''),
 (9, 'camionero', 'inactivo'),
-(10, '', '');
+(10, '', ''),
+(11, 'Auxiliar administrativa', 'activo');
 
 -- --------------------------------------------------------
 
@@ -117,7 +118,9 @@ INSERT INTO `cliente` (`id_cliente`, `id_ubi1`, `nombre_cliente`, `identificacio
 (15, NULL, 'pacho zuleta', NULL, NULL, NULL, 'activo'),
 (16, NULL, 'Juan pablo', NULL, NULL, NULL, 'activo'),
 (17, NULL, 'hfhfh', NULL, NULL, NULL, 'activo'),
-(18, NULL, 'juan pablo kfugisadghsdbfg', NULL, NULL, NULL, 'activo');
+(18, NULL, 'juan pablo kfugisadghsdbfg', NULL, NULL, NULL, 'activo'),
+(19, NULL, 'juancho', NULL, NULL, NULL, 'activo'),
+(20, NULL, 'ugvgtyvfvft', NULL, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -152,7 +155,9 @@ INSERT INTO `control` (`id_control`, `id_pers4`, `llegada`, `ir_desayuno`, `regr
 (8, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-16'),
 (9, 1, NULL, NULL, NULL, NULL, NULL, NULL, '2022-09-16'),
 (10, 2, '16:12:15', '16:21:00', '17:36:46', NULL, NULL, NULL, '2022-09-17'),
-(11, 3, '17:40:12', NULL, NULL, NULL, NULL, NULL, '2022-09-17');
+(11, 3, '17:40:12', NULL, NULL, NULL, NULL, NULL, '2022-09-17'),
+(12, 2, '15:43:56', '15:44:21', '15:44:25', '15:44:27', '15:44:29', '15:44:31', '2022-09-18'),
+(13, 3, '16:14:40', '16:15:04', '16:15:05', '16:15:05', '16:15:06', '16:15:07', '2022-09-18');
 
 -- --------------------------------------------------------
 
@@ -210,16 +215,16 @@ CREATE TABLE `cuenta_cobro` (
 --
 
 INSERT INTO `cuenta_cobro` (`id_cuenta`, `nombre`, `costo`, `factura`, `fecha`, `fecha_pago`, `dias`, `estado`) VALUES
-(1, 'prove', 1000000, 'ss', '2022-08-31', '2022-07-09 11:56:52', 30, 'activo'),
+(1, 'prove', 1000000, 'ss', '2022-09-05', '2022-09-18 16:02:05', 10, 'inactivo'),
 (2, 'prove', 200000, '5A45SDAS4D5AS', '2022-07-04', '2022-07-05 16:13:29', 10, 'inactivo'),
-(3, 'prove', 300000, '', '2022-08-25', '2022-07-06 12:25:02', 25, 'activo'),
+(3, 'prove', 300000, '', '2022-09-07', '2022-07-06 12:25:02', 25, 'activo'),
 (4, 'prove', 4000000, 'ABC123', '2022-07-03', '2022-07-06 00:00:00', 20, 'inactivo'),
 (5, 'prove', 450000, NULL, '2022-07-05', '2022-07-06 12:25:02', 25, ''),
 (6, 'cocacola', 50000, NULL, '2022-07-05', '2022-07-05 16:13:25', 30, 'inactivo'),
 (7, 'cocacola', 2000, 'jp11', '2022-07-05', '2022-07-06 12:26:52', 10, 'inactivo'),
 (8, 'nuevo', 200000, 'kk', '2022-07-05', '2022-07-09 11:56:52', 10, ''),
 (9, 'cocacola', 50000, 'kl521', '2022-07-06', '2022-07-19 19:09:54', 19, 'inactivo'),
-(10, 'Bimbo', 100000, 'ABC132', '2022-08-25', NULL, 20, 'activo'),
+(10, 'Bimbo', 150000, 'ABC132', '2022-09-09', NULL, 20, 'activo'),
 (11, '', 0, '', '2022-07-08', '2022-07-08 17:56:32', 0, ''),
 (12, NULL, 0, NULL, '2022-07-08', NULL, 0, ''),
 (13, NULL, 0, NULL, '2022-07-08', NULL, 0, ''),
@@ -334,7 +339,9 @@ INSERT INTO `detalle_factura` (`id_detalle`, `id_facturacion1`, `id_producto1`, 
 (65, 25, 8, 1, 4000, 'activo'),
 (66, 25, 9, 1, 1800, 'activo'),
 (67, 26, 4, 20, 30000, 'activo'),
-(68, 26, 5, 3, 12000, 'activo');
+(68, 26, 5, 3, 12000, 'activo'),
+(69, 27, 4, 6, 9000, 'activo'),
+(70, 27, 7, 1, 3500, 'activo');
 
 -- --------------------------------------------------------
 
@@ -955,7 +962,24 @@ INSERT INTO `detalle_sugerido` (`id_detalle`, `id_sugerido1`, `id_producto2`, `c
 (598, 227, 4, 0, 0, NULL, NULL, 1000, 'activo'),
 (599, 228, 8, 0, 50, NULL, 10, 4000, 'activo'),
 (600, 228, 9, 0, 40, NULL, 10, 2500, 'activo'),
-(601, 228, 10, 0, 25, NULL, 10, 6000, 'activo');
+(601, 228, 10, 0, 25, NULL, 10, 6000, 'activo'),
+(602, 229, 1, 0, 0, NULL, NULL, 1500, 'activo'),
+(603, 229, 2, 0, 0, NULL, NULL, 4000, 'activo'),
+(604, 229, 3, 0, 0, NULL, NULL, 2000, 'activo'),
+(605, 229, 4, 0, 0, NULL, NULL, 1000, 'activo'),
+(606, 230, 1, 20, 0, NULL, 20, 1500, 'activo'),
+(607, 230, 2, 4, 0, NULL, 20, 4000, 'activo'),
+(608, 230, 3, 5, 0, NULL, 10, 2000, 'activo'),
+(609, 230, 4, 7, 0, NULL, 10, 1000, 'activo'),
+(610, 232, 8, 0, 4, NULL, NULL, 4000, 'activo'),
+(611, 232, 9, 0, 8, NULL, NULL, 2500, 'activo'),
+(612, 232, 10, 0, 50, NULL, NULL, 6000, 'activo'),
+(613, 233, 8, 60, 0, NULL, NULL, 4000, 'activo'),
+(614, 233, 9, 0, 0, NULL, NULL, 2500, 'activo'),
+(615, 233, 10, 0, 0, NULL, NULL, 6000, 'activo'),
+(616, 234, 8, 0, 0, NULL, NULL, 4000, 'activo'),
+(617, 234, 9, 0, 0, NULL, NULL, 2500, 'activo'),
+(618, 234, 10, 0, 0, NULL, NULL, 6000, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1011,7 +1035,9 @@ INSERT INTO `domicilio` (`id_domi`, `id_pers3`, `id_cliente2`, `id_vehiculo2`, `
 (27, 1, 16, 1, '2022-09-17', '', 'normal', 'urbano', 'carrera', '12:20:27', '15:34:34', 'inactivo'),
 (28, 1, 1, 1, '2022-09-17', '', 'Prioritario', 'urbano', 'hhhhhhhhhhh', NULL, NULL, 'activo'),
 (29, 1, 17, 1, '2022-09-17', 'vvvv', 'normal', 'urbano', 'fhfhfhhfhf', '15:56:20', '17:37:53', 'inactivo'),
-(30, 1, 18, 1, '2022-09-17', '', 'Prioritario', 'urbano', 'calle colombia', NULL, NULL, 'activo');
+(30, 1, 18, 1, '2022-09-17', '', 'Prioritario', 'urbano', 'calle colombia', NULL, NULL, 'activo'),
+(31, 1, 19, 1, '2022-09-18', '', 'Prioritario', 'urbano', 'carrea 20 etc etc', '15:49:42', '15:49:58', 'inactivo'),
+(32, 1, 20, 1, '2022-09-18', '', 'normal', 'urbano', 'nydryndynrdrydrndyrndrn nt', '15:56:53', '16:14:20', 'inactivo');
 
 -- --------------------------------------------------------
 
@@ -1061,7 +1087,8 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 (24, 'santiago', '2022-09-15 18:42:50', 'credito', 12, 1, NULL, NULL, 'finalizada'),
 (25, '', '2022-09-15 18:52:53', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
 (26, '', '2022-09-17 17:44:35', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
-(27, NULL, '2022-09-17 17:44:35', NULL, NULL, 1, NULL, NULL, 'activo');
+(27, '', '2022-09-18 15:31:56', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
+(28, NULL, '2022-09-18 15:31:56', NULL, NULL, 1, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1156,7 +1183,8 @@ INSERT INTO `kilometraje` (`id_kilometraje`, `fecha`, `id_vehiculo3`, `kilometra
 (6, '2022-08-19', 1, 2000),
 (7, '2022-09-05', 1, 3000),
 (8, '2022-09-15', 1, 1),
-(9, '2022-09-17', 1, 100);
+(9, '2022-09-17', 1, 100),
+(10, '2022-09-18', 1, 1000);
 
 -- --------------------------------------------------------
 
@@ -1259,9 +1287,9 @@ CREATE TABLE `personal` (
 --
 
 INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celular_pers`, `correo_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `fecha_ingreso`, `cargo`, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, `estado`) VALUES
-(1, 'juan pablo zapata gómez', '1037977046', '3135721225', 'juan@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-04-08', 8, '2022-07-13', 1, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
-(2, 'Domiciliario', '1', '123', 'domi@gmail.com', 'domi', 'domi', 4, '2004-09-15', '2022-06-02', 12, '2022-07-13', 4, 500000, 'sura', 'sura', '', 'proteccion', 'activo'),
-(3, 'empleado prueba', '', '456', 'emp_1@hotmail.com', 'empleado', '1234', 2, '1990-07-21', '2022-01-01', 12, '2022-07-14', 2, 1200000, '', '', '', 'colpensiones', 'activo'),
+(1, 'John Alexis Morales', '1037977046', '3135721225', 'juan@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-01-01', 12, '2022-07-13', 1, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
+(2, 'Estelita atehortua atehortua', '1', '123', 'domi@gmail.com', 'estela', 'estela', 2, '2004-09-15', '2022-05-01', 6, '2022-07-13', 2, 1340000, 'sura', 'sura', '', 'proteccion', 'activo'),
+(3, 'empleado prueba', '', '456', 'emp_1@hotmail.com', 'empleado', '1234', 4, '1990-07-21', '2022-01-01', 12, '2022-07-14', 2, 1200000, '', '', '', 'colpensiones', 'activo'),
 (4, NULL, NULL, NULL, NULL, 'probando', 'probando', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (5, NULL, NULL, NULL, NULL, 'prueba 50', 'prueba 50', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (6, NULL, NULL, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
@@ -1284,7 +1312,10 @@ INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celula
 (23, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-07-13', '2022-07-13', 0, '2022-07-13', 3, 0, NULL, NULL, NULL, NULL, ''),
 (24, '', NULL, '', '', '', '', 3, '2022-07-13', '2022-07-13', NULL, '2022-07-13', 3, NULL, NULL, NULL, NULL, NULL, ''),
 (25, '', '', '', '', '', '', 0, '1992-07-14', '2022-07-14', NULL, '2022-07-14', 3, NULL, '', '', '', '', ''),
-(26, '', '', '', '', '', '', 3, '2022-09-05', '2022-08-03', 12, '2022-09-05', 3, 0, '', '', '', '', 'activo');
+(26, '', '', '', '', '', '', 3, '2022-09-05', '2022-08-03', 6, '2022-09-05', 3, 0, '', '', '', '', ''),
+(27, '', '', '', '', '', '', 3, '2022-09-15', '2022-09-18', 0, '2022-09-29', 3, 0, '', '', '', '', ''),
+(28, '', NULL, '', '', '', '', 3, '2022-09-18', '2022-09-18', 0, '2022-09-18', 3, 0, NULL, NULL, NULL, NULL, ''),
+(29, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-18', '2022-09-18', 0, '2022-09-18', 3, 0, NULL, NULL, NULL, NULL, '');
 
 -- --------------------------------------------------------
 
@@ -1958,8 +1989,14 @@ INSERT INTO `sugerido` (`id_sugerido`, `id_pers2`, `fecha_sugerido`, `pedido_pro
 (224, 1, '2022-09-09', NULL, NULL, NULL, 'natipan', NULL, NULL, 'inactivo'),
 (225, 1, '2022-09-09', '2022-09-20', NULL, NULL, 'natipan', NULL, NULL, 'inactivo'),
 (226, 1, '2022-09-09', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
-(227, 1, '2022-09-15', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'activo'),
-(228, 1, '2022-09-15', '2022-09-29', NULL, NULL, 'natipan', NULL, NULL, 'activo');
+(227, 1, '2022-09-15', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(228, 1, '2022-09-15', '2022-09-29', NULL, NULL, 'natipan', NULL, NULL, 'inactivo'),
+(229, 1, '2022-09-18', NULL, NULL, NULL, 'cocacola', NULL, NULL, 'inactivo'),
+(230, 1, '2022-09-18', '2022-09-20', NULL, NULL, 'cocacola', NULL, NULL, 'activo'),
+(231, 1, '2022-09-18', NULL, NULL, NULL, 'proveedor', NULL, NULL, 'activo'),
+(232, 1, '2022-09-18', NULL, NULL, NULL, 'natipan', NULL, NULL, 'inactivo'),
+(233, 1, '2022-09-18', NULL, NULL, NULL, 'natipan', NULL, NULL, 'inactivo'),
+(234, 1, '2022-09-18', NULL, NULL, NULL, 'natipan', NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -2219,7 +2256,7 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -2231,13 +2268,13 @@ ALTER TABLE `categoria`
 -- AUTO_INCREMENT de la tabla `cliente`
 --
 ALTER TABLE `cliente`
-  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id_cliente` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT de la tabla `control`
 --
 ALTER TABLE `control`
-  MODIFY `id_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_control` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `cuadre_caja`
@@ -2255,25 +2292,25 @@ ALTER TABLE `cuenta_cobro`
 -- AUTO_INCREMENT de la tabla `detalle_factura`
 --
 ALTER TABLE `detalle_factura`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=71;
 
 --
 -- AUTO_INCREMENT de la tabla `detalle_sugerido`
 --
 ALTER TABLE `detalle_sugerido`
-  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=602;
+  MODIFY `id_detalle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=619;
 
 --
 -- AUTO_INCREMENT de la tabla `domicilio`
 --
 ALTER TABLE `domicilio`
-  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_domi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_abono`
@@ -2297,7 +2334,7 @@ ALTER TABLE `gas_detalle`
 -- AUTO_INCREMENT de la tabla `kilometraje`
 --
 ALTER TABLE `kilometraje`
-  MODIFY `id_kilometraje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_kilometraje` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de la tabla `observacion`
@@ -2315,7 +2352,7 @@ ALTER TABLE `pagos_caja`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `presupuesto`
@@ -2369,7 +2406,7 @@ ALTER TABLE `r_operativos`
 -- AUTO_INCREMENT de la tabla `sugerido`
 --
 ALTER TABLE `sugerido`
-  MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+  MODIFY `id_sugerido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=235;
 
 --
 -- AUTO_INCREMENT de la tabla `ubicacion`
