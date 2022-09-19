@@ -32,7 +32,7 @@
         <tr>
             <th>#</th>
             <th>Nombre</th>
-            <th>Cargo <i class="fa fa-plus" onclick="document.getElementById('form_cargos').style.display='block'"></i></th>
+            <th>Cargo <i class="fa fa-plus" id="btn_cargo" onclick="document.getElementById('form_cargos').style.display='block'"></i></th>
             <th>Duración</th>
             <th>F. Inicio</th>
             <th>F. Terminación</th>
@@ -43,7 +43,8 @@
         <tr>
             <?php
             $contador = 0;
-            $consulta = mysqli_query($conexion, "SELECT * FROM `personal` 
+            $consulta = mysqli_query($conexion, "SELECT `id_pers`, `nombre_pers`, `identificacion_pers`, `celular_pers`, `correo_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `fecha_ingreso`, personal.cargo, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, personal.estado
+            FROM `personal` 
             INNER JOIN `cargo` ON personal.cargo = cargo.id_cargo 
             WHERE personal.estado = 'activo' AND personal.tipo_usuario_pers != '5' AND personal.tipo_usuario_pers != '6'
             ORDER BY personal.id_pers ASC") or die ("Error al consultar: existencia del proveedor");
@@ -54,29 +55,29 @@
                 <tr>
                     <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
-                    <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
-                    <td><select name="cargo">
-                    <?php
-                    if($fila['cargo'] != '' ){
-                        echo "<input list='cargos' name='cargo[]' id='cargo' value='".$fila['cargo']."'>";
-                    }else{
-                        echo "<input list='cargos' name='cargo[]' id='cargo'>";
-                        
-                    }
-                    ?>
-                    <datalist id="cargos">
+                    <td><input type="text" name="nombre_pers[]" onchange="$('#enviar9').trigger('click');" value="<?php echo ucwords($fila['nombre_pers']) ?>"/></td>
+                    <td>
+
+                    <select name="cargo[]">
                         <?php
                         for ($i = 0; $i < count($id_cargo); $i++) { 
-                            ?>
-                            <option value="<?php echo $cargo[$i] ?>"></option>
 
-                        <?php
+                            if($fila['cargo'] == $id_cargo[$i]){
+                                ?>
+                                <option value="<?php echo $id_cargo[$i] ?>" selected><?php echo $cargo[$i] ?></option>
+                                <?php
+                            }else{
+                                ?>
+                                <option value="<?php echo $id_cargo[$i] ?>"><?php echo $cargo[$i] ?></option>
+                                <?php
+                            }
+                            
                         }
                         ?>
-                    </datalist>
+                    </select>
                     </td>
-                    <td><input type="text" name="tipo_contrato_pers[]" size="2" value="<?php echo $fila['tipo_contrato_pers'] ?>"/> Meses</td>
-                    <td><input type="date" name="fecha_inicio_contrato_pers[]" value="<?php echo $fila['fecha_inicio_contrato_pers'] ?>"/></td>
+                    <td><input type="text" name="tipo_contrato_pers[]" size="2" value="<?php echo $fila['tipo_contrato_pers'] ?>" onchange="$('#enviar9n').trigger('click');"/> Meses</td>
+                    <td><input type="date" name="fecha_inicio_contrato_pers[]" value="<?php echo $fila['fecha_inicio_contrato_pers'] ?>" onchange="$('#enviar9n').trigger('click');"/></td>
                     <?php
 
                     echo "<td>".date("d-m-Y",strtotime(date("d-m-Y",strtotime($fila['fecha_inicio_contrato_pers']." +".intval($fila['tipo_contrato_pers'])." month"))."- 1 days"))."</td>";
@@ -115,9 +116,9 @@
                     }
                     if($fila['nombre_pers'] == ''){
                         ?>
-                        <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9').trigger('click');">
-                        <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <input type="radio"  name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9').trigger('click');">
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]">X</label></td> 
                         <?php
                     }else{
                         ?>
@@ -135,7 +136,7 @@
             <td><button type="button" id="enviar9_4_1" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
             <td colspan="4"></td>
             <td><?php echo number_format($tota_nomina, 0, ',', '.') ?></td>
-            <td> <img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar9" class="w3-btn" onclick="document.getElementById('respuesta9').style.display='block'" class="btn_icono"></td>
+            <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar9"  onclick="document.getElementById('respuesta9').style.display='block'"></td>
             <td></td>
         </tr>
     </table>
@@ -144,7 +145,7 @@
 
 
     
-    <form id="actualizar_cargos" method="POST">
+<form id="actualizar_cargos" method="POST">
     <div id="form_cargos" style="position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);;width:100%;height: 100%;display:none;">
     
     <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white" >
@@ -201,12 +202,12 @@
     ?>
         <tr>
             <td><button type="button" id="enviar9_7" class="w3-btn" style="background-color: transparent;"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
-            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_8" class="btn_icono"></td>
+            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_8" class="btn_guardar"></td>
             <td></td>
         </tr>
 
     </table>
-    </form>
+</form>
     </div>
     <?php
     
@@ -233,6 +234,21 @@
             }
         });
     });
+    $('#enviar9n').click(function(){
+        $.ajax({
+            url:'../php/consulta9.php',
+            type:'POST',
+            data: $('#actualizar_personal').serialize(),
+            success: function(res){
+
+                $('#respuesta9').html(res);
+                $('#enviar9_1').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
     $('#enviar9_4_1').click(function(){
         $.ajax({
             url:'../php/consulta9_4.php',
@@ -244,6 +260,8 @@
             }
         });
     });
+
+    //nuevo puesto en blanco
     $('#enviar9_7').click(function(){
         $.ajax({
             url:'../php/consulta9_7.php',
@@ -252,7 +270,13 @@
             success: function(res){
                 $('#respuesta9').html(res);
                 $('#enviar9_1').trigger('click');
-                document.getElementById('form_cargos').style.display='block';
+                
+
+
+                setTimeout(function(){ 
+                    $('#btn_cargo').trigger('click');
+                }, 50);
+
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
@@ -265,13 +289,13 @@
             type:'POST',
             data: $('#actualizar_cargos').serialize(),
             success: function(res){
-                Swal.fire(
-                '¡Muy bien!',
-                'Guardado Exitoso',
-                'success'
-                )
                 $('#respuesta9').html(res);
                 $('#enviar9_1').trigger('click');
+
+                setTimeout(function(){ 
+                    $('#btn_cargo').trigger('click');
+                }, 50);
+
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");

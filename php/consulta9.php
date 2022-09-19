@@ -18,6 +18,8 @@
     $eliminar                   = $_POST['eliminar'];
 
 
+
+
     $id_cargos = array();
     $cargos = array();
 
@@ -34,27 +36,16 @@
 
         $j = $i + 1; //ya que el arreglo de los estados en html del formulario anterior empieza en 1 y no en 0
 
-
-
-        if (in_array($cargo[$i], $cargos)) {
-
-            for ($k = 0; $k < count($id_cargos); $k++) { 
-                if($cargos[$k] == $cargo[$i]){
-                    $valor = $k;
-                    break;
-                }
-            }
-
-            $consulta = mysqli_query($conexion, "UPDATE `personal` 
-            SET `nombre_pers`='$nombre_pers[$i]', `fecha_inicio_contrato_pers`='$fecha_inicio_contrato_pers[$i]', `tipo_contrato_pers`='$tipo_contrato_pers[$i]', `cargo`='$id_cargos[$k]', `salario_pers`='$salario_pers[$i]'
-            WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: proveedores");
-        
-            if($eliminar[$j] == 'eliminar'){
-                $consulta = mysqli_query($conexion, "UPDATE `personal` SET 
-                `estado` = '' 
-                WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: proveedores");
-            }
-        } 
+        $consulta = mysqli_query($conexion, "UPDATE `personal` 
+        SET `nombre_pers`='$nombre_pers[$i]', `fecha_inicio_contrato_pers`='$fecha_inicio_contrato_pers[$i]', `tipo_contrato_pers`='$tipo_contrato_pers[$i]', `cargo`='$cargo[$i]', `salario_pers`='$salario_pers[$i]'
+        WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: personal");
+    
+        if($eliminar[$j] == 'eliminar'){
+            $consulta = mysqli_query($conexion, "UPDATE `personal` SET 
+            `estado` = '' 
+            WHERE `id_pers` = '$id_pers[$i]'") or die ("Error al update: personal");
+        }
+ 
         
     }
 

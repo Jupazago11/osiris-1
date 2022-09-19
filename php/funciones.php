@@ -774,19 +774,19 @@ function menu_personal($usuario){
 
 
     <div id="respuesta9_1" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta9_2" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta9_3" style="display:none; backgroung-color:white;"></div>
+    <!--<div id="respuesta9_2" style="display:none; backgroung-color:white;"></div>
+    <div id="respuesta9_3" style="display:none; backgroung-color:white;"></div>-->
     <br>
     <button type="button" id="enviar9_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Laboral</button>
-    <button type="button" id="enviar9_2" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_2').style.display='block'"> Información Personal</button>
-    <button type="button" id="enviar9_3" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_3').style.display='block'"> Datos</button>
+    <button type="button" id="enviar9_2" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Personal</button>
+    <button type="button" id="enviar9_3" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_1').style.display='block'"> Datos</button>
     <script>
         $('#enviar9_1').click(function(){
             $.ajax({
                 url:'../php/consulta9_1.php',
                 success: function(res){
-                    document.getElementById('respuesta9_2').style.display='none';
-                    document.getElementById('respuesta9_3').style.display='none';
+                    //document.getElementById('respuesta9_2').style.display='none';
+                    //document.getElementById('respuesta9_3').style.display='none';
                     $('#respuesta9_1').html(res);
                 },
                 error: function(res){
@@ -798,9 +798,9 @@ function menu_personal($usuario){
             $.ajax({
                 url:'../php/consulta9_2.php',
                 success: function(res){
-                    document.getElementById('respuesta9_1').style.display='none';
-                    document.getElementById('respuesta9_3').style.display='none';
-                    $('#respuesta9_2').html(res);
+                    //document.getElementById('respuesta9_1').style.display='none';
+                    //document.getElementById('respuesta9_3').style.display='none';
+                    $('#respuesta9_1').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");
@@ -811,9 +811,9 @@ function menu_personal($usuario){
             $.ajax({
                 url:'../php/consulta9_3.php',
                 success: function(res){
-                    document.getElementById('respuesta9_1').style.display='none';
-                    document.getElementById('respuesta9_2').style.display='none';
-                    $('#respuesta9_3').html(res);
+                    //document.getElementById('respuesta9_1').style.display='none';
+                    //document.getElementById('respuesta9_2').style.display='none';
+                    $('#respuesta9_1').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

@@ -11,6 +11,15 @@
     date_default_timezone_set('America/Bogota');
     $fecha        = date('Y-m-d', time());
 
+    //Creamos el arreglo con los valores de los niveles de acceso
+
+    $lvl = array(
+        "Administrador" => 1,
+        "Auxiliar Administrativo" => 2,
+        "Empleado" => 3,
+        "Domiciliario" => 4,
+    );
+
     ?>
     <form id="actualizar_personal3" method="POST">
     <table class="tabla_sugerido">
@@ -44,30 +53,37 @@
                     <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
                     <td><input type="text" name="celular_pers[]" value="<?php echo $fila['celular_pers'] ?>"/></td>
                     <td><input type="text" name="correo_pers[]" value="<?php echo $fila['correo_pers'] ?>"/></td>
-                    <td>
+                    <td><select name="lvl_acc[]">
                     <?php
-                    if($fila['tipo_usuario_pers'] != '' ){
-                        echo "<input list='lvl_accs' name='lvl_acc[]' id='lvl_acc' value='".$fila['tipo_usuario_pers']."'>";
-                    }else{
-                        echo "<input list='lvl_accs' name='lvl_acc[]' id='lvl_acc'>";
-                    }
 
+                    foreach ($lvl as $clave => $valor) {
+                        if($fila['tipo_usuario_pers'] == $valor ){
+                            ?>
+                            <option value="<?php echo $valor ?>" selected><?php echo $valor." ".$clave ?></option>
+                            
+                            <?php
+
+                            
+                        }else{
+                            ?>
+                            <option value="<?php echo $valor ?>"><?php echo $valor." ".$clave ?></option>
+    
+                            <?php
+                            
+                        }
+                    }
                     ?>
-                        <datalist id="lvl_accs">
-                            <option value="1">Administrador</option>
-                            <option value="2">Empleado entendido</option>
-                            <option value="3">Empleado</option>
-                            <option value="4">Domiciliario</option>
-                        </datalist>
+                
+                    </select>
                     </td>
                     <td><input type="text" name="user_pers[]" size="8" value="<?php echo $fila['user_pers'] ?>"/></td>
                     <td><input type="text" name="pass_pers[]" size="8" value="<?php echo $fila['pass_pers'] ?>"/></td>
                     <?php
                     if($fila['nombre_pers'] == '' || $fila['nombre_pers'] == NULL){
                         ?>
-                        <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                         <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_6').trigger('click');">
-                        <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
                         <?php
                     }else{
                         ?>

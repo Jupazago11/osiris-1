@@ -47,7 +47,7 @@
                     <td><?php echo $contador ?></td>
                     <td><input type="text" name="identificacion_pers[]" size="7" value="<?php echo $fila['identificacion_pers'] ?>"/></td>
                     <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
-                    <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>" style="width:120px"/></td>
+                    <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>" style="width:120px" onchange="$('#enviar9_5n').trigger('click');"/></td>
 
                     <?php
                     $fecha1  = new DateTime($fecha);
@@ -82,9 +82,9 @@
                     <?php
                     if($fila['nombre_pers'] == '' || $fila['nombre_pers'] == NULL){
                         ?>
-                        <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                         <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_5').trigger('click');">
-                        <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
                         <?php
                     }else{
                         ?>
@@ -105,7 +105,7 @@
             <td colspan="7"></td>
             <td></td>
 
-            <td colspan="2"><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_5" class="w3-btn" onclick="document.getElementById('respuesta9_5').style.display='block'" class="btn_guardar"></td>
+            <td colspan="2"><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar9_5"  class="btn_guardar" onclick="document.getElementById('respuesta9_5').style.display='block'"></td>
         </tr>
     </table>
     </form>
@@ -124,7 +124,31 @@ $('#enviar9_5').click(function(){
             'success'
             )
             $('#respuesta9_5').html(res);
-            $('#enviar9_2').trigger('click');
+            
+            setTimeout(function(){ 
+                
+                $('#enviar9_2').trigger('click');
+            }, 50);
+            
+        },
+        error: function(res){
+            alert("Problemas al tratar de enviar el formulario");
+        }
+    });
+});
+$('#enviar9_5n').click(function(){
+    $.ajax({
+        url:'../php/consulta9_5.php',
+        type:'POST',
+        data: $('#actualizar_personal2').serialize(),
+        success: function(res){
+            $('#respuesta9_5').html(res);
+            
+            setTimeout(function(){ 
+                
+                $('#enviar9_2').trigger('click');
+            }, 50);
+            
         },
         error: function(res){
             alert("Problemas al tratar de enviar el formulario");
