@@ -46,8 +46,8 @@
                     <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
                     <td><input type="text" name="identificacion_pers[]" size="7" value="<?php echo $fila['identificacion_pers'] ?>"/></td>
-                    <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
-                    <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>" style="width:120px" onchange="$('#enviar9_5n').trigger('click');"/></td>
+                    <td><input type="text" name="nombre_pers[]" size="30" value="<?php echo $fila['nombre_pers'] ?>"/></td>
+                    <td><input type="date" name="fecha_nacimiento_pers[]" value="<?php echo $fila['fecha_nacimiento_pers'] ?>" style="width:120px"/></td>
 
                     <?php
                     $fecha1  = new DateTime($fecha);
@@ -84,7 +84,7 @@
                         ?>
                         <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                         <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_5').trigger('click');">
-                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
                         <?php
                     }else{
                         ?>
@@ -118,11 +118,11 @@ $('#enviar9_5').click(function(){
         type:'POST',
         data: $('#actualizar_personal2').serialize(),
         success: function(res){
-            Swal.fire(
+            /*Swal.fire(
             '¡Muy bien!',
             'Guardado Exitoso',
             'success'
-            )
+            )*/
             $('#respuesta9_5').html(res);
             
             setTimeout(function(){ 
@@ -136,25 +136,7 @@ $('#enviar9_5').click(function(){
         }
     });
 });
-$('#enviar9_5n').click(function(){
-    $.ajax({
-        url:'../php/consulta9_5.php',
-        type:'POST',
-        data: $('#actualizar_personal2').serialize(),
-        success: function(res){
-            $('#respuesta9_5').html(res);
-            
-            setTimeout(function(){ 
-                
-                $('#enviar9_2').trigger('click');
-            }, 50);
-            
-        },
-        error: function(res){
-            alert("Problemas al tratar de enviar el formulario");
-        }
-    });
-});
+
 $('#enviar9_4_2').click(function(){
     $.ajax({
         url:'../php/consulta9_4.php',

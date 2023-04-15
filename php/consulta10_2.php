@@ -16,14 +16,25 @@
     $id_vehiculo = array();
     $placa = array();
 
-    $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `estado` != ''") or die ("Error al consultar: existencia del cargo");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `placa` != ''") or die ("Error al consultar: existencia del cargo");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         array_push($id_vehiculo, $fila['id_vehiculo']);
         array_push($placa, $fila['placa']);
     }
+    mysqli_free_result($consulta);
 
 
+    $consulta = mysqli_query($conexion, "SELECT `id_vehiculo1`
+    FROM `observacion` 
+    INNER JOIN vehiculo ON vehiculo.id_vehiculo = observacion.id_vehiculo1
+    WHERE vehiculo.estado = 'activo'            
+    ORDER BY observacion.id_obs ASC") or die ("Error al consultar: existencia del proveedor");
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $fila['id_vehiculo1'];
+    }
+    mysqli_free_result($consulta);
 
 
     ?>
@@ -46,7 +57,7 @@
                 $consulta = mysqli_query($conexion, "SELECT `id_vehiculo`,`id_obs`, vehiculo.placa, vehiculo.id_vehiculo, `observacion`,`costo`,`fecha` 
                 FROM `observacion` 
                 INNER JOIN vehiculo ON vehiculo.id_vehiculo = observacion.id_vehiculo1
-                WHERE observacion.estado = 'activo'            
+                WHERE observacion.estado = 'activo' AND vehiculo.placa != ''           
                 ORDER BY observacion.id_obs ASC") or die ("Error al consultar: existencia del proveedor");
 
                 while (($fila = mysqli_fetch_array($consulta))!=NULL){
@@ -59,7 +70,7 @@
                         <select name="id_vehiculo[]">
                             <?php
                             for ($i = 0; $i < count($id_vehiculo); $i++) { 
-                                if($id_vehiculo[$i] == $fila['id_obs']){
+                                if($id_vehiculo[$i] == $fila['id_vehiculo']){
                                     ?>
                                         <option value="<?php echo $id_vehiculo[$i] ?>" selected><?php echo $placa[$i] ?></option>
                                     <?php
@@ -79,9 +90,9 @@
                         <?php
                         if($fila['observacion'] == '' || $fila['observacion'] == NULL){
                             ?>
-                            <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                            <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                             <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar10_5').trigger('click');">
-                            <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                            <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
                             <?php
                         }else{
                             ?>
@@ -101,7 +112,7 @@
                 <td><button type="button" id="enviar10_6" class="w3-btn" style="background-color: transparent;"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
                 <td></td>
                 <td></td>
-                <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar10_5" class="w3-btn" onclick="document.getElementById('respuesta10_5').style.display='block'" class="btn_guardar"></td>
+                <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar10_5" onclick="document.getElementById('respuesta10_5').style.display='block'" class="btn_guardar"></td>
                 <td></td>
             </tr>
         </table>
@@ -131,7 +142,10 @@ $('#enviar10_5').click(function(){
 $('#enviar10_6').click(function(){
     $.ajax({
         url:'../php/consulta10_6.php',
+        type:'POST',
+        data: $('#actualizar_vehiculos2').serialize(),
         success: function(res){
+            //$('#respuesta10_5').html(res);
             $('#enviar10_2').trigger('click');
         },
         error: function(res){

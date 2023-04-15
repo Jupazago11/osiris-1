@@ -55,7 +55,7 @@
                 <tr>
                     <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
-                    <td><input type="text" name="nombre_pers[]" onchange="$('#enviar9').trigger('click');" value="<?php echo ucwords($fila['nombre_pers']) ?>"/></td>
+                    <td><input type="text" name="nombre_pers[]" size="30" onchange="$('#enviar9').trigger('click');" value="<?php echo ucwords($fila['nombre_pers']) ?>"/></td>
                     <td>
 
                     <select name="cargo[]">
@@ -76,8 +76,8 @@
                         ?>
                     </select>
                     </td>
-                    <td><input type="text" name="tipo_contrato_pers[]" size="2" value="<?php echo $fila['tipo_contrato_pers'] ?>" onchange="$('#enviar9n').trigger('click');"/> Meses</td>
-                    <td><input type="date" name="fecha_inicio_contrato_pers[]" value="<?php echo $fila['fecha_inicio_contrato_pers'] ?>" onchange="$('#enviar9n').trigger('click');"/></td>
+                    <td><input type="text" name="tipo_contrato_pers[]" size="2" value="<?php echo $fila['tipo_contrato_pers'] ?>" onchange="$('#enviar9').trigger('click');"/> Meses</td>
+                    <td><input type="date" name="fecha_inicio_contrato_pers[]" value="<?php echo $fila['fecha_inicio_contrato_pers'] ?>"/></td>
                     <?php
 
                     echo "<td>".date("d-m-Y",strtotime(date("d-m-Y",strtotime($fila['fecha_inicio_contrato_pers']." +".intval($fila['tipo_contrato_pers'])." month"))."- 1 days"))."</td>";
@@ -118,7 +118,7 @@
                         ?>
                         <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                         <input type="radio"  name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9').trigger('click');">
-                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]">X</label></td> 
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label></td> 
                         <?php
                     }else{
                         ?>
@@ -185,9 +185,9 @@
             <?php
             if($fila['cargo'] == ''){
                 ?>
-                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                 <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_8').trigger('click');">
-                <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
                 <?php
             }else{
                 ?>
@@ -221,26 +221,11 @@
             type:'POST',
             data: $('#actualizar_personal').serialize(),
             success: function(res){
-                Swal.fire(
+                /*Swal.fire(
                 '¡Muy bien!',
                 'Guardado Exitoso',
                 'success'
-                )
-                $('#respuesta9').html(res);
-                $('#enviar9_1').trigger('click');
-            },
-            error: function(res){
-                alert("Problemas al tratar de enviar el formulario");
-            }
-        });
-    });
-    $('#enviar9n').click(function(){
-        $.ajax({
-            url:'../php/consulta9.php',
-            type:'POST',
-            data: $('#actualizar_personal').serialize(),
-            success: function(res){
-
+                )*/
                 $('#respuesta9').html(res);
                 $('#enviar9_1').trigger('click');
             },

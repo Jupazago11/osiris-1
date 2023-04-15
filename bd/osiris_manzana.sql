@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-09-2022 a las 00:53:38
+-- Tiempo de generación: 20-09-2022 a las 00:07:13
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.6
 
@@ -44,11 +44,30 @@ INSERT INTO `cargo` (`id_cargo`, `cargo`, `estado`) VALUES
 (4, 'Domiciliario', 'activo'),
 (5, 'Proveedor oficina', ''),
 (6, 'Proveedor', ''),
-(7, 'Bodeguera', 'inactivo'),
+(7, '', ''),
 (8, '', ''),
-(9, 'camionero', 'inactivo'),
+(9, '', ''),
 (10, '', ''),
-(11, 'Auxiliar administrativa', 'activo');
+(11, 'Auxiliar administrativa', 'activo'),
+(12, '', ''),
+(13, '', ''),
+(14, '', ''),
+(15, '', ''),
+(16, '', ''),
+(17, '', ''),
+(18, '', ''),
+(19, '', ''),
+(20, '', ''),
+(21, '', ''),
+(22, '', ''),
+(23, '', ''),
+(24, '', ''),
+(25, '', ''),
+(26, 'Desarrollador', 'activo'),
+(27, '', ''),
+(28, '', ''),
+(29, 'Cajera Lider', 'activo'),
+(30, 'cajera', 'activo');
 
 -- --------------------------------------------------------
 
@@ -1088,7 +1107,8 @@ INSERT INTO `factura` (`id_facturacion`, `name_cliente`, `fecha`, `forma_pago`, 
 (25, '', '2022-09-15 18:52:53', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
 (26, '', '2022-09-17 17:44:35', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
 (27, '', '2022-09-18 15:31:56', 'contado', NULL, 1, NULL, NULL, 'finalizada'),
-(28, NULL, '2022-09-18 15:31:56', NULL, NULL, 1, NULL, NULL, 'activo');
+(28, NULL, '2022-09-18 15:31:56', NULL, NULL, 1, NULL, NULL, 'activo'),
+(29, NULL, '2022-09-19 11:58:12', NULL, NULL, 2, NULL, NULL, 'activo');
 
 -- --------------------------------------------------------
 
@@ -1207,13 +1227,13 @@ CREATE TABLE `observacion` (
 
 INSERT INTO `observacion` (`id_obs`, `id_vehiculo1`, `observacion`, `costo`, `fecha`, `estado`) VALUES
 (1, 1, 'gasolina moto', 10000, '2022-07-14', 'activo'),
-(2, 2, '', 14000, '2022-08-10', 'activo'),
+(2, 1, '', 14000, '2022-08-10', ''),
 (3, 1, '', 50000, '2022-08-19', ''),
 (4, 1, '', 0, '2022-08-19', ''),
-(5, 1, 'nuevo presupuesto', 45000, '2022-08-19', 'activo'),
-(6, 1, 'Compra de rin', 450000, '2022-09-09', 'activo'),
-(7, 1, 'moto teeran', 20000, '2022-09-17', 'activo'),
-(8, 1, 'combustible', 15000, '2022-09-17', 'activo');
+(5, 2, '', 45000, '2022-08-19', 'activo'),
+(6, 1, '', 450000, '2022-09-09', ''),
+(7, 1, '', 20000, '2022-09-17', ''),
+(8, 1, '', 15000, '2022-09-17', '');
 
 -- --------------------------------------------------------
 
@@ -1287,9 +1307,9 @@ CREATE TABLE `personal` (
 --
 
 INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celular_pers`, `correo_pers`, `user_pers`, `pass_pers`, `tipo_usuario_pers`, `fecha_nacimiento_pers`, `fecha_inicio_contrato_pers`, `tipo_contrato_pers`, `fecha_ingreso`, `cargo`, `salario_pers`, `eps`, `arl`, `caja_compensacion`, `pension`, `estado`) VALUES
-(1, 'John Alexis Morales', '1037977046', '3135721225', 'juan@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-01-01', 12, '2022-07-13', 1, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
-(2, 'Estelita atehortua atehortua', '1', '123', 'domi@gmail.com', 'estela', 'estela', 2, '2004-09-15', '2022-05-01', 6, '2022-07-13', 2, 1340000, 'sura', 'sura', '', 'proteccion', 'activo'),
-(3, 'empleado prueba', '', '456', 'emp_1@hotmail.com', 'empleado', '1234', 4, '1990-07-21', '2022-01-01', 12, '2022-07-14', 2, 1200000, '', '', '', 'colpensiones', 'activo'),
+(1, 'Juan Pablo Zapata', '1037977046', '3135721225', 'jupazago11@gmail.com', 'jupazago', '159875321', 1, '1998-03-06', '2022-01-01', 12, '2022-07-13', 26, 1000000, 'savia', 'sura', 'comfama', 'porvenir', 'activo'),
+(2, 'Estelita Atehortua Atehortua', '1', '123', 'correo@gmail.com', 'estela', 'estela', 2, '2000-09-30', '2022-05-01', 6, '2022-07-13', 11, 1340000, 'sura', 'sura', '', 'proteccion', ''),
+(3, '', '', '456', 'emp_1@hotmail.com', 'empleado', '1234', 4, '1990-07-21', '2022-01-01', 12, '2022-07-14', 11, 1200000, '', '', '', 'colpensiones', ''),
 (4, NULL, NULL, NULL, NULL, 'probando', 'probando', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (5, NULL, NULL, NULL, NULL, 'prueba 50', 'prueba 50', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
 (6, NULL, NULL, NULL, NULL, 'probando 40', 'probando 40', 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'activo'),
@@ -1315,7 +1335,28 @@ INSERT INTO `personal` (`id_pers`, `nombre_pers`, `identificacion_pers`, `celula
 (26, '', '', '', '', '', '', 3, '2022-09-05', '2022-08-03', 6, '2022-09-05', 3, 0, '', '', '', '', ''),
 (27, '', '', '', '', '', '', 3, '2022-09-15', '2022-09-18', 0, '2022-09-29', 3, 0, '', '', '', '', ''),
 (28, '', NULL, '', '', '', '', 3, '2022-09-18', '2022-09-18', 0, '2022-09-18', 3, 0, NULL, NULL, NULL, NULL, ''),
-(29, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-18', '2022-09-18', 0, '2022-09-18', 3, 0, NULL, NULL, NULL, NULL, '');
+(29, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-18', '2022-09-18', 0, '2022-09-18', 3, 0, NULL, NULL, NULL, NULL, ''),
+(30, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 0, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(31, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(32, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(33, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(34, '', '', '', '', '', '', 3, '2022-09-12', '2022-09-19', 12, '2022-09-19', 3, 0, '', '', '', '', ''),
+(35, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(36, '', '', NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, NULL, '', '', '', '', ''),
+(37, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(38, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(39, 'Estelita Atehortúa Atehortúa', '1037976742', '3127490630', 'estelitha@misena.edu.co', 'estela', 'estela1', 2, '1997-05-14', '2022-05-21', 6, '2022-11-22', 3, 1000000, 'savia', 'sura', 'comfama', 'Colpernsiones', 'activo'),
+(40, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(41, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(42, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(43, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(44, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(45, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, 0, NULL, NULL, NULL, NULL, ''),
+(46, '', NULL, NULL, NULL, NULL, NULL, 3, '2022-09-19', '2022-09-19', 6, '2022-09-19', 3, 1000000, NULL, NULL, NULL, NULL, ''),
+(47, '', NULL, '', '', '', '', 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, NULL, NULL, NULL, NULL, NULL, ''),
+(48, '', NULL, '', '', '', '', 3, '2022-09-19', '2022-09-19', 12, '2022-09-19', 3, NULL, NULL, NULL, NULL, NULL, ''),
+(49, 'Paula Andrea Agudelo Montoya', '39456330', ' ', 'andreagu1019@gmail.com', 'andrea', 'andrea2', 3, '1984-04-14', '2022-12-09', 12, '2022-09-19', 29, 1000000, 'Nueva Eps', 'sura', 'comfama', 'Porvervir', 'activo'),
+(50, 'Yuly Katherine Daza Jimenez', '1037976971', NULL, NULL, NULL, NULL, 3, '1997-11-16', '2022-09-24', 12, '2022-09-19', 30, 1000000, '', 'sura', 'comfama', 'Porvervir', 'activo');
 
 -- --------------------------------------------------------
 
@@ -2041,8 +2082,8 @@ CREATE TABLE `vehiculo` (
 --
 
 INSERT INTO `vehiculo` (`id_vehiculo`, `placa`, `tipo`, `fecha_soat`, `fecha_tecn`, `kilometraje`, `estado`) VALUES
-(1, 'ABC-12A', 'moto', '2021-09-15', '2021-12-30', 1000, 'activo'),
-(2, 'XYZ-12A', 'moto', '2022-06-02', '2021-09-17', 0, 'activo'),
+(1, 'ABC-12A', 'moto', '2022-08-10', '2021-12-30', 1000, 'activo'),
+(2, 'XYZ-12A', '', '2022-06-02', '2021-09-17', 0, 'inactivo'),
 (3, '', '', '2022-07-14', '2022-07-14', 0, ''),
 (4, '', '', '2022-07-14', '2022-07-14', 0, ''),
 (5, '', '', '2022-07-14', '2022-07-14', 0, ''),
@@ -2051,7 +2092,8 @@ INSERT INTO `vehiculo` (`id_vehiculo`, `placa`, `tipo`, `fecha_soat`, `fecha_tec
 (8, '', '', '2022-07-14', '2022-07-14', 0, ''),
 (9, '', '', '2022-07-14', '2022-07-14', 25000, ''),
 (10, '', '', '2022-08-19', '2022-08-19', 0, ''),
-(11, 'ASB-123', 'Turbo', '2022-01-01', '2022-09-09', 25000, 'activo');
+(11, 'ASB-123', '', '2022-01-01', '2022-09-09', 25000, 'inactivo'),
+(12, '', '', '2022-09-19', '2022-09-19', 0, '');
 
 --
 -- Índices para tablas volcadas
@@ -2256,7 +2298,7 @@ ALTER TABLE `vehiculo`
 -- AUTO_INCREMENT de la tabla `cargo`
 --
 ALTER TABLE `cargo`
-  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_cargo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
@@ -2310,7 +2352,7 @@ ALTER TABLE `domicilio`
 -- AUTO_INCREMENT de la tabla `factura`
 --
 ALTER TABLE `factura`
-  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `id_facturacion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `factura_abono`
@@ -2352,7 +2394,7 @@ ALTER TABLE `pagos_caja`
 -- AUTO_INCREMENT de la tabla `personal`
 --
 ALTER TABLE `personal`
-  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_pers` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
 
 --
 -- AUTO_INCREMENT de la tabla `presupuesto`
@@ -2418,7 +2460,7 @@ ALTER TABLE `ubicacion`
 -- AUTO_INCREMENT de la tabla `vehiculo`
 --
 ALTER TABLE `vehiculo`
-  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_vehiculo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas

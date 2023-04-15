@@ -898,7 +898,7 @@ function menu_vehiculos($usuario){
             $.ajax({
                 url:'../php/consulta10_1.php',
                 success: function(res){
-                    document.getElementById('respuesta10_2').style.display='none';
+                    //document.getElementById('respuesta10_2').style.display='none';
                     $('#respuesta10_1').html(res);
                 },
                 error: function(res){
@@ -910,8 +910,8 @@ function menu_vehiculos($usuario){
             $.ajax({
                 url:'../php/consulta10_2.php',
                 success: function(res){
-                    document.getElementById('respuesta10_1').style.display='none';
-                    $('#respuesta10_2').html(res);
+                    //document.getElementById('respuesta10_1').style.display='none';
+                    $('#respuesta10_1').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

@@ -50,7 +50,7 @@
                 <tr>
                     <input type="hidden" name="id_pers[]" value="<?php echo $fila['id_pers'] ?>"/>
                     <td><?php echo $contador ?></td>
-                    <td><input type="text" name="nombre_pers[]" value="<?php echo $fila['nombre_pers'] ?>"/></td>
+                    <td><input type="text" name="nombre_pers[]" size="30" value="<?php echo $fila['nombre_pers'] ?>"/></td>
                     <td><input type="text" name="celular_pers[]" value="<?php echo $fila['celular_pers'] ?>"/></td>
                     <td><input type="text" name="correo_pers[]" value="<?php echo $fila['correo_pers'] ?>"/></td>
                     <td><select name="lvl_acc[]">
@@ -83,7 +83,7 @@
                         ?>
                         <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                         <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_6').trigger('click');">
-                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
                         <?php
                     }else{
                         ?>

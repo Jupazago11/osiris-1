@@ -55,6 +55,8 @@
                     $intvl   = $fecha1->diff($fecha2);
                     if($fecha1 == $fecha2){
                         echo "<td style='border: 2px solid white;text-align: center;color:black;'>".$intvl->y." Año</td>";
+                    }elseif($fecha1 > $fecha2){
+                        echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'>Vencido</td>";
                     }elseif($intvl->d != 0){
                         if($intvl->m <=1 && $intvl->d >=0){
                             echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'>".$intvl->m." Meses con ".$intvl->d." días</td>";
@@ -82,6 +84,8 @@
 
                     if($fecha1 == $fecha2){
                         echo "<td style='border: 2px solid white;text-align: center;color:black;'>".$intvl->y." Año</td>";
+                    }elseif($fecha1 > $fecha2){
+                        echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'>Vencido</td>";
                     }elseif($intvl->d != 0){
                         if($intvl->m <=1 && $intvl->d >=0){
                             echo "<td style='background-color:red;border: 2px solid white;text-align: center;color:white;'>".$intvl->m." Meses con ".$intvl->d." días</td>";
@@ -102,16 +106,16 @@
 
                     if($fila['estado'] == "activo"){
                         ?>
-                        <input type="radio" name="estado[<?php echo $contador ?>]" value="activo" checked>
+                        <input type="radio" name="estado[<?php echo $contador ?>]" value="activo" checked style="appearance: block;">
                             Activo<br>
-                        <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo">
+                        <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo" style="appearance: block;">
                             Inactivo<br></td> 
                         <?php
                     }elseif($fila['estado'] == "inactivo"){
                         ?>
-                        <input type="radio" name="estado[<?php echo $contador ?>]" value="activo">
+                        <input type="radio" name="estado[<?php echo $contador ?>]" value="activo" style="appearance: block;">
                             Activo<br>
-                        <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo" checked>
+                        <input type="radio" name="estado[<?php echo $contador ?>]" value="inactivo" checked style="appearance: block;">
                             Inactivo<br></td> 
                         <?php
                     }
@@ -120,9 +124,9 @@
                     <?php
                     if($fila['tipo'] == '' || $fila['tipo'] == NULL){
                         ?>
-                        <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar10_4').trigger('click');">
-                        <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                        <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                        <input type="radio" style="appearance: none;" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar10_4').trigger('click');">
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
                         <?php
                     }else{
                         ?>
@@ -143,7 +147,7 @@
             <td colspan="4"></td>
             <td></td>
             <td></td>
-            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar10_4" class="w3-btn" onclick="document.getElementById('respuesta10_3').style.display='block'" class="btn_guardar"></td>
+            <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar10_4" onclick="document.getElementById('respuesta10_3').style.display='block'" class="btn_guardar"></td>
             <td></td>
             <td></td>
         </tr>
