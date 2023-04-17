@@ -117,7 +117,7 @@
                     if($fila['nombre_pers'] == ''){
                         ?>
                         <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                        <input type="radio"  name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9').trigger('click');">
+                        <input type="radio"  name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9').trigger('click');" style="visibility:hidden;">
                         <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label></td> 
                         <?php
                     }else{
@@ -186,13 +186,13 @@
             if($fila['cargo'] == ''){
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar9_8').trigger('click');">
-                <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarcargo[<?php echo $contador ?>]" onchange="$('#enviar9_8').trigger('click');" style="visibility:hidden;">
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminarcargo[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
                 <?php
             }else{
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar9_8').trigger('click');"></td> 
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarcargo[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar9_8').trigger('click');"></td> 
                 <?php
             }
             ?>
@@ -276,7 +276,6 @@
             success: function(res){
                 $('#respuesta9').html(res);
                 $('#enviar9_1').trigger('click');
-
                 setTimeout(function(){ 
                     $('#btn_cargo').trigger('click');
                 }, 50);

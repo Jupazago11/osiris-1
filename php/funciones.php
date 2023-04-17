@@ -691,14 +691,10 @@ function cuentas_por_pagar($usuario){
 
 function menu_proveedor($usuario){
     ?>
-    
-
-
     <div id="respuesta7_0" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta7_1" style="display:none; backgroung-color:white;"></div>
 
     <br>
-    <button type="button" id="enviar7_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta7_1').style.display='block'"> Información</button>
+    <button type="button" id="enviar7_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta7_0').style.display='block'"> Información</button>
     <button type="button" id="enviar7_0" class="w3-btn btn_gris" onclick="document.getElementById('respuesta7_0').style.display='block'"> Acceso</button>
     
     <form id="mandar_user" method="POST">
@@ -711,7 +707,6 @@ function menu_proveedor($usuario){
             $.ajax({
                 url:'../php/consulta7_0.php',
                 success: function(res){
-                    document.getElementById('respuesta7_1').style.display='none';
 
                     $('#respuesta7_0').html(res);
                 },
@@ -726,8 +721,7 @@ function menu_proveedor($usuario){
                 type:'POST',
                 data: $('#mandar_user').serialize(),
                 success: function(res){
-                    document.getElementById('respuesta7_0').style.display='none';
-                    $('#respuesta7_1').html(res);
+                    $('#respuesta7_0').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");
@@ -770,12 +764,9 @@ function menu_producto($usuario){
 
 function menu_personal($usuario){
     ?>
-    
-
 
     <div id="respuesta9_1" style="display:none; backgroung-color:white;"></div>
-    <!--<div id="respuesta9_2" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta9_3" style="display:none; backgroung-color:white;"></div>-->
+
     <br>
     <button type="button" id="enviar9_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Laboral</button>
     <button type="button" id="enviar9_2" class="w3-btn btn_gris" onclick="document.getElementById('respuesta9_1').style.display='block'"> Información Personal</button>
@@ -785,8 +776,6 @@ function menu_personal($usuario){
             $.ajax({
                 url:'../php/consulta9_1.php',
                 success: function(res){
-                    //document.getElementById('respuesta9_2').style.display='none';
-                    //document.getElementById('respuesta9_3').style.display='none';
                     $('#respuesta9_1').html(res);
                 },
                 error: function(res){
@@ -798,8 +787,6 @@ function menu_personal($usuario){
             $.ajax({
                 url:'../php/consulta9_2.php',
                 success: function(res){
-                    //document.getElementById('respuesta9_1').style.display='none';
-                    //document.getElementById('respuesta9_3').style.display='none';
                     $('#respuesta9_1').html(res);
                 },
                 error: function(res){
@@ -811,8 +798,6 @@ function menu_personal($usuario){
             $.ajax({
                 url:'../php/consulta9_3.php',
                 success: function(res){
-                    //document.getElementById('respuesta9_1').style.display='none';
-                    //document.getElementById('respuesta9_2').style.display='none';
                     $('#respuesta9_1').html(res);
                 },
                 error: function(res){
@@ -829,8 +814,9 @@ function menu_personal($usuario){
 function ver_presupuestos($usuario){
     date_default_timezone_set('America/Bogota');
     $fecha        = date('m', time());
+    $anio         = date('Y', time());
     ?>
-    <form id="menu_presupuestos" method="POST" class="form-inline">
+    <form id="menu_presupuestos" method="POST" class="form-inline" onkeydown="return event.key != 'Enter';">
     <input type="hidden" name="user" value="<?php echo $usuario ?>">
     <table class="tabla_sugerido">
         <tr>
@@ -856,7 +842,7 @@ function ver_presupuestos($usuario){
                 </select>
             </td>
             <td>Año</td>
-            <td><input type="text" name="year" value="2022"></td>
+            <td><input type="text" name="year" value="<?php echo $anio ?>"></td>
             <td></td>
             <td><button type="button" id="enviar11" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
         </tr>
@@ -888,17 +874,16 @@ function ver_presupuestos($usuario){
 function menu_vehiculos($usuario){
     ?>
     <div id="respuesta10_1" style="display:none; backgroung-color:white;"></div>
-    <div id="respuesta10_2" style="display:none; backgroung-color:white;"></div>
 
-    <button type="button" id="enviar10_1" class="w3-btn btn_gris" onclick="document.getElementById('respuesta10_1').style.display='block'"> Vehículos</button>
-    <button type="button" id="enviar10_2" class="w3-btn btn_gris" onclick="document.getElementById('respuesta10_2').style.display='block'"> Generar reporte</button>
+    <button type="button" id="enviar10_1" class="w3-btn btn_gris"> Vehículos</button>
+    <button type="button" id="enviar10_2" class="w3-btn btn_gris"> Generar reporte</button>
 
     <script>
         $('#enviar10_1').click(function(){
+            document.getElementById('respuesta10_1').style.display='block';
             $.ajax({
                 url:'../php/consulta10_1.php',
                 success: function(res){
-                    //document.getElementById('respuesta10_2').style.display='none';
                     $('#respuesta10_1').html(res);
                 },
                 error: function(res){
@@ -907,10 +892,10 @@ function menu_vehiculos($usuario){
             });
         });
         $('#enviar10_2').click(function(){
+            document.getElementById('respuesta10_1').style.display='block';
             $.ajax({
                 url:'../php/consulta10_2.php',
                 success: function(res){
-                    //document.getElementById('respuesta10_1').style.display='none';
                     $('#respuesta10_1').html(res);
                 },
                 error: function(res){
@@ -926,21 +911,21 @@ function menu_vehiculos($usuario){
 
 /////////////////////////////////////////////////////////////////////////////////////////
 function resultados_operativos($usuario){
+    $anio = date('Y', time());
     ?>
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_6').style.display='none'">X</a>
-        <form id="menu_roo">
-        <table class="tabla_sugerido">
-            <tr>
-                <th colspan="6">Selección</th>
-            </tr>
-            <tr>
-                <td>Año</td>
-                <td><input type="number" name="year" value="2022" onchange="$('#enviar12').trigger('click');"></td>
-                <td></td>
-                <td style="display:none"><button type="button" id="enviar12" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
-            </tr>
-        </table>
-        
+        <form id="menu_roo" onkeydown="return event.key != 'Enter';">
+            <table class="tabla_sugerido">
+                <tr>
+                    <th colspan="6">Selección</th>
+                </tr>
+                <tr>
+                    <td>Año</td>
+                    <td><input type="number" name="year" value="<?php echo $anio ?>" onchange="$('#enviar12').trigger('click');"></td>
+                    <td></td>
+                    <td style="display:none"><button type="button" id="enviar12" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+                </tr>
+            </table>
         </form>
     
     <div id="respuesta12">

@@ -45,7 +45,7 @@
         ?>
         <div class="columna1">
 
-            <a class='columna2' style="background-color: #4a4a4a;" onclick="//ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
+            <a class='columna2' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
             <a class='columna2' style="background-color: #ff0000;" onclick="ocultarDivs('cont1');ocultarDivs1('cont1_1')"><img src="../iconos/pedidos.png" alt="" width="50%" height="50%"><br>Toma Pedidos</a>
 
             <a class='columna2' style="background-color: #22AB09;" onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
@@ -70,8 +70,8 @@
     }elseif($tipo_de_cuenta == 4){
         ?>
         <div class="columna1">
-        <a class='columna2' style="background-color: #22AB09;width:25%;color:white" onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="35%" height="35%"><br>Domicilios</a>
-        <a class='columna2' style="background-color: #0969AB;width:25%;color:white" onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="35%" height="35%"><br>Control</a>
+            <a class='columna2' style="background-color: #22AB09;width:25%;color:white" onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="35%" height="35%"><br>Domicilios</a>
+            <a class='columna2' style="background-color: #0969AB;width:25%;color:white" onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="35%" height="35%"><br>Control</a>
         </div>
         <?php
     }
@@ -156,7 +156,7 @@
             <div class="menu" style="margin-top: 3%;">
             
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="50%" height="50%"><br>Proveedor</a>
-                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_2'); $('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="50%" height="50%"><br>Producto</a>
+                <a class="columna" style="background-color: #4a4a4a;" onclick="ocultarDivs2('cont2_2'); $('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="50%" height="50%"><br>Producto</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="50%" height="50%"><br>Personal</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_4'); $('#enviar11').trigger('click')"><img src="../iconos/presupuesto.png" width="50%" height="50%"><br>Presupuestos</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="50%" height="50%"><br>Vehículos</a>
@@ -227,11 +227,11 @@
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
-                    <a class="columna" style="background-color: #22AB09;color:white" onclick="ocultarDivs3('cont3_2')"><img src="../iconos/proximo.png" width="40%" height="40%"><br>Ver Domicilios</a>
+                    <a class="columna" style="background-color: #22AB09;" onclick="ocultarDivs3('cont3_2')"><img src="../iconos/proximo.png" width="40%" height="40%"><br>Ver Domicilios</a>
                     <?php
                 }elseif($tipo_de_cuenta == 4){
                     ?>
-                    <a class="columna" style="background-color: #22AB09;color:white" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="40%" height="40%"><br>Domicilio</a>
+                    <a class="columna" style="background-color: #22AB09;" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="40%" height="40%"><br>Domicilio</a>
                     <?php
                 }
                 ?>
@@ -492,7 +492,7 @@ function ocultarDivs2(no_oculta){
 }
 
 function ocultarDivs3(no_oculta){
-    document.getElementById("body").style.display='none';
+
     document.getElementById("cont3_1").style.display='none';
     document.getElementById("cont3_2").style.display='none';
     document.getElementById("cont3_3").style.display='none';

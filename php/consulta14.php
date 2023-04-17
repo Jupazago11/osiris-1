@@ -84,14 +84,14 @@ mysqli_free_result($consulta);
             //Eliminar
             if($fila['reque'] == '' || $fila['reque'] == NULL){
                 ?>
-                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar14_3').trigger('click');">
-                <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarreque[<?php echo $contador ?>]" onchange="$('#enviar14_3').trigger('click');" style="visibility:hidden;">
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminarreque[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td>
                 <?php
             }else{
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar14_3').trigger('click');"></td> 
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarreque[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar14_3').trigger('click');"></td> 
                 <?php
             }
             ?>

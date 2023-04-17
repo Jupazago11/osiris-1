@@ -125,13 +125,13 @@
                     if($fila['tipo'] == '' || $fila['tipo'] == NULL){
                         ?>
                         <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                        <input type="radio" style="appearance: none;" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar10_4').trigger('click');">
-                        <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
+                        <input type="radio" style="appearance: none;" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarvehiculo[<?php echo $contador ?>]" onchange="$('#enviar10_4').trigger('click');">
+                        <label class="w3-tbn w3-red btn-eliminar" for="eliminarvehiculo[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td>
                         <?php
                     }else{
                         ?>
                         <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar10_4').trigger('click');"></td> 
+                        <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarvehiculo[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar10_4').trigger('click');"></td> 
                         <?php
                     }
                     ?>
@@ -162,12 +162,12 @@ $('#enviar10_4').click(function(){
         type:'POST',
         data: $('#actualizar_vehiculos').serialize(),
         success: function(res){
-            Swal.fire(
+            /*Swal.fire(
             '¡Muy bien!',
             'Guardado Exitoso',
             'success'
-            )
-            $('#respuesta10_4').html(res);
+            )*/
+            $('#respuesta10_3').html(res);
             $('#enviar10_1').trigger('click');
         },
         error: function(res){

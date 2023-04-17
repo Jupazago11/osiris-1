@@ -48,7 +48,7 @@
         <td></td>
         <td></td>
         <td></td>
-        <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar7_4" onclick="document.getElementById('respuesta7_4').style.display='block'" class="btn_icono"></td>
+        <td><img src="../iconos/guardar.png" width="60px" height="60px" id="enviar7_4" onclick="document.getElementById('respuesta7_4').style.display='block'" class="btn_guardar btn_icono"></td>
     </tr>
     </table>
     </form>

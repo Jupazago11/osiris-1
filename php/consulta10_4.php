@@ -23,12 +23,12 @@
         $j = $i + 1; //ya que el arreglo de los estados en html del formulario anterior empieza en 1 y no en 0
 
         $consulta = mysqli_query($conexion, "UPDATE `vehiculo` SET `tipo`='$tipo[$i]', `placa`='$placa[$i]', `fecha_soat`='$fecha_soat[$i]', `fecha_tecn`='$fecha_tecn[$i]', `kilometraje`='$kilometraje[$i]', `estado` ='$estado[$j]'
-        WHERE `id_vehiculo` = '$id_vehiculo[$i]'") or die ("Error al update: proveedores");
+        WHERE `id_vehiculo` = '$id_vehiculo[$i]'") or die ("Error al update: vehiculos");
     
-        if($eliminar[$j] == 'eliminar' && count($eliminar) > 1){
+        if($eliminar[$j] == 'eliminar' && count($eliminar) > 0){
             $consulta = mysqli_query($conexion, "UPDATE `vehiculo` SET 
             `estado` = '' 
-            WHERE `id_vehiculo` = '$id_vehiculo[$i]'") or die ("Error al update: proveedores");
+            WHERE `id_vehiculo` = '$id_vehiculo[$i]'") or die ("Error al update: vehiculos");
         }
 
         

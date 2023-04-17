@@ -15,7 +15,7 @@
     $id_vehiculo    = $_POST['id_vehiculo'];
     
     $consulta = mysqli_query($conexion, "INSERT INTO `observacion`( `id_vehiculo1`, `observacion`, `costo`, `fecha`, `estado`) 
-    VALUES ('$id_vehiculo','','0', '$hoy','activo')") or die ("Error al consultar: proveedores");
+    VALUES ('$id_vehiculo','','0', '$hoy','activo')") or die ("Error al consultar: observacion");
 
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>
