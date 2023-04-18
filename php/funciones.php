@@ -664,7 +664,7 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
 function cuentas_por_pagar($usuario){
     ?>
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_7').style.display='none';document.getElementById('cont2_6').style.display='none';">X</a>
-    <button type="button" id="enviar6_1" class="w3-btn w3-red"  style="display:none;">Inscribir Cuenta</button>
+    <button type="button" id="enviar6_1" class="w3-btn w3-red" style="display:none;">Inscribir Cuenta</button>
     
     <div id="respuesta6_1"></div>
 

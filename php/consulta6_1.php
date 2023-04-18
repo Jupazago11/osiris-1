@@ -179,14 +179,14 @@
             <?php
             if($nombre[$i] == ''){
                 ?>
-                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar6_2').trigger('click');">
-                <label for="eliminar[<?php echo $contador ?>]">X</label><br></td> 
+                <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminacxpagar[<?php echo $contador ?>]" onchange="$('#enviar6_2').trigger('click');" style="visibility:hidden;">
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminacxpagar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
                 <?php
             }else{
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar6_2').trigger('click');"></td> 
+                <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminacxpagar[<?php echo $contador ?>]" style="visibility:hidden;" onchange="$('#enviar6_2').trigger('click');"></td> 
                 <?php
             }
 
@@ -195,14 +195,20 @@
         
         }
         ?>   
-            
-            
-            
+        </table>    
+        </form>    
+
+        <form id="ver_cxpagar" method="POST">
+        <table class="tabla_sugerido"> 
         <tr>
+        
             <td></td>
+            
             <td><button type="button" id="enviar6_3" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
-            <td></td>
-            <td><button type="button" id="enviar6_4" class="w3-btn" onclick="document.getElementById('respuesta6_4').style.display='block'" style="width:auto; background-color:#305490; color:white;">Ver cuentas canceladas</button></td>
+            <td>Desde: <input type="date" name="fecha_inicio_cxpagar" value="<?php echo $fecha ?>"/><br><br>
+                Hasta: <input type="date" name="fecha_final_cxpagar" value="<?php echo $fecha ?>"/></td>
+            <td><button type="button" id="enviar6_4" class="w3-btn" style="width:auto; background-color:#305490; color:white;">Ver cuentas canceladas</button></td>
+            
         <?php
         echo "<td colspan='2'></td><td>Total</td><th>".number_format($costo_total, 0, ',', '.')."</th>";
         ?>
@@ -217,10 +223,12 @@
     </tr>
     </table>
     </form>
+    
+    
     <div id="respuesta6_2"></div>
     <div id="respuesta6_4" style="position:absolute; top:0;left:0;background:white;width:100%;height: 100%;display:none;"></div>
     <script>
-    //console.log("a ver xd");
+
     $('#enviar6_2').click(function(){
         $.ajax({
             url:'../php/consulta6_2.php',
@@ -240,6 +248,23 @@
         });
     });
 
+    //Ver cuentas canceladas
+    $('#enviar6_4').click(function(){
+        document.getElementById('respuesta6_4').style.display='block';
+        $.ajax({
+            url:'../php/consulta6_4.php',
+            type:'POST',
+            data: $('#ver_cxpagar').serialize(),
+            success: function(res){
+                $('#respuesta6_4').html(res);
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+
+    });
+
     $('#enviar6_3').click(function(){
         $.ajax({
             url:'../php/consulta6_3.php',
@@ -251,18 +276,8 @@
             }
         });
     });
-    $('#enviar6_4').click(function(){
-        $.ajax({
-            url:'../php/consulta6_4.php',
-            success: function(res){
-                $('#respuesta6_4').html(res);
-            },
-            error: function(res){
-                alert("Problemas al tratar de enviar el formulario");
-            }
-        });
 
-    });
+    
 
 
     

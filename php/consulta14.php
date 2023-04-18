@@ -9,6 +9,9 @@ $conexion = conectar();                     //Obtenemos la conexion
 
 $usuario = $_POST['usuario'];
 
+date_default_timezone_set('America/Bogota');
+$fecha_hoy        = date('Y-m-d', time());
+
 //Capturaremos el id del ususario
 
 $consulta = mysqli_query($conexion, "SELECT `id_pers` 
@@ -32,6 +35,7 @@ mysqli_free_result($consulta);
         <th>Requerimiento</th>
         <th>Costo</th>
         <th>Fecha</th>
+        <th>Días</th>
         <th>Estado</th>
         <th></th>
     </tr>
@@ -53,7 +57,20 @@ mysqli_free_result($consulta);
             <td><textarea name="reque[]" rows="3" cols="60" onchange="$('#enviar14_4').trigger('click');"><?php echo $fila['reque'] ?></textarea></td>
             <td><input type="text" name="costo[]" value="<?php echo number_format($fila['costo'], 0, ',', '.') ?>" class="puntos"/></td>
             <td><input type="date" name="fecha[]" value="<?php echo $fila['fecha'] ?>"/></td>
+            
+            <?php
+            $fecha1  = new DateTime($fila['fecha']);
+            $fecha2  = new DateTime($fecha_hoy);
+            
+            $intvl   = $fecha1->diff($fecha2);
 
+            
+
+            echo "<td style='text-align: center;'>".$intvl->days."</td>";
+
+
+            ?>
+            
             <td>
             
             <?php
@@ -109,6 +126,7 @@ mysqli_free_result($consulta);
             <td><button type="button" id="enviar14_2" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
             <td></td>
             <td><?php echo number_format($total_reque, 0, ',', '.') ?></td>
+            <td></td>
             <td></td>
             <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar14_3" class="w3-btn" onclick="document.getElementById('respuesta14_2').style.display='block'" class="btn_icono"></td>
             <td></td>

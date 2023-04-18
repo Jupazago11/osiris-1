@@ -90,6 +90,7 @@
             </tr>
             <tr>
             <?php
+            $categoria = array('Promedio','Suma','Suma','Promedio','Suma','Suma','Suma','Suma','Promedio','Promedio','Promedio','Promedio');
             $total = array(0,0,0,0,0,0,0,0,0,0,0,0);
             $nmeses = array('Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
             $cant =  array(0,0,0,0,0,0,0,0,0,0,0,0);
@@ -140,10 +141,10 @@
                 }
 
                 //prom de g operacion
-                if($g_operacion[$i] != 0){
+                /*if($g_operacion[$i] != 0){
                     $cant[2]++;
                     $canti[2] += $g_operacion[$i];
-                }
+                }*/
 
                 //prom de margen
                 if($margen[$i] != 0){
@@ -152,10 +153,10 @@
                 }
 
                 //prom de inversion
-                if($inversion[$i] != 0){
+                /*if($inversion[$i] != 0){
                     $cant[7]++;
                     $canti[7] += $inversion[$i];
-                }
+                }*/
 
                 //prom de cxpagar
                 if($cxpagar[$i] != 0){
@@ -168,22 +169,36 @@
                     $canti[9] += $credito[$i];
                 }
 
+                //prom de efectivo
+                if($efectivo[$i] != 0){
+                    $cant[10]++;
+                    $canti[10] += $efectivo[$i];
+                }
+
+
+                //prom de tarjeta
+                if($tarjeta[$i] != 0){
+                    $cant[11]++;
+                    $canti[11] += $tarjeta[$i];
+                }
+
+
                 
 
                 //totales
                 //$total[0] = $total[0] + $inventario[$i];
                 $total[1] = $total[1] + $ventas[$i];
-                //$total[2] = $total[2] + $g_operacion[$i];
+                $total[2] = $total[2] + $g_operacion[$i];
                 //$total[3] = $total[3] + $margen[$i];
 
                 $total[4] = $total[4] + $ventas[$i]*$margen[$i]/100;                    //Bruta
                 $total[5] = $total[5] + ($ventas[$i]*$margen[$i]/100)-$g_operacion[$i]; //Neta
 
                 $total[6] = $total[6] + $dividendo[$i];
-                //$total[7] = $total[7] + $cxpagar[$i];
+                $total[7] = $total[7] + $inversion[$i];
                 //$total[8] = $total[8] + $credito[$i];
-                $total[10] = $total[10] + $efectivo[$i];
-                $total[11] = $total[11] + $tarjeta[$i];
+                //$total[10] = $total[10] + $efectivo[$i];
+                //$total[11] = $total[11] + $tarjeta[$i];
 
 
             ?>
@@ -191,11 +206,13 @@
                 <?php
             }
             if($cant[0] != 0){$total[0] = $canti[0] / $cant[0];}else{$total[0] = 0;}
-            if($cant[2] != 0){$total[2] = $canti[2] / $cant[2];}else{$total[2] = 0;}
+            //if($cant[2] != 0){$total[2] = $canti[2] / $cant[2];}else{$total[2] = 0;}
             if($cant[3] != 0){$total[3] = $canti[3] / $cant[3];}else{$total[3] = 0;}
             if($cant[8] != 0){$total[8] = $canti[8] / $cant[8];}else{$total[8] = 0;} //cxpagar
             if($cant[9] != 0){$total[9] = $canti[9] / $cant[9];}else{$total[9] = 0;} //credito
-            if($cant[7] != 0){$total[7] = $canti[7] / $cant[7];}else{$total[7] = 0;} //inversion
+            //if($cant[7] != 0){$total[7] = $canti[7] / $cant[7];}else{$total[7] = 0;} //inversion
+            if($cant[10] != 0){$total[10] = $canti[10] / $cant[10];}else{$total[10] = 0;}
+            if($cant[11] != 0){$total[11] = $canti[11] / $cant[11];}else{$total[11] = 0;}
             
             ?>
             <tr style="background-color:#575656">
@@ -205,11 +222,16 @@
                     if($i==3){
                         //margen
                         ?>
-                        <td style="color:white;font-weight: bold;"><?php echo number_format($total[$i], 2, ',', '.') ?></td>
+
+                        <td style="color:white;font-weight: bold;"><div class="tooltip"><?php echo number_format($total[$i], 2, ',', '.') ?>
+                        <span class="tooltiptext"><?php echo $categoria[$i] ?></span></div></td>
+
                         <?php
                     }else{
                         ?>
-                        <td style="color:white;font-weight: bold;"><?php echo number_format($total[$i], 0, ',', '.') ?></td>
+                        <td style="color:white;font-weight: bold;"><div class="tooltip"><?php echo number_format($total[$i], 0, ',', '.') ?>
+                        <span class="tooltiptext"><?php echo $categoria[$i] ?></span></div></td>
+                        
                         <?php
                     }
                     
