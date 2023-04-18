@@ -1064,4 +1064,80 @@ function ver_requerimientos($usuario){
     </script>
     <?php
 }
+/////////////////////////////////////////////////////////////////////////////////////////
+function registro_diario_ventas($usuario){
+
+    date_default_timezone_set('America/Bogota');
+    $fecha        = date('m', time());
+    $anio         = date('Y', time());
+
+    ?>
+    <button type="button" id="enviar15" class="w3-btn w3-red" onclick="document.getElementById('respuesta15').style.display='block'" style="display:none"></button>
+
+    <form id="registro_diario_ventas" method="post">
+        <input type="hidden" name="user" value="<?php echo $usuario ?>">
+    <table class="tabla_sugerido">
+        <tr>
+            <th colspan="6">Selección</th>
+        </tr>
+        <tr>
+            <td>Mes</td>
+            <td>
+                <select name="mes">
+
+                    <option value="1" <?php if($fecha=='01'){?>selected <?php } ?> >Enero</option>
+                    <option value="2" <?php if($fecha=='02'){?>selected <?php } ?> >Febrero</option>
+                    <option value="3" <?php if($fecha=='03'){?>selected <?php } ?> >Marzo</option>
+                    <option value="4" <?php if($fecha=='04'){?>selected <?php } ?> >Abril</option>
+                    <option value="5" <?php if($fecha=='05'){?>selected <?php } ?> >Mayo</option>
+                    <option value="6" <?php if($fecha=='06'){?>selected <?php } ?> >Junio</option>
+                    <option value="7" <?php if($fecha=='07'){?>selected <?php } ?> >Julio</option>
+                    <option value="8" <?php if($fecha=='08'){?>selected <?php } ?> >Agosto</option>
+                    <option value="9" <?php if($fecha=='09'){?>selected <?php } ?> >Septiembre</option>
+                    <option value="10" <?php if($fecha=='10'){?>selected <?php } ?> >Octubre</option>
+                    <option value="11" <?php if($fecha=='11'){?>selected <?php } ?> >Noviembre</option>
+                    <option value="12" <?php if($fecha=='12'){?>selected <?php } ?> >Diciembre</option>
+                </select>
+            </td>
+            <td>Año</td>
+            <td>
+            <select name="anio">
+                <?php
+                    for ($i=2020; $i <= $anio; $i++) {
+                        ?>
+                        <option value="<?php echo $i ?>" <?php if($i==$anio){?>selected <?php } ?> ><?php echo $i ?></option>
+                        <?php
+                    }
+
+                ?>
+                </select>    
+            </td>
+            <td></td>
+            <td><button type="button" id="enviar15_1" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+        </tr>
+    </table>
+    </form>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_9').style.display='none'">X</a>
+
+
+    <div id="respuesta15"></div>
+    
+    <script>
+        $('#enviar15_1').click(function(){
+            $.ajax({
+                url:'../php/consulta15.php',
+                type:'POST',
+                data: $('#registro_diario_ventas').serialize(),
+                success: function(res){
+                    $('#respuesta15').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+
+    </script>
+    <?php
+}
 ?>

@@ -26,19 +26,20 @@
 /////////////////////////////////////////////////////////////////////////////////////////////
 
     if($existe == true){
-        $id_presu_de = array();
-        $id_ro_de = array();
-        $mes = array();
-        $inventario = array();
-        $ventas = array();
-        $g_operacion = array();
-        $margen = array();
-        $dividendo = array();
-        $cxpagar = array();
-        $credito = array();
-        $efectivo = array();
-        $tarjeta = array();
-        $inversion = array();
+        $id_presu_de    = array();
+        $id_ro_de       = array();
+        $mes            = array();
+        $inventario     = array();
+        $ventas         = array();
+        $g_operacion    = array();
+        $margen         = array();
+        $dividendo      = array();
+        $cxpagar        = array();
+        $credito        = array();
+        $efectivo       = array();
+        $tarjeta        = array();
+        $inversion      = array();
+        $comentario_inversion = array();
         
 
         $consulta = mysqli_query($conexion, "SELECT * FROM `ro_detalles` 
@@ -58,6 +59,7 @@
             array_push($efectivo, $fila['efectivo']);
             array_push($tarjeta, $fila['tarjeta']);
             array_push($inversion, $fila['inversion']);
+            array_push($comentario_inversion, $fila['comentario_inversion']);
         }
         mysqli_free_result($consulta);
         ?>
@@ -120,7 +122,16 @@
                 
                 <td><input type="text" name="dividendo[]" size="9" value="<?php echo number_format($dividendo[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
 
-                <td><input type="text" name="inversion[]" size="9" value="<?php echo number_format($inversion[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
+                <td><input type="text" name="inversion[]" size="9" value="<?php echo number_format($inversion[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/>
+                <i class='fa fa-book comentario_inv'></i>
+
+                <div class="texto"><textarea rows="2" cols="11" name="comentario_inversion[]" style="resize: vertical;" onchange="guardar_r_operativos()"><?php echo $comentario_inversion[$i] ?></textarea></div></td>
+
+
+
+
+
+
                 
                 <td><input type="text" name="cxpagar[]" size="9" value="<?php echo number_format($cxpagar[$i], 0, ',', '.') ?>" class="puntos" onchange="guardar_r_operativos()"/></td>
                 
@@ -347,5 +358,19 @@ function grafico_r_operativosxmes(valor) {
             alert("Problemas al tratar de enviar el formulario");
         }
     });
+}
+
+$(function(){
+    $('.comentario_inv').click(function(e){
+        e.preventDefault();
+        $(this).closest('td').find(".texto").toggle();
+    });
+});
+
+
+var elements = document.getElementsByClassName("comentario_inv");
+
+for (var i = 0, len = elements.length; i < len; i++) {
+  elements[i].click();
 }
 </script>

@@ -161,9 +161,10 @@
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_4'); $('#enviar11').trigger('click')"><img src="../iconos/presupuesto.png" width="50%" height="50%"><br>Presupuestos</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="50%" height="50%"><br>Vehículos</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_6'); $('#enviar12').trigger('click')"><img src="../iconos/indicador.png" width="50%" height="50%"><br>Resultados Operativos</a>
-                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_7'); $('#enviar6_1').trigger('click');"><img src="../iconos/pago.png" width="50%" height="50%"><br>Cuentas pos pagar</a>
+                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_7'); $('#enviar6_1').trigger('click');"><img src="../iconos/pago.png" width="50%" height="50%"><br>Cuentas por pagar</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_8'); $('#enviar14_1').trigger('click')"><img src="../iconos/requerimiento.png" width="50%" height="50%"><br>Requerimientos</a>
-                
+                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_9'); $('#enviar15').trigger('click')"><img src="../iconos/grafico-de-barras.png" width="50%" height="50%"><br>Ventas diarias</a>
+
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
 
             </div>
@@ -213,6 +214,12 @@
             <div id="cont2_8" style="display:none;">
                 <div class="w3-container">
                     <?php   ver_requerimientos($usuario);    ?>
+                    
+                </div>
+            </div>
+            <div id="cont2_9" style="display:none;">
+                <div class="w3-container">
+                    <?php   registro_diario_ventas($usuario);    ?>
                     
                 </div>
             </div>
@@ -457,6 +464,7 @@ function ocultarDivs2(no_oculta){
     document.getElementById("cont2_6").style.display='none';
     document.getElementById("cont2_7").style.display='none';
     document.getElementById("cont2_8").style.display='none';
+    document.getElementById("cont2_9").style.display='none';
     switch(no_oculta) {
         //empresa
         case "cont2_1":
@@ -482,8 +490,10 @@ function ocultarDivs2(no_oculta){
             document.getElementById("cont2_7").style.display='block';
             break;
         case "cont2_8":
-
             document.getElementById("cont2_8").style.display='block';
+            break;
+        case "cont2_9":
+            document.getElementById("cont2_9").style.display='block';
             break;
         default:
           // code block
