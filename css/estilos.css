@@ -854,3 +854,15 @@ textarea {
   display:none;
   width: 100%;
 }
+
+
+.tdcalendario:hover {
+  background-color: #dddddd;
+}
+
+.tdcalendario {
+  background-color: #f2f2f2;
+}
+.ncalendario{
+  border-bottom: 2px solid red;
+}

@@ -1083,7 +1083,7 @@ function registro_diario_ventas($usuario){
         <tr>
             <td>Mes</td>
             <td>
-                <select name="mes">
+                <select name="mes" onchange="$('#enviar15_1').trigger('click');">
 
                     <option value="1" <?php if($fecha=='01'){?>selected <?php } ?> >Enero</option>
                     <option value="2" <?php if($fecha=='02'){?>selected <?php } ?> >Febrero</option>
@@ -1101,19 +1101,19 @@ function registro_diario_ventas($usuario){
             </td>
             <td>Año</td>
             <td>
-            <select name="anio">
-                <?php
-                    for ($i=2020; $i <= $anio; $i++) {
+            <select name="anio" onchange="$('#enviar15_1').trigger('click');">
+                    <?php
+                    for ($i=2020; $i <= $anio; $i++){
                         ?>
                         <option value="<?php echo $i ?>" <?php if($i==$anio){?>selected <?php } ?> ><?php echo $i ?></option>
                         <?php
                     }
 
                 ?>
-                </select>    
+            </select>    
             </td>
             <td></td>
-            <td><button type="button" id="enviar15_1" class="w3-btn" style="background-color: #478248;color:white;">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
+            <td><button type="button" id="enviar15_1" class="w3-btn" style="background-color: #478248;color:white;visibility:hidden">Continuar <i class='fas fa-edit' style='font-size:24px;color:white'></button></td>
         </tr>
     </table>
     </form>
@@ -1136,7 +1136,7 @@ function registro_diario_ventas($usuario){
                 }
             });
         });
-
+        $('#enviar15_1').trigger('click');
     </script>
     <?php
 }

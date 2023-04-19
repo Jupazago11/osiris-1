@@ -313,8 +313,8 @@
     });
 
     
-function guardar_r_operativos() {
-
+function guardar_r_operativos(valor) {
+    document.getElementById("name_ro").setAttribute('value',valor);
     $.ajax({
         url:'../php/consulta12_1.php',
         type:'POST',
