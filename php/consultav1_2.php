@@ -103,7 +103,7 @@
         ?>
 
         <tr>
-            <td><button type="button" id="enviarv1_3" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+            <td><button type="button" id="enviarv1_3" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
             <td><span id="total_cuadre1"><?php echo number_format($total_cuadre, 0, ',', '.') ?></span></td>
             <td><button type="button" id="enviarv1_4" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
         </tr>
@@ -161,7 +161,7 @@
         ?>
         </tr>
             <tr>
-                <td><button type="button" id="enviarv1_5" class="w3-btn"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button</td>
+                <td><button type="button" id="enviarv1_5" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button</td>
                 <td><span id="total_cuadre2"><?php echo number_format($total_pagos, 0, ',', '.') ?></span></td>
                 <td><button type="button" id="enviarv1_6" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
             </tr>
@@ -180,7 +180,7 @@
 
 
 <div class="recuadro" style="left:66%;width:34%;">
-<form>
+<form id="guardar_ventas_diarias" method="POST">
 <table class="tabla_sugerido">
     <tr>
         <th colspan="4" style="background-color:orange;">EFECTIVO EN CAJA <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuesta_cuadre_caja').style.display='none'; document.getElementById('xcont_4_1').style.display='block';$('#enviarv1_6').trigger('click');$('#enviarv1_4').trigger('click');">X</a></th>

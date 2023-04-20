@@ -37,7 +37,7 @@
             [<?php while (($fila = mysqli_fetch_array($consulta))!=NULL){ echo $fila[$valor] ?>, <?php } ?>],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
-            tension: 0.1
+            tension: 0.3
         }]
         };
 

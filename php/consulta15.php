@@ -112,7 +112,7 @@
                     <input type="hidden" name="id_ven_dia[]" value="<?php echo $id_ven_dia[$i-1] ?>"/>
                     <td class='tdcalendario' style='width:14%'>
                         <span class='ncalendario'><?php echo $i; ?></span><br>
-                        <input type='text' name='ventas_dias[]' class='puntos' value="<?php echo number_format($ventas[$i-1], 0, ',', '.') ?>" size='12' style='font-size:14px;background: transparent;border: none;border-bottom: 2px solid gray;'/>
+                        <input type='text' name='ventas_dias[]' class='puntos' value="<?php echo number_format($ventas[$i-1], 0, ',', '.') ?>" size='15' style='background: transparent;border: none;border-bottom: 2px solid gray;'/>
                     </td>
                     <?php
                     if($contador_dias_ant==7){
@@ -123,8 +123,8 @@
                 ?>
                 </tr>
                 <tr>
-                    <td onclick="grafico_mensual()">Gráfica del Mes</td>
-                    <td onclick="grafico_anual()">Anual</td>
+                    <td onclick="grafico_mensual()"><span class="w3-btn" style="background-color: #478248;color:white;">Gráfica del Mes</span></td>
+                    <td onclick="grafico_anual()"><span class="w3-btn" style="background-color: #478248;color:white;">Gráfica Anual</span></td>
                     <td colspan="4"></td>
                     <td><img src="../iconos/guardar.png" width="60px" height="60px" class="btn_guardar" id="enviar15_2" class="w3-btn" class="btn_icono"></td>
  

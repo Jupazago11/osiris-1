@@ -866,3 +866,22 @@ textarea {
 .ncalendario{
   border-bottom: 2px solid red;
 }
+
+.btn {
+  border: none;
+  background-color: inherit;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Green */
+.success {
+  color: green;
+}
+
+.success:hover {
+  background-color: #04AA6D;
+  color: white;
+}
