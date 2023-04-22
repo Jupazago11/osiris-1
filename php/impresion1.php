@@ -4,7 +4,7 @@ ob_start();
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Incluir el archivo que contiene las funciones del lenguaje PHP
-
+require("../php/conexion.php");
 $conexion = conectar();
 
 date_default_timezone_set('America/Bogota');

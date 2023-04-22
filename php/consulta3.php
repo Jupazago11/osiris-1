@@ -1,6 +1,6 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();                      //Obtenemos la conexion
 
     $name_proveedor    = strval($_POST['name_proveedor']);

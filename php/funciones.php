@@ -102,9 +102,7 @@ function iniciar_sesion2($usuario, $clave){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ver_notificaciones(){
-    ?>
-        <script>console.log("Entra vernot0");</script>
-    <?php
+    
     require_once("../php/notificaciones.php");   
     
     $eva = array(false, false, false, false);
@@ -757,7 +755,6 @@ function menu_producto($usuario){
 
 function menu_personal($usuario){
     ?>
-
     <div id="respuesta9_1" style="display:none; backgroung-color:white;"></div>
 
     <br>
@@ -770,6 +767,7 @@ function menu_personal($usuario){
                 url:'../php/consulta9_1.php',
                 success: function(res){
                     $('#respuesta9_1').html(res);
+                    console.log("Sale");
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

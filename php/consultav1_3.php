@@ -1,6 +1,6 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
     $consulta = mysqli_query($conexion, "INSERT INTO `cuadre_caja`( `descripcion_cuadre`, `costo_cuadre`, `estado`) 

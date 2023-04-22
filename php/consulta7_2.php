@@ -2,7 +2,7 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
 <script src="sweetalert2.min.js"></script>
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
     $id_proveedor= $_POST['id_proveedor'];

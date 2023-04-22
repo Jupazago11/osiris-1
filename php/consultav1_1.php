@@ -1,5 +1,5 @@
 <?php
-
+require("../php/conexion.php");
 $conexion = conectar();                     //Obtenemos la conexion
 
 $codigo_producto_v1_1 = $_POST['codigo_producto_v1_1'];

@@ -1,16 +1,30 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
+<script>console.log("Entra personal1");</script>
 <?php
-
+    require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
-
+    ?>
+        <script>console.log("Entra personal2");</script>
+    <?php
     date_default_timezone_set('America/Bogota');
+    ?>
+        <script>console.log("Entra personal21");</script>
+    <?php
     $fecha        = date('Y-m-d', time());
-
+    ?>
+        <script>console.log("Entra personal22");</script>
+    <?php
     $id_cargo = array();
     $cargo = array();
 
+    ?>
+        <script>console.log("Entra personal3");</script>
+    <?php
     $consulta = mysqli_query($conexion, "SELECT * FROM `cargo` WHERE `estado` != '' AND `estado` != 'inactivo'") or die ("Error al consultar: existencia del cargo");
 
+    ?>
+        <script>console.log("Entra personal4");</script>
+    <?php
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         array_push($id_cargo, $fila['id_cargo']);
         array_push($cargo, $fila['cargo']);

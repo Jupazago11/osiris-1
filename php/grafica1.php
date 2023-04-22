@@ -6,7 +6,7 @@
 <canvas id="myChart" style="position: absolute;background-color:white; top:10%; left:10%; max-width:80%; max-height:80%"></canvas>
 
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
 

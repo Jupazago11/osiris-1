@@ -1,5 +1,5 @@
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();
 
     $id_sugerido   = strval($_POST['id_sugerido']);

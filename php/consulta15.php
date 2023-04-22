@@ -1,5 +1,5 @@
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();
 
     /////////////////////////

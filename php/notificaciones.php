@@ -9,10 +9,7 @@ require_once("../php/funciones.php");
 
 function tiempo_contratos(){
     $evaluar = false;
-    ?>
-        <script>console.log("Entra1");</script>
-    <?php
-
+    require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
     date_default_timezone_set('America/Bogota');

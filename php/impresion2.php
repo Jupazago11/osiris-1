@@ -2,7 +2,7 @@
 use Dompdf\Dompdf;
 ob_start();
 
-
+require("../php/conexion.php");
 $conexion = conectar();
 
 date_default_timezone_set('America/Bogota');

@@ -1,7 +1,7 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
 <script>document.getElementById('xcont_4_1').style.display='none';</script>
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
     $bandera = false;

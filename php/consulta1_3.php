@@ -1,5 +1,5 @@
 <?php
-
+    require("../php/conexion.php");
     $conexion = conectar();
 
     $nombre_prove = strval($_POST['nombre']); //obtenemos el nombre del proveedor seleccionado

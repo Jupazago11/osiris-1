@@ -2,7 +2,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 <script>$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {    options.async = true; });</script>
 <?php
-    
+    require("../php/conexion.php");
     $conexion = conectar();
 
     date_default_timezone_set('America/Bogota');

@@ -1,5 +1,5 @@
 <?php
-
+require("../php/conexion.php");
     $conexion = conectar();
 
     $nombre_usuario = strval($_POST['usuario']);

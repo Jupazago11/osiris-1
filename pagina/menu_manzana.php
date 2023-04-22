@@ -195,6 +195,7 @@
             <div id="cont2_3" style="display:none;">
                 <div class="w3-container">
                     <?php   menu_personal($usuario);    ?>
+                    
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont2_3').style.display='none'">X</a>
                 </div>
             </div>
@@ -654,6 +655,9 @@ var suma = data.reduce(function(a,b){ return a+b; },0);
 
 $('#total4_2').html(new Intl.NumberFormat('de-DE').format(suma));
 }
+
+
+
 
 
 </script>
