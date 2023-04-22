@@ -23,7 +23,7 @@
     $user = $_POST['user'];
     $existe = false;
 
-    //  obtener id del presupuesto
+    //  obtener id de fecha
 
     $consulta = mysqli_query($conexion, "SELECT * FROM `fechas`  
     WHERE `mes`= '$mes' AND `year`= '$year'") or die ("Error al consultar: proveedores");
@@ -60,7 +60,7 @@
         //Miramos si este año es bisiesto
         if(date('L', time()) == 1){
             //Actualizamos febrero
-            $dias_meses[] = 1;
+            $dias_meses[1] += 1;
         }
     
         $días_anteriores = array_search(date("l", mktime(0, 0, 0, $mes, 1, $year)), $days_week);
@@ -135,7 +135,6 @@
             </div>
         </div>
         <?php
-
     }else{
         //Creamos un regsitro de presupuesto, ya que es de donde obtenemos la fecha
         $consulta = mysqli_query($conexion, "INSERT INTO `fechas`(`mes`, `year`) 
@@ -161,7 +160,7 @@
 
         echo "<script>$('#enviar15_1').trigger('click');</script>";
     }
-
+    
 
     ?>  
         <div class="ventana" id="div_canvas2" style="background:rgba(0, 0, 0, 0.8);"></div>

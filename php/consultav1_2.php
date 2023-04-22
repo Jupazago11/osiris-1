@@ -167,7 +167,7 @@
             </tr>
         </tbody>
     </table>
-    <button type="button" id="enviarv1_7" class="w3-btn" style="background-color: #478248;color:white;" onclick="$('#enviarv1_6').trigger('click');$('#enviarv1_4').trigger('click');">Guardar</button>
+    <button type="button" id="enviarv1_7" class="w3-btn" style="background-color: #478248;color:white;" >Guardar</button>
 
 </form>
 <br>
@@ -204,7 +204,7 @@
         <td>Moneda</td>
         <td class="precio">50</td>
         <td class="precio2" style="display:none">50</td>
-        <td><input type="text" class="cantidad puntos" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -212,7 +212,7 @@
         <td>Moneda</td>
         <td class="precio">100</td>
         <td class="precio2" style="display:none">100</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -220,7 +220,7 @@
         <td>Moneda</td>
         <td class="precio">200</td>
         <td class="precio2" style="display:none">200</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -228,7 +228,7 @@
         <td>Moneda</td>
         <td class="precio">500</td>
         <td class="precio2" style="display:none">500</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -236,7 +236,7 @@
         <td>Moneda</td>
         <td class="precio">1,000</td>
         <td class="precio2" style="display:none">1000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -244,7 +244,7 @@
         <td>Billete</td>
         <td class="precio">2.000</td>
         <td class="precio2" style="display:none">2000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -252,7 +252,7 @@
         <td>Billete</td>
         <td class="precio">5.000</td>
         <td class="precio2" style="display:none">5000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -260,7 +260,7 @@
         <td>Billete</td>
         <td class="precio">10.000</td>
         <td class="precio2" style="display:none">10000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -268,7 +268,7 @@
         <td>Billete</td>
         <td class="precio">20.000</td>
         <td class="precio2" style="display:none">20000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -276,7 +276,7 @@
         <td>Billete</td>
         <td class="precio">50.000</td>
         <td class="precio2" style="display:none">50000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
@@ -284,10 +284,11 @@
         <td>Billete</td>
         <td class="precio">100.000</td>
         <td class="precio2" style="display:none">100000</td>
-        <td><input type="text" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
+        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
+    <button type="button" id="enviarv1_8" class="w3-btn" style="background-color: #478248;color:white">Guardar</button>
     </tbody>
 </table>
 </form>
@@ -348,11 +349,28 @@
     });
     
     $('#enviarv1_7').click(function(){
+        $('#enviarv1_6').trigger('click');
+        $('#enviarv1_4').trigger('click');
         $.ajax({
             success: function(res){
                 $('#Enviarv1_4').trigger('click');
                 $('#Enviarv1_6').trigger('click');
                 $('#Enviarv1_2').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    //ventas diarias
+    $('#enviarv1_8').click(function(){
+        $.ajax({
+            url:'../php/consultav1_8.php',
+            type:'POST',
+            data: $('#guardar_ventas_diarias').serialize(),
+            success: function(res){
+                //$('#Enviarv1_8').trigger('click');
+                $('#rrr').html(res);
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");

@@ -1,5 +1,4 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <script>$.ajaxPrefilter(function( options, originalOptions, jqXHR ) {    options.async = true; });</script>
 <script type="text/javascript" src="../js/funciones.js"></script>
 
@@ -9,11 +8,12 @@
 function existencia_de_la_conexion(){
     try {
         //Verificar si existe el archivo de conexion
-        if(!file_exists('../PHP/conexion.php')){
+        if(!file_exists('../php/conexion.php')){
             throw new Exception ('PHP: File  -conexion-  no existe',1);  //NO existe, captura excepcion
+
         }else{
+            require("../php/conexion.php");                //SI Existe, continuar y realizar la conexion
             return true;
-            //require_once("../PHP/conexion.php");                //SI Existe, continuar y realizar la conexion
         }
     
     } catch (Exception $excepcion) {
@@ -26,12 +26,10 @@ function existencia_de_la_conexion(){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function iniciar_sesion($usuario, $clave){
-        
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
+    existencia_de_la_conexion(); 
+
     $conexion = conectar();                     //Obtenemos la conexion
-    
+
     //Consulta a la base de datos en la tabla login
     $consulta = mysqli_query($conexion, "SELECT `user_pers`, `pass_pers`, `tipo_usuario_pers` FROM `personal` WHERE `estado` ='activo'")
     or die ("Error al iniciar sesión: ");
@@ -46,13 +44,13 @@ function iniciar_sesion($usuario, $clave){
             echo "<div class='usuario' style='bakcground-color:#575656;color:white'>".$fila['user_pers'];
             $encontrado = true;
             mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-            mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
+            //mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
             break;
         }
     }
     if($encontrado==false){
         mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
-        mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
+        //mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
         //Si no se encontró registro alguno, regresamos al index de inicio de sesión
         ?>
         <script type="text/javascript">
@@ -67,7 +65,7 @@ function iniciar_sesion($usuario, $clave){
 function iniciar_sesion2($usuario, $clave){
     
     if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+        require_once("../php/conexion.php");    //Hacer conexion con la base de datos
     }
     $conexion = conectar();                     //Obtenemos la conexion
     
@@ -104,7 +102,7 @@ function iniciar_sesion2($usuario, $clave){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ver_notificaciones(){
-    require_once("../PHP/notificaciones.php");   
+    require_once("../php/notificaciones.php");   
 
     $eva = array(false, false, false, false);
 
@@ -137,11 +135,10 @@ function ver_notificaciones(){
 ////////////////////////////////////////////////////////////////////////////////////////////////////////
 //Funcion que verifica si existeel archivo de conexion de la base de datos
 function crear_sugerido($usuario){
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
-    $conexion = conectar();                     //Obtenemos la conexion
+    $conexion = conectar();                     //Obtenemos la conexion  
+    
     ?>
+
     
 
     <form name="form_seleccionar_prove" id="form_seleccionar_prove" method='post'>
@@ -157,8 +154,8 @@ function crear_sugerido($usuario){
             <th></th>
         </tr>
 
-
         <?php
+
         $consulta = mysqli_query($conexion, "SELECT `id_proveedor`,`nombre_proveedor` 
         FROM `proveedor` 
         WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
@@ -189,14 +186,13 @@ function crear_sugerido($usuario){
         ?>
     </form>
     </table>
+
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_1').style.display='none'">X</a>
     <button type="button" id="enviar1" onclick="document.getElementById('respuesta1').style.display='block'" style="display: none;"></button>
     <button type="button" id="enviar1_3" style="display: none;"></button>
             
     <div id="respuesta1" class="ventana">
 
-
-        
 
     </div>
     <script>
@@ -227,8 +223,6 @@ function crear_sugerido($usuario){
             });
         });
     </script>
-
-    </div>
 <?php
 }
 
@@ -327,12 +321,9 @@ function ver_pedidos($usuario){
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 function control_domiciliario($usuario, $tipo_de_cuenta){
 
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
-    $conexion = conectar();                     //Obtenemos la conexion
+    $conexion = conectar();                     //Obtenemos la conexion  
     ?>
-    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_1').style.display='none';">X</a>
+    
     <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
         ?>
@@ -425,10 +416,7 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 function control_domiciliario2($usuario, $tipo_de_cuenta){
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
-    $conexion = conectar();                     //Obtenemos la conexion
+    $conexion = conectar();                     //Obtenemos la conexion  
     ?>
     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_2').style.display='none';">X</a>
 
@@ -482,7 +470,7 @@ function control_domiciliario2($usuario, $tipo_de_cuenta){
     ////////////////////////////////////////
     /*
     if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
+        require_once("../php/conexion.php");    //Hacer conexion con la base de datos
     }
     $conexion = conectar();                     //Obtenemos la conexion
 
@@ -1130,6 +1118,7 @@ function registro_diario_ventas($usuario){
                 data: $('#registro_diario_ventas').serialize(),
                 success: function(res){
                     $('#respuesta15').html(res);
+                    
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

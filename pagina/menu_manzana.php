@@ -4,27 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal</title>
-    <LINK REL=StyleSheet HREF="../css/estilos.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel=stylesheet href="../css/estilos.css">
     <script
         src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
         crossorigin="anonymous">
     </script>
-    <script type="text/javascript" src="../js/funciones.js"></script>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
 </head>
 <body>
-<div class="header" id="header">
-  <h1 class="w3-animate-top" style="font-size:0.8em">Bienvenido</h1>
-</div>
+    <div class="header" id="header">
+    <h1 class="w3-animate-top" style="font-size:0.8em">Bienvenido</h1>
+    </div>
 <?php
+
     //Incluir el archivo que contiene las funciones del lenguaje PHP
-    require_once("../php/funciones.php");
+    require("../php/funciones.php");
     //Desactivar Desactivar toda notificación de error
     //error_reporting(0);
+
+    if(empty($_POST['u'])){
+        echo "<script>window.history.back();</script>";
+    }
+    
     $usuario     =      $_POST['u'];
     $clave       =      $_POST['p'];
 
@@ -48,12 +55,12 @@
             <a class='columna2' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
             <a class='columna2' style="background-color: #ff0000;" onclick="ocultarDivs('cont1');ocultarDivs1('cont1_1')"><img src="../iconos/pedidos.png" alt="" width="50%" height="50%"><br>Toma Pedidos</a>
 
-            <a class='columna2' style="background-color: #22AB09;" onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
-            <a class='columna2' style="background-color: #0969AB;" onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
+            <a class='columna2' style="background-color: #22AB09;" onclick="ocultarDivs('cont3');ocultarDivs3('cont3_2')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
+            <a class='columna2' style="background-color: #0969AB;" onclick="ocultarDivs('cont5');ocultarDivs5('cont5_1');$('#enviar13_1').trigger('click')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
         </div> 
 
         <div class="columna1">
-            <a class='columna2' style="background-color: #09AB83;padding-top:21%;padding-bottom:21%;" onclick="ocultarDivs('cont2')"><img src="../iconos/equipo.png" alt="empresa" width="50%" height="50%"><br>Empresa</a>
+            <a class='columna2' id="Mempresa" style="background-color: #09AB83;padding-top:21%;padding-bottom:21%;"><img src="../iconos/equipo.png" alt="empresa" width="50%" height="50%"><br>Empresa</a>
 
             <a class='columna2' style="padding-top:30%;padding-bottom:21%;width:15%;" onclick="ocultar_notificaciones();"><img src="../iconos/activo.png" id="img_noti" width="60px" height="60px" class="notificaciones"></a>
 
@@ -62,16 +69,16 @@
     }elseif($tipo_de_cuenta == 3){
         ?>
 
-        <a class='columna' onclick="ocultarDivs('cont1')">Pedidos</a>
-        <a class='columna' onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="40%" height="40%"><br>Domicilios</a>
-        <a class='columna' onclick="ocultarDivs('cont4')">Caja</a>
-        <a class='columna' onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="40%" height="40%"><br>Control</a>
+        <a class='columna' style="background-color: #ff0000;" onclick="ocultarDivs('cont1');ocultarDivs1('cont1_1')"><img src="../iconos/pedidos.png" alt="" width="50%" height="50%"><br>Toma Pedidos</a>
+        <a class='columna' style="background-color: #22AB09;" onclick="ocultarDivs('cont3');ocultarDivs3('cont3_2')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
+        <a class='columna' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
+        <a class='columna' style="background-color: #0969AB" onclick="ocultarDivs('cont5');ocultarDivs5('cont5_2');$('#enviar13_2').trigger('click')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
         <?php
     }elseif($tipo_de_cuenta == 4){
         ?>
         <div class="columna1">
-            <a class='columna2' style="background-color: #22AB09;width:25%;color:white" onclick="ocultarDivs('cont3')"><img src="../iconos/domicilios.png" alt="domicilios" width="35%" height="35%"><br>Domicilios</a>
-            <a class='columna2' style="background-color: #0969AB;width:25%;color:white" onclick="ocultarDivs('cont5')"><img src="../iconos/control.png" alt="control" width="35%" height="35%"><br>Control</a>
+            <a class='columna2' style="background-color: #22AB09" onclick="ocultarDivs('cont3');ocultarDivs3('cont3_1')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
+            <a class='columna2' style="background-color: #0969AB" onclick="ocultarDivs('cont5');ocultarDivs5('cont5_2');$('#enviar13_2').trigger('click')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
         </div>
         <?php
     }
@@ -84,23 +91,20 @@
 </div>
 <div class="osiris"><div class="contenido">OSIRIS</div></div>
 
+
+
 <?php //Desplegaremos los elementos para la sección de Pedidos ?>
     <div id="cont1" style="display:none;">
         <div class="w3-container" id="pedidos"  style="display:none;">
-        <div class="osiris"><div class="contenido">Pedidos</div></div>
+            <div class="osiris"><div class="contenido">Pedidos</div></div>
             <div class="menu" style="margin-top: 3%;">
-            
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
                     <a class="columna" style="background-color: #AB0909" onclick="ocultarDivs1('cont1_1')"><img src="../iconos/existencias.png" alt="existencias" width="50%" height="50%"><br>Crea Sugerido</a>
                     <a class="columna" style="background-color: #C11818" onclick="ocultarDivs1('cont1_4');$('#enviar4').trigger('click')"><img src="../iconos/proximo.png" alt="proximo" width="50%" height="50%"><br>Ver próximos pedidos</a>
                     <?php
-                    if($tipo_de_cuenta == 1){
-                        ?>
-                        <a class="columna" style="background-color: #AB0909" onclick="ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click')"><img src="../iconos/pago.png" alt="pago" width="50%" height="50%"><br>cuentas por pagar</a>
-                        <?php
-                    }
+
                 }elseif($tipo_de_cuenta == 5){
                     ?>
                     <a class="columna" style="background-color: #AB0909" onclick="ocultarDivs1('cont1_2')"><img src="../iconos/existencias.png" alt="existencias" width="50%" height="50%"><br>Crear Pedido</a>
@@ -119,17 +123,20 @@
             <div id="cont1_1" style="display:none;">
                 <div class="w3-container">
                     <?php   crear_sugerido($usuario);   ?>
-                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_1')"><img src="../iconos/existencias.png" alt="existencias" width="30%" height="30%"><br>Crea Sugerido</a>
-                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4');$('#enviar4').trigger('click')"><img src="../iconos/proximo.png" alt="proximo" width="30%" height="30%"><br>Ver próximos pedidos</a>
+
+                    <a class="columna w3-red" onclick="ocultarDivs1('cont1_1');"><img src="../iconos/existencias.png" alt="existencias" width="30%" height="30%"><br>Crea Sugerido</a>
+                    <a class="columna w3-green" onclick="ocultarDivs1('cont1_4');$('#enviar4').trigger('click');"><img src="../iconos/proximo.png" alt="proximo" width="30%" height="30%"><br>Ver próximos pedidos</a>
                     
                 </div>
             </div>
+
             <div id="cont1_2" style="display:none;">
                 <div class="w3-container">
                     <?php   crear_pedido($usuario);     ?>
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_2').style.display='none'">X</a>
                 </div>
             </div>
+
             <div id="cont1_3" style="display:none;">
                 <div class="w3-container">
                     Crear pedido
@@ -137,20 +144,28 @@
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_3').style.display='none'">X</a>
                 </div>
             </div>
+
             <div id="cont1_4" style="display:none;">
                 <div class="w3-container">
                     <?php   ver_pedidos($usuario);      ?>
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_4').style.display='none'">X</a>
                 </div>
             </div>
+
             <div id="cont1_5" style="display:none;">
                 <div class="w3-container">
                     <?php   //cuentas_por_pagar($usuario);?>
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_5').style.display='none'">X</a>
                 </div>
             </div>
+            <script>
+                        console.log("entra18");
+                    </script>
         </div>
     </div>
+    <script>
+console.log("entra2");
+</script>
     <div id="cont2">
         <div class="w3-container" id="empresa"  style="display:none; height: 100%;">
             <div class="menu" style="margin-top: 3%;">
@@ -225,7 +240,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="cont3" style="display:none;">
         <div class="w3-container" id="control_domiciliario"  style="display:none;">
         <div class="osiris"><div class="contenido">Domicilios</div></div>
@@ -234,11 +249,11 @@
                 <?php
                 if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
                     ?>
-                    <a class="columna" style="background-color: #22AB09;" onclick="ocultarDivs3('cont3_2')"><img src="../iconos/proximo.png" width="40%" height="40%"><br>Ver Domicilios</a>
+                    <a class="columna" style="background-color: #22AB09;" onclick="ocultarDivs3('cont3_2')"><img src="../iconos/proximo.png" width="50%" height="50%"><br>Ver Domicilios</a>
                     <?php
                 }elseif($tipo_de_cuenta == 4){
                     ?>
-                    <a class="columna" style="background-color: #22AB09;" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="40%" height="40%"><br>Domicilio</a>
+                    <a class="columna" style="background-color: #22AB09;" onclick="ocultarDivs3('cont3_1')"><img src="../iconos/entrega.png" width="50%" height="50%"><br>Domicilio</a>
                     <?php
                 }
                 ?>
@@ -246,16 +261,27 @@
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
 
             </div>
+            <script>
+console.log("entra32");
+</script>
             <div id="cont3_1" style="display:none;">
                 <div class="w3-container">
                     <?php   control_domiciliario($usuario, $tipo_de_cuenta);   ?>
                 </div>
+                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_1').style.display='none';ocultarDivs0();">X</a>
             </div>
+            <script>
+console.log("entra33");
+</script>
             <div id="cont3_2" style="display:none;">
                 <div class="w3-container">
                     <?php   control_domiciliario2($usuario, $tipo_de_cuenta);     ?>
                 </div>
+                <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_2').style.display='none';ocultarDivs0();">X</a>
             </div>
+            <script>
+console.log("entra34");
+</script>
             <div id="cont3_3" style="display:none;">
                 <div class="w3-container">
                     <?php   //crear_pedido2($usuario);    ?>
@@ -269,6 +295,9 @@
 
         </div>
     </div>
+    <script>
+console.log("entra4");
+</script>
     <div id="cont4" style="display:none;">
         <div class="w3-container" id="ventas"  style="display:none;">
             <div class="menu">
@@ -305,6 +334,9 @@
             </div>
         </div>
     </div>
+    <script>
+console.log("entra5");
+</script>
     <div id="cont5" style="display:none;">
         <div class="w3-container" id="control"  style="display:none;">
         <div class="osiris"><div class="contenido">Control</div></div>
@@ -339,79 +371,87 @@
             </div>
         </div>
     </div>
-</body>
 
-<script type="text/javascript" src="../js/funciones.js"></script>
+
 <script>
- 
-function multi() {
+document.getElementById("Mempresa").addEventListener("click", () => {
+    console.log("entraF");
+    ocultarDivs('cont2');
+});
 
-    var valores = document.getElementsByClassName('cantidad');
-    document.getElementById("total_sugeridos").innerHTML = valores.length;
+
+
+
+
+
+    function multi() {
+
+var valores = document.getElementsByClassName('cantidad');
+document.getElementById("total_sugeridos").innerHTML = valores.length;
 }
 
 //setInterval('multi()',500);
 
 function ocultarDivs(no_oculta){
-    document.getElementById("header").style.display='none';
-    document.getElementById("venta_noti").style.display='none';
-    document.getElementById("menu_princi").style.display='none';
+document.getElementById("header").style.display='none';
+document.getElementById("venta_noti").style.display='none';
+document.getElementById("menu_princi").style.display='none';
 
-    document.getElementById("cont1").style.display='none';
-    document.getElementById("cont2").style.display='none';
-    document.getElementById("cont3").style.display='none';
-    document.getElementById("cont4").style.display='none';
-    document.getElementById("cont5").style.display='none';
+document.getElementById("cont1").style.display='none';
+document.getElementById("cont2").style.display='none';
+document.getElementById("cont3").style.display='none';
+document.getElementById("cont4").style.display='none';
+document.getElementById("cont5").style.display='none';
 
-    switch(no_oculta) {
-        //Pedidos
-        case "cont1":
-            document.getElementById("cont1").style.display='block';
-            document.getElementById("pedidos").style.display='block';
-            document.getElementById("cont1_1").style.display='none';
-            document.getElementById("cont1_2").style.display='none';
-            document.getElementById("cont1_3").style.display='none';
-            document.getElementById("cont1_4").style.display='none';
-            document.getElementById("cont1_5").style.display='none';
-            break;
-        case "cont2":
-            document.getElementById("cont2").style.display='block';
-            document.getElementById("empresa").style.display='block';
-            document.getElementById("cont2_1").style.display='none';
-            document.getElementById("cont2_2").style.display='none';
-            document.getElementById("cont2_3").style.display='none';
-            document.getElementById("cont2_4").style.display='none';
-            document.getElementById("cont2_5").style.display='none';
-            document.getElementById("cont2_6").style.display='none';
-            document.getElementById("cont2_7").style.display='none';
-            document.getElementById("cont2_8").style.display='none';
-            break;
-        case "cont3":
-            document.getElementById("cont3").style.display='block';
-            document.getElementById("control_domiciliario").style.display='block';
-            document.getElementById("cont3_1").style.display='none';
-            document.getElementById("cont3_2").style.display='none';
-            document.getElementById("cont3_3").style.display='none';
-            document.getElementById("cont3_4").style.display='none';
-            break;
-        case "cont4":
-            document.getElementById("cont4").style.display='block';
-            document.getElementById("ventas").style.display='block';
-            document.getElementById("cont4_1").style.display='none';
-            document.getElementById("cont4_2").style.display='none';
-            document.getElementById("cont4_3").style.display='none';
-            document.getElementById("cont4_4").style.display='none';
-            break;
-        case "cont5":
-            document.getElementById("cont5").style.display='block';
-            document.getElementById("control").style.display='block';
-            document.getElementById("cont5_1").style.display='none';
-            document.getElementById("cont5_2").style.display='none';
-            break;
-        default:
-          // code block
-            break;
-    }
+switch(no_oculta) {
+    //Pedidos
+    case "cont1":
+        document.getElementById("cont1").style.display='block';
+        document.getElementById("pedidos").style.display='block';
+        document.getElementById("cont1_1").style.display='none';
+        document.getElementById("cont1_2").style.display='none';
+        document.getElementById("cont1_3").style.display='none';
+        document.getElementById("cont1_4").style.display='none';
+        document.getElementById("cont1_5").style.display='none';
+        break;
+    case "cont2":
+        document.getElementById("cont2").style.display='block';
+        document.getElementById("empresa").style.display='block';
+        document.getElementById("cont2_1").style.display='none';
+        document.getElementById("cont2_2").style.display='none';
+        document.getElementById("cont2_3").style.display='none';
+        document.getElementById("cont2_4").style.display='none';
+        document.getElementById("cont2_5").style.display='none';
+        document.getElementById("cont2_6").style.display='none';
+        document.getElementById("cont2_7").style.display='none';
+        document.getElementById("cont2_8").style.display='none';
+        break;
+    case "cont3":
+        document.getElementById("cont3").style.display='block';
+        document.getElementById("control_domiciliario").style.display='block';
+        document.getElementById("cont3_1").style.display='none';
+        document.getElementById("cont3_2").style.display='none';
+        document.getElementById("cont3_3").style.display='none';
+        document.getElementById("cont3_4").style.display='none';
+        break;
+    case "cont4":
+        document.getElementById("cont4").style.display='block';
+        document.getElementById("ventas").style.display='block';
+        document.getElementById("cont4_1").style.display='none';
+        document.getElementById("cont4_2").style.display='none';
+        document.getElementById("cont4_3").style.display='none';
+        document.getElementById("cont4_4").style.display='none';
+        break;
+    case "cont5":
+        document.getElementById("cont5").style.display='block';
+        document.getElementById("control").style.display='block';
+        document.getElementById("cont5_1").style.display='none';
+        document.getElementById("cont5_2").style.display='none';
+        break;
+    default:
+      // code block
+        break;
+}
 }
 
 function ocultarDivs0(){
@@ -450,193 +490,194 @@ function ocultarDivs1(no_oculta){
             document.getElementById("cont1_5").style.display='block';
             break;
         default:
-          // code block
+        // code block
             break;
     }
 }
 
 function ocultarDivs2(no_oculta){
-    document.getElementById("cont2_1").style.display='none';
-    document.getElementById("cont2_2").style.display='none';
-    document.getElementById("cont2_3").style.display='none';
-    document.getElementById("cont2_4").style.display='none';
-    document.getElementById("cont2_5").style.display='none';
-    document.getElementById("cont2_6").style.display='none';
-    document.getElementById("cont2_7").style.display='none';
-    document.getElementById("cont2_8").style.display='none';
-    document.getElementById("cont2_9").style.display='none';
-    switch(no_oculta) {
-        //empresa
-        case "cont2_1":
-            document.getElementById("cont2_1").style.display='block';
-            break;
-        case "cont2_2":
-            document.getElementById("cont2_2").style.display='block';
-            break;
-        case "cont2_3":
-            document.getElementById("cont2_3").style.display='block';
-            break;
-        case "cont2_4":
-            document.getElementById("cont2_4").style.display='block';
-            break;
-        case "cont2_5":
-            document.getElementById("cont2_5").style.display='block';
-            break;
-        case "cont2_6":
-            document.getElementById("cont2_6").style.display='block';
-            break;
-        case "cont2_7":
-            document.getElementById("cont2_6").style.display='block';
-            document.getElementById("cont2_7").style.display='block';
-            break;
-        case "cont2_8":
-            document.getElementById("cont2_8").style.display='block';
-            break;
-        case "cont2_9":
-            document.getElementById("cont2_9").style.display='block';
-            break;
-        default:
-          // code block
-            break;
-    }
+document.getElementById("cont2_1").style.display='none';
+document.getElementById("cont2_2").style.display='none';
+document.getElementById("cont2_3").style.display='none';
+document.getElementById("cont2_4").style.display='none';
+document.getElementById("cont2_5").style.display='none';
+document.getElementById("cont2_6").style.display='none';
+document.getElementById("cont2_7").style.display='none';
+document.getElementById("cont2_8").style.display='none';
+document.getElementById("cont2_9").style.display='none';
+switch(no_oculta) {
+    //empresa
+    case "cont2_1":
+        document.getElementById("cont2_1").style.display='block';
+        break;
+    case "cont2_2":
+        document.getElementById("cont2_2").style.display='block';
+        break;
+    case "cont2_3":
+        document.getElementById("cont2_3").style.display='block';
+        break;
+    case "cont2_4":
+        document.getElementById("cont2_4").style.display='block';
+        break;
+    case "cont2_5":
+        document.getElementById("cont2_5").style.display='block';
+        break;
+    case "cont2_6":
+        document.getElementById("cont2_6").style.display='block';
+        break;
+    case "cont2_7":
+        document.getElementById("cont2_6").style.display='block';
+        document.getElementById("cont2_7").style.display='block';
+        break;
+    case "cont2_8":
+        document.getElementById("cont2_8").style.display='block';
+        break;
+    case "cont2_9":
+        document.getElementById("cont2_9").style.display='block';
+        break;
+    default:
+      // code block
+        break;
+}
 }
 
 function ocultarDivs3(no_oculta){
 
-    document.getElementById("cont3_1").style.display='none';
-    document.getElementById("cont3_2").style.display='none';
-    document.getElementById("cont3_3").style.display='none';
-    document.getElementById("cont3_4").style.display='none';
-    switch(no_oculta) {
-        //Pedidos
-        case "cont3_1":
-            document.getElementById("cont3_1").style.display='block';
-            break;
-        case "cont3_2":
-            document.getElementById("cont3_2").style.display='block';
-            break;
-        case "cont3_3":
-            document.getElementById("cont3_3").style.display='block';
-            break;
-        case "cont3_4":
-            document.getElementById("cont3_4").style.display='block';
-            break;
-        default:
-          // code block
-            break;
-    }
+document.getElementById("cont3_1").style.display='none';
+document.getElementById("cont3_2").style.display='none';
+document.getElementById("cont3_3").style.display='none';
+document.getElementById("cont3_4").style.display='none';
+switch(no_oculta) {
+    //Pedidos
+    case "cont3_1":
+        document.getElementById("cont3_1").style.display='block';
+        break;
+    case "cont3_2":
+        document.getElementById("cont3_2").style.display='block';
+        break;
+    case "cont3_3":
+        document.getElementById("cont3_3").style.display='block';
+        break;
+    case "cont3_4":
+        document.getElementById("cont3_4").style.display='block';
+        break;
+    default:
+      // code block
+        break;
+}
 }
 
 function ocultarDivs4(no_oculta){
-    document.getElementById("cont4_1").style.display='none';
-    document.getElementById("cont4_2").style.display='none';
-    document.getElementById("cont4_3").style.display='none';
-    document.getElementById("cont4_4").style.display='none';
-    switch(no_oculta) {
-        //Pedidos
-        case "cont4_1":
-            document.getElementById("cont4_1").style.display='block';
-            break;
-        case "cont4_2":
-            document.getElementById("cont4_2").style.display='block';
-            break;
-        case "cont4_3":
-            document.getElementById("cont4_3").style.display='block';
-            break;
-        case "cont4_4":
-            document.getElementById("cont4_4").style.display='block';
-            break;
-        default:
-          // code block
-            break;
-    }
+document.getElementById("cont4_1").style.display='none';
+document.getElementById("cont4_2").style.display='none';
+document.getElementById("cont4_3").style.display='none';
+document.getElementById("cont4_4").style.display='none';
+switch(no_oculta) {
+    //Pedidos
+    case "cont4_1":
+        document.getElementById("cont4_1").style.display='block';
+        break;
+    case "cont4_2":
+        document.getElementById("cont4_2").style.display='block';
+        break;
+    case "cont4_3":
+        document.getElementById("cont4_3").style.display='block';
+        break;
+    case "cont4_4":
+        document.getElementById("cont4_4").style.display='block';
+        break;
+    default:
+      // code block
+        break;
+}
 }
 
 function ocultarDivs5(no_oculta){
-    document.getElementById("cont5_1").style.display='none';
-    document.getElementById("cont5_2").style.display='none';
-    switch(no_oculta) {
-        //Pedidos
-        case "cont5_1":
-            document.getElementById("cont5_1").style.display='block';
-            break;
-        case "cont5_2":
-            document.getElementById("cont5_2").style.display='block';
-            break;
-        default:
-          // code block
-            break;
-    }
+document.getElementById("cont5_1").style.display='none';
+document.getElementById("cont5_2").style.display='none';
+switch(no_oculta) {
+    //Pedidos
+    case "cont5_1":
+        document.getElementById("cont5_1").style.display='block';
+        break;
+    case "cont5_2":
+        document.getElementById("cont5_2").style.display='block';
+        break;
+    default:
+      // code block
+        break;
+}
 }
 
 
 
 $('#img_noti').click(function(){
-    $.ajax({
-        url:'../php/consultanoti_1_1.php',
-        success: function(res){
-            $('#venta_noti').html(res);
-        },
-        error: function(res){
-            alert("Problemas al tratar de mostrar notificaciones");
-        }
-    });
+$.ajax({
+    url:'../php/consultanoti_1_1.php',
+    success: function(res){
+        $('#venta_noti').html(res);
+    },
+    error: function(res){
+        alert("Problemas al tratar de mostrar notificaciones");
+    }
+});
 });
 
 $('#tbodyform')
 .on('input', '.cantidad', function() {
-    
-    var $input = $(this), // input.cantidad
-        cantidad = parseInt($input.val(), 10), // valor de input.cantidad
-        $tr = $input.closest('tr'), // fila del input.cantidad
-        precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
-        $total = $tr.find('.total'); // elemento span.total
-    
-    $total.text(precio * cantidad); // reseteamos el valor del span.total
+
+var $input = $(this), // input.cantidad
+    cantidad = parseInt($input.val(), 10), // valor de input.cantidad
+    $tr = $input.closest('tr'), // fila del input.cantidad
+    precio = parseInt($tr.find('.precio').text(), 10), // valor del span.precio
+    $total = $tr.find('.total'); // elemento span.total
+
+$total.text(precio * cantidad); // reseteamos el valor del span.total
 });
 
 function multi2() {
-    var data = [];
+var data = [];
 
-    $("td.total").each(function(){
-        data.push(parseFloat($(this).text()));
-    });
-
-
-    var suma = data.reduce(function(a,b){ return a+b; },0);
+$("td.total").each(function(){
+    data.push(parseFloat($(this).text()));
+});
 
 
-    $('#final_v1_1').html(new Intl.NumberFormat('de-DE').format(suma));
+var suma = data.reduce(function(a,b){ return a+b; },0);
+
+
+$('#final_v1_1').html(new Intl.NumberFormat('de-DE').format(suma));
 }
 
 function multi3() {
-    var data = [];
+var data = [];
 
-    $("td.total3_2").each(function(){
-        data.push(parseFloat($(this).text()));
-    });
-
-
-    var suma = data.reduce(function(a,b){ return a+b; },0);
+$("td.total3_2").each(function(){
+    data.push(parseFloat($(this).text()));
+});
 
 
-    $('#total_cuadre3').html(new Intl.NumberFormat('de-DE').format(suma));
+var suma = data.reduce(function(a,b){ return a+b; },0);
+
+
+$('#total_cuadre3').html(new Intl.NumberFormat('de-DE').format(suma));
 }
 
 function multi4() {
-    var data = [];
+var data = [];
 
-    $("td.total4_2").each(function(){
-        data.push(parseFloat($(this).text()));
-    });
-
-
-    var suma = data.reduce(function(a,b){ return a+b; },0);
+$("td.total4_2").each(function(){
+    data.push(parseFloat($(this).text()));
+});
 
 
-    $('#total4_2').html(new Intl.NumberFormat('de-DE').format(suma));
+var suma = data.reduce(function(a,b){ return a+b; },0);
+
+
+$('#total4_2').html(new Intl.NumberFormat('de-DE').format(suma));
 }
 
 
 </script>
+</body>
 </html>

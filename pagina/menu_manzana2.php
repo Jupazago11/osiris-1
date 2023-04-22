@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal</title>
-    <LINK REL=StyleSheet HREF="../css/estilos.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <link rel=stylesheet href="../css/estilos.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
@@ -18,6 +17,9 @@
     require_once("../php/funciones.php");
     //Desactivar Desactivar toda notificación de error
     //error_reporting(0);
+    if(empty($_POST['u'])){
+        echo "<script>window.history.back();</script>";
+    }
     $usuario     =      $_POST['u'];
     $clave       =      $_POST['p'];
 

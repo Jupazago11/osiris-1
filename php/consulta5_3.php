@@ -24,7 +24,9 @@
     foreach ($salidass as $value) {
         if(count($salidass) > 0){
         
-            $consulta = mysqli_query($conexion, "UPDATE `domicilio` SET `tiempo_salida`='$hoy', `estado`='proceso' WHERE `estado` = 'activo' AND `id_domi` = '$value'
+            $consulta = mysqli_query($conexion, "UPDATE `domicilio` 
+            SET `tiempo_salida`='$hoy', `estado`='proceso' 
+            WHERE `estado` = 'activo' AND `id_domi` = '$value'
             ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
     
         }

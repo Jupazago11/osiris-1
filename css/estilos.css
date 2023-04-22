@@ -388,7 +388,7 @@ a{
     width: 48%;
   }
 
-  .columna {
+  .columna #tabla_control .menu{
     width: 100%;
   }
 }

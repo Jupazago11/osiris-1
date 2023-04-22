@@ -37,11 +37,12 @@ mysqli_free_result($consulta);
 
 if($existe_registro == true){
     ?>
-    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont5_2').style.display='none';">X</a>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont5_2').style.display='none';ocultarDivs0();">X</a>
     <form id="mandar_valor_control13_3" method="post">
         <input type="hidden" name="id_control" value="<?php echo $id_control ?>"/>
 
-    <table class="tabla_sugerido" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+    <table class="tabla_sugerido" id="tabla_control" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white;
+}">
         <?php
 
         $empieza = 0;

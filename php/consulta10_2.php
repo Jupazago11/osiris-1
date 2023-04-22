@@ -16,7 +16,8 @@
     $id_vehiculo = array();
     $placa = array();
 
-    $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `placa` != ''") or die ("Error al consultar: existencia del cargo");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` 
+    WHERE `placa` != '' AND `estado` = 'activo'") or die ("Error al consultar: existencia del cargo");
 
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
         array_push($id_vehiculo, $fila['id_vehiculo']);
@@ -57,7 +58,7 @@
                 $consulta = mysqli_query($conexion, "SELECT `id_vehiculo`,`id_obs`, vehiculo.placa, vehiculo.id_vehiculo, `observacion`,`costo`,`fecha` 
                 FROM `observacion` 
                 INNER JOIN vehiculo ON vehiculo.id_vehiculo = observacion.id_vehiculo1
-                WHERE observacion.estado = 'activo' AND vehiculo.placa != ''           
+                WHERE observacion.estado = 'activo' AND vehiculo.placa != '' AND vehiculo.estado = 'activo'           
                 ORDER BY observacion.id_obs ASC") or die ("Error al consultar: existencia del proveedor");
 
                 while (($fila = mysqli_fetch_array($consulta))!=NULL){

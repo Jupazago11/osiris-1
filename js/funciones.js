@@ -369,5 +369,3 @@ function utilidades() {
 ////////////////////////////
 //  grafica r operativos
 
-
-

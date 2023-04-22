@@ -12,7 +12,8 @@ $fecha   = date('Y-m-d', time());
 //$hoy     = date("H:i:s", time());
 
 ?>
-<a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont5_1').style.display='none';">X</a>
+<a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont5_1').style.display='none';ocultarDivs0();">X</a>
+<br>
 <table class="tabla_sugerido">
     <tr>
         <th>Nombre</th>
