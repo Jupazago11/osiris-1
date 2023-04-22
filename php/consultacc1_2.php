@@ -1,10 +1,5 @@
 <?php
-//Incluir el archivo que contiene las funciones del lenguaje PHP
-require_once("../PHP/funciones.php");
 
-if(existencia_de_la_conexion()){
-    require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-}
 $conexion = conectar();
 
 date_default_timezone_set('America/Bogota');

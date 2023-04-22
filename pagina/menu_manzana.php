@@ -60,7 +60,7 @@
         </div> 
 
         <div class="columna1">
-            <a class='columna2' id="Mempresa" style="background-color: #09AB83;padding-top:21%;padding-bottom:21%;"><img src="../iconos/equipo.png" alt="empresa" width="50%" height="50%"><br>Empresa</a>
+            <a class='columna2' style="background-color: #09AB83;padding-top:21%;padding-bottom:21%;" onclick="ocultarDivs('cont2');"><img src="../iconos/equipo.png" alt="empresa" width="50%" height="50%"><br>Empresa</a>
 
             <a class='columna2' style="padding-top:30%;padding-bottom:21%;width:15%;" onclick="ocultar_notificaciones();"><img src="../iconos/activo.png" id="img_noti" width="60px" height="60px" class="notificaciones"></a>
 
@@ -158,14 +158,10 @@
                     <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont1_5').style.display='none'">X</a>
                 </div>
             </div>
-            <script>
-                        console.log("entra18");
-                    </script>
+
         </div>
     </div>
-    <script>
-console.log("entra2");
-</script>
+
     <div id="cont2">
         <div class="w3-container" id="empresa"  style="display:none; height: 100%;">
             <div class="menu" style="margin-top: 3%;">
@@ -261,27 +257,21 @@ console.log("entra2");
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
 
             </div>
-            <script>
-console.log("entra32");
-</script>
+
             <div id="cont3_1" style="display:none;">
                 <div class="w3-container">
                     <?php   control_domiciliario($usuario, $tipo_de_cuenta);   ?>
                 </div>
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_1').style.display='none';ocultarDivs0();">X</a>
             </div>
-            <script>
-console.log("entra33");
-</script>
+
             <div id="cont3_2" style="display:none;">
                 <div class="w3-container">
                     <?php   control_domiciliario2($usuario, $tipo_de_cuenta);     ?>
                 </div>
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont3_2').style.display='none';ocultarDivs0();">X</a>
             </div>
-            <script>
-console.log("entra34");
-</script>
+
             <div id="cont3_3" style="display:none;">
                 <div class="w3-container">
                     <?php   //crear_pedido2($usuario);    ?>
@@ -295,9 +285,7 @@ console.log("entra34");
 
         </div>
     </div>
-    <script>
-console.log("entra4");
-</script>
+
     <div id="cont4" style="display:none;">
         <div class="w3-container" id="ventas"  style="display:none;">
             <div class="menu">
@@ -334,9 +322,7 @@ console.log("entra4");
             </div>
         </div>
     </div>
-    <script>
-console.log("entra5");
-</script>
+
     <div id="cont5" style="display:none;">
         <div class="w3-container" id="control"  style="display:none;">
         <div class="osiris"><div class="contenido">Control</div></div>
@@ -374,15 +360,6 @@ console.log("entra5");
 
 
 <script>
-document.getElementById("Mempresa").addEventListener("click", () => {
-    console.log("entraF");
-    ocultarDivs('cont2');
-});
-
-
-
-
-
 
     function multi() {
 
@@ -612,15 +589,16 @@ switch(no_oculta) {
 
 
 $('#img_noti').click(function(){
-$.ajax({
-    url:'../php/consultanoti_1_1.php',
-    success: function(res){
-        $('#venta_noti').html(res);
-    },
-    error: function(res){
-        alert("Problemas al tratar de mostrar notificaciones");
-    }
-});
+
+    $.ajax({
+        url:'../php/consultanoti_1_1.php',
+        success: function(res){
+            $('#venta_noti').html(res);
+        },
+        error: function(res){
+            alert("Problemas al tratar de mostrar notificaciones");
+        }
+    });
 });
 
 $('#tbodyform')

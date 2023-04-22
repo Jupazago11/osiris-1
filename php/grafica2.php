@@ -6,12 +6,7 @@
 <canvas id="myChart" style="position: absolute;background-color:rgb(221,221,221); top:10%; left:10%; max-width:80%; max-height:80%"></canvas>
 
 <?php
-    //Incluir el archivo que contiene las funciones del lenguaje PHP
-    require_once("../PHP/funciones.php");
 
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
     $conexion = conectar();                     //Obtenemos la conexion
 
 

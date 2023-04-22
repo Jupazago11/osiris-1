@@ -4,13 +4,15 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
 
 <?php
+require_once("../php/conexion.php");
+require_once("../php/funciones.php");
 
 function tiempo_contratos(){
     $evaluar = false;
+    ?>
+        <script>console.log("Entra1");</script>
+    <?php
 
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
     $conexion = conectar();                     //Obtenemos la conexion
 
     date_default_timezone_set('America/Bogota');
@@ -50,9 +52,7 @@ function tiempo_contratos(){
 ////////////////////////////////////////////////////////////////////////////////////////////
 function tiempo_cumpleani(){
     $evaluar = false;
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
+
     $conexion = conectar();                     //Obtenemos la conexion
 
     date_default_timezone_set('America/Bogota');
@@ -94,9 +94,7 @@ function tiempo_cumpleani(){
 function tiempo_soat_tecn(){
     $evaluar = false;
 
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
+
     $conexion = conectar();                     //Obtenemos la conexion
 
     date_default_timezone_set('America/Bogota');
@@ -143,9 +141,7 @@ function tiempo_soat_tecn(){
 function tiempo_cuentaxpa(){
     $evaluar = false;
 
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
+
     $conexion = conectar();                     //Obtenemos la conexion
 
     date_default_timezone_set('America/Bogota');

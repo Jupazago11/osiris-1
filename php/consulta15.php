@@ -1,10 +1,5 @@
 <?php
-    //Incluir el archivo que contiene las funciones del lenguaje PHP
-    require_once("../PHP/funciones.php");
 
-    if(existencia_de_la_conexion()){
-        require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-    }
     $conexion = conectar();
 
     /////////////////////////
@@ -158,7 +153,7 @@
         }
 
 
-        echo "<script>$('#enviar15_1').trigger('click');</script>";
+        //echo "<script>$('#enviar15_1').trigger('click');</script>";
     }
     
 
@@ -170,6 +165,7 @@
 
 <script>
     $('#enviar15_2').click(function(){
+        
         $.ajax({
             url:'../php/consulta15_1.php',
             type:'POST',
@@ -181,12 +177,13 @@
                 'Guardado Exitoso',
                 'success'
                 )*/
-                $('#enviar15_1').trigger('click');
+                //$('#enviar15_1').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
             }
         });
+        
     });
 
     function grafico_mensual() {

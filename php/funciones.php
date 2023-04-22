@@ -102,11 +102,15 @@ function iniciar_sesion2($usuario, $clave){
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function ver_notificaciones(){
+    ?>
+        <script>console.log("Entra vernot0");</script>
+    <?php
     require_once("../php/notificaciones.php");   
-
+    
     $eva = array(false, false, false, false);
 
     ?>
+    <script>console.log("Entra vernoti");</script>
     <table class="tabla_sugerido">
         <tr>
             <th>Indicador</th>
@@ -323,7 +327,6 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
 
     $conexion = conectar();                     //Obtenemos la conexion  
     ?>
-    
     <?php
     if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2 || $tipo_de_cuenta == 3){
         ?>
@@ -334,7 +337,6 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
             <fieldset><legend>Selecciona el vehículo:</legend>
             <input list="vehiculos" name="vehiculo" id="vehiculo"  required>
             <datalist id="vehiculos"  required>
-
             <?php
                 //Consulta a la base de datos en la tabla provvedor
                 $consulta = mysqli_query($conexion, "SELECT * FROM `vehiculo` WHERE `estado` = 'activo'") or die ("Error al consultar: proveedores");
@@ -350,9 +352,12 @@ function control_domiciliario($usuario, $tipo_de_cuenta){
             <button type="button" id="enviar5" class="w3-btn w3-teal" onclick="document.getElementById('respuesta5').style.display='block'">Continuar</button>
             </fieldset>
         </form>
-
+        <script>
+                console.log("entra2");
+            </script>
         <div id="respuesta5"></div>
         <script>
+            
             $('#enviar5').click(function(){
                 $.ajax({
                     url:'../php/consulta5.php',
@@ -1125,7 +1130,7 @@ function registro_diario_ventas($usuario){
                 }
             });
         });
-        $('#enviar15_1').trigger('click');
+        //$('#enviar15_1').trigger('click');
     </script>
     <?php
 }
