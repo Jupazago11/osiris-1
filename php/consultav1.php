@@ -212,7 +212,7 @@ require("../php/conexion.php");
 
         $('#Enviarv1_1').click(function(){
             $.ajax({
-                url:'../PHP/consultav1_1.php',
+                url:'../php/consultav1_1.php',
                 type:'POST',
                 data: $('#form_ventas_v1_1').serialize(),
                 success: function(res){
@@ -224,9 +224,10 @@ require("../php/conexion.php");
             });
         });
 
+        //cuadre de caja
         $('#Enviarv1_2').click(function(){
             $.ajax({
-                url:'../PHP/consultav1_2.php',
+                url:'../php/consultav1_2.php',
                 success: function(res){
                     $('#respuesta_cuadre_caja').html(res);
                 },
@@ -238,7 +239,7 @@ require("../php/conexion.php");
 
         $('#Enviard1_1').click(function(){
             $.ajax({
-                url:'../PHP/consultad1_1.php',
+                url:'../php/consultad1_1.php',
                 type:'POST',
                 data: $('#form_domicilios_d').serialize(),
                 success: function(res){
@@ -253,7 +254,7 @@ require("../php/conexion.php");
         $('#Enviarcc1_1').click(function(){
             document.getElementById('respuesta_crear_cliente').style.display='block';
             $.ajax({
-                url:'../PHP/consultacc1_1.php',
+                url:'../php/consultacc1_1.php',
                 success: function(res){
                     $('#respuesta_crear_cliente').html(res);
                 },
@@ -265,7 +266,7 @@ require("../php/conexion.php");
 
         $('#Enviarcongelarc1_1').click(function(){
             $.ajax({
-                url:'../PHP/consultacongelarc1_1.php',
+                url:'../php/consultacongelarc1_1.php',
                 type:'POST',
                 data: $('#form_caja_v1_1').serialize(),
                 success: function(res){
@@ -282,7 +283,7 @@ require("../php/conexion.php");
         //ver cuentas congeladas
         $('#Enviarccongeladas1_1').click(function(){
             $.ajax({
-                url:'../PHP/consultaccongeladas1_1.php',
+                url:'../php/consultaccongeladas1_1.php',
                 success: function(res){
                     document.getElementById('respuesta_congeladas').style.display='block';
                     $('#respuesta_congeladas').html(res);
@@ -297,7 +298,7 @@ require("../php/conexion.php");
         //traer productos de la cuenta congelada
         $('#Enviarccongeladas1_2').click(function(){
             $.ajax({
-                url:'../PHP/consultaccongeladas1_2.php',
+                url:'../php/consultaccongeladas1_2.php',
                 type:'POST',
                 data: $('#form_ventas_v1_1').serialize(),
                 success: function(res){
@@ -311,7 +312,7 @@ require("../php/conexion.php");
 
         $('#Enviarfactura1_1').click(function(){
             $.ajax({
-                url:'../PHP/consultafactura1_1.php',
+                url:'../php/consultafactura1_1.php',
                 type:'POST',
                 data: $('#form_caja_v1_1').serialize(),
                 success: function(res){
@@ -327,7 +328,7 @@ require("../php/conexion.php");
 
         $('#Enviarfacturaobs1_1').click(function(){
             $.ajax({
-                url:'../PHP/consultafacturaobs1_1.php',
+                url:'../php/consultafacturaobs1_1.php',
                 success: function(res){
                     document.getElementById('respuesta_facturarobs').style.display='block';
                     $('#respuesta_facturarobs').html(res);
@@ -341,8 +342,8 @@ require("../php/conexion.php");
 
         $('#Enviarfacturaobs1_2').click(function(){
             $.ajax({
-                url:'../PHP/impresion2.php',
-                //url:'../PHP/probador_mensajes.php',
+                url:'../php/impresion2.php',
+                //url:'../php/probador_mensajes.php',
                 type:'POST',
                 data: $('#form_ventas_v1_1').serialize(),
                 success: function(res){
@@ -359,7 +360,7 @@ require("../php/conexion.php");
 
         $('#Enviarabonar1_1').click(function(){
             $.ajax({
-                url:'../PHP/consultaabonar1_1.php',
+                url:'../php/consultaabonar1_1.php',
                 success: function(res){
                     document.getElementById('respuesta_abonar').style.display='block';
                     $('#respuesta_abonar').html(res);

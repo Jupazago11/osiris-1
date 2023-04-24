@@ -193,6 +193,9 @@ require("../php/conexion.php");
         <td><button type="button" id="limpiar">Limpiar</button></td>
         <td><span id="total_cuadre3">0</span></td>
     </tr>
+    <tr>
+        <td colspan="4"><button type="button" id="enviarv1_8" class="w3-btn" style="background-color: #478248;color:white">Registrar venta diaria</button></td>
+    </tr>
     </tfoot>
     <tbody id="tbodyform2">
     <tr>
@@ -283,7 +286,7 @@ require("../php/conexion.php");
         <td class="total3">0</td>
         <td class="total3_2" style="display:none">0</td>
     </tr>
-    <button type="button" id="enviarv1_8" class="w3-btn" style="background-color: #478248;color:white">Guardar</button>
+    
     </tbody>
 </table>
 </form>

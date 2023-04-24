@@ -18,6 +18,7 @@
     
 </head>
 <body>
+    <div style="background-color: #9b0000;position: absolute;top: 0px; right: 5px; padding: 10px;border-radius: 0px 0px 15px 15px;color:white" onclick="window.location.href = 'http://mercadoslamanzana.com/osiris/pagina/sesion_manzana.php'">Cerrar sesión</div>
     <div class="header" id="header">
     <h1 class="w3-animate-top" style="font-size:0.8em">Bienvenido</h1>
     </div>
@@ -27,7 +28,16 @@
     require("../php/funciones.php");
     //Desactivar Desactivar toda notificación de error
     //error_reporting(0);
-
+    $acceso = array(
+        "",
+        "Administrador",
+        "Auxiliar Administrativo",
+        "Empleado",
+        "Domiciliario",
+        "Provedor",
+        "Provedor"
+    );
+    
     if(empty($_POST['u'])){
         echo "<script>window.history.back();</script>";
     }
@@ -37,10 +47,12 @@
 
     $tipo_de_cuenta = iniciar_sesion($usuario, $clave);
 
-    echo " - Nivel de cuenta ".$tipo_de_cuenta."</div>";
+    echo " - ".$acceso[$tipo_de_cuenta]."</div>";
     // Notificar todos los errores de PHP
     error_reporting(-1);
 ?>
+
+
 
 <div id="venta_noti">
 
@@ -48,7 +60,7 @@
 
 <div class="menu w3-animate-zoom" id="menu_princi">
     <?php
-    if($tipo_de_cuenta == 1 || $tipo_de_cuenta == 2){
+    if($tipo_de_cuenta == 1){
         ?>
         <div class="columna1">
 
@@ -57,6 +69,24 @@
 
             <a class='columna2' style="background-color: #22AB09;" onclick="ocultarDivs('cont3');ocultarDivs3('cont3_2')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
             <a class='columna2' style="background-color: #0969AB;" onclick="ocultarDivs('cont5');ocultarDivs5('cont5_1');$('#enviar13_1').trigger('click')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
+        </div> 
+
+        <div class="columna1">
+            <a class='columna2' style="background-color: #09AB83;padding-top:21%;padding-bottom:21%;" onclick="ocultarDivs('cont2');"><img src="../iconos/equipo.png" alt="empresa" width="50%" height="50%"><br>Empresa</a>
+
+            <a class='columna2' style="padding-top:30%;padding-bottom:21%;width:15%;" onclick="ocultar_notificaciones();"><img src="../iconos/activo.png" id="img_noti" width="60px" height="60px" class="notificaciones"></a>
+
+        </div>
+        <?php
+    }elseif($tipo_de_cuenta == 2){
+        ?>
+        <div class="columna1">
+
+            <a class='columna2' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
+            <a class='columna2' style="background-color: #ff0000;" onclick="ocultarDivs('cont1');ocultarDivs1('cont1_1')"><img src="../iconos/pedidos.png" alt="" width="50%" height="50%"><br>Toma Pedidos</a>
+
+            <a class='columna2' style="background-color: #22AB09;" onclick="ocultarDivs('cont3');ocultarDivs3('cont3_2')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
+            <a class='columna2' style="background-color: #0969AB;" onclick="ocultarDivs('cont5');ocultarDivs5('cont5_2');$('#enviar13_2').trigger('click')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
         </div> 
 
         <div class="columna1">

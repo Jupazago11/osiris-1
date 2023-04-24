@@ -4,7 +4,9 @@ require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
     //Consulta a la base de datos en la tabla proveedor
-    $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` WHERE `estado` != ''") or die ("Error al consultar: existencia del proveedor");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` 
+    WHERE `estado` != '' 
+    ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: existencia del proveedor");
 
 ?>
     <form id="actualizar_proveedores2" method="POST">

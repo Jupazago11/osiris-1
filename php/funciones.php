@@ -35,13 +35,21 @@ function iniciar_sesion($usuario, $clave){
     or die ("Error al iniciar sesión: ");
 
     $encontrado = false;
+    //Tipos de cuentas
+
+    
     while (($fila = mysqli_fetch_array($consulta))!=NULL){
 
     //Comprobamos la existencia del usuario y contraseña del formulario en los resulatdos de la bases de datos
         if($usuario == $fila['user_pers'] && $clave == $fila['pass_pers']){
             //Existe en la base de datos y es conrrecto los datos
             $tipo_de_cuenta = $fila['tipo_usuario_pers']; //Obtenemos su tipo de cuenta
-            echo "<div class='usuario' style='bakcground-color:#575656;color:white'>".$fila['user_pers'];
+
+            
+
+
+
+            echo "<div class='usuario'>".$fila['user_pers'];
             $encontrado = true;
             mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
             //mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------

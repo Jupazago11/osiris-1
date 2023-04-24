@@ -4,12 +4,10 @@
 <script type="text/javascript" src="../js/funciones.js"></script>
 
 <?php
-require_once("../php/conexion.php");
-require_once("../php/funciones.php");
-
+require("../php/conexion.php");
 function tiempo_contratos(){
     $evaluar = false;
-    require("../php/conexion.php");
+
     $conexion = conectar();                     //Obtenemos la conexion
 
     date_default_timezone_set('America/Bogota');
@@ -170,14 +168,14 @@ function tiempo_cuentaxpa(){
         if($fecha1 > $fecha2){
             $evaluar = true;
             ?>
-            <tr onclick="ocultarDivs('cont1'); ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $nombre[$i] ?></td><td>Factura por pagar</td><td><?php echo "-".$intvl->d ?> Días</td></tr>
+            <tr onclick="ocultarDivs('cont2'); ocultarDivs2('cont2_7'); $('#enviar6_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $nombre[$i] ?></td><td>Factura por pagar</td><td><?php echo "-".$intvl->d ?> Días</td></tr>
 
             <?php
 
         }elseif($intvl->days <= 7){
             $evaluar = true;
             ?>
-            <tr onclick="ocultarDivs('cont1'); ocultarDivs1('cont1_5'); $('#enviar6_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $nombre[$i] ?></td><td>Factura por pagar</td><td><?php echo $intvl->d ?> Días</td></tr>
+            <tr onclick="ocultarDivs('cont2'); ocultarDivs2('cont2_7'); $('#enviar6_1').trigger('click');$('#img_noti').trigger('click');"><td><?php echo $nombre[$i] ?></td><td>Factura por pagar</td><td><?php echo $intvl->d ?> Días</td></tr>
             <?php
         }
     }

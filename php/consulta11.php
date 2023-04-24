@@ -120,7 +120,7 @@ require("../php/conexion.php");
                     ?>
                     <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                     <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarpresu[<?php echo $contador ?>]" onchange="$('#enviar11_1').trigger('click');" style="visibility:hidden;">
-                    <label class="w3-tbn w3-red btn-eliminar" for="eliminarpresu[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td>
+                    <label class="w3-tbn w3-red btn-eliminar" for="eliminarpresu[<?php echo $contador ?>]"><i class='fa fa-trash-o' style='font-size:16px;color:white'></i></label><br></td>
                     <?php
                 }else{
                     ?>
@@ -219,7 +219,7 @@ require("../php/conexion.php");
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                 <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminarpresu[<?php echo $contador ?>]" onchange="$('#enviar11_4').trigger('click');" style="visibility:hidden;">
-                <label class="w3-tbn w3-red btn-eliminar" for="eliminarpresu[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label><br></td> 
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminarpresu[<?php echo $contador ?>]"><i class='fa fa-trash-o' style='font-size:16px;color:white'></i></label><br></td> 
                 <?php
             }else{
                 ?>

@@ -101,31 +101,6 @@
 
         }
         mysqli_free_result($consulta);
-/*
-        $consulta = mysqli_query($conexion, "SELECT producto.nombre_producto
-        FROM `detalle_sugerido` 
-        INNER JOIN `producto` ON producto.id_producto = detalle_sugerido.id_producto2
-        INNER JOIN `sugerido` ON sugerido.id_sugerido = detalle_sugerido.id_sugerido1
-        WHERE sugerido.id_sugerido = '$id_sugerido';");
-
-        $productos2 = array();
-        while (($fila = mysqli_fetch_array($consulta))!=NULL){
-            array_push($productos2, $fila['nombre_producto']);
-        }
-        mysqli_free_result($consulta);
-        for ($i=0; $i < count($productos); $i++) { 
-            if(in_array($productos[$i], $productos2)){
-                continue;
-            }else{
-                $consulta = mysqli_query($conexion, "INSERT INTO `detalle_sugerido`(`id_sugerido1`, `id_producto2`, `cantidad_sugerido`, `inventario_sugerido`,`precio_sugerido`,`estado`)  
-                VALUES ('$id_sugerido','$ides[$i]','0','0','$precios[$i]','activo')");
-            }
-        }
-        unset($productos);
-        unset($productos2);
-        unset($ides);
-        unset($precios);
-        */
 
         $consulta = mysqli_query($conexion, "SELECT detalle_sugerido.id_detalle, producto.nombre_producto, producto.precio_de_compra, detalle_sugerido.inventario_sugerido, detalle_sugerido.cantidad_sugerido
         FROM `detalle_sugerido` 
@@ -148,7 +123,7 @@
             <input type="hidden" name="usuario" value="<?php echo $nombre_usuario; ?>">
             <input type="hidden" name="proveedor" value="<?php echo $nombre_prove; ?>">
             <input type="hidden" name="fecha_creacion" value="<?php echo $fecha; ?>">
-            <table class="tabla_sugerido" width="100%" style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+            <table class="tabla_sugerido" width="100%" style="width:65%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
                 <tr>
                     <th width="5%">#</th>
                     <th>Descripción</th>

@@ -43,10 +43,6 @@ require("../php/conexion.php");
             <select id="proveedores_menu_pro" name="proveedores">
             <option value="0"></option>
             <?php
-                if(existencia_de_la_conexion()){
-                    require_once("../PHP/conexion.php");    //Hacer conexion con la base de datos
-                }
-                $conexion = conectar();                     //Obtenemos la conexion
                 
                 //Consulta a la base de datos en la tabla provvedor
                 $consulta = mysqli_query($conexion, "SELECT `id_proveedor`, `nombre_proveedor` 
@@ -75,7 +71,7 @@ require("../php/conexion.php");
         </tr>
         <tr>
             <td>Descripción</td>
-            <td><input type="text" id="nombre_menu_pro" name="descripcion"/></td>
+            <td><input type="text" id="nombre_menu_pro" name="descripcion" onkeyup="javascript:this.value=this.value.toUpperCase();"/></td>
             <td>Costo del producto</td>
             <td><input type="text" id="precio_de_compra_menu_pro" name="precio_de_compra" onkeyup="utilidades()"/></td>
             <td></td>

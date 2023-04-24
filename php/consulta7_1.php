@@ -7,7 +7,9 @@ require("../php/conexion.php");
 
 
     //Consulta a la base de datos en la tabla proveedor
-    $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` WHERE `estado` != ''") or die ("Error al consultar: existencia del proveedor");
+    $consulta = mysqli_query($conexion, "SELECT * FROM `proveedor` 
+    WHERE `estado` != ''
+    ORDER BY `nombre_proveedor` ASC") or die ("Error al consultar: existencia del proveedor");
 
 ?>
     
@@ -63,7 +65,7 @@ require("../php/conexion.php");
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador ?>]" value="activo" style="visibility:hidden;" checked>
                 <input type="radio" name="eliminar[<?php echo $contador ?>]" value="eliminar" id="eliminar[<?php echo $contador ?>]" onchange="$('#enviar7_5').trigger('click');" style="visibility:hidden;">
-                <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='far fa-trash-alt' style='font-size:16px;color:white'></i></label></td> 
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminar[<?php echo $contador ?>]"><i class='fa fa-trash-o' style='font-size:16px;color:white'></i></label></td> 
                 <?php
             }else{
                 ?>
