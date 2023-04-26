@@ -48,18 +48,21 @@ require("../php/conexion.php");
     mysqli_free_result($consulta);
 
 ?>
-<div class="contrecuadro2">
-<div class="recuadro2" style="left:0%; width:30%">
+<div class="columna1" style="width: 100%;">
+<div class="columna2" style="width: 30%; background-color:red;">
     <form id="form_cuadre_de_caja2" method="POST">
     <table class="tabla_sugerido" id="tabla_cuadre_caja">
-        <tr>
+
+        <tr style="border-radius:20px;">
             <th colspan="3" style="background-color:#182c63;">CUADRE CAJA</th>
         </tr>
+
         <tr>
             <td style="background-color:#244d77;color:white">Descripción</td>
             <td style="background-color:#244d77;color:white">Valor</td>
             <td style="background-color:#244d77;color:white"></td>
         </tr>
+        
         <tbody id="contenido-tabla">
 
         <?php
@@ -80,14 +83,14 @@ require("../php/conexion.php");
 
             if($descripcion_cuadre[$i] == ''){
                 ?>
-                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="eliminar" id="eliminar[<?php echo $contador1 ?>]" onchange="$('#enviarv2_7').trigger('click');">
-                <label for="eliminar[<?php echo $contador1 ?>]">X</label><br></td> 
+                <td><input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="eliminar" id="eliminarcuadre[<?php echo $contador1 ?>]" onchange="$('#enviarv2_7').trigger('click');" style="visibility:hidden;">
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminarcuadre[<?php echo $contador1 ?>]"><i class='fa fa-trash-o' style='font-size:16px;color:white'></i></label><br></td> 
                 <?php
             }else{
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="eliminar" id="eliminar[<?php echo $contador1 ?>]" style="visibility:hidden;" onchange="$('#enviarv2_7').trigger('click');"></td> 
+                <input type="radio" name="eliminar[<?php echo $contador1 ?>]" value="eliminar" id="eliminarcuadre[<?php echo $contador1 ?>]" style="visibility:hidden;" onchange="$('#enviarv2_7').trigger('click');"></td> 
                 <?php
             }
 
@@ -103,6 +106,8 @@ require("../php/conexion.php");
             <td><span id="total_cuadre1"><?php echo number_format($total_cuadre, 0, ',', '.') ?></span></td>
             <td><button type="button" id="enviarv2_4" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
         </tr>
+
+        
         </tbody>
     </table>
     </form>
@@ -111,12 +116,14 @@ require("../php/conexion.php");
 </div>
 
 
-<div class="recuadro2" style="left:33%; width:30%">
+<div class="columna2" style="width: 30%;">
     <form id="form_pagos_de_caja2" method="POST">
     <table class="tabla_sugerido" id="tabla_pagos_de_caja">
-        <tr>
+        <thead>
+            <tr>
             <th colspan="3" style="background-color:green;">PAGOS DE CAJA</th>
         </tr>
+        </thead>
         <tr>
             <td style="background-color:#244d77;color:white">Descripción</td>
             <td style="background-color:#244d77;color:white">Valor</td>
@@ -139,14 +146,14 @@ require("../php/conexion.php");
 
             if($descripcion_caja[$i] == ''){
                 ?>
-                <td class="w3-btn w3-red"><input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="eliminar" id="eliminar[<?php echo $contador2 ?>]" onchange="$('#enviarv2_7').trigger('click');">
-                <label for="eliminar[<?php echo $contador2 ?>]">X</label><br></td> 
+                <td><input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="activo" style="visibility:hidden;" checked>
+                <input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="eliminar" id="eliminarpagoscaja[<?php echo $contador2 ?>]" onchange="$('#enviarv2_7').trigger('click');" style="visibility:hidden;">
+                <label class="w3-tbn w3-red btn-eliminar" for="eliminarpagoscaja[<?php echo $contador2 ?>]"><i class='fa fa-trash-o' style='font-size:16px;color:white'></i></label><br></td> 
                 <?php
             }else{
                 ?>
                 <td><input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="activo" style="visibility:hidden;" checked>
-                <input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="eliminar" id="eliminar[<?php echo $contador2 ?>]" style="visibility:hidden;" onchange="$('#enviarv2_7').trigger('click');"></td> 
+                <input type="radio" name="eliminar[<?php echo $contador2 ?>]" value="eliminar" id="eliminarpagoscaja[<?php echo $contador2 ?>]" style="visibility:hidden;" onchange="$('#enviarv2_7').trigger('click');"></td> 
                 <?php
             }
             ?>
@@ -156,11 +163,13 @@ require("../php/conexion.php");
         }
         ?>
         </tr>
-            <tr>
-                <td><button type="button" id="enviarv2_5" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button</td>
-                <td><span id="total_cuadre2"><?php echo number_format($total_pagos, 0, ',', '.') ?></span></td>
-                <td><button type="button" id="enviarv2_6" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
-            </tr>
+        <tfoot>
+        <tr>
+            <td><button type="button" id="enviarv2_5" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button</td>
+            <td><span id="total_cuadre2"><?php echo number_format($total_pagos, 0, ',', '.') ?></span></td>
+            <td><button type="button" id="enviarv2_6" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
+        </tr>
+        </tfoot>
         </tbody>
     </table>
     <button type="button" id="enviarv2_7" class="w3-btn" style="background-color: #478248;color:white;" >Guardar</button>
@@ -175,13 +184,15 @@ require("../php/conexion.php");
 
 
 
-<div class="recuadro2" style="left:66%;width:34%;">
+<div class="columna2" style="width: 30%;">
 <form id="guardar_ventas_diarias2" method="POST">
 <table class="tabla_sugerido">
+    <thead>
     <tr>
         <th colspan="4" style="background-color:orange;">EFECTIVO EN CAJA </th>
 
     </tr>
+    </thead>
     <tr>
         <td style="background-color:#244d77;width:20%;color:white">Nominación</td>
         <td style="background-color:#244d77;width:20%;color:white">Valor</td>
@@ -299,7 +310,7 @@ require("../php/conexion.php");
         $.ajax({
             url:'../php/consultav1_3.php',
             success: function(res){
-                $('#Enviarv2_2').trigger('click');
+                $('#entrar_cajapequenia').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
@@ -326,7 +337,7 @@ require("../php/conexion.php");
         $.ajax({
             url:'../php/consultav1_5.php',
             success: function(res){
-                $('#Enviarv2_2').trigger('click');
+                $('#entrar_cajapequenia').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
@@ -350,10 +361,10 @@ require("../php/conexion.php");
     
     $('#enviarv2_7').click(function(){
         $('#enviarv2_6').trigger('click');
-        $('#enviarv2_4').trigger('click');
+        $('#enviarv2_4').trigger('click'); 
         $.ajax({
             success: function(res){
-                $('#enviarv2_2').trigger('click');
+                $('#entrar_cajapequenia').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
@@ -390,3 +401,20 @@ require("../php/conexion.php");
 </script>
 <?php
 ?>
+<style>
+    .tabla_sugerido {
+        border-radius: 1em;
+        color: black;
+    }
+    tfoot {
+        border-radius:20px;
+        display:block  
+    }
+    thead {
+        border-radius:20px;
+        display:block  
+    }
+    .columna2:hover {
+        opacity: 1.0;
+        }
+</style>

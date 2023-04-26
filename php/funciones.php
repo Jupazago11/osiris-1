@@ -1142,28 +1142,33 @@ function registro_diario_ventas($usuario){
 }
 /////////////////////////////////////////////////////////////////////////////////////////
 function caja_pequenia($usuario){
-    ?><button type="button" id="enviarv2_1" class="w3-btn btn_gris" onclick="document.getElementById('respuestav2').style.display='block'"> Domicilios</button>
-    <button type="button" id="enviarv2_2" class="w3-btn btn_gris" onclick="document.getElementById('respuestav2').style.display='block'"> Cuadre de caja</button>
-    <br>
-    <br>
-    <div id="respuestav2" style="display:none; backgroung-color:white;overflow-y: scroll"></div>
+    ?>
 
+    <div id="respuestav2" style="display:none; backgroung-color:white;overflow-y: scroll"></div>
+    <div id="respuestav2_1" style="backgroung-color:white;overflow-y: scroll;position:absolute; top:0;left:0;background:rgba(255, 255, 255, 0.4);width:100%;height: 100%;display:none;"></div>
 
 
     <form id="usuario_caja2">
         <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
     </form>
 
+
+    <button type="button" id="enviarv2_2" class="w3-btn btn_gris" style="display:none" onclick="document.getElementById('respuestav2').style.display='block'"> Cuadre de caja</button>
     
+    <a class='columna' style="background-color: #4a4a4a; height:auto;text-align: center;">
+    <img src="../iconos/domicilios.png" id="enviarv2_1" width="60px" height="60px" onclick="document.getElementById('respuestav2_1').style.display='block'" class="icon_caja">
+    <br>
+    Crear Domicilio</a>
 
     <script>
         $('#enviarv2_1').click(function(){
+            document.getElementById('xcont_4_2').style.display='none';
             $.ajax({
                 url:'../php/consultav2_1.php',
                 type:'POST',
                 data: $('#usuario_caja2').serialize(),
                 success: function(res){
-                    $('#respuestav2').html(res);
+                    $('#respuestav2_1').html(res);
                 },
                 error: function(res){
                     alert("Problemas al tratar de enviar el formulario");

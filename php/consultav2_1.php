@@ -9,6 +9,8 @@ require("../php/conexion.php");
 
 <div>
     <br><br><br>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" id="xcont_4_3" onclick="document.getElementById('respuestav2_1').style.display='none';document.getElementById('xcont_4_2').style.display='block';">X</a>
+
 
     <form id="seleccion_vehiculoo3" method="POST">
     <table class="tabla_sugerido"  style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
