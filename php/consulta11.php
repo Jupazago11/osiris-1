@@ -75,7 +75,7 @@ require("../php/conexion.php");
                 <th colspan="4">Presupuesto</th>
                 <th><a class="w3-bar-item w3-button w3-hover-red active" id="clic_cat" onclick="document.getElementById('form_presupuestos').style.display='none'">X</a></th>
             </tr>
-            <tr style="background-color:#87CEEB;">
+            <tr>
                 <td>Categoría <i class="fa fa-plus" onclick="document.getElementById('form_cat').style.display='block'"></i></td>
                 <td>Descripción</td>
                 <td>Valor</td>
@@ -135,7 +135,7 @@ require("../php/conexion.php");
             }
             
             ?>
-            <tr style="background-color:#87CEEB;">
+            <tr>
                 <td></td>
                 <td></td>
                 <td><?php echo number_format($total_presupuesto, 0, ',', '.') ?></td>

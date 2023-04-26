@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Principal</title>
     <link rel=stylesheet href="../css/estilos.css">
+    <link rel="shortcut icon" href="favicon.png">
     <script
         src="https://code.jquery.com/jquery-3.6.0.js"
         integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -64,7 +65,8 @@
         ?>
         <div class="columna1">
 
-            <a class='columna2' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
+            <!--<a class='columna2' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_caja').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a> -->
+            <a class='columna2' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_cajapequenia').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
             <a class='columna2' style="background-color: #ff0000;" onclick="ocultarDivs('cont1');ocultarDivs1('cont1_1')"><img src="../iconos/pedidos.png" alt="" width="50%" height="50%"><br>Toma Pedidos</a>
 
             <a class='columna2' style="background-color: #22AB09;" onclick="ocultarDivs('cont3');ocultarDivs3('cont3_2')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
@@ -197,14 +199,14 @@
             <div class="menu" style="margin-top: 3%;">
             
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_1'); $('#enviar7_1').trigger('click')"><img src="../iconos/proveedor.png" width="50%" height="50%"><br>Proveedor</a>
-                <a class="columna" style="background-color: #4a4a4a;" onclick="ocultarDivs2('cont2_2'); $('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="50%" height="50%"><br>Producto</a>
-                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="50%" height="50%"><br>Personal</a>
+                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_2'); $('#enviar8').trigger('click')"><img src="../iconos/producto.png" width="50%" height="50%"><br>Producto</a>
+                <a class="columna" style="background-color: #09AB83;<?php if($tipo_de_cuenta != 1){ echo "display:none;";} ?>" onclick="ocultarDivs2('cont2_3'); $('#enviar9_1').trigger('click')"><img src="../iconos/personal.png" width="50%" height="50%"><br>Personal</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_4'); $('#enviar11').trigger('click')"><img src="../iconos/presupuesto.png" width="50%" height="50%"><br>Presupuestos</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_5'); $('#enviar10_1').trigger('click')"><img src="../iconos/vehiculos.png" width="50%" height="50%"><br>Vehículos</a>
-                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_6'); $('#enviar12').trigger('click')"><img src="../iconos/indicador.png" width="50%" height="50%"><br>Resultados Operativos</a>
+                <a class="columna" style="background-color: #09AB83;<?php if($tipo_de_cuenta != 1){ echo "display:none;";} ?>" onclick="ocultarDivs2('cont2_6'); $('#enviar12').trigger('click')"><img src="../iconos/indicador.png" width="50%" height="50%"><br>Resultados Operativos</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_7'); $('#enviar6_1').trigger('click');"><img src="../iconos/pago.png" width="50%" height="50%"><br>Cuentas por pagar</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_8'); $('#enviar14_1').trigger('click')"><img src="../iconos/requerimiento.png" width="50%" height="50%"><br>Requerimientos</a>
-                <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_9'); $('#enviar15').trigger('click')"><img src="../iconos/grafico-de-barras.png" width="50%" height="50%"><br>Ventas diarias</a>
+                <a class="columna" style="background-color: #09AB83;<?php if($tipo_de_cuenta != 1){ echo "display:none;";} ?>" onclick="ocultarDivs2('cont2_9'); $('#enviar15').trigger('click')"><img src="../iconos/grafico-de-barras.png" width="50%" height="50%"><br>Ventas diarias</a>
 
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
 
@@ -321,7 +323,7 @@
         <div class="w3-container" id="ventas"  style="display:none;">
             <div class="menu">
                 <a class="columna w3-teal"  onclick="ocultarDivs4('cont4_1'); $('#enviarv1').trigger('click')" id="entrar_caja">Caja 1</a>
-                <a class="columna w3-green" onclick="ocultarDivs4('cont4_2'); $('#enviarv2').trigger('click')">Caja 2</a>
+                <a class="columna w3-green" onclick="ocultarDivs4('cont4_2'); $('#enviarv2').trigger('click'); $('#enviarv2_1').trigger('click')"; id="entrar_cajapequenia">Caja 2</a>
                 <a class="columna w3-blue"  onclick="ocultarDivs4('cont4_3'); $('#enviarv3').trigger('click')">Caja 3</a>
                 <a class="columna w3-red"   onclick="ocultarDivs4('cont4_4'); $('#enviarv4').trigger('click')">Caja 4</a>
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
@@ -335,8 +337,8 @@
             </div>
             <div id="cont4_2" style="display:none;">
                 <div class="w3-container">
-                    <?php   //crear_pedido($usuario);     ?>
-                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('cont4_2').style.display='none'">X</a>
+                    <?php   caja_pequenia($usuario);     ?>
+                    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" id="xcont_4_2" onclick="document.getElementById('cont4_2').style.display='none';ocultarDivs0();">X</a>
                 </div>
             </div>
             <div id="cont4_3" style="display:none;">

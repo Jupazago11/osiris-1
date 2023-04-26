@@ -109,8 +109,7 @@ if($kilometraje > 0){
         $consulta = mysqli_query($conexion, "INSERT INTO `domicilio`(`id_pers3`, `id_cliente2`, `id_vehiculo2`, `fecha`, `observacion`, `nivel_urgencia`, `ubicacion`, `destino`, `estado`) VALUES ('$id_pers','$id_cliente','$id_vehiculo','$fecha','$observa','$categor','$ubicacion','$destino','activo')") or die ("Error al consultar: no se obtuvo la el la informacion de los productos");
         ?>
         <script>
-            document.getElementById('respuesta_domicilio').style.display='none';
-            document.getElementById('xcont_4_1').style.display='block';
+            
             Swal.fire(
                 '¡Muy bien!',
                 'Domicilio guardado exitosamente',

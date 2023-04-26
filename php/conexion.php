@@ -2,12 +2,12 @@
     function conectar(){
         #Conecxion a la Base de datos
 
-        /*$db_host="localhost";           //Nombre del Servidor
+        $db_host="localhost";           //Nombre del Servidor
         $db_nombre_bd="osiris_manzana"; //Nombre de la base de datos
         $db_usuario="root";             //Usuario
         $db_contrasenia="";             //Clave*/
 
-        
+        /*
         $db_host="localhost";           //Nombre del Servidor
         $db_nombre_bd="merca230_osiris_manzana"; //Nombre de la base de datos
         $db_usuario="merca230_admin";             //Usuario

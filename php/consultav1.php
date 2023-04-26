@@ -236,7 +236,7 @@ require("../php/conexion.php");
                 }
             });
         });
-
+        //Domicilios
         $('#Enviard1_1').click(function(){
             $.ajax({
                 url:'../php/consultad1_1.php',

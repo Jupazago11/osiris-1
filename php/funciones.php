@@ -1140,4 +1140,50 @@ function registro_diario_ventas($usuario){
     </script>
     <?php
 }
+/////////////////////////////////////////////////////////////////////////////////////////
+function caja_pequenia($usuario){
+    ?><button type="button" id="enviarv2_1" class="w3-btn btn_gris" onclick="document.getElementById('respuestav2').style.display='block'"> Domicilios</button>
+    <button type="button" id="enviarv2_2" class="w3-btn btn_gris" onclick="document.getElementById('respuestav2').style.display='block'"> Cuadre de caja</button>
+    <br>
+    <br>
+    <div id="respuestav2" style="display:none; backgroung-color:white;overflow-y: scroll"></div>
+
+
+
+    <form id="usuario_caja2">
+        <input type="hidden" name="usuario" value="<?php echo $usuario ?>"/>
+    </form>
+
+    
+
+    <script>
+        $('#enviarv2_1').click(function(){
+            $.ajax({
+                url:'../php/consultav2_1.php',
+                type:'POST',
+                data: $('#usuario_caja2').serialize(),
+                success: function(res){
+                    $('#respuestav2').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+        //Cuadre de caja
+        $('#enviarv2_2').click(function(){
+            $.ajax({
+                url:'../php/consultav2_2.php',
+                success: function(res){
+                    
+                    $('#respuestav2').html(res);
+                },
+                error: function(res){
+                    alert("Problemas al tratar de enviar el formulario");
+                }
+            });
+        });
+    </script>
+<?php
+}
 ?>
