@@ -377,6 +377,16 @@ a{
   color:white;
 }
 
+.resultado {
+  background-color: #4CAF50;
+  border: none;
+  color: white;
+  padding: 10px;
+  font-size: 18px;
+  display: inline-block;
+  font-weight: bold;
+}
+
 
 /* ---------------------------------------------------------------------- */
 #pedidos {

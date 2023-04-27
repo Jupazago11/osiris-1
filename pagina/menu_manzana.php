@@ -103,7 +103,7 @@
 
         <a class='columna' style="background-color: #ff0000;" onclick="ocultarDivs('cont1');ocultarDivs1('cont1_1')"><img src="../iconos/pedidos.png" alt="" width="50%" height="50%"><br>Toma Pedidos</a>
         <a class='columna' style="background-color: #22AB09;" onclick="ocultarDivs('cont3');ocultarDivs3('cont3_2')"><img src="../iconos/domicilios.png" alt="domicilios" width="50%" height="50%"><br>Domicilios</a>
-        <a class='columna2' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_cajapequenia').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
+        <a class='columna' style="background-color: #4a4a4a;" onclick="ocultarDivs('cont4');$('#entrar_cajapequenia').trigger('click');"><img src="../iconos/ventas.png" alt="ventas" width="50%" height="50%"><br>Caja</a>
         <a class='columna' style="background-color: #0969AB" onclick="ocultarDivs('cont5');ocultarDivs5('cont5_2');$('#enviar13_2').trigger('click')"><img src="../iconos/control.png" alt="control" width="50%" height="50%"><br>Control</a>
         <?php
     }elseif($tipo_de_cuenta == 4){
