@@ -206,7 +206,7 @@
                 <a class="columna" style="background-color: #09AB83;<?php if($tipo_de_cuenta != 1){ echo "display:none;";} ?>" onclick="ocultarDivs2('cont2_6'); $('#enviar12').trigger('click')"><img src="../iconos/indicador.png" width="50%" height="50%"><br>Resultados Operativos</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_7'); $('#enviar6_1').trigger('click');"><img src="../iconos/pago.png" width="50%" height="50%"><br>Cuentas por pagar</a>
                 <a class="columna" style="background-color: #09AB83;" onclick="ocultarDivs2('cont2_8'); $('#enviar14_1').trigger('click')"><img src="../iconos/requerimiento.png" width="50%" height="50%"><br>Requerimientos</a>
-                <a class="columna" style="background-color: #09AB83;<?php if($tipo_de_cuenta != 1){ echo "display:none;";} ?>" onclick="ocultarDivs2('cont2_9'); $('#enviar15').trigger('click')"><img src="../iconos/grafico-de-barras.png" width="50%" height="50%"><br>Ventas diarias</a>
+                <a class="columna" style="background-color: #09AB83;<?php if($tipo_de_cuenta != 1){ echo "display:none;";} ?>" onclick="ocultarDivs2('cont2_9'); $('#enviar15').trigger('click');$('#enviar15_1').trigger('click');"><img src="../iconos/grafico-de-barras.png" width="50%" height="50%"><br>Ventas diarias</a>
 
                 <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="ocultarDivs0();">X</a>
 

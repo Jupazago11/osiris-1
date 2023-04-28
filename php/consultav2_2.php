@@ -10,6 +10,51 @@ require("../php/conexion.php");
 
 
 <?php 
+    //Capturamos el usuario
+    $usuario      = $_POST['usuario'];
+
+
+    $consulta = mysqli_query($conexion, "SELECT `id_pers` 
+    FROM `personal` 
+    WHERE `user_pers` = '$usuario'") or die ("Error al update: presupuesto");
+
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $id_usuario = $fila['id_pers'];
+    }
+    mysqli_free_result($consulta);
+
+
+    //Ahora verificamos si existe una caja para ese usuario
+    $consulta = mysqli_query($conexion, "SELECT `id_cuadre_caja_completo` 
+    FROM `cuadre_de_caja_completo` 
+    WHERE `id_pers6` = '$id_usuario'") or die ("Error al update: presupuesto");
+
+    $encontrado_caja_completa = false;
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+        $encontrado_caja_completa = true;
+    }
+    mysqli_free_result($consulta);
+
+
+    //Si existe continuamos
+    if($encontrado_caja_completa == true){
+
+    }else{
+        
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     $id_cuadre_caja = array();
     $descripcion_cuadre = array();
     $costo_cuadre = array();
@@ -47,11 +92,42 @@ require("../php/conexion.php");
     }
     mysqli_free_result($consulta);
 
+    //cuadre de caja
+    $dinero = array();
+    $monedas = array();
+    $nominacion = array();
+    $total_monedas = 0;
+
+    $consulta = mysqli_query($conexion, "SELECT `moneda`,`efectivo_en_caja`,`nominacion` 
+    FROM `efectivo_en_caja`
+    ORDER BY `id_efectivo_en_caja` ASC") or die ("Error al update: presupuesto");
+
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+
+        array_push($dinero ,$fila['efectivo_en_caja']);
+        array_push($monedas ,$fila['moneda']);
+        array_push($nominacion ,$fila['nominacion']);
+    }
+    mysqli_free_result($consulta);
+
+    //venta diaria
+    $consulta = mysqli_query($conexion, "SELECT *
+    FROM `venta_diaria`") or die ("Error al update: presupuesto");
+
+
+    while (($fila = mysqli_fetch_array($consulta))!=NULL){
+
+        $venta_diaria = $fila['venta_diaria'];
+    }
+    mysqli_free_result($consulta);
+
+
 ?>
-<div class="columna1" style="width: 100%;">
+<div class="columna1" style="width: 100%; background-color: #dddddd;">
 <div class="columna2" style="width: 30%;">
     <form id="form_cuadre_de_caja2" method="POST">
-    <table class="tabla_sugerido" id="tabla_cuadre_caja">
+    <table class="tabla_sugeridos" id="tabla_cuadre_caja">
     
   
         
@@ -65,6 +141,7 @@ require("../php/conexion.php");
             <td style="background-color:#4d4c4c;color:white"></td>
         </tr>
         
+        
         <tbody id="contenido-tabla">
 
         <?php
@@ -73,12 +150,14 @@ require("../php/conexion.php");
 
         $contador1 = 0;
         for ($i=0; $i < count($id_cuadre_caja); $i++) { 
+            // Ignoramos la venta diaria final
+
             $contador1++;
             ?>
             <tr>
             <input type="hidden" name="id_cuadre_caja[]" size="10" value="<?php echo $id_cuadre_caja[$i] ?>"/>
-            <td><input type="text" name="descripcion_cuadre[]" size="10" value="<?php echo $descripcion_cuadre[$i] ?>"/></td>
-            <td><input type="text" name="costo_cuadre[]" class="puntos" size="8" value="<?php echo number_format($costo_cuadre[$i], 0, ',', '.') ?>"/></td>
+            <td><input type="text" name="descripcion_cuadre[]" size="10" value="<?php echo ucfirst($descripcion_cuadre[$i]) ?>" onchange="$('#enviarv2_7').trigger('click');"/></td>
+            <td><input type="text" name="costo_cuadre[]" class="puntos" size="8" value="<?php echo number_format($costo_cuadre[$i], 0, ',', '.') ?>" onchange="$('#enviarv2_7').trigger('click');"/></td>
 
             <?php
             $total_cuadre += $costo_cuadre[$i];
@@ -100,22 +179,19 @@ require("../php/conexion.php");
 
             </tr>
             <?php
+            
         }
         ?>
-        <tfoot>
-        <tr>
-            <td><button type="button" id="enviarv2_3" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
-            <td><span id="total_cuadre1" class="w3-btn"style="background-color: #305490;color:white;width:100%;"><?php echo number_format($total_cuadre, 0, ',', '.') ?></span></td>
-            <td><button type="button" id="enviarv2_4" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
-
-           
-
-
-
-        </tr>
-        </tfoot>
+        
         
         </tbody>
+
+                <tr>
+                    <td><button type="button" id="enviarv2_3" class="w3-btn" style="background-color:transparent"><i class="fa fa-plus-circle" style="font-size:24px;color:#305490"></i></button></td>
+                    <td><span id="total_cuadre1" class="w3-btn"style="background-color: #305490;color:white;width:100%;"><?php echo number_format($total_cuadre, 0, ',', '.') ?></span></td>
+                    <td><button type="button" id="enviarv2_4" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button></td>
+                </tr>
+
     </table>
     </form>
     <br>
@@ -124,12 +200,41 @@ require("../php/conexion.php");
     <br>
     Crear Domicilio</a>
 
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+<form id="form_pagos_de_caja3" method="POST">
+<?php
+
+for ($i=0; $i < count($dinero); $i++) { 
+    $total_monedas += $dinero[$i]*$monedas[$i];
+}
+
+for ($i=0; $i < count($id_pagos_caja); $i++) { 
+    $total_pagos += $costo_pagos[$i];
+}
+
+?>
+
+<div class="formContent2"><h2 class="active"> Resultado </h2></div>
+
+<div id="formContent"><?php echo number_format(($total_pagos+$total_monedas)-($total_cuadre+$venta_diaria), 0, ',', '.') ?></div>
+
+<div class="formContent2 formContent3">Venta diaria: <input type="text" class="puntos" name="venta_diaria" value="<?php echo number_format($venta_diaria, 0, ',', '.') ?>" onchange="$('#enviarv2_7').trigger('click');"/></div>
+
+<button type="button" id="enviarv2_10" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button>
+
+
+</form>
+
 </div>
 
 
 <div class="columna2" style="width: 30%;">
     <form id="form_pagos_de_caja2" method="POST">
-    <table class="tabla_sugerido" id="tabla_pagos_de_caja">
+    <table class="tabla_sugeridos" id="tabla_pagos_de_caja">
 
         <tr>
             <td colspan="3" style="font-weight: bold;text-align: center">PAGOS DE CAJA</td>
@@ -149,8 +254,8 @@ require("../php/conexion.php");
             ?>
             <tr>
             <input type="hidden" name="id_pagos_caja[]" size="18" value="<?php echo $id_pagos_caja[$i] ?>"/>
-            <td><input type="text" name="descripcion_caja[]" size="18" value="<?php echo $descripcion_caja[$i] ?>"/></td>
-            <td><input type="text" name="costo_pagos[]" class="puntos" size="8" value="<?php echo number_format($costo_pagos[$i], 0, ',', '.') ?>"/></td>
+            <td class="letm"><input type="text" name="descripcion_caja[]" size="18" value="<?php echo ucfirst($descripcion_caja[$i]) ?>" onchange="$('#enviarv2_7').trigger('click');"/></td>
+            <td><input type="text" name="costo_pagos[]" class="puntos" size="8" value="<?php echo number_format($costo_pagos[$i], 0, ',', '.') ?>" onchange="$('#enviarv2_7').trigger('click');"/></td>
 
             <?php
             $total_pagos += $costo_pagos[$i];
@@ -189,23 +294,21 @@ require("../php/conexion.php");
     </table>
     <br>
     <button type="button" id="enviarv2_7" class="w3-btn" style="background-color: #305490;color:white;" >Guardar</button>
+    </form>
 
-</form>
 <br>
 
-<div class="formContent2"><h2 class="active"> Resultado</h2></div>
-<div id="formContent"><?php echo number_format($total_pagos-$total_cuadre, 0, ',', '.') ?></div>
 
-
-  <div class="formContent2 formContent3">-</div>
 
 </div>
+
+</form>
 
 
 
 <div class="columna2" style="width: 30%;">
 <form id="guardar_ventas_diarias2" method="POST">
-<table class="tabla_sugerido">
+<table class="tabla_sugeridos">
 
     <tr>
         <td colspan="4" style="font-weight: bold;text-align: center">EFECTIVO EN CAJA </td>
@@ -220,106 +323,36 @@ require("../php/conexion.php");
     </tr>
     <tbody id="tbodyform2">
     
+    <?php
+    
+    $total_monedas = 0;
+    for ($i=0; $i < count($dinero); $i++) { 
+
+        ?>
+        <tr>
+            <td><?php echo ucfirst($nominacion[$i]) ?></td>
+            <td class="precio"><?php echo number_format($monedas[$i], 0, ',', '.') ?></td>
+            <td class="precio2" style="display:none"><?php echo $monedas[$i] ?></td>
+            <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3(); $('#enviarv2_7').trigger('click');" value="<?php echo $dinero[$i] ?>"/></td>
+            <td class="total3"><?php echo number_format($dinero[$i]*$monedas[$i], 0, ',', '.') ?></td>
+            <td class="total3_2" style="display:none"><?php echo $dinero[$i]*$monedas[$i] ?></td>
+        </tr>
+
+        <?php
+        $total_monedas += $dinero[$i]*$monedas[$i];
+    }
+    ?>
     
     <tr>
-        <td>Moneda</td>
-        <td class="precio">50</td>
-        <td class="precio2" style="display:none">50</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Moneda</td>
-        <td class="precio">100</td>
-        <td class="precio2" style="display:none">100</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Moneda</td>
-        <td class="precio">200</td>
-        <td class="precio2" style="display:none">200</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Moneda</td>
-        <td class="precio">500</td>
-        <td class="precio2" style="display:none">500</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Moneda</td>
-        <td class="precio">1,000</td>
-        <td class="precio2" style="display:none">1000</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Billete</td>
-        <td class="precio">2.000</td>
-        <td class="precio2" style="display:none">2000</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Billete</td>
-        <td class="precio">5.000</td>
-        <td class="precio2" style="display:none">5000</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Billete</td>
-        <td class="precio">10.000</td>
-        <td class="precio2" style="display:none">10000</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Billete</td>
-        <td class="precio">20.000</td>
-        <td class="precio2" style="display:none">20000</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Billete</td>
-        <td class="precio">50.000</td>
-        <td class="precio2" style="display:none">50000</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-    <tr>
-        <td>Billete</td>
-        <td class="precio">100.000</td>
-        <td class="precio2" style="display:none">100000</td>
-        <td><input type="text" name="cantidad_monedas[]" class="cantidad" size="5" onchange="multi3()" value="0"/></td>
-        <td class="total3">0</td>
-        <td class="total3_2" style="display:none">0</td>
-    </tr>
-
-    <tr>
         
-    <td colspan="4"><button type="button" class="w3-btn" style="background-color: #305490;color:white; width:100%;">Total efectivo: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="total_cuadre3" style="font-size: 20px;font-weight: bold;">0</span></button></td>
+    <td colspan="4"><button type="button" class="w3-btn" style="background-color: #305490;color:white; width:100%;">Total efectivo: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="total_cuadre3" style="font-size: 20px;font-weight: bold;"><?php echo number_format($total_monedas, 0, ',', '.') ?></span></button></td>
         
     </tr>
     <tr>
         <td colspan="2"><button type="button" id="enviarv2_8" class="w3-btn" style="background-color: #305490;color:white">Registrar venta diaria</button></td>
         <td colspan="2"><button class="w3-btn" style="background-color: #305490;color:white;width:100%;" type="button" id="limpiar">Limpiar</button></td>
     </tr>
-
+    <button type="button" id="enviarv2_9" class="w3-btn" style="background-color: #478248;color:white;display:none">Guardar</button>
     </tbody>
 </table>
 </form>
@@ -329,6 +362,7 @@ require("../php/conexion.php");
 <div id="rrr2"></div>
 <script>
     $('#enviarv2_3').click(function(){
+        $('#enviarv2_7').trigger('click');
         $.ajax({
             url:'../php/consultav1_3.php',
             success: function(res){
@@ -356,6 +390,7 @@ require("../php/conexion.php");
     });
 
     $('#enviarv2_5').click(function(){
+        $('#enviarv2_7').trigger('click');
         $.ajax({
             url:'../php/consultav1_5.php',
             success: function(res){
@@ -384,6 +419,8 @@ require("../php/conexion.php");
     $('#enviarv2_7').click(function(){
         $('#enviarv2_6').trigger('click');
         $('#enviarv2_4').trigger('click'); 
+        $('#enviarv2_9').trigger('click');
+        $('#enviarv2_10').trigger('click');
         $.ajax({
             success: function(res){
                 $('#entrar_cajapequenia').trigger('click');
@@ -398,9 +435,24 @@ require("../php/conexion.php");
         $.ajax({
             url:'../php/consultav1_8.php',
             type:'POST',
+            data: $('#form_pagos_de_caja3').serialize(),
+            success: function(res){
+                $('#enviarv2_7').trigger('click');
+                //$('#rrr2').html(res);
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    //Guardar cuadre de caja
+    $('#enviarv2_9').click(function(){
+        $.ajax({
+            url:'../php/consultav1_9.php',
+            type:'POST',
             data: $('#guardar_ventas_diarias2').serialize(),
             success: function(res){
-                $('#rrr2').html(res);
+                //$('#rrr2').html(res);
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
@@ -408,12 +460,11 @@ require("../php/conexion.php");
         });
     });
     
-    $('#limpiar2').click(function(){
+    $('#limpiar').click(function(){
         $.ajax({
+            url:'../php/consultav1_10.php',
             success: function(res){
-                $('#Enviarv2_4').trigger('click');
-                $('#Enviarv2_6').trigger('click');
-                $('#Enviarv2_2').trigger('click');
+                $('#entrar_cajapequenia').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
@@ -421,24 +472,66 @@ require("../php/conexion.php");
         });
     });
     $('#enviarv2_1').click(function(){
-            document.getElementById('xcont_4_2').style.display='none';
-            $.ajax({
-                url:'../php/consultav2_1.php',
-                type:'POST',
-                data: $('#usuario_caja2').serialize(),
-                success: function(res){
-                    $('#respuestav2_1').html(res);
-                },
-                error: function(res){
-                    alert("Problemas al tratar de enviar el formulario");
-                }
-            });
+        document.getElementById('xcont_4_2').style.display='none';
+        $.ajax({
+            url:'../php/consultav2_1.php',
+            type:'POST',
+            data: $('#usuario_caja2').serialize(),
+            success: function(res){
+                $('#respuestav2_1').html(res);
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
         });
+    });
+    $('#enviarv2_10').click(function(){
+        $.ajax({
+            url:'../php/consultav1_11.php',
+            type:'POST',
+            data: $('#form_pagos_de_caja3').serialize(),
+            success: function(res){
+
+                //$('#rrr').html(res);
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
 </script>
 <?php
 ?>
 <style>
-    .tabla_sugerido {
+
+.tabla_sugeridos {
+  font-family: Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  font-size: 15px;
+  border-radius: 0em;
+  width: 100%;
+  overflow:auto;
+  background-color: white;
+}
+
+    .tabla_sugeridos td, .tabla_sugeridos th {
+  border: 0px solid #ddd;
+  padding: 4px;
+}
+
+.tabla_sugeridos tr:nth-child(even){background-color: #f2f2f2;}
+
+.tabla_sugeridos tr:hover {background-color: #ddd;}
+
+.tabla_sugeridos th {
+
+  padding-top: 8px;
+  text-align: left;
+  background-color: #575656;
+  color: white;
+}
+
+    .tabla_sugeridos {
         border-radius: 1em;
         color: black;
     }
@@ -446,14 +539,14 @@ require("../php/conexion.php");
         opacity: 1.0;
     }
     h2 {
-  text-align: center;
-  font-size: 16px;
-  font-weight: 600;
-  text-transform: uppercase;
-  display:inline-block;
-  margin: 40px 8px 10px 8px; 
-  color: #cccccc;
-}
+        text-align: center;
+        font-size: 5px;
+        font-weight: 500;
+        text-transform: uppercase;
+        display:inline-block;
+        margin: 30px 6px 8px 6px; 
+        color: #cccccc;
+    }
 
 
 
@@ -474,6 +567,7 @@ require("../php/conexion.php");
   background: #fff;
   color:black;
   width: 100%;
+  font-size: 30px;
   max-width: 450px;
   position: relative;
   padding: 0px;
@@ -485,16 +579,18 @@ require("../php/conexion.php");
 .formContent2 {
   -webkit-border-radius: 10px 10px 0px 0px;
   background-color: #4d4c4c;
-  color: #4d4c4c;
+  color: white;
+  font-size: 16px;
   padding: 0px;
   width: 100%;
   max-width: 450px;
   position: relative;
-  padding: 0px;
+  padding: 5px;
   -webkit-box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   box-shadow: 0 30px 60px 0 rgba(0,0,0,0.3);
   text-align: center;
 }
+
 
 .formContent3 {
   -webkit-border-radius: 0px 0px 10px 10px;

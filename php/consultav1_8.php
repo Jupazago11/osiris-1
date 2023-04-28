@@ -3,25 +3,10 @@
 require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
-    $monedas = array(
-        50,
-        100,
-        200,
-        500,
-        1000,
-        2000,
-        5000,
-        10000,
-        20000,
-        50000,
-        100000
-    );
-    $cantidad_monedas      = $_POST['cantidad_monedas'];
 
-    $total = 0;
-    for ($i = 0; $i < count($cantidad_monedas); $i++) { 
-        $total += $monedas[$i]*$cantidad_monedas[$i];
-    }
+    $venta_diaria      = str_replace(".","",$_POST['venta_diaria']);
+    
+
 
         
     //Capturamos el ID del mes actual
@@ -63,7 +48,7 @@ require("../php/conexion.php");
             echo '<br>';
             if($i == ($hoy-1)){
                 $consulta = mysqli_query($conexion, "UPDATE `ventas_diarias` 
-                SET `ventas`='$total' 
+                SET `ventas`='$venta_diaria' 
                 WHERE `id_ven_dia`='$id_ven_dia[$i]'") or die ("Error al update: presupuesto");
             }
         }

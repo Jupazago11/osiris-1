@@ -1082,7 +1082,7 @@ function registro_diario_ventas($usuario){
         <tr>
             <td>Mes</td>
             <td>
-                <select name="mes" onchange="$('#enviar15_1').trigger('click');">
+                <select name="mes" onchange="$('#enviar15_1').trigger('click');" id="selector_mes_ventas">
 
                     <option value="1" <?php if($fecha=='01'){?>selected <?php } ?> >Enero</option>
                     <option value="2" <?php if($fecha=='02'){?>selected <?php } ?> >Febrero</option>
@@ -1122,6 +1122,7 @@ function registro_diario_ventas($usuario){
     <div id="respuesta15"></div>
     
     <script>
+
         $('#enviar15_1').click(function(){
             $.ajax({
                 url:'../php/consulta15.php',
@@ -1163,6 +1164,8 @@ function caja_pequenia($usuario){
         $('#enviarv2_2').click(function(){
             $.ajax({
                 url:'../php/consultav2_2.php',
+                type:'POST',
+                data: $('#usuario_caja2').serialize(),
                 success: function(res){
                     
                     $('#respuestav2').html(res);

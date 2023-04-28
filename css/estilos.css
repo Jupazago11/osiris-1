@@ -772,6 +772,7 @@ img:hover {
   font-family: Arial, Helvetica, sans-serif;
   border-collapse: collapse;
   font-size: 15px;
+  border-radius: 0em;
   width: 100%;
   overflow:auto;
   background-color: white;
