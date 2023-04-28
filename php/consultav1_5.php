@@ -3,8 +3,10 @@
 require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
-    $consulta = mysqli_query($conexion, "INSERT INTO `pagos_caja`( `descripcion_caja`, `costo_pagos`, `estado`) 
-    VALUES (NULL,'0','activo')") or die ("Error al update: presupuesto");
+    $id_cuadre_caja_completa     = $_POST['id_cuadre_caja_completa'];
+
+    $consulta = mysqli_query($conexion, "INSERT INTO `pagos_caja`(`id_cuadre_caja_completo2`, `descripcion_caja`, `costo_pagos`, `estado`) 
+    VALUES ('$id_cuadre_caja_completa',NULL,'0','activo')") or die ("Error al update: presupuesto");
 
     mysqli_close($conexion);     //---------------------- Cerrar conexion ------------------
 ?>

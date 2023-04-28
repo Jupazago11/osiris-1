@@ -5,6 +5,7 @@ require("../php/conexion.php");
 
 
     $venta_diaria      = str_replace(".","",$_POST['venta_diaria']);
+    $id_cuadre_caja_completa     = $_POST['id_cuadre_caja_completa'];
     
 
 
@@ -69,7 +70,7 @@ require("../php/conexion.php");
 
         //Ahora creamos los registros del mes y año de ventas diarias
         for ($i = 0; $i < $dias_meses[$mes-1]; $i++) { 
-
+            
             $consulta = mysqli_query($conexion, "INSERT INTO `ventas_diarias`(`id_fecha1`, `ventas`) 
             VALUES ('$id_fecha', NULL)") or die ("Error al update: presupuesto");
             

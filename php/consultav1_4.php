@@ -4,6 +4,8 @@ require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
 
+    $id_cuadre_caja_completa     = $_POST['id_cuadre_caja_completa'];
+
     $id_cuadre_caja     = $_POST['id_cuadre_caja'];
     $descripcion_cuadre = $_POST['descripcion_cuadre'];
     $costo_cuadre       = str_replace(".","",$_POST['costo_cuadre']);
@@ -17,12 +19,14 @@ require("../php/conexion.php");
         }
         $consulta = mysqli_query($conexion, "UPDATE `cuadre_caja` 
         SET `descripcion_cuadre`='$descripcion_cuadre[$i]', `costo_cuadre`='$costo_cuadre[$i]'
-        WHERE `id_cuadre_caja` = '$id_cuadre_caja[$i]'") or die ("Error al update: presupuesto");
+        WHERE `id_cuadre_caja` = '$id_cuadre_caja[$i]' 
+        AND `id_cuadre_caja_completo1` = '$id_cuadre_caja_completa'") or die ("Error al update: presupuesto");
         
         if($eliminar[$j] == 'eliminar' && count($id_cuadre_caja) > 1){
             $consulta = mysqli_query($conexion, "UPDATE `cuadre_caja` 
             SET `estado` = '' 
-            WHERE `id_cuadre_caja` = '$id_cuadre_caja[$i]'") or die ("Error al update: proveedores");
+            WHERE `id_cuadre_caja` = '$id_cuadre_caja[$i]'
+            AND `id_cuadre_caja_completo1` = '$id_cuadre_caja_completa'") or die ("Error al update: proveedores");
         }
     }
 
