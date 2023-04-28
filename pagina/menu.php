@@ -19,7 +19,7 @@
     
 </head>
 <body>
-    <div style="background-color: #9b0000;position: absolute;top: 0px; right: 5px; padding: 10px;border-radius: 0px 0px 15px 15px;color:white" onclick="window.location.href = 'http://mercadoslamanzana.com/osiris/pagina/sesion_manzana.php'">Cerrar sesión</div>
+    <div style="background-color: #9b0000;position: absolute;top: 0px; right: 5px; padding: 10px;border-radius: 0px 0px 15px 15px;color:white" onclick="window.location.href = 'http://mercadoslamanzana.com/osiris/pagina/sesion.php'">Cerrar sesión</div>
     <div class="header" id="header">
     <h1 class="w3-animate-top" style="font-size:0.8em">Bienvenido</h1>
     </div>

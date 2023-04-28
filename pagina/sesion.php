@@ -5,16 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
     <link rel="shortcut icon" href="favicon.png">
-    <script type="text/javascript" src="../js/funciones.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
-    <LINK REL=StyleSheet HREF="../CSS/estilos.css">
+    <link rel=stylesheet href="../css/estilos.css">
+    <script language="JavaScript" type="text/javascript" src="../js/funciones.js"></script>
 </head>
 <body>
 <div class="wrapper fadeInDown">
-  <h2 class="active" style="background-color:transparent;font-size:3em;color:black;"> Proveedor </h2>
+  <h2 class="active" style="background-color:transparent;font-size:3em;color:black;"> Bienvenido </h2>
   <div class="formContent2"><h2 class="active"> Mercados la Manzana </h2></div>
   <div id="formContent">
-    <form name="formulario_iniciar_sesion2" action="menu_manzana2.php" method='post'>
+    <form name="formulario_iniciar_sesion" action="menu.php" method='post'>
         <br>
         <img src="../iconos/usuario.png" alt="user" width="10%" height="10%">
         <input type="text" name="u" class="fadeIn second" required placeholder="Usuario"/><br>
@@ -29,7 +29,7 @@
 </body>
 </html>
 <style>
-    /* BASIC */
+/* BASIC */
 
 html {
   background-color: #dddddd;

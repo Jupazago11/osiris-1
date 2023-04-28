@@ -1,32 +1,33 @@
 <!DOCTYPE html>
-<!-- saved from url=(0055)http://localhost/xampp/osiris/pagina/sesion.php -->
-<html lang="es"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio de Sesión</title>
-    <script type="text/javascript" src="./Inicio de Sesión_files/funciones.js.descargar"></script>
-    <link rel="stylesheet" href="./Inicio de Sesión_files/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous">
-    <link rel="StyleSheet" href="./Inicio de Sesión_files/estilos.css">
+    <link rel="shortcut icon" href="favicon.png">
+    <script type="text/javascript" src="../js/funciones.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w==" crossorigin="anonymous" />
+    <LINK REL=StyleSheet HREF="../CSS/estilos.css">
 </head>
 <body>
 <div class="wrapper fadeInDown">
-  <h2 class="active" style="background-color:transparent;font-size:3em;color:black;"> Bienvenido </h2>
+  <h2 class="active" style="background-color:transparent;font-size:3em;color:black;"> Proveedor </h2>
   <div class="formContent2"><h2 class="active"> Mercados la Manzana </h2></div>
   <div id="formContent">
-    <form name="formulario_iniciar_sesion" action="http://localhost/xampp/osiris/pagina/menu1.php" method="post">
+    <form name="formulario_iniciar_sesion2" action="menu2.php" method='post'>
         <br>
-        <img src="./Inicio de Sesión_files/usuario.png" alt="user" width="10%" height="10%">
-        <input type="text" name="u" class="fadeIn second" required="" placeholder="Usuario"><br>
-        <img src="./Inicio de Sesión_files/bloquear.png" alt="user" width="10%" height="10%">
-        <input type="password" name="p" class="fadeIn third" required="" placeholder="Contraseña">
+        <img src="../iconos/usuario.png" alt="user" width="10%" height="10%">
+        <input type="text" name="u" class="fadeIn second" required placeholder="Usuario"/><br>
+        <img src="../iconos/bloquear.png" alt="user" width="10%" height="10%">
+        <input type="password" name="p" class="fadeIn third" required placeholder="Contraseña"/>
         <br><br>
-  </form></div>
+  </div>
   <div class="formContent2 formContent3"><div class="fadeIn fourth"><input type="submit" value="Iniciar Sesión" id="enviar"></div></div>
-  
+  </form>
 </div>
 <div class="osiris"><div class="contenido">OSIRIS</div></div>
-
-
+</body>
+</html>
 <style>
     /* BASIC */
 
@@ -311,4 +312,4 @@ input[type=text]:placeholder, input[type=password]:placeholder {
 * {
   box-sizing: border-box;
 }
-</style></body></html>
+</style>
