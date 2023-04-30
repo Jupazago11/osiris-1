@@ -13,14 +13,14 @@ require("../php/conexion.php");
 
 
     <form id="seleccion_vehiculoo3" method="POST">
-    <table class="tabla_sugerido"  style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+    <table class="tabla_sugerido"  style="width:834px;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
         <tr>
-            <th colspan="3">Selecciona el vehículo</th>
+            <th colspan="4">Selecciona el vehículo</th>
         </tr>
         <tr>
             <input type="hidden" name="usuario" value="<?php echo $usuario; ?>">
             <td></td>
-            <td><select name="vehiculo">
+            <td><select name="vehiculo" onchange="$('#enviard2_2').trigger('click');">
 
             <?php
                 //Consulta a la base de datos en la tabla provvedor
@@ -38,7 +38,8 @@ require("../php/conexion.php");
                 
             ?>
             </select></td>
-            <td><button type="button" id="enviard2_2" class="w3-btn w3-teal" onclick="document.getElementById('respuestad2_2').style.display='block'">Continuar</button></td>
+            <td></td>
+            <td><button type="button" id="enviard2_2" style="display:none" class="w3-btn w3-teal" onclick="document.getElementById('respuestad2_2').style.display='block'">Continuar</button></td>
         </tr>
     </table>
     </form>

@@ -1,14 +1,14 @@
 <?php
     function conectar(){
         #Conecxion a la Base de datos en el servidor local
-/*
+
         $db_host="localhost";           //Nombre del Servidor
         $db_nombre_bd="osiris_manzana"; //Nombre de la base de datos
         $db_usuario="root";             //Usuario
         $db_contrasenia="";             //Clave*/
 
         #Conecxion a la Base de datos de mercados la manzana
-
+/*
         $db_host="localhost";           //Nombre del Servidor
         $db_nombre_bd="merca230_osiris_manzana"; //Nombre de la base de datos
         $db_usuario="merca230_admin";             //Usuario
@@ -17,7 +17,7 @@
         #Conecxion a la Base de datos de distribuidora tropial - carepa
 /*
         $db_host="localhost";           //Nombre del Servidor
-        $db_nombre_bd="merca230_osiris_manzana"; //Nombre de la base de datos
+        $db_nombre_bd="merca230_osiris_tropical"; //Nombre de la base de datos
         $db_usuario="merca230_admin";             //Usuario
         $db_contrasenia="GL03WBF8ETVU";             //Clave*/
 

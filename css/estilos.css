@@ -883,6 +883,10 @@ textarea {
     margin-right: 0%;
 
   }
+
+  h1 {
+    font-size:0.7em;
+  }
 }
 @media (max-width: 600px) {
   .columna2 {

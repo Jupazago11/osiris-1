@@ -515,6 +515,8 @@ require("../php/conexion.php");
             }
         });
     });
+
+    //Domicilios
     $('#enviarv2_1').click(function(){
         document.getElementById('xcont_4_2').style.display='none';
         $.ajax({

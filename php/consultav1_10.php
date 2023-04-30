@@ -4,7 +4,7 @@ require("../php/conexion.php");
     $conexion = conectar();                     //Obtenemos la conexion
 
    
-
+    
     //efectivo de caja en blanco
     $consulta = mysqli_query($conexion, "UPDATE `efectivo_en_caja` 
     SET `efectivo_en_caja`='0'") or die ("Error al update: efectivo en caja");

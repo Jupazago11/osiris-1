@@ -50,7 +50,7 @@ require("../php/conexion.php");
         ?>
 
         <form id="creacion_domicilio" method="POST">
-        <table class="tabla_sugerido"  style="width:50%;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
+        <table class="tabla_sugerido"  style="width:800px;border: 1px solid black; border-collapse: collapse;margin-left: auto;  margin-right: auto;background-color:white">
         
 
         <?php
