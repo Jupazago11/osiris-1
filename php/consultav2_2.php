@@ -113,8 +113,8 @@ require("../php/conexion.php");
 
 
         ?>
-        <div class="columna1" style="width: 100%; background-color: #dddddd;">
-        <div class="columna2" style="width: 30%;">
+        <div class="w3-row-padding w3-padding-32" style="width: 100%; background-color: #dddddd;">
+        <div class="w3-third">
             <form id="form_cuadre_de_caja2" method="POST">
             <input type="hidden" name="id_cuadre_caja_completa" value="<?php echo $id_cuadre_caja_completo ?>"/>
             <table class="tabla_sugeridos" id="tabla_cuadre_caja">
@@ -223,7 +223,7 @@ require("../php/conexion.php");
         </div>
 
 
-        <div class="columna2" style="width: 30%;">
+        <div class="w3-third">
             <form id="form_pagos_de_caja2" method="POST">
             <input type="hidden" name="id_cuadre_caja_completa" value="<?php echo $id_cuadre_caja_completo ?>"/>
             <table class="tabla_sugeridos" id="tabla_pagos_de_caja">
@@ -297,8 +297,8 @@ require("../php/conexion.php");
         </form>
 
 
-
-        <div class="columna2" style="width: 30%;">
+ 
+        <div class="w3-third">
         <form id="guardar_ventas_diarias2" method="POST">
         <input type="hidden" name="id_cuadre_caja_completa" value="<?php echo $id_cuadre_caja_completo ?>"/>
         <table class="tabla_sugeridos">
@@ -318,8 +318,17 @@ require("../php/conexion.php");
             
             <?php
             
-            $total_monedas = 0;
+            $total_menuda       = 0;
+            $total_billetes     = 0;
             for ($i=0; $i < count($dinero); $i++) { 
+                if($i==8){
+                    ?>
+                    <tr>
+        
+                    <td colspan="4"><button type="button" class="w3-btn" style="background-color: #305490;color:white; width:100%;">Total menuda: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="total_cuadre3" style="font-size: 20px;font-weight: bold;"><?php echo number_format($total_menuda, 0, ',', '.') ?></span></button></td>
+                    </tr>
+                <?php
+                }
 
                 ?>
                 <tr>
@@ -332,13 +341,21 @@ require("../php/conexion.php");
                 </tr>
 
                 <?php
-                $total_monedas += $dinero[$i]*$monedas[$i];
+                if($monedas[$i]<=5000){
+                    $total_menuda += $dinero[$i]*$monedas[$i];
+                }else{
+                    $total_billetes += $dinero[$i]*$monedas[$i];
+                }
+                
             }
             ?>
             
-            <tr>
-                
-            <td colspan="4"><button type="button" class="w3-btn" style="background-color: #305490;color:white; width:100%;">Total efectivo: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="total_cuadre3" style="font-size: 20px;font-weight: bold;"><?php echo number_format($total_monedas, 0, ',', '.') ?></span></button></td>
+            
+        <tr>
+            <td colspan="4"><button type="button" class="w3-btn" style="background-color: #305490;color:white; width:100%;">Total Billetes: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="total_cuadre3" style="font-size: 20px;font-weight: bold;"><?php echo number_format($total_billetes, 0, ',', '.') ?></span></button></td>
+        </tr>
+        <tr>
+            <td colspan="4"><button type="button" class="w3-btn" style="background-color: #305490;color:white; width:100%;">Total efectivo: &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;<span id="total_cuadre3" style="font-size: 20px;font-weight: bold;"><?php echo number_format($total_menuda + $total_billetes, 0, ',', '.') ?></span></button></td>
                 
             </tr>
             <tr>
@@ -507,6 +524,8 @@ require("../php/conexion.php");
     $('#limpiar').click(function(){
         $.ajax({
             url:'../php/consultav1_10.php',
+            type:'POST',
+            data: $('#form_pagos_de_caja3').serialize(),
             success: function(res){
                 $('#entrar_cajapequenia').trigger('click');
             },
