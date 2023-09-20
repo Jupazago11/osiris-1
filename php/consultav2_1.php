@@ -58,7 +58,7 @@ require("../php/conexion.php");
 ?>
 
 <div id="respuestad2_2">
-    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuestad2_2').style.display='none'; document.getElementById('xcont_d1_1').style.display='block';">X</a>
+    <a class="w3-bar-item w3-button w3-red w3-hover-red active salir" onclick="document.getElementById('respuestad2_2').style.display='none';">X</a>
 </div>
 
 <script>

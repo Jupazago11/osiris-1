@@ -26,7 +26,9 @@
                 mysqli_free_result($consulta); //Liberar espacio de consulta cuando ya no es necesario
                 if($estado == "proceso"){
 
-                    $consulta = mysqli_query($conexion, "UPDATE `domicilio` SET `tiempo_llegada`='$hoy', `estado`='inactivo' WHERE `estado` = 'proceso' AND `id_domi` = '$value'
+                    $consulta = mysqli_query($conexion, "UPDATE `domicilio` 
+                    SET `tiempo_llegada`='$hoy', `estado`='inactivo' 
+                    WHERE `estado` = 'proceso' AND `id_domi` = '$value'
                     ORDER BY `id_domi` ASC") or die ("Error al consultar: domicilios");
                 }elseif($fila['estado'] == "activo"){
                     

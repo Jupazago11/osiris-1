@@ -185,10 +185,15 @@ require("../php/conexion.php");
             </table>
             </form>
             <br>
-            <a class='columna2' style="background-color: #4a4a4a; height:auto;text-align: center;width:100%">
-            <img src="../iconos/domicilios.png" id="enviarv2_1" width="60px" height="60px" onclick="document.getElementById('respuestav2_1').style.display='block'" class="icon_caja">
+            <a id="enviarv2_1" onclick="document.getElementById('respuestav2_1').style.display='block'" class='columna2 w3-third' style="background-color: #4a4a4a">
+            <img src="../iconos/domicilios.png" width="60px" height="60px" class="icon_caja">
             <br>
             Crear Domicilio</a>
+
+            <a id="enviarv2_22" onclick="document.getElementById('respuestav2_1').style.display='block'" class='columna2 w3-third' style="background-color: #4a4a4a">
+            <img src="../iconos/buscar.png"  width="60px" height="60px"  class="icon_caja">
+            <br>
+            Ver Domicilios</a>
 
             <br>
             <br>
@@ -535,7 +540,7 @@ require("../php/conexion.php");
         });
     });
 
-    //Domicilios
+    // Domicilios
     $('#enviarv2_1').click(function(){
         document.getElementById('xcont_4_2').style.display='none';
         $.ajax({
@@ -544,6 +549,23 @@ require("../php/conexion.php");
             data: $('#usuario_caja2').serialize(),
             success: function(res){
                 $('#respuestav2_1').html(res);
+                $('#enviard2_2').trigger('click');
+            },
+            error: function(res){
+                alert("Problemas al tratar de enviar el formulario");
+            }
+        });
+    });
+    // VerDomicilios
+    $('#enviarv2_22').click(function(){
+        document.getElementById('xcont_4_2').style.display='none';
+        $.ajax({
+            url:'../php/consultav2_3.php',
+            type:'POST',
+            data: $('#usuario_caja2').serialize(),
+            success: function(res){
+                $('#respuestav2_1').html(res);
+                $('#enviar5_6').trigger('click');
             },
             error: function(res){
                 alert("Problemas al tratar de enviar el formulario");
